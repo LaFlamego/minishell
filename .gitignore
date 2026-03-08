@@ -1,0 +1,5 @@
+.cache/
+*.o
+*.a
+compile_commands.json
+minishell

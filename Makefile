@@ -1,6 +1,7 @@
 NAME=minishell
 
 SRCS_DIR = src
+INCL_DIR = includes
 
 SRCS = $(addprefix $(SRCS_DIR)/, main.c )
 OBJS = $(SRCS:.c=.o)
@@ -8,7 +9,7 @@ OBJS = $(SRCS:.c=.o)
 LIBFT  = lib/libft
 LIBS   = -L $(LIBFT)
 
-INCLUDES = -I $(LIBFT)
+INCLUDES = -I $(LIBFT) -I $(INCL_DIR)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pedantic

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 16:55:40 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/08 17:04:42 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/08 17:07:28 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef enum e_ops
 {
 	NONE,
 	INSERT_CMD,
-	INSERT_VAR,
+	INSERT_ENV_VAR,
 	REDIRECT_INPUT,
 	REDIRECT_OUTPUT,
 	READ_UNTIL,

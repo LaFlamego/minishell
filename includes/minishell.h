@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
+/*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 16:55:40 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/08 17:07:28 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/09 21:15:04 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,7 @@ typedef struct s_ctx
 {
 	char			**env;
 }					t_ctx;
+
+void	prompt_display(void);
 
 #endif

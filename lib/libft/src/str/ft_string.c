@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_string.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
+/*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:00:54 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/09 17:27:39 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/09 20:05:15 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ char	*ft_string_alloc(t_string *s, size_t size)
 {
 	s->length = 0;
 	s->content = malloc(size);
-	ft_bzero(s->content, size);
 	if (s->content == NULL)
+	{
 		s->capacity = 0;
-	else
-		s->capacity = size;
+		return (NULL);
+	}
+	ft_bzero(s->content, size);
+	s->capacity = size;
 	return (s->content);
 }
 

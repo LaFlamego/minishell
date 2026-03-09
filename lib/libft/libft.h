@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
+/*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 15:00:56 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/09 17:20:35 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/09 20:41:47 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ char					*ft_basename(const char *path);
 char					*ft_itoa(int n);
 char					**ft_split(char const *s, char c);
 void					*free_splits(char **splits);
-char					*ft_strrchr(const char *s, int c);
+char					*ft_strrchr(const char *s, char c);
 void					ft_striteri(char *s, void (*f)(unsigned int, char *));
 char					*ft_strjoin(char const *s1, char const *s2);
 size_t					ft_strlcat(char *dst, const char *src, size_t size);

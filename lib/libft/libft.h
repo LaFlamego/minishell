@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 15:00:56 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/09 17:17:45 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/09 17:20:35 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,17 @@ int						ft_putstr_fd(char *s, int fd);
 int						ft_putstr_fd_max(char *s, int fd, int max);
 
 // >> Strings
+
+typedef struct s_string
+{
+	char				*content;
+	size_t				length;
+	size_t				capacity;
+}						t_string;
+
+char					*ft_string_alloc(t_string *s, size_t size);
+char					*ft_string_realloc(t_string *s, size_t new_size);
+
 int						ft_atoi(const char *str);
 char					*ft_basename(const char *path);
 char					*ft_itoa(int n);

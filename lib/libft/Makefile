@@ -33,7 +33,7 @@ PRINTF_SRCS = ft_pad.c ft_printf.c ft_printf_char.c ft_printf_flags.c          \
 			  ft_printf_nbr_base.c ft_printf_nbr_u.c ft_printf_nbr_u_base.c    \
 			  ft_printf_pct.c ft_printf_ptr.c ft_printf_put.c                  \
 			  ft_printf_specs.c ft_printf_str.c ft_read_int.c ft_panic.c       \
-			  ft_fprintf.c
+			  ft_dprintf.c
 
 SRCS = $(addprefix $(SRCS_DIR)/lst/, $(LST_SRCS))       \
 	   $(addprefix $(SRCS_DIR)/mem/, $(MEM_SRCS))       \

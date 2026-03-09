@@ -86,7 +86,7 @@ typedef struct s_flags
 }	t_flags;
 
 t_flags	*new_flags(void);
-int		ft_fprintf(const char *fmt, ...);
+int		ft_dprintf(int fd, const char *fmt, ...);
 int		ft_printf(const char *fmt, ...);
 int		ft_printf_put(const char **fmt, int fd);
 int		ft_printf_pct(int fd);

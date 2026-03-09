@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fprintf.c                                       :+:      :+:    :+:   */
+/*   ft_dprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 17:49:35 by Oery              #+#    #+#             */
-/*   Updated: 2026/02/06 17:52:43 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/09 16:00:37 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdarg.h>
+#include <stdio.h>
 
 static void	set_precision(const char **fmt, t_flags *flags)
 {
@@ -40,7 +41,7 @@ static int	handle_directive(const char **fmt, va_list *ap, int fd)
 	return (i);
 }
 
-int	ft_fprintf(const char *fmt, ...)
+int	ft_dprintf(int fd, const char *fmt, ...)
 {
 	int		i;
 	va_list	ap;
@@ -52,9 +53,9 @@ int	ft_fprintf(const char *fmt, ...)
 	while (*fmt)
 	{
 		if (*fmt == '%')
-			i += handle_directive(&fmt, &ap, 2);
+			i += handle_directive(&fmt, &ap, fd);
 		else
-			i += ft_printf_put(&fmt, 2);
+			i += ft_printf_put(&fmt, fd);
 	}
 	va_end(ap);
 	return (i);

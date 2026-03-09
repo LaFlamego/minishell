@@ -7,7 +7,7 @@ SRCS = $(addprefix $(SRCS_DIR)/, main.c )
 OBJS = $(SRCS:.c=.o)
 
 LIBFT  = lib/libft
-LIBS   = -L $(LIBFT)
+LIBS   = -L $(LIBFT) -lft
 
 INCLUDES = -I $(LIBFT) -I $(INCL_DIR)
 

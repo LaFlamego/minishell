@@ -24,7 +24,7 @@ STR_SRCS  = ft_atoi.c ft_itoa.c ft_split.c ft_strchr.c ft_striteri.c           \
 GNL_SRCS  = get_next_line.c get_next_line_utils.c
 
 CHAR_SRCS = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c   \
-			ft_tolower.c ft_toupper.c
+			ft_tolower.c ft_toupper.c ft_isspace.c
 
 MATHS_SRCS = ft_abs.c ft_max.c ft_min.c
 

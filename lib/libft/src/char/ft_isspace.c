@@ -1,41 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/06 15:29:55 by Oery              #+#    #+#             */
-/*   Updated: 2025/11/13 20:20:43 by Oery             ###   ########.fr       */
+/*   Created: 2026/03/08 16:40:11 by Oery              #+#    #+#             */
+/*   Updated: 2026/03/08 16:51:41 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_atoi(const char *str)
+// https://infra.spec.whatwg.org/#ascii-whitespace
+int	ft_isspace(char c)
 {
-	int	result;
-	int	sign;
-
-	sign = 1;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-')
-	{
-		sign = -1;
-		str++;
-	}
-	else if (*str == '+')
-	{
-		sign = 1;
-		str++;
-	}
-	result = 0;
-	while (ft_isdigit(*str))
-	{
-		result *= 10;
-		result += sign * (*str - 48);
-		str++;
-	}
-	return (result);
+	return (c == '\t' || c == '\n' || c == '\f' || c == '\r' || c == ' ');
 }

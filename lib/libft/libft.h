@@ -132,6 +132,12 @@ typedef struct s_string
 	size_t				capacity;
 }						t_string;
 
+typedef struct s_keyval
+{
+	t_string			key;
+	t_string			val;
+}						t_keyval;
+
 char					*ft_string_alloc(t_string *s, size_t size);
 char					*ft_string_realloc(t_string *s, size_t new_size);
 

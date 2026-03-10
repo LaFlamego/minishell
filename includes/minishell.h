@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 16:55:40 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/10 22:13:55 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/10 23:18:22 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,8 @@ typedef struct s_ctx
 }					t_ctx;
 
 void				prompt_display(void);
+
+// builtins
+void				mini_export(int argc, char **argv, t_ctx *ctx);
 
 #endif

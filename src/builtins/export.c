@@ -6,87 +6,81 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:21:12 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/10 22:08:27 by crevette         ###   ########.fr       */
+/*   Updated: 2026/03/10 23:33:53 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 
-//export: `23=1': not a valid identifier
-//export: `23': not a valid identifier
-//export: `=': not a valid identifier
+// export: `23=1': not a valid identifier
+// export: `23': not a valid identifier
+// export: `=': not a valid identifier
 
-static bool	is_valid_args(char *args, int key_end)
+static bool	is_valid_arg(char *arg)
 {
-	int			i;
+	int	i;
 
-	if (!ft_isalpha(args[0]) || args[0] != '_')
+	if (!ft_isalpha(arg[0]) && arg[0] != '_')
 		return (false);
 	i = 1;
-	while (args[i] && args[i] != '=')
+	while (arg[i] && arg[i] != '=')
 	{
-		if (!ft_isalpha(args[i]) && !ft_isdigit(args[i])
-			&& args[i] != '_')
+		if (!ft_isalpha(arg[i]) && !ft_isdigit(arg[i]) && arg[i] != '_')
 			return (false);
 		++i;
 	}
-	if (args[i] && args[i] == '=')
-		key_end = i;
 	return (true);
 }
 
-static void	store_keypairs(int key_end, char **argv)
+static void	store_keypair(t_ctx *ctx, char *var)
 {
-	int			len;
-	char		*key;
-	char		*val;
+	char	*val;
 
-	len = ft_strlen(*argv);
-	if (key_end > 0)
-	{
-		key = ft_substr((*argv), 0, (size_t)key_end);
-		if (key_end == len - 1)
-			val = ft_strdup("""");
-		else
-			val = ft_substr((*argv), (size_t)key_end + 1, len - key_end - 1);
-	}
-	else if (key_end == 0)
-		key = argv;
-	ft_env_set(key, val);
+	val = ft_strchr(var, '=');
+	if (val && *(val + 1) == '\0')
+		val = "\"\"";
+	else if (val)
+		val++;
+	ft_env_set(ctx->env, var, val);
 }
 
+// Last element of env is NULL
+// > Therefore we stop at i = size - 1
 static void	export_list(t_ctx *ctx)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < ctx->env->size)
+	while (i < ctx->env->size - 1)
 	{
 		printf("%s\n", (char *)ctx->env->data[i]);
 		i++;
 	}
 }
 
+// FIXME: Error Message should probably be written to stderr
 void	mini_export(int argc, char **argv, t_ctx *ctx)
 {
-	static int	key_end;
+	size_t	i;
 
-	if (argc > 1)
-	{	
-		++argv;
-		while (*argv)
-		{
-			if (!is_valid_args(*argv, key_end))
-			{		
-				printf("export: `%s': not a valid identifier\n", (*argv));
-				return ;
-			}
-			store_keypairs(key_end, argv);
-			++argv;
-		}
+	if (argc <= 1)
+	{
+		export_list(ctx);
+		return ;
 	}
 	else
-		export_list(ctx);
+	{
+		i = 1;
+		while (argv[i])
+		{
+			if (is_valid_arg(argv[i]))
+				store_keypair(ctx, argv[i]);
+			else
+				printf("export: `%s': not a valid identifier\n", argv[i]);
+			++i;
+		}
+	}
 }

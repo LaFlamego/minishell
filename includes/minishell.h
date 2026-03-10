@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 16:55:40 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/09 21:15:04 by crevette         ###   ########.fr       */
+/*   Updated: 2026/03/10 22:13:55 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# include "libft.h"
 
 // TODO: Bonus operations
 typedef enum e_ops
@@ -40,11 +42,19 @@ typedef struct s_node
 	struct s_node	*right;
 }					t_node;
 
+typedef t_array		t_env;
+
+t_env				*ft_env_from(char **envp);
+t_env				*ft_env_free(t_env *env);
+void				*ft_env_get(t_env *env, char *key);
+void				ft_env_set(t_env *env, char *key, char *value);
+void				ft_env_unset(t_env *env, char *key);
+
 typedef struct s_ctx
 {
-	char			**env;
+	t_env			*env;
 }					t_ctx;
 
-void	prompt_display(void);
+void				prompt_display(void);
 
 #endif

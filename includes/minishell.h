@@ -19,6 +19,7 @@
 # define MINISHELL_H
 
 # include "libft.h"
+# include <stdio.h>
 
 // TODO: Bonus operations
 typedef enum e_ops
@@ -55,7 +56,7 @@ typedef struct s_ctx
 	t_env			*env;
 }					t_ctx;
 
-void				prompt_display(void);
+void				prompt_display(t_ctx *ctx);
 
 // builtins
 void				mini_export(int argc, char **argv, t_ctx *ctx);

@@ -6,26 +6,31 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 13:15:33 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/08 16:15:47 by crevette         ###   ########.fr       */
+/*   Updated: 2026/03/10 23:21:28 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "minishell.h"
-#include <stdio.h>
-#include <readline/readline.h>
 #include <readline/history.h>
+#include <readline/readline.h>
+#include <stdlib.h>
 
-void	prompt_display(void)
+void	prompt_display(t_ctx *ctx)
 {
 	char	*input;
+	char	**args;
+	int		argc;
 
 	while (1)
+	{
 		input = readline("(=^.^=)$ ");
+		args = ft_split(input, ' ');
+		argc = 0;
+		while (args[argc])
+			argc++;
+		mini_export(argc, args, ctx);
+		free_splits(args);
+		free(input);
+	}
 }
-
-// int	main(void)
-// {
-// 	prompt_display();
-// 	return 0;
-// }
-

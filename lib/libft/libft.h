@@ -6,13 +6,14 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 15:00:56 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/09 20:41:47 by crevette         ###   ########.fr       */
+/*   Updated: 2026/03/10 19:22:13 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include "src/array/ft_array.h"
 # include <stdarg.h>
 # include <stdlib.h>
 

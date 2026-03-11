@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:21:12 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/10 23:33:53 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/11 15:59:25 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	export_list(t_ctx *ctx)
 	}
 }
 
-// FIXME: Error Message should probably be written to stderr
+// FIXME: Error Message should probably be written to stderr // *DONE
 void	mini_export(int argc, char **argv, t_ctx *ctx)
 {
 	size_t	i;
@@ -79,7 +79,11 @@ void	mini_export(int argc, char **argv, t_ctx *ctx)
 			if (is_valid_arg(argv[i]))
 				store_keypair(ctx, argv[i]);
 			else
-				printf("export: `%s': not a valid identifier\n", argv[i]);
+			{
+				ft_putstr_fd("export: `", 2);
+				ft_putstr_fd(argv[i], 2);
+				ft_putstr_fd("': not a valid identifier\n", 2);
+			}
 			++i;
 		}
 	}

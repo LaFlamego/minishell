@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 19:01:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/11 20:57:49 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/11 23:04:55 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include "minishell.h"
 #include <stdlib.h>
 
-bool	is_key(char *var, char *key)
+// FIXME: Not every var has a value (no =)
+static bool	is_key(char *var, char *key)
 {
 	char	*sep;
 
@@ -48,8 +49,6 @@ void	*ft_env_get(t_env *env, char *key)
 	return (ft_strchr(var, '=') + 1);
 }
 
-// FIXME: If we push a new variable, then the last value won't be NULL
-// > We need to replace the last one, then push NULL
 // TODO: Push can fail, so ft_env_set should return an error
 void	ft_env_set(t_env *env, char *key, char *value)
 {
@@ -83,6 +82,8 @@ void	ft_env_set(t_env *env, char *key, char *value)
 }
 
 // FIXME: This is causing a double free error
+// > The memory isn't shifted back as it should be
+// > The removed value ptr can still be reached
 void	ft_env_unset(t_env *env, char *key)
 {
 	char	*var;

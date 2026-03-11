@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 19:01:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/11 23:04:55 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/11 23:17:05 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,4 +137,26 @@ t_env	*ft_env_from(char **envp)
 	if (!ft_array_push(env, NULL))
 		return (ft_env_free(env));
 	return (env);
+}
+
+// Merge two environments. If a key is in both, the one in DST will be kept.
+// FIXME: ft_env_set will return an error
+void	ft_env_merge(t_env *dst, t_env *src)
+{
+	size_t	i;
+	char	*key;
+	char	*value;
+
+	i = 0;
+	while (i < src->size - 1)
+	{
+		key = src->data[i];
+		if (!ft_env_find(dst, key))
+		{
+			value = ft_strchr(key, '=');
+			if (value)
+				ft_env_set(dst, key, value);
+		}
+		i++;
+	}
 }

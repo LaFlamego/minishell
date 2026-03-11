@@ -6,16 +6,18 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:11:29 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/11 18:41:44 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/11 19:04:15 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+int	main(int argc, char *argv[], char *envp[])
 {
 	t_ctx	ctx;
 
+	(void)argc;
+	(void)argv;
 	ctx.env = ft_env_from(envp);
 	ctx.exit = false;
 	if (!ctx.env)

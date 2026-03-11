@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 19:01:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/11 20:43:37 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/11 20:44:02 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	*ft_env_find(t_env *env, char *key)
 	while (i < env->size)
 	{
 		if (is_key(env->data[i], key))
-			return (env->data + i);
+			return ((void *)env->data + i);
 		i++;
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 19:01:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/11 20:48:07 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/11 20:57:49 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	ft_env_set(t_env *env, char *key, char *value)
 	}
 }
 
+// FIXME: This is causing a double free error
 void	ft_env_unset(t_env *env, char *key)
 {
 	char	*var;

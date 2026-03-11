@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 16:55:40 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/11 18:36:54 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/11 19:14:14 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_ctx
 void				prompt_display(t_ctx *ctx);
 
 // builtins
-void				mini_export(int argc, char **argv, t_ctx *ctx);
+int					mini_export(int argc, char **argv, t_ctx *ctx);
 int					mini_unset(int argc, char **argv, t_ctx *ctx);
 int					mini_exit(t_ctx *ctx);
 

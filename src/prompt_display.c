@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 13:15:33 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/11 18:41:55 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/11 18:52:26 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	prompt_display(t_ctx *ctx)
 	char	**argv;
 	int		argc;
 
-	while (1)
+	while (!ctx->exit)
 	{
 		input = readline("(=^.^=)$ ");
 		argv = ft_split(input, ' ');
@@ -33,6 +33,8 @@ void	prompt_display(t_ctx *ctx)
 			mini_unset(argc, argv, ctx);
 		else if (ft_streq(argv[0], "export"))
 			mini_export(argc, argv, ctx);
+		else if (ft_streq(argv[0], "exit"))
+			mini_exit(ctx);
 		free_splits(argv);
 		free(input);
 	}

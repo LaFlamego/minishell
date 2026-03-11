@@ -3,7 +3,7 @@ NAME=minishell
 SRCS_DIR = src
 INCL_DIR = includes
 
-SRCS = $(addprefix $(SRCS_DIR)/, main.c prompt_display.c env/env.c builtins/export.c builtins/unset.c )
+SRCS = $(addprefix $(SRCS_DIR)/, main.c prompt_display.c env/env.c builtins/export.c builtins/unset.c builtins/exit.c )
 OBJS = $(SRCS:.c=.o)
 
 LIBFT  = lib/libft

@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
+/*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/09 21:11:29 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/11 18:41:44 by Oery             ###   ########.fr       */
+/*   Created: 2026/03/11 18:30:12 by Oery              #+#    #+#             */
+/*   Updated: 2026/03/11 18:47:15 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+// TODO: Pressing Ctrl + D add exit to the current line and run it
+int	mini_exit(t_ctx *ctx)
 {
-	t_ctx	ctx;
-
-	ctx.env = ft_env_from(envp);
-	ctx.exit = false;
-	if (!ctx.env)
-		return (1);
-	prompt_display(&ctx);
-	ft_env_free(ctx.env);
+	ctx->exit = true;
 	return (0);
 }

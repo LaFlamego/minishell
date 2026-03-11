@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 19:01:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/11 20:44:02 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/11 20:48:07 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	*ft_env_get(t_env *env, char *key)
 	return (ft_strchr(var, '=') + 1);
 }
 
-// TODO:
 // FIXME: If we push a new variable, then the last value won't be NULL
 // > We need to replace the last one, then push NULL
 // TODO: Push can fail, so ft_env_set should return an error
@@ -70,18 +69,13 @@ void	ft_env_set(t_env *env, char *key, char *value)
 			new_str = ft_strdup(key);
 			if (!new_str)
 				return ;
-			free(var);
 			i = var - (char *)env->data;
+			free(env->data[i]);
 			env->data[i] = new_str;
 		}
 	}
 	else
 	{
-		// Get Key Size,
-		// Get Value Size,
-		// Allocate String
-		// Concatenate it
-		// Insert it
 		env->size--;
 		ft_array_push(env, ft_strdup(key));
 		ft_array_push(env, NULL);
@@ -90,12 +84,14 @@ void	ft_env_set(t_env *env, char *key, char *value)
 
 void	ft_env_unset(t_env *env, char *key)
 {
-	void	*var;
+	char	*var;
+	size_t	i;
 
 	var = ft_env_find(env, key);
 	if (var)
 	{
-		free(*(void **)var);
+		i = var - (char *)env->data;
+		free(env->data[i]);
 		ft_array_pop(env, var);
 	}
 }

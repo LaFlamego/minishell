@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:21:12 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/11 19:14:19 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/11 20:07:44 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static void	store_keypair(t_ctx *ctx, char *var)
 // Last element of env is NULL
 // > Therefore we stop at i = size - 1
 // FIXME: Values should be printed between double quotes
+// FIXME: Invalid Identifier should be skipped
 static void	export_list(t_ctx *ctx)
 {
 	size_t	i;

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 17:31:35 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/10 22:02:14 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/11 16:05:19 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	ft_array_pop(t_array *arr, void *ptr)
 	size_t	total;
 	size_t	taken;
 
+	if (arr->size == 0)
+		return ;
 	taken = ptr - (void *)arr->data;
 	total = arr->size * sizeof(void *) - taken;
 	ft_memmove(ptr, ptr + sizeof(void *), total);

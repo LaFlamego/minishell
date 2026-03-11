@@ -6,14 +6,13 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 19:01:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/11 20:42:16 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/11 20:43:37 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "minishell.h"
-#include "src/array/ft_array.h"
-#include <stddef.h>
+#include <stdlib.h>
 
 bool	is_key(char *var, char *key)
 {

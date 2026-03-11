@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:21:12 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/10 23:33:53 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/11 18:23:17 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	mini_export(int argc, char **argv, t_ctx *ctx)
 	if (argc <= 1)
 	{
 		export_list(ctx);
-		return ;
 	}
 	else
 	{

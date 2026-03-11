@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:21:12 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/11 20:34:15 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/11 23:29:05 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static bool	is_valid_arg(char *arg)
 }
 
 // FIXME: We should not store quotes in t_env
-static void	store_keypair(t_ctx *ctx, char *var)
+void	store_keypair(t_ctx *ctx, char *var)
 {
 	char	*val;
 
@@ -52,7 +52,7 @@ static void	store_keypair(t_ctx *ctx, char *var)
 // Last element of env is NULL
 // > Therefore we stop at i = size - 1
 // FIXME: Values should be printed between double quotes
-static void	export_list(t_ctx *ctx)
+void	env_vars_list(t_ctx *ctx)
 {
 	size_t	i;
 
@@ -92,7 +92,7 @@ int	mini_export(int argc, char **argv, t_ctx *ctx)
 
 	if (argc <= 1)
 	{
-		export_list(ctx);
+		env_vars_list(ctx);
 		exit_code = 0;
 	}
 	else

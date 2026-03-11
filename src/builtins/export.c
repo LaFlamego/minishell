@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:21:12 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/11 20:07:44 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/11 20:25:41 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ int	mini_export(int argc, char **argv, t_ctx *ctx)
 				store_keypair(ctx, argv[i]);
 			else
 			{
-				printf("export: `%s': not a valid identifier\n", argv[i]);
+				ft_putstr_fd("export: `", 2);
+				ft_putstr_fd(argv[i], 2);
+				ft_putstr_fd("': not a valid identifier\n", 2);
 				exit_code = 1;
 			}
 			++i;

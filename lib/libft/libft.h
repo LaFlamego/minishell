@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 15:00:56 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/10 19:22:13 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/11 18:35:03 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,5 +165,6 @@ char					*ft_strtrim(char const *s1, char const *set);
 char					*ft_substr(const char *s, unsigned int start,
 							size_t len);
 int						ft_endswith(const char *string, const char *suffix);
+int						ft_startswith(const char *string, const char *prefix);
 
 #endif

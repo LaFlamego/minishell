@@ -6,10 +6,11 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:21:12 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/11 20:25:41 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/11 20:31:44 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "minishell.h"
 #include <stdbool.h>
 #include <stdio.h>
@@ -64,33 +65,39 @@ static void	export_list(t_ctx *ctx)
 	}
 }
 
-// FIXME: Error Message should probably be written to stderr
+static int	export_variables(int argc, char **argv, t_ctx *ctx)
+{
+	int	i;
+	int	exit_code;
+
+	i = 1;
+	exit_code = 0;
+	while (i < argc)
+	{
+		if (is_valid_arg(argv[i]))
+			store_keypair(ctx, argv[i]);
+		else
+		{
+			ft_dprintf(2, "export: `%s': not a valid identifier\n", argv[i]);
+			exit_code = 1;
+		}
+		++i;
+	}
+	return (exit_code);
+}
+
 int	mini_export(int argc, char **argv, t_ctx *ctx)
 {
-	size_t	i;
-	int		exit_code;
+	int	exit_code;
 
-	exit_code = 0;
 	if (argc <= 1)
 	{
 		export_list(ctx);
+		exit_code = 0;
 	}
 	else
 	{
-		i = 1;
-		while (argv[i])
-		{
-			if (is_valid_arg(argv[i]))
-				store_keypair(ctx, argv[i]);
-			else
-			{
-				ft_putstr_fd("export: `", 2);
-				ft_putstr_fd(argv[i], 2);
-				ft_putstr_fd("': not a valid identifier\n", 2);
-				exit_code = 1;
-			}
-			++i;
-		}
+		exit_code = export_variables(argc, argv, ctx);
 	}
 	return (exit_code);
 }

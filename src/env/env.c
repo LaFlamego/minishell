@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 19:01:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/12 18:54:12 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/12 18:59:12 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,26 @@
 
 static bool	is_key(const char *var, const char *key)
 {
-	int				i;
-	unsigned char	diff;
+	int	i;
 
 	if (!var || !key)
 		return (false);
 	i = 0;
 	while (var[i] && key[i] && var[i] == key[i])
+	{
+		if (var[i] == '=' || key[i] == '=')
+			break ;
 		i++;
+	}
 	if (var[i] == '=' && key[i] == '\0')
 		return (true);
 	if (key[i] == '=' && var[i] == '\0')
 		return (true);
-	diff = (unsigned char)var[i] - (unsigned char)key[i];
-	return (diff == 0);
+	if (key[i] == '=' && var[i] == '=')
+		return (true);
+	if (key[i] == '\0' && var[i] == '\0')
+		return (true);
+	return (false);
 }
 
 char	**ft_env_find(t_env *env, char *key)

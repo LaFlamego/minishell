@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 19:01:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/12 16:49:14 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/12 18:54:12 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_env_set(t_env *env, char *key)
 		value = ft_strchr(key, '=');
 		if (value && (ft_strlen(value) <= ft_strlen(*var)))
 		{
-			ft_strlcpy(*var, value, ft_strlen(value));
+			ft_strlcpy(*var, key, ft_strlen(key) + 1);
 		}
 		else
 		{

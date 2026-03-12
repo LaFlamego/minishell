@@ -32,7 +32,7 @@ static bool	is_key(const char *var, const char *key)
 	return (diff == 0);
 }
 
-void	*ft_env_find(t_env *env, char *key)
+char	**ft_env_find(t_env *env, char *key)
 {
 	size_t	i;
 
@@ -40,7 +40,7 @@ void	*ft_env_find(t_env *env, char *key)
 	while (i < env->size)
 	{
 		if (is_key(env->data[i], key))
-			return ((void *)env->data + i);
+			return ((char **)env->data + i);
 		i++;
 	}
 	return (NULL);
@@ -48,18 +48,18 @@ void	*ft_env_find(t_env *env, char *key)
 
 void	*ft_env_get(t_env *env, char *key)
 {
-	char	*var;
+	char	**var;
 
 	var = ft_env_find(env, key);
 	if (!var)
 		return (NULL);
-	return (ft_strchr(var, '=') + 1);
+	return (ft_strchr(*var, '=') + 1);
 }
 
 // TODO: Push can fail, so ft_env_set should return an error
 void	ft_env_set(t_env *env, char *key)
 {
-	char	*var;
+	char	**var;
 	char	*value;
 	char	*new_str;
 	size_t	i;
@@ -68,13 +68,13 @@ void	ft_env_set(t_env *env, char *key)
 	if (var)
 	{
 		value = ft_strchr(key, '=');
-		if (value && (ft_strlen(value) <= ft_strlen(var)))
+		if (value && (ft_strlen(value) <= ft_strlen(*var)))
 		{
-			ft_strlcpy(var, value, ft_strlen(value));
+			ft_strlcpy(*var, value, ft_strlen(value));
 		}
 		else
 		{
-			i = var - (char *)env->data;
+			i = var - (char **)env->data;
 			if (!value && ft_strchr(env->data[i], '='))
 				return ;
 			new_str = ft_strdup(key);
@@ -95,15 +95,17 @@ void	ft_env_set(t_env *env, char *key)
 // FIXME: This is causing a double free error
 // > The memory isn't shifted back as it should be
 // > The removed value ptr can still be reached
+// TODO: Key should be an exact match
+// > "test=something" should not be usable as a key
 void	ft_env_unset(t_env *env, char *key)
 {
-	char	*var;
+	void	**var;
 	size_t	i;
 
-	var = ft_env_find(env, key);
+	var = (void **)ft_env_find(env, key);
 	if (var)
 	{
-		i = var - (char *)env->data;
+		i = var - env->data;
 		free(env->data[i]);
 		ft_array_pop(env, var);
 	}

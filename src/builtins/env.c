@@ -6,57 +6,34 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 16:14:45 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/12 21:06:20 by crevette         ###   ########.fr       */
+/*   Updated: 2026/03/13 00:08:00 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// *DONE env 
-// *DONE env NAME=val NAME=val ... NAME=val
-// *DONE env NAME=val NAME=val command(with multiple args it should have)
-// TODO error msg
-
+#include "libft.h"
 #include "minishell.h"
-#include <stdbool.h>
-#include <unistd.h>
 
-void	env_vars_list(t_ctx *ctx);
-
-static bool all_vars(char **argv)
-{
-	while (*argv)
-	{
-		if (ft_strchr(*argv, '='))
-			return (false);
-		++argv;
-	}
-	return (true);
-}
-
-unsigned	mini_env(int argc, char **argv, t_ctx *ctx)
+// TODO: $? should not printed?
+static void	print_env(t_env *env)
 {
 	size_t	i;
-	t_env	*local;
 
-	local = ft_env_new();
-	if (!local)
-		return ;
-	if (argc == 1)
-		vars_list(ctx);
-	else if (argc > 1)
+	i = 0;
+	while (i < env->size - 1)
 	{
-		i = 1;
-		if (all_vars)
-			vars_list(ctx);
-		while (argv[i] && ft_strchr(argv[i], '='))
-		{
-			ft_env_set(local, argv[i]);
-			if (all_vars)
-				printf("%s\n", argv[i]);
-			++i;
-		}
-		ft_env_merge(local, ctx->env);
-		if (argv[i])
-			return (run_cmd((argv + i), local));
+		ft_dprintf(0, "%s\n", env->data[i]);
+		i++;
 	}
+}
+
+unsigned int	mini_env(int argc, char **argv, t_ctx *ctx)
+{
+	(void)argv;
+	if (argc > 1)
+	{
+		ft_dprintf(2, "minishell: exit: too many arguments\n");
+		return (2);
+	}
+	print_env(ctx->env);
 	return (0);
 }

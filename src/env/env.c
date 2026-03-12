@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 19:01:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/12 18:59:12 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/12 19:55:07 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,6 @@ void	ft_env_set(t_env *env, char *key)
 	}
 }
 
-// FIXME: This is causing a double free error
-// > The memory isn't shifted back as it should be
-// > The removed value ptr can still be reached
-// TODO: Key should be an exact match
-// > "test=something" should not be usable as a key
 void	ft_env_unset(t_env *env, char *key)
 {
 	void	**var;

@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 16:14:45 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/13 00:08:00 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 00:17:58 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	print_env(t_env *env)
 	i = 0;
 	while (i < env->size - 1)
 	{
-		ft_dprintf(0, "%s\n", env->data[i]);
+		ft_dprintf(1, "%s\n", env->data[i]);
 		i++;
 	}
 }

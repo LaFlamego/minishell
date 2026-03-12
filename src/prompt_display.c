@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 13:15:33 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/11 18:52:26 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/12 15:13:14 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include <readline/readline.h>
 #include <stdlib.h>
 
+// FIXME: Ctrl+D should print exit
+// > on the current command line
+// > not the next one.
 void	prompt_display(t_ctx *ctx)
 {
 	char	*input;
@@ -25,6 +28,13 @@ void	prompt_display(t_ctx *ctx)
 	while (!ctx->exit)
 	{
 		input = readline("(=^.^=)$ ");
+		if (!input)
+		{
+			rl_replace_line("exit\n", 0);
+			rl_on_new_line();
+			rl_redisplay();
+			return ;
+		}
 		argv = ft_split(input, ' ');
 		argc = 0;
 		while (argv[argc])

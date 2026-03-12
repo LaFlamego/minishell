@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 19:01:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/12 16:02:39 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/12 16:18:41 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,22 @@
 #include "minishell.h"
 #include <stdlib.h>
 
-// FIXME: Not every var has a value (no =)
-static bool	is_key(char *var, char *key)
+static bool	is_key(const char *var, const char *key)
 {
-	char	*sep;
+	int				i;
+	unsigned char	diff;
 
-	if (!var)
+	if (!var || !key)
 		return (false);
-	sep = ft_strchr(var, '=');
-	return (ft_strncmp(var, key, sep - var) == 0);
+	i = 0;
+	while (var[i] && key[i] && var[i] == key[i])
+		i++;
+	if (var[i] == '=' && key[i] == '\0')
+		return (true);
+	if (key[i] == '=' && var[i] == '\0')
+		return (true);
+	diff = (unsigned char)var[i] - (unsigned char)key[i];
+	return (diff == 0);
 }
 
 void	*ft_env_find(t_env *env, char *key)

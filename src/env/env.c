@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 19:01:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/11 23:17:05 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/12 15:58:32 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,18 @@ void	*ft_env_get(t_env *env, char *key)
 }
 
 // TODO: Push can fail, so ft_env_set should return an error
-void	ft_env_set(t_env *env, char *key, char *value)
+void	ft_env_set(t_env *env, char *key)
 {
 	char	*var;
+	char	*value;
 	char	*new_str;
 	size_t	i;
 
 	var = ft_env_find(env, key);
 	if (var)
 	{
-		if (ft_strlen(value) <= ft_strlen(var))
+		value = ft_strchr(key, '=');
+		if (value && (ft_strlen(value) <= ft_strlen(var)))
 		{
 			ft_strlcpy(var, value, ft_strlen(value));
 		}
@@ -155,7 +157,7 @@ void	ft_env_merge(t_env *dst, t_env *src)
 		{
 			value = ft_strchr(key, '=');
 			if (value)
-				ft_env_set(dst, key, value);
+				ft_env_set(dst, key);
 		}
 		i++;
 	}

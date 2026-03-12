@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 16:55:40 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/12 15:26:53 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/12 15:36:27 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_env				*ft_env_new(void);
 t_env				*ft_env_from(char **envp);
 t_env				*ft_env_free(t_env *env);
 void				*ft_env_get(t_env *env, char *key);
-void				ft_env_set(t_env *env, char *key, char *value);
+void				ft_env_set(t_env *env, char *key);
 void				ft_env_unset(t_env *env, char *key);
 void				ft_env_merge(t_env *dst, t_env *src);
 

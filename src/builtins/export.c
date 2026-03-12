@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:21:12 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/11 23:29:05 by crevette         ###   ########.fr       */
+/*   Updated: 2026/03/12 15:59:17 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,6 @@ static bool	is_valid_arg(char *arg)
 	return (true);
 }
 
-// FIXME: We should not store quotes in t_env
-void	store_keypair(t_ctx *ctx, char *var)
-{
-	char	*val;
-
-	val = ft_strchr(var, '=');
-	if (val && *(val + 1) == '\0')
-		val = "\"\"";
-	else if (val)
-		val++;
-	ft_env_set(ctx->env, var, val);
-}
-
 // Last element of env is NULL
 // > Therefore we stop at i = size - 1
 // FIXME: Values should be printed between double quotes
@@ -75,7 +62,7 @@ static int	export_variables(int argc, char **argv, t_ctx *ctx)
 	while (i < argc)
 	{
 		if (is_valid_arg(argv[i]))
-			store_keypair(ctx, argv[i]);
+			ft_env_set(ctx->env, argv[i]);
 		else
 		{
 			ft_dprintf(2, "export: `%s': not a valid identifier\n", argv[i]);

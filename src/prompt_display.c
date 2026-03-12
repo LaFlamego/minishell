@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 13:15:33 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/12 15:13:14 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/12 21:23:08 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	prompt_display(t_ctx *ctx)
 		else if (ft_streq(argv[0], "export"))
 			mini_export(argc, argv, ctx);
 		else if (ft_streq(argv[0], "exit"))
-			mini_exit(ctx);
+			mini_exit(argc, argv, ctx);
 		free_splits(argv);
 		free(input);
 	}

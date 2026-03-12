@@ -6,17 +6,18 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 16:14:45 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/12 16:16:24 by crevette         ###   ########.fr       */
+/*   Updated: 2026/03/12 21:06:20 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // *DONE env 
 // *DONE env NAME=val NAME=val ... NAME=val
 // *DONE env NAME=val NAME=val command(with multiple args it should have)
-// TODO error msg - use perror
+// TODO error msg
 
 #include "minishell.h"
 #include <stdbool.h>
+#include <unistd.h>
 
 void	env_vars_list(t_ctx *ctx);
 
@@ -31,17 +32,7 @@ static bool all_vars(char **argv)
 	return (true);
 }
 
-void	get_path(char **cmds)
-{
-
-}
-
-static void	run_cmd(char **cmds, t_ctx *ctx)
-{
-	
-}
-
-void	mini_env(int argc, char **argv, t_ctx *ctx)
+unsigned	mini_env(int argc, char **argv, t_ctx *ctx)
 {
 	size_t	i;
 	t_env	*local;
@@ -65,6 +56,7 @@ void	mini_env(int argc, char **argv, t_ctx *ctx)
 		}
 		ft_env_merge(local, ctx->env);
 		if (argv[i])
-			run_cmd((argv + i), ctx);
+			return (run_cmd((argv + i), local));
 	}
+	return (0);
 }

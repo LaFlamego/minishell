@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 19:01:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/12 15:58:32 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/12 16:02:39 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,6 @@ void	ft_env_merge(t_env *dst, t_env *src)
 {
 	size_t	i;
 	char	*key;
-	char	*value;
 
 	i = 0;
 	while (i < src->size - 1)
@@ -155,8 +154,7 @@ void	ft_env_merge(t_env *dst, t_env *src)
 		key = src->data[i];
 		if (!ft_env_find(dst, key))
 		{
-			value = ft_strchr(key, '=');
-			if (value)
+			if (ft_strchr(key, '='))
 				ft_env_set(dst, key);
 		}
 		i++;

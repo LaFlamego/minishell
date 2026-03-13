@@ -6,16 +6,13 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:21:12 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/13 18:10:52 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 18:52:44 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "libft/printf.h"
-#include "minishell.h"
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "minishell/ctx.h"
 
 // export: `23=1': not a valid identifier
 // export: `23': not a valid identifier
@@ -48,7 +45,7 @@ void	env_vars_list(t_ctx *ctx)
 	while (i < ctx->env->size - 1)
 	{
 		if (is_valid_arg((char *)ctx->env->data[i]))
-			printf("%s\n", (char *)ctx->env->data[i]);
+			ft_printf("%s\n", (char *)ctx->env->data[i]);
 		i++;
 	}
 }

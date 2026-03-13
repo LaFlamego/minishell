@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 23:56:01 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 18:18:32 by Oery             ###   ########.fr       */
+/*   Created: 2026/03/13 17:15:40 by Oery              #+#    #+#             */
+/*   Updated: 2026/03/13 18:17:46 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "minishell.h"
-#include <stdbool.h>
+#ifndef ENV_H
+# define ENV_H
 
-static bool	is_valid(const char *key)
-{
-	return (ft_strchr(key, '=') == NULL);
-}
+# include "libft/array.h"
 
-int	mini_unset(int argc, char **argv, t_ctx *ctx)
-{
-	int	i;
+typedef t_array	t_env;
 
-	i = 1;
-	while (i < argc)
-	{
-		if (is_valid(argv[i]))
-			ft_env_unset(ctx->env, argv[i]);
-		i++;
-	}
-	return (0);
-}
+t_env			*ft_env_new(void);
+t_env			*ft_env_from(char **envp);
+t_env			*ft_env_free(t_env *env);
+void			*ft_env_get(t_env *env, char *key);
+void			ft_env_set(t_env *env, char *key);
+void			ft_env_unset(t_env *env, char *key);
+void			ft_env_merge(t_env *dst, t_env *src);
+
+#endif

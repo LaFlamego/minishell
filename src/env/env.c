@@ -6,12 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 19:01:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/12 19:55:07 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 17:52:16 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "minishell.h"
+#include "minishell/env.h"
 #include <stdlib.h>
 
 static bool	is_key(const char *var, const char *key)

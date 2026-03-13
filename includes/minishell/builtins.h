@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 23:56:01 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 18:18:32 by Oery             ###   ########.fr       */
+/*   Created: 2026/03/13 17:13:34 by Oery              #+#    #+#             */
+/*   Updated: 2026/03/13 17:14:19 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "minishell.h"
-#include <stdbool.h>
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-static bool	is_valid(const char *key)
-{
-	return (ft_strchr(key, '=') == NULL);
-}
+# include "minishell.h"
 
-int	mini_unset(int argc, char **argv, t_ctx *ctx)
-{
-	int	i;
+int				mini_export(int argc, char *argv[], t_ctx *ctx);
+int				mini_unset(int argc, char *argv[], t_ctx *ctx);
+unsigned int	mini_exit(int argc, char *argv[], t_ctx *ctx);
+unsigned int	mini_env(int argc, char *argv[], t_ctx *ctx);
+unsigned int	mini_pwd(int argc, char *argv[], t_ctx *ctx);
 
-	i = 1;
-	while (i < argc)
-	{
-		if (is_valid(argv[i]))
-			ft_env_unset(ctx->env, argv[i]);
-		i++;
-	}
-	return (0);
-}
+#endif

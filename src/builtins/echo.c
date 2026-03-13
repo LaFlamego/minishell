@@ -6,15 +6,16 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 17:21:48 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/08 22:46:25 by crevette         ###   ########.fr       */
+/*   Updated: 2026/03/13 18:08:21 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
+#include "libft/printf.h"
 
 void	mini_echo(int argc, char **argv)
 {
-	int i;
+	int	i;
 
 	if (argc > 1)
 	{
@@ -30,4 +31,3 @@ void	mini_echo(int argc, char **argv)
 	if (argc == 1 || !ft_streq(argv[1], "-n"))
 		ft_printf("\n");
 }
-    

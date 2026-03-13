@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 16:55:40 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 00:37:02 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 18:22:59 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft.h"
+# include "minishell/env.h"
+// Needed for Readline
 # include <stdio.h>
 
 // TODO: Bonus operations
@@ -43,16 +44,6 @@ typedef struct s_node
 	struct s_node	*right;
 }					t_node;
 
-typedef t_array		t_env;
-
-t_env				*ft_env_new(void);
-t_env				*ft_env_from(char **envp);
-t_env				*ft_env_free(t_env *env);
-void				*ft_env_get(t_env *env, char *key);
-void				ft_env_set(t_env *env, char *key);
-void				ft_env_unset(t_env *env, char *key);
-void				ft_env_merge(t_env *dst, t_env *src);
-
 typedef struct s_ctx
 {
 	t_env			*env;
@@ -61,11 +52,5 @@ typedef struct s_ctx
 
 void				prompt_display(t_ctx *ctx);
 
-// builtins
-int					mini_export(int argc, char **argv, t_ctx *ctx);
-int					mini_unset(int argc, char **argv, t_ctx *ctx);
-unsigned int		mini_exit(int argc, char *argv[], t_ctx *ctx);
-unsigned int		mini_env(int argc, char *argv[], t_ctx *ctx);
-unsigned int		mini_pwd(int argc, char *argv[], t_ctx *ctx);
 
 #endif

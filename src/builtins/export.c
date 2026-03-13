@@ -6,11 +6,12 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:21:12 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/12 15:59:17 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 18:10:52 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "libft/printf.h"
 #include "minishell.h"
 #include <stdbool.h>
 #include <stdio.h>

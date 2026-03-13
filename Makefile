@@ -15,7 +15,7 @@ OBJS = $(SRCS:.c=.o)
 LIBFT  = lib/libft
 LIBS   = -L $(LIBFT) -lft -lreadline -lncurses
 
-INCLUDES = -I $(LIBFT) -I $(INCL_DIR)
+INCLUDES = -I $(LIBFT)/include -I $(INCL_DIR)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pedantic

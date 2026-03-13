@@ -6,10 +6,11 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:00:54 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/09 20:52:07 by crevette         ###   ########.fr       */
+/*   Updated: 2026/03/13 00:56:20 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_string.h"
 #include "libft.h"
 
 char	*ft_string_alloc(t_string *s, size_t size)

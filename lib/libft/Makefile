@@ -19,7 +19,7 @@ PUT_SRCS  = ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c      \
 STR_SRCS  = ft_atoi.c ft_itoa.c ft_split.c ft_strchr.c ft_striteri.c           \
 			ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c    \
 			ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c    \
-			ft_strcmp.c ft_streq.c ft_basename.c ft_endswith.c ft_string.c     \
+			ft_strcmp.c ft_streq.c ft_basename.c ft_endswith.c                 \
 			ft_startswith.c
 
 GNL_SRCS  = get_next_line.c get_next_line_utils.c
@@ -38,6 +38,8 @@ PRINTF_SRCS = ft_pad.c ft_printf.c ft_printf_char.c ft_printf_flags.c          \
 
 ARRAY_SRCS = ft_array.c ft_array_iter.c
 
+STRING_SRCS = ft_string.c
+
 SRCS = $(addprefix $(SRCS_DIR)/lst/, $(LST_SRCS))       \
 	   $(addprefix $(SRCS_DIR)/mem/, $(MEM_SRCS))       \
 	   $(addprefix $(SRCS_DIR)/put/, $(PUT_SRCS))       \
@@ -46,6 +48,7 @@ SRCS = $(addprefix $(SRCS_DIR)/lst/, $(LST_SRCS))       \
 	   $(addprefix $(SRCS_DIR)/char/, $(CHAR_SRCS))     \
 	   $(addprefix $(SRCS_DIR)/array/, $(ARRAY_SRCS))   \
 	   $(addprefix $(SRCS_DIR)/maths/, $(MATHS_SRCS))   \
+	   $(addprefix $(SRCS_DIR)/string/, $(STRING_SRCS)) \
 	   $(addprefix $(SRCS_DIR)/printf/, $(PRINTF_SRCS)) 
 OBJS = $(SRCS:.c=.o)
 

@@ -20,7 +20,7 @@ STR_SRCS  = ft_atoi.c ft_itoa.c ft_split.c ft_strchr.c ft_striteri.c           \
 			ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c    \
 			ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c    \
 			ft_strcmp.c ft_streq.c ft_basename.c ft_endswith.c                 \
-			ft_startswith.c
+			ft_startswith.c ft_split_space.c
 
 GNL_SRCS  = get_next_line.c get_next_line_utils.c
 

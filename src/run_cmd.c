@@ -6,11 +6,11 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:02:13 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/12 21:05:25 by crevette         ###   ########.fr       */
+/*   Updated: 2026/03/13 20:35:05 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell/env.h"
 #include <sys/types.h>
 
 char	*get_path(char *cmd_name, t_env *env);
@@ -38,8 +38,8 @@ pid_t	fork_to_cmd(char **cmds, t_env *env)
 	pid = fork();
 	if (pid < 0)
 	{
-		perror("pid");
-		// TODO free and return
+		return (perror("pid"), pid);
+		// TODO free
 	}
 	else if (pid == 0)
 	{
@@ -47,8 +47,8 @@ pid_t	fork_to_cmd(char **cmds, t_env *env)
 		if (!cmd_path);
 			return ;
 		execve(cmd_path, cmds, env->data);
-		perror("execve");
-		// TODO free and return
+		return(perror("execve"), pid);
+		// TODO free
 	}
 	else
 		(void)pid;

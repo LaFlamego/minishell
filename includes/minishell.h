@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 16:55:40 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 00:00:07 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 00:37:02 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ int					mini_export(int argc, char **argv, t_ctx *ctx);
 int					mini_unset(int argc, char **argv, t_ctx *ctx);
 unsigned int		mini_exit(int argc, char *argv[], t_ctx *ctx);
 unsigned int		mini_env(int argc, char *argv[], t_ctx *ctx);
+unsigned int		mini_pwd(int argc, char *argv[], t_ctx *ctx);
 
 #endif

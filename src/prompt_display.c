@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 13:15:33 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/12 23:59:55 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 00:50:25 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	prompt_display(t_ctx *ctx)
 			mini_export(argc, argv, ctx);
 		else if (ft_streq(argv[0], "env"))
 			mini_env(argc, argv, ctx);
+		else if (ft_streq(argv[0], "pwd"))
+			mini_pwd(argc, argv, ctx);
 		else if (ft_streq(argv[0], "exit"))
 		{
 			exit_code = mini_exit(argc, argv, ctx);

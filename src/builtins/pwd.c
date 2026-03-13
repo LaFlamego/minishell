@@ -6,22 +6,46 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 13:06:22 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/09 21:11:07 by crevette         ###   ########.fr       */
+/*   Updated: 2026/03/13 01:08:45 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "minishell.h"
-#include <stddef.h>
 #include <errno.h>
+#include <string.h>
+#include <unistd.h>
 
-void	mini_pwd(t_ctx *ctx)
+#define BUFFER_SIZE 64
+
+static unsigned int	print_pwd(void)
 {
-	char	*buf;
-	size_t	size;
+	t_string	buf;
 
-	size = 1024;
-	buf = (char *)malloc(sizeof(char) * size);
-	if (!buf)
-		return ;
-	
+	if (!ft_string_alloc(&buf, BUFFER_SIZE))
+		return (1);
+	while (getcwd(buf.content, buf.capacity) == NULL && errno == ERANGE)
+	{
+		if (!ft_string_realloc(&buf, buf.capacity * 2))
+			return (1);
+	}
+	if (errno && !buf.content)
+	{
+		ft_dprintf(2, "minishell: pwd: %s\n", strerror(errno));
+		return (1);
+	}
+	ft_dprintf(1, "%s\n", buf.content);
+	free(buf.content);
+	return (0);
+}
+
+unsigned int	mini_pwd(int argc, char *argv[], t_ctx *ctx)
+{
+	unsigned int	exit_code;
+
+	(void)argv;
+	(void)ctx;
+	(void)argc;
+	exit_code = print_pwd();
+	return (exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:00:54 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 18:23:18 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 20:39:09 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_string_alloc(t_string *s, size_t size)
 {
 	s->size = 0;
 	s->content = malloc(size);
-	if (s->content == NULL)
+	if (s->content == NULL && size != 0)
 	{
 		s->capacity = 0;
 		return (NULL);

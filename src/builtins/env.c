@@ -6,12 +6,13 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 16:14:45 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/13 18:08:31 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 18:58:40 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/printf.h"
-#include "minishell.h"
+#include "minishell/ctx.h"
+#include "minishell/env.h"
 
 // TODO: $? should not printed?
 static void	print_env(t_env *env)

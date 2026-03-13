@@ -6,12 +6,14 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 13:59:50 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/12 20:12:13 by crevette         ###   ########.fr       */
+/*   Updated: 2026/03/13 22:00:20 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell/env.h"
+#include "libft.h"
 #include <unistd.h>
+#include <stdlib.h>
 
 static char	**extract_path(char **envp)
 {
@@ -36,20 +38,21 @@ static char	**extract_path(char **envp)
 	return (res);
 }
 
-static bool	cmd_access(bool f_no_x, char *target_path)
+static bool	cmd_access(char *target_path)
 {
 	if (access(target_path, F_OK) == 0)
 	{
-		if (access(target_path, X_OK) == 0)
-			return (true);
-		else
-			f_no_x = true;
+		return (true);
+		// if (access(target_path, X_OK) == 0)
+		// 	return (true);
+		// else
+		// 	f_no_x = true;
 		// TODO return for permission issue and free
 	}
 	return (false);
 }
 
-static char	*find_path(bool f_no_x, char *cmd_name, char **cddt_paths)
+static char	*find_path(char *cmd_name, char **cddt_paths)
 {
 	char	*tpr;
 	char	*res;
@@ -65,7 +68,7 @@ static char	*find_path(bool f_no_x, char *cmd_name, char **cddt_paths)
 			free(tpr);
 			if (!res)
 				return (NULL);
-			if (cmd_access(f_no_x, res))
+			if (cmd_access(res))
 				return (res);
 			free(res);
 			++cddt_paths;
@@ -84,8 +87,8 @@ char	*get_path(char *cmd_name, t_env *env)
 		return (NULL);
 	// cmd->is_abs = false;
 	path = ft_strchr(cmd_name, '/');
-	cddt_paths = extract_path(env->data);
-	path_find = find_path(false, cmd_name, cddt_paths);
+	cddt_paths = extract_path((char **)env->data);
+	path_find = find_path(cmd_name, cddt_paths);
 	if (cddt_paths)
 		free_splits(cddt_paths);
 	if (path)

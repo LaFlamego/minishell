@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   ctx.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/13 17:13:34 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 18:50:45 by Oery             ###   ########.fr       */
+/*   Created: 2026/03/13 18:29:55 by Oery              #+#    #+#             */
+/*   Updated: 2026/03/13 18:48:28 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#ifndef CTX_H
+# define CTX_H
 
-# include "minishell/ctx.h"
+# include "minishell/env.h"
 
-int				mini_export(int argc, char *argv[], t_ctx *ctx);
-int				mini_unset(int argc, char *argv[], t_ctx *ctx);
-unsigned int	mini_exit(int argc, char *argv[], t_ctx *ctx);
-unsigned int	mini_env(int argc, char *argv[], t_ctx *ctx);
-unsigned int	mini_pwd(int argc, char *argv[], t_ctx *ctx);
+typedef struct s_ctx
+{
+	t_env	*env;
+	bool	exit;
+}			t_ctx;
 
 #endif

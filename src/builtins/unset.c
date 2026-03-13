@@ -6,13 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 23:56:01 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 18:18:32 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 18:50:12 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "minishell.h"
-#include <stdbool.h>
+#include "minishell/ctx.h"
 
 static bool	is_valid(const char *key)
 {

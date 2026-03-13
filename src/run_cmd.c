@@ -6,12 +6,19 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:02:13 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/13 20:35:05 by crevette         ###   ########.fr       */
+/*   Updated: 2026/03/13 21:56:24 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell/env.h"
+#include "libft/printf.h"
 #include <sys/types.h>
+#include <sys/wait.h>
+#include <stdio.h>
+#include <errno.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 
 char	*get_path(char *cmd_name, t_env *env);
 
@@ -19,10 +26,10 @@ unsigned	wait_exit_code(pid_t pid)
 {
 	int			status;
 	unsigned	exit_code;
-	pid_t		pid_wait;
+	//pid_t		pid_wait;
 
 	exit_code = 0;
-	pid_wait = waitpid(pid, &status, 0);
+	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		exit_code = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
@@ -39,16 +46,20 @@ pid_t	fork_to_cmd(char **cmds, t_env *env)
 	if (pid < 0)
 	{
 		return (perror("pid"), pid);
-		// TODO free
+		// TODO free cmd
 	}
 	else if (pid == 0)
 	{
 		cmd_path = get_path(cmds[0], env);
-		if (!cmd_path);
-			return ;
-		execve(cmd_path, cmds, env->data);
-		return(perror("execve"), pid);
-		// TODO free
+		if (!cmd_path)
+		{
+			ft_dprintf(2, "minishell: '%s': %s\n", cmds[0], strerror(errno));
+			exit(errno);
+		}
+		execve(cmd_path, cmds, (char **)env->data);
+		perror("execve");
+		exit(errno);
+		// TODO free cmd
 	}
 	else
 		(void)pid;

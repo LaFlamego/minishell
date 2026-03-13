@@ -6,11 +6,11 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 20:01:00 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/10 21:51:58 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 17:53:12 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_array.h"
+#include "libft/array.h"
 #include <stdlib.h>
 
 void	ft_array_foreach(t_array *arr, void (*f)(void *))

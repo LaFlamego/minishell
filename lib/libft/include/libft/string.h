@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_string.h                                        :+:      :+:    :+:   */
+/*   string.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 00:53:09 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 16:26:50 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 18:17:15 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_STRING_H
-# define FT_STRING_H
+#ifndef STRING_H
+# define STRING_H
 
-# include <stdlib.h>
+# include <stddef.h>
 
 typedef struct s_string
 {

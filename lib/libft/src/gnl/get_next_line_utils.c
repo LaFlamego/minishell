@@ -6,11 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 20:16:29 by Oery              #+#    #+#             */
-/*   Updated: 2026/01/06 17:59:16 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 18:12:54 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "libft/get_next_line.h"
 #include <stdlib.h>
 
 char	*ft_safe_assign(char **dst, char *src)

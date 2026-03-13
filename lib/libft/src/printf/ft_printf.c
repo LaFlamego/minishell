@@ -6,12 +6,13 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 17:14:54 by Oery              #+#    #+#             */
-/*   Updated: 2026/01/06 16:58:11 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 18:14:03 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/printf.h"
 #include <stdarg.h>
-#include "libft.h"
+#include <stdlib.h>
 
 void	set_precision(const char **fmt, t_flags *flags)
 {

@@ -6,11 +6,11 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:37:44 by Oery              #+#    #+#             */
-/*   Updated: 2025/11/13 20:21:40 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 18:12:00 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft/list.h"
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {

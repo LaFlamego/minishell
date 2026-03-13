@@ -6,11 +6,13 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 19:55:58 by Oery              #+#    #+#             */
-/*   Updated: 2026/01/06 16:51:56 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 18:14:38 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft/printf.h"
+#include <stdarg.h>
+#include <stdlib.h>
 
 t_flags	*new_flags(void)
 {

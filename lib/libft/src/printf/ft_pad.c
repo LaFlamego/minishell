@@ -6,11 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:07:45 by Oery              #+#    #+#             */
-/*   Updated: 2026/01/06 17:07:53 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 18:13:18 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "libft/printf.h"
 #include <unistd.h>
 
 int	ft_pad(t_flags *flags, int length, int fd)

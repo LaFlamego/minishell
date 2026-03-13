@@ -6,11 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 18:02:17 by Oery              #+#    #+#             */
-/*   Updated: 2026/02/02 11:54:39 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 18:11:14 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft/list.h"
+#include <stdlib.h>
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {

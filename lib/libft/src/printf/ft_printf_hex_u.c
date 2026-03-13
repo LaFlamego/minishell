@@ -6,14 +6,15 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 22:18:30 by Oery              #+#    #+#             */
-/*   Updated: 2026/01/06 17:37:35 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 18:15:24 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "libft/printf.h"
 #include <stdarg.h>
 
-static	int	max_size(t_flags *flags, unsigned int n, int len)
+static int	max_size(t_flags *flags, unsigned int n, int len)
 {
 	int	prefix;
 
@@ -34,7 +35,7 @@ int	ft_printf_hex_u(va_list *ap, t_flags *flags, int fd)
 	int				i;
 	int				len;
 
-	n = (unsigned int) va_arg(*ap, long);
+	n = (unsigned int)va_arg(*ap, long);
 	len = ft_length_nbr_base(n, "0123456789ABCDEF", flags);
 	i = 0;
 	if (!(flags->style & STYLE_JUSTIFY_LEFT))

@@ -6,13 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 17:31:35 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/12 18:48:31 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 17:52:58 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_array.h"
 #include "libft.h"
-#include <stdio.h>
+#include "libft/array.h"
 #include <stdlib.h>
 
 t_array	*ft_array_alloc(void)

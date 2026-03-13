@@ -6,11 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:34:36 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 14:46:16 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 17:42:51 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "libft/array.h"
 #include <stdlib.h>
 
 static char	*alloc_split(const char *s)

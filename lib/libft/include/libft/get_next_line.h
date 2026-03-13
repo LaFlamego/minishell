@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstpop_front.c                                  :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/23 18:50:31 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 18:12:27 by Oery             ###   ########.fr       */
+/*   Created: 2026/03/13 18:03:23 by Oery              #+#    #+#             */
+/*   Updated: 2026/03/13 18:05:01 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/list.h"
-#include <stdlib.h>
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-t_list	*ft_lstpop_front(t_list **lst)
+# ifndef BUFFER_SIZE
+
+#  define BUFFER_SIZE 42
+
+# endif
+
+char					*get_next_line(int fd);
+
+typedef struct s_gnl_list
 {
-	t_list	*current;
+	int					fd;
+	char				*buf;
+	struct s_gnl_list	*next;
+}						t_gnl_list;
 
-	if (*lst)
-	{
-		current = *lst;
-		*lst = (*lst)->next;
-		current->next = NULL;
-		return (current);
-	}
-	return (NULL);
-}
+#endif

@@ -6,13 +6,13 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 20:38:24 by Oery              #+#    #+#             */
-/*   Updated: 2026/01/06 17:33:23 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 18:20:36 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "libft/printf.h"
 #include <stdarg.h>
-#include <unistd.h>
 
 static int	max_size(t_flags *flags, char *str)
 {
@@ -23,7 +23,7 @@ static int	max_size(t_flags *flags, char *str)
 		return (0);
 	}
 	if (flags->precision != -1
-		&& (unsigned long) flags->precision < ft_strlen(str))
+		&& (unsigned long)flags->precision < ft_strlen(str))
 		return (flags->precision);
 	return (ft_strlen(str));
 }

@@ -6,23 +6,18 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 15:16:10 by Oery              #+#    #+#             */
-/*   Updated: 2026/02/01 19:16:02 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 18:04:54 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
+#include "libft/get_next_line.h"
 #include <stdlib.h>
+#include <unistd.h>
 
-char	*ft_safe_assign(char **dst, char *src);
-char	*ft_merge(char *dst, char *buf, int n);
-void	ft_lstpop(t_gnl_list **lst, int fd);
-
-#ifndef BUFFER_SIZE
-
-# define BUFFER_SIZE 42
-
-#endif
+char				*ft_safe_assign(char **dst, char *src);
+char				*ft_merge(char *dst, char *buf, int n);
+void				ft_lstpop(t_gnl_list **lst, int fd);
 
 static t_gnl_list	*ft_lstfnd_or_new(t_gnl_list **lst, int fd)
 {
@@ -55,7 +50,7 @@ static t_gnl_list	*ft_lstfnd_or_new(t_gnl_list **lst, int fd)
 
 static char	*get_new_line(char *s, int n)
 {
-	int		i;
+	int	i;
 
 	if (!s)
 		return (NULL);
@@ -80,8 +75,8 @@ static ssize_t	try_read(t_gnl_list *e, char **next)
 		*next = e->buf;
 		e->buf = NULL;
 	}
-	else if (n > 0
-		&& ft_safe_assign(&(e->buf), ft_merge(e->buf, r_buf, n)) == NULL)
+	else if (n > 0 && ft_safe_assign(&(e->buf), ft_merge(e->buf, r_buf,
+				n)) == NULL)
 		return (-1);
 	return (n);
 }

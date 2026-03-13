@@ -6,12 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 20:44:57 by Oery              #+#    #+#             */
-/*   Updated: 2026/01/06 17:43:35 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/13 18:15:37 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdarg.h>
+#include "libft/printf.h"
 #include <unistd.h>
 
 static int	ft_length_nbr_rec(int n)
@@ -31,7 +31,7 @@ static int	ft_length_nbr_rec(int n)
 	return (i);
 }
 
-static	int	max_size(t_flags *flags, int n, int len)
+static int	max_size(t_flags *flags, int n, int len)
 {
 	int	prefix;
 
@@ -67,7 +67,7 @@ static int	ft_printf_nbr_rec(int n, int fd)
 	return (i);
 }
 
-static	int	ft_printf_sign(t_flags *flags, int n, int fd)
+static int	ft_printf_sign(t_flags *flags, int n, int fd)
 {
 	if (n < 0)
 		return (ft_putchar_fd('-', fd));

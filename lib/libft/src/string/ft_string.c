@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:00:54 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 20:39:09 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/14 23:40:11 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,16 @@ t_string	ft_string_from_cstring(char *str)
 	return (s);
 }
 
+t_string	ft_string_from_cstring_alloc(char *str)
+{
+	t_string	s;
+
+	s.size = ft_strlen(str) + 1;
+	s.capacity = s.size;
+	s.content = ft_strdup(str);
+	return (s);
+}
+
 void	*ft_string_resize(t_string *s, size_t size)
 {
 	void	*data;
@@ -68,18 +78,4 @@ void	*ft_string_resize(t_string *s, size_t size)
 	s->content = data;
 	s->capacity = size;
 	return (s->content);
-}
-
-size_t	ft_string_push(t_string *s, char c)
-{
-	if (s->size + 1 > s->capacity)
-	{
-		if (s->capacity == 0)
-			s->capacity = 1;
-		if (!ft_string_resize(s, s->capacity * 2))
-			return (0);
-	}
-	s->content[s->size] = c;
-	s->size++;
-	return (s->size);
 }

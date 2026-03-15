@@ -6,12 +6,15 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 16:50:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 21:56:28 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/15 00:51:55 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CMD_H
 # define CMD_H
+
+# include "libft/array.h"
+# include "minishell/env.h"
 
 // TODO: Add bonuses
 typedef enum s_kind
@@ -32,6 +35,7 @@ struct		s_node
 	void	*data;
 };
 
-void		cmd_parse(char *input);
+t_array		*cmd_parse(const char *s);
+t_array		*cmd_expand(t_env *env, t_array *words);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 19:01:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 17:52:16 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/15 00:16:12 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	**ft_env_find(t_env *env, char *key)
 	return (NULL);
 }
 
-void	*ft_env_get(t_env *env, char *key)
+char	*ft_env_get(t_env *env, char *key)
 {
 	char	**var;
 

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 17:31:35 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 17:52:58 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/16 18:56:25 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ t_array	*ft_array_alloc(void)
 
 	arr = malloc(sizeof(t_array));
 	ft_bzero(arr, sizeof(t_array));
+	return (arr);
+}
+
+t_array	ft_array_init(void)
+{
+	t_array	arr;
+
+	arr.capacity = 0;
+	arr.data = NULL;
+	arr.size = 0;
 	return (arr);
 }
 

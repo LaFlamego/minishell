@@ -6,13 +6,23 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:00:54 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/14 23:40:11 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/16 19:00:08 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "libft/string.h"
 #include <stdlib.h>
+
+t_string	ft_string_init(void)
+{
+	t_string	s;
+
+	s.capacity = 0;
+	s.content = NULL;
+	s.size = 0;
+	return (s);
+}
 
 char	*ft_string_alloc(t_string *s, size_t size)
 {

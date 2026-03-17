@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "minishell/ctx.h"
 #include "libft.h"
 #include "libft/string.h"
 

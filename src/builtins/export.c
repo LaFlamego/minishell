@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:21:12 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/13 18:52:44 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/17 16:30:38 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	export_variables(int argc, char **argv, t_ctx *ctx)
 	return (exit_code);
 }
 
-int	mini_export(int argc, char **argv, t_ctx *ctx)
+unsigned int	mini_export(int argc, char *argv[], t_ctx *ctx)
 {
 	int	exit_code;
 

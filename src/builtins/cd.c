@@ -6,11 +6,12 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 12:18:23 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/16 18:05:25 by crevette         ###   ########.fr       */
+/*   Updated: 2026/03/17 16:29:06 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "minishell/ctx.h"
 #include "libft/string.h"
 #include "libft/printf.h"
 #include "libft.h"
@@ -44,7 +45,7 @@ unsigned int update_cwd(char *key, t_ctx *ctx)
 	return (0);
 }
 
-unsigned int mini_cd(int argc, char **argv, t_ctx *ctx)
+unsigned int mini_cd(int argc, char *argv[], t_ctx *ctx)
 {
 
 	if (argc > 2)

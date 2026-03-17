@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
+/*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 23:56:01 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 18:50:12 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/17 16:30:16 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static bool	is_valid(const char *key)
 	return (ft_strchr(key, '=') == NULL);
 }
 
-int	mini_unset(int argc, char **argv, t_ctx *ctx)
+unsigned int	mini_unset(int argc, char *argv[], t_ctx *ctx)
 {
 	int	i;
 

@@ -6,17 +6,19 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 17:21:48 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/13 18:08:21 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/17 16:28:33 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "libft/printf.h"
+#include "minishell/ctx.h"
 
-void	mini_echo(int argc, char **argv)
+unsigned int	mini_echo(int argc, char *argv[], t_ctx *ctx)
 {
 	int	i;
 
+	(void)ctx;
 	if (argc > 1)
 	{
 		i = 1 + ft_streq(argv[1], "-n");
@@ -30,4 +32,5 @@ void	mini_echo(int argc, char **argv)
 	}
 	if (argc == 1 || !ft_streq(argv[1], "-n"))
 		ft_printf("\n");
+	return (0);
 }

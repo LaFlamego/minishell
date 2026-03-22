@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 15:16:10 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/22 19:30:02 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 21:47:57 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@
 char				*ft_safe_assign(char **dst, char *src);
 char				*ft_merge(char *dst, char *buf, int n);
 void				ft_lstpop(t_gnl_list **lst, int fd);
+
+#ifndef BUFFER_SIZE
+
+# define BUFFER_SIZE 42
+
+#endif
 
 static t_gnl_list	*ft_lstfnd_or_new(t_gnl_list **lst, int fd)
 {

@@ -6,20 +6,23 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 20:38:24 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 18:20:36 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:42:34 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "libft/printf.h"
+#include "../put/ft_put.h"
+#include "../str/ft_str.h"
+#include "ft_printf.h"
 #include <stdarg.h>
+
+#define MAX_PRECISION 6
 
 static int	max_size(t_flags *flags, char *str)
 {
 	if (str == NULL)
 	{
-		if (flags->precision == -1 || flags->precision >= 6)
-			return (6);
+		if (flags->precision == -1 || flags->precision >= MAX_PRECISION)
+			return (MAX_PRECISION);
 		return (0);
 	}
 	if (flags->precision != -1

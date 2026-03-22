@@ -6,11 +6,13 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 16:12:47 by Oery              #+#    #+#             */
-/*   Updated: 2025/12/27 12:21:27 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:42:55 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../char/ft_char.h"
+
+#define BASE 10
 
 int	ft_read_int(const char **fmt)
 {
@@ -19,7 +21,7 @@ int	ft_read_int(const char **fmt)
 	i = 0;
 	while (ft_isdigit(**fmt))
 	{
-		i *= 10;
+		i *= BASE;
 		i += **fmt - '0';
 		(*fmt)++;
 	}

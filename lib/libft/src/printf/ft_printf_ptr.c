@@ -6,12 +6,13 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 21:03:21 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 18:20:04 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:40:50 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "libft/printf.h"
+#include "../put/ft_put.h"
+#include "../str/ft_str.h"
+#include "ft_printf.h"
 #include <stdarg.h>
 
 static int	handle_null(t_flags *flags, int fd)

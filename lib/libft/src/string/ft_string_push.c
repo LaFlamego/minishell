@@ -6,12 +6,11 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 23:36:59 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/22 16:12:55 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 18:40:39 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/array.h"
-#include "libft/string.h"
+#include "ft_string.h"
 #include <stddef.h>
 
 size_t	ft_string_push(t_string *s, char c)

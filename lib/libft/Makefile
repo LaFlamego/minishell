@@ -4,7 +4,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS_DIR = src
-INCLUDE_DIR = include
+INCLUDE_DIR = src
 
 LST_SRCS  = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c    \
 		    ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c                  \
@@ -36,7 +36,7 @@ PRINTF_SRCS = ft_pad.c ft_printf.c ft_printf_char.c ft_printf_flags.c          \
 			  ft_printf_specs.c ft_printf_str.c ft_read_int.c ft_panic.c       \
 			  ft_dprintf.c
 
-ARRAY_SRCS = ft_array.c ft_array_iter.c
+ARRAY_SRCS = ft_array_new.c ft_array_iter.c
 
 STRING_SRCS = ft_string.c ft_string_push.c
 
@@ -44,7 +44,7 @@ SRCS = $(addprefix $(SRCS_DIR)/lst/, $(LST_SRCS))       \
 	   $(addprefix $(SRCS_DIR)/mem/, $(MEM_SRCS))       \
 	   $(addprefix $(SRCS_DIR)/put/, $(PUT_SRCS))       \
 	   $(addprefix $(SRCS_DIR)/str/, $(STR_SRCS))       \
-	   $(addprefix $(SRCS_DIR)/gnl/, $(GNL_SRCS))       \
+	   $(addprefix $(SRCS_DIR)/get_next_line/, $(GNL_SRCS))       \
 	   $(addprefix $(SRCS_DIR)/char/, $(CHAR_SRCS))     \
 	   $(addprefix $(SRCS_DIR)/array/, $(ARRAY_SRCS))   \
 	   $(addprefix $(SRCS_DIR)/maths/, $(MATHS_SRCS))   \

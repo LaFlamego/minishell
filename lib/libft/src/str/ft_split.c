@@ -6,11 +6,11 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 15:02:34 by Oery              #+#    #+#             */
-/*   Updated: 2026/01/07 17:17:07 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:22:07 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_str.h"
 #include <stdlib.h>
 
 static int	count_splits(char const *s, char c)
@@ -72,7 +72,7 @@ char	**ft_split(char const *s, char c)
 	int		splits;
 	int		i;
 
-	current = (char *) s;
+	current = (char *)s;
 	splits = count_splits(s, c);
 	result = malloc((splits + 1) * sizeof(char **));
 	if (result == NULL)

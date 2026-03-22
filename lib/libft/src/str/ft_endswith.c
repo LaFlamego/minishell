@@ -6,11 +6,11 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 12:42:18 by Oery              #+#    #+#             */
-/*   Updated: 2026/02/15 12:54:49 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:22:29 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_str.h"
 
 int	ft_endswith(const char *string, const char *suffix)
 {

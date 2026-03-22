@@ -1,50 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_str.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
+/*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/06 15:00:56 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 18:16:55 by Oery             ###   ########.fr       */
+/*   Created: 2026/03/22 18:42:10 by Oery              #+#    #+#             */
+/*   Updated: 2026/03/22 18:54:39 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef FT_STR_H
+# define FT_STR_H
 
-# include "libft/array.h"
-# include <stddef.h>
-
-// >> Char
-int		ft_isalnum(int c);
-int		ft_isalpha(int c);
-int		ft_isascii(int c);
-int		ft_isdigit(int c);
-int		ft_isprint(int c);
-int		ft_isspace(int c);
-int		ft_tolower(int c);
-int		ft_toupper(int c);
-
-// >> Memory
-void	*ft_bzero(void *s, size_t n);
-void	*ft_calloc(size_t n, size_t size);
-void	*ft_memchr(const void *s, int c, size_t n);
-int		ft_memcmp(const void *s1, const void *s2, size_t n);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-void	*ft_memmove(void *dest, const void *src, size_t n);
-void	*ft_memset(void *s, int c, size_t n);
-char	*ft_strdup(const char *s);
-char	*ft_strldup(const char *s, int n);
-
-// >> Put
-int		ft_putchar_fd(char c, int fd);
-void	ft_putendl_fd(char *s, int fd);
-void	ft_putnbr_fd(int n, int fd);
-int		ft_putstr_fd(char *s, int fd);
-int		ft_putstr_fd_max(char *s, int fd, int max);
-
-// >> Strings
+# include "../array/ft_array.h"
 
 t_array	*ft_split_space(const char *s);
 int		ft_atoi(const char *str);

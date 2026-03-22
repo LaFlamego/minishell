@@ -6,11 +6,11 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:22:26 by Oery              #+#    #+#             */
-/*   Updated: 2025/12/27 12:36:42 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:19:45 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_put.h"
 
 int	ft_putstr_fd(char *s, int fd)
 {

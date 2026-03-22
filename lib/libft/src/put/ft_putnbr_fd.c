@@ -6,19 +6,21 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:38:08 by Oery              #+#    #+#             */
-/*   Updated: 2025/11/13 20:22:33 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:18:51 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_put.h"
+
+#define BASE 10
 
 static void	ft_putnbr_rec(int n, int fd)
 {
 	int	quotient;
 	int	remainder;
 
-	quotient = n / 10;
-	remainder = n % 10;
+	quotient = n / BASE;
+	remainder = n % BASE;
 	if (quotient != 0)
 		ft_putnbr_rec(quotient, fd);
 	if (remainder < 0)

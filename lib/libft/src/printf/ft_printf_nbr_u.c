@@ -6,12 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 10:41:24 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 18:19:33 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:40:13 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "libft/printf.h"
+#include "../put/ft_put.h"
+#include "ft_printf.h"
 #include <stdarg.h>
 
 static int	ft_length_nbr_u_rec(unsigned int n)

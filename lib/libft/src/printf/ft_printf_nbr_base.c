@@ -6,14 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 21:00:22 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 18:15:53 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:40:03 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "libft/printf.h"
-
-// #include <unistd.h>
+#include "../put/ft_put.h"
+#include "ft_printf.h"
 
 static int	validate_base(char *base)
 {

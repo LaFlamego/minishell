@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string.h                                           :+:      :+:    :+:   */
+/*   ft_string.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/13 00:53:09 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/22 16:13:42 by Oery             ###   ########.fr       */
+/*   Created: 2026/03/22 17:41:16 by Oery              #+#    #+#             */
+/*   Updated: 2026/03/22 18:52:13 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRING_H
-# define STRING_H
+#ifndef FT_STRING_H
+# define FT_STRING_H
 
-# include "libft/array.h"
+# include "../array/ft_array.h"
 # include <stddef.h>
 
 typedef struct s_string

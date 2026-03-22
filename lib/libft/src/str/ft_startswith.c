@@ -6,11 +6,11 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 18:32:05 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/11 18:33:30 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:21:41 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_str.h"
 
 int	ft_startswith(const char *string, const char *prefix)
 {

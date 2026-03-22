@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_array.c                                         :+:      :+:    :+:   */
+/*   ft_array_new.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 17:31:35 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/16 18:56:25 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:37:03 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "libft/array.h"
+#include "../mem/ft_mem.h"
+#include "ft_array.h"
 #include <stdlib.h>
 
 t_array	*ft_array_alloc(void)

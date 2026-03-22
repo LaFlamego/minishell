@@ -6,12 +6,13 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:00:54 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/22 15:28:43 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 18:41:50 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "libft/string.h"
+#include "ft_string.h"
+#include "mem/ft_mem.h"
+#include "str/ft_str.h"
 #include <stdlib.h>
 
 t_string	ft_string_init(void)

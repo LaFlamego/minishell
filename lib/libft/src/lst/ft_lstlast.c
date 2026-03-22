@@ -6,11 +6,11 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:22:15 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 18:12:05 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:05:26 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/list.h"
+#include "ft_list.h"
 
 t_list	*ft_lstlast(t_list *lst)
 {

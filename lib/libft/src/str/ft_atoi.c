@@ -6,11 +6,11 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 15:29:55 by Oery              #+#    #+#             */
-/*   Updated: 2025/11/13 20:20:43 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:20:14 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../char/ft_char.h"
 
 int	ft_atoi(const char *str)
 {

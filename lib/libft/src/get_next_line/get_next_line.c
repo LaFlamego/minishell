@@ -6,12 +6,13 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 15:16:10 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 18:04:54 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:30:02 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "libft/get_next_line.h"
+#include "../mem/ft_mem.h"
+#include "../str/ft_str.h"
+#include "get_next_line.h"
 #include <stdlib.h>
 #include <unistd.h>
 

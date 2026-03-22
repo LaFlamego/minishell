@@ -6,11 +6,11 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:05:13 by Oery              #+#    #+#             */
-/*   Updated: 2025/11/13 17:10:41 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:24:35 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_str.h"
 #include <stdlib.h>
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)

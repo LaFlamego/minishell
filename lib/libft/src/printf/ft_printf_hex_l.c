@@ -6,12 +6,13 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 20:53:51 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 18:15:05 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:38:55 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "libft/printf.h"
+#include "../put/ft_put.h"
+#include "../str/ft_str.h"
+#include "ft_printf.h"
 #include <stdarg.h>
 
 static int	max_size(t_flags *flags, unsigned int n, int len)

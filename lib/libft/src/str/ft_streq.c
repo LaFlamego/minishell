@@ -6,11 +6,11 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 14:34:07 by Oery              #+#    #+#             */
-/*   Updated: 2026/01/29 14:34:46 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:21:32 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_str.h"
 
 int	ft_streq(const char *s1, const char *s2)
 {

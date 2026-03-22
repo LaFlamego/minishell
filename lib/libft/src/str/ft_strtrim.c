@@ -6,11 +6,11 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 11:52:26 by Oery              #+#    #+#             */
-/*   Updated: 2025/11/13 14:36:41 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:23:06 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_str.h"
 #include <stdlib.h>
 
 static int	ft_has_char(char const *set, char c)

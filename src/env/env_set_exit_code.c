@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_exit_code.c                                        :+:      :+:    :+:   */
+/*   env_set_exit_code.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:55:09 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/17 12:55:41 by crevette         ###   ########.fr       */
+/*   Updated: 2026/03/22 21:20:57 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "minishell/ctx.h"
 #include "libft.h"
-#include "libft/string.h"
+#include "minishell/env.h"
+#include <stdlib.h>
 
-int	update_exit_code(unsigned int exit_code, t_ctx *ctx)
+int	ft_env_set_exit_code(unsigned int exit_code, t_env *env)
 {
 	t_string	var;
 	char		*val;
@@ -30,8 +29,7 @@ int	update_exit_code(unsigned int exit_code, t_ctx *ctx)
 			return (1);
 		ft_string_push_str(&var, val);
 		free(val);
-		ft_string_push(&var, '\0');
-		ft_env_set(ctx->env, var.content);
+		ft_env_set(env, var.content);
 		free(var.content);
 	}
 	return (0);

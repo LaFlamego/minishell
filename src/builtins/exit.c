@@ -6,12 +6,11 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 18:30:12 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 18:59:04 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:04:18 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "libft/printf.h"
 #include "minishell/ctx.h"
 #include <limits.h>
 

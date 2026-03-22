@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ctx.c                                              :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
+/*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/17 14:40:56 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/17 16:39:13 by crevette         ###   ########.fr       */
+/*   Created: 2026/03/22 19:00:21 by Oery              #+#    #+#             */
+/*   Updated: 2026/03/22 20:37:05 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	init_ctx(t_ctx *ctx, char **envp)
+void	parse_skip_whitespace(const char *s, size_t *i)
 {
-	ctx->env = envp;
-	ctx->exit = false;
-	if (ctx->env && ctx->env->data)
-		ft_env_set(ctx->env, "?=0");
+	while (s[*i] && ft_isspace(s[*i]))
+		(*i)++;
 }

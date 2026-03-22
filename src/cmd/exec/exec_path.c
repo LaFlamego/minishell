@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_path.c                                         :+:      :+:    :+:   */
+/*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 13:59:50 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/13 22:00:20 by crevette         ###   ########.fr       */
+/*   Updated: 2026/03/22 21:40:28 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell/env.h"
 #include "libft.h"
-#include <unistd.h>
+#include "minishell/env.h"
 #include <stdlib.h>
+#include <unistd.h>
 
 static char	**extract_path(char **envp)
 {
@@ -77,7 +77,7 @@ static char	*find_path(char *cmd_name, char **cddt_paths)
 	return (NULL);
 }
 
-char	*get_path(char *cmd_name, t_env *env)
+char	*cmd_exec_get_path(char *cmd_name, t_env *env)
 {
 	char	*path;
 	char	*path_find;
@@ -94,7 +94,7 @@ char	*get_path(char *cmd_name, t_env *env)
 	if (path)
 	{
 		path = cmd_name;
-		//cmd->is_abs = true;
+		// cmd->is_abs = true;
 		if (access(path, X_OK) == 0 && access(path, F_OK) == 0)
 			return (path);
 	}

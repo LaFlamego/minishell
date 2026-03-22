@@ -6,15 +6,13 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 13:06:22 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/13 18:49:48 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 19:04:33 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/printf.h"
-#include "libft/string.h"
+#include "libft.h"
 #include "minishell/ctx.h"
 #include <errno.h>
-#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -22,22 +20,23 @@
 
 static unsigned int	print_pwd(void)
 {
-	t_string	buf;
+	t_string	*buf;
 
-	if (!ft_string_alloc(&buf, BUFFER_SIZE))
+	buf = ft_string_new(BUFFER_SIZE);
+	if (!buf)
 		return (1);
-	while (getcwd(buf.content, buf.capacity) == NULL && errno == ERANGE)
+	while (getcwd(buf->content, buf->capacity) == NULL && errno == ERANGE)
 	{
-		if (!ft_string_realloc(&buf, buf.capacity * 2))
+		if (!ft_string_realloc(buf, buf->capacity * 2))
 			return (1);
 	}
-	if (errno && !buf.content)
+	if (errno && !buf->content)
 	{
 		ft_dprintf(2, "minishell: pwd: %s\n", strerror(errno));
 		return (1);
 	}
-	ft_dprintf(1, "%s\n", buf.content);
-	free(buf.content);
+	ft_dprintf(1, "%s\n", buf->content);
+	ft_string_free(buf);
 	return (0);
 }
 

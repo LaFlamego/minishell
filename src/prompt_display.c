@@ -6,11 +6,11 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 13:15:33 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/13 18:58:05 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/22 22:19:05 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/printf.h"
+#include "libft.h"
 #include "minishell/cmd.h"
 #include "minishell/prompt.h"
 #include <readline/history.h>
@@ -24,12 +24,8 @@
 // > not the next one.
 void	prompt_display(t_ctx *ctx)
 {
-	char			*input;
-	char			**argv;
-	int				argc;
-	unsigned int	exit_code;
+	char	*input;
 
-	exit_code = 0;
 	while (!ctx->exit)
 	{
 		input = readline("(=^.^=)$ ");
@@ -40,24 +36,9 @@ void	prompt_display(t_ctx *ctx)
 			rl_redisplay();
 			return ;
 		}
-		argv = ft_split(input, ' ');
-		argc = 0;
-		while (argv[argc])
-			argc++;
-		if (ft_streq(argv[0], "unset"))
-			mini_unset(argc, argv, ctx);
-		else if (ft_streq(argv[0], "export"))
-			mini_export(argc, argv, ctx);
-		else if (ft_streq(argv[0], "env"))
-			mini_env(argc, argv, ctx);
-		else if (ft_streq(argv[0], "pwd"))
-			mini_pwd(argc, argv, ctx);
-		else if (ft_streq(argv[0], "exit"))
-		{
-			exit_code = mini_exit(argc, argv, ctx);
-		}
-		printf("exit code: %u\n", exit_code);
+		cmd_handle(input, ctx);
 		// TODO: Check if input is good
+		// > Empty Input should not be added to the history
 		add_history(input);
 		free_splits(argv);
 		free(input);

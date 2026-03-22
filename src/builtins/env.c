@@ -6,11 +6,11 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 16:14:45 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/17 16:26:40 by crevette         ###   ########.fr       */
+/*   Updated: 2026/03/22 19:02:38 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/printf.h"
+#include "libft.h"
 #include "minishell/ctx.h"
 #include "minishell/env.h"
 

@@ -1,41 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd.h                                              :+:      :+:    :+:   */
+/*   expand.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/13 16:50:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/22 22:19:34 by Oery             ###   ########.fr       */
+/*   Created: 2026/03/22 20:21:43 by Oery              #+#    #+#             */
+/*   Updated: 2026/03/22 20:35:11 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CMD_H
-# define CMD_H
+#ifndef EXPAND_H
+# define EXPAND_H
 
-# include "libft.h"
-# include "minishell/ctx.h"
+# include "minishell/env.h"
 
-// TODO: Add bonuses
-typedef enum s_kind
-{
-	STRING,
-	INSERT_CMD,
-	INSERT_ENV_VAR,
-	REDIRECT_INPUT,
-	REDIRECT_OUTPUT,
-	READ_UNTIL,
-	REDIRECT_APPEND,
-	PIPE,
-}				t_kind;
-
-struct			s_node
-{
-	t_kind		kind;
-	void		*data;
-};
-
-bool			is_sq_string(t_string *s);
-unsigned int	cmd_handle(char *input, t_ctx *ctx);
+t_array		*cmd_expand_command(t_env *env, t_array *words);
+t_string	*cmd_expand_dollar(t_env *env, t_string *word, size_t *i);
+t_string	*cmd_expand_word(t_env *env, t_string *word);
 
 #endif

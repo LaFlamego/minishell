@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_run.c                                          :+:      :+:    :+:   */
+/*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
+/*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/17 15:10:18 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/17 16:35:55 by crevette         ###   ########.fr       */
+/*   Created: 2026/03/22 21:03:47 by Oery              #+#    #+#             */
+/*   Updated: 2026/03/22 22:05:17 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "minishell/ctx.h"
-#include "libft.h"
 #include "minishell/builtins.h"
+#include "minishell/ctx.h"
+#include "minishell/env.h"
+#include "minishell/exec.h"
 
-int	update_exit_code(unsigned int exit_code, t_ctx *ctx);
-
-unsigned int (*get_builtin(char *cmd_name))(int, char **, t_ctx *)
+static unsigned int (*get_builtin(char *cmd_name))(int, char **, t_ctx *)
 {
 	if (ft_streq(cmd_name, "echo"))
 		return (&mini_echo);
@@ -37,15 +35,16 @@ unsigned int (*get_builtin(char *cmd_name))(int, char **, t_ctx *)
 		return (NULL);
 }
 
-void	cmd_run(char **cmds, t_ctx *ctx, int argc, char **argv)
+void	cmd_exec(t_ctx *ctx, int argc, char **argv)
 {
 	unsigned int	exit_code;
-	unsigned int (*builtin)(int, char **, t_ctx *); 
+	unsigned int	(*builtin)(int, char **, t_ctx *);
 
-	builtin = get_builtin(cmds[0]);
+	builtin = get_builtin(argv[0]);
+	ft_printf("Builting = %p\n", builtin);
 	if (builtin)
 		exit_code = builtin(argc, argv, ctx);
 	else
-		exit_code = run_cmd(cmds, ctx->env);
-	update_exit_code(exit_code, ctx);
+		exit_code = cmd_exec_bin(argv, ctx->env);
+	ft_env_set_exit_code(exit_code, ctx->env);
 }

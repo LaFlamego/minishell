@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   ctx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/08 17:21:48 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/22 21:49:20 by Oery             ###   ########.fr       */
+/*   Created: 2026/03/17 14:40:56 by crevette          #+#    #+#             */
+/*   Updated: 2026/03/22 21:29:52 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "minishell/ctx.h"
 
-unsigned int	mini_echo(int argc, char *argv[], t_ctx *ctx)
+void	ctx_init(t_ctx *ctx, char **envp)
 {
-	int	i;
-
-	(void)ctx;
-	if (argc > 1)
-	{
-		i = 1 + ft_streq(argv[1], "-n");
-		while (i < argc)
-		{
-			ft_printf("%s", argv[i]);
-			if (i < argc - 1)
-				ft_printf(" ");
-			++i;
-		}
-	}
-	if (argc == 1 || !ft_streq(argv[1], "-n"))
-		ft_printf("\n");
-	return (0);
+	ctx->env = ft_env_from(envp);
+	ctx->exit = false;
+	if (ctx->env && ctx->env->data)
+		ft_env_set(ctx->env, "?=0");
 }

@@ -1,41 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd.h                                              :+:      :+:    :+:   */
+/*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/13 16:50:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/22 22:19:34 by Oery             ###   ########.fr       */
+/*   Created: 2026/03/22 21:05:59 by Oery              #+#    #+#             */
+/*   Updated: 2026/03/22 21:52:56 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CMD_H
-# define CMD_H
+#ifndef EXEC_H
+# define EXEC_H
 
-# include "libft.h"
 # include "minishell/ctx.h"
+# include <sys/types.h>
 
-// TODO: Add bonuses
-typedef enum s_kind
-{
-	STRING,
-	INSERT_CMD,
-	INSERT_ENV_VAR,
-	REDIRECT_INPUT,
-	REDIRECT_OUTPUT,
-	READ_UNTIL,
-	REDIRECT_APPEND,
-	PIPE,
-}				t_kind;
-
-struct			s_node
-{
-	t_kind		kind;
-	void		*data;
-};
-
-bool			is_sq_string(t_string *s);
-unsigned int	cmd_handle(char *input, t_ctx *ctx);
+void			cmd_exec(t_ctx *ctx, int argc, char **argv);
+unsigned int	cmd_exec_bin(char **cmds, t_env *env);
+pid_t			cmd_exec_fork(char **cmds, t_env *env);
+char			*cmd_exec_get_path(char *cmd_name, t_env *env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:03:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/23 04:10:48 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/23 04:27:06 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ void	cmd_exec(t_ctx *ctx, int argc, char **argv)
 		exit_code = builtin(argc, argv, ctx);
 	else
 		exit_code = cmd_exec_bin(argv, ctx->env);
-	ft_env_set_exit_code(exit_code, ctx->env);
+	env_set_exit_code(exit_code, ctx->env);
 }

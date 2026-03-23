@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:33:08 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/22 21:25:46 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/23 04:26:58 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_string	*cmd_expand_dollar(t_env *env, t_string *word, size_t *i)
 		ft_string_push(expanded, '$');
 	else
 	{
-		val = ft_env_get(env, key->content);
+		val = env_get(env, key->content);
 		if (val)
 		{
 			ft_string_push_str(expanded, val);

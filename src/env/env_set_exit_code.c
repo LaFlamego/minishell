@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:55:09 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/22 21:20:57 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/23 04:25:35 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "minishell/env.h"
 #include <stdlib.h>
 
-int	ft_env_set_exit_code(unsigned int exit_code, t_env *env)
+int	env_set_exit_code(unsigned int exit_code, t_env *env)
 {
 	t_string	var;
 	char		*val;
@@ -29,7 +29,7 @@ int	ft_env_set_exit_code(unsigned int exit_code, t_env *env)
 			return (1);
 		ft_string_push_str(&var, val);
 		free(val);
-		ft_env_set(env, var.content);
+		env_set(env, var.content);
 		free(var.content);
 	}
 	return (0);

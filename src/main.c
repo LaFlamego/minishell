@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:11:29 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/23 03:50:30 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/23 04:25:54 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ int	main(int argc, char *argv[], char *envp[])
 		return (1);
 	// set_sigactions();
 	prompt_display(&ctx);
-	ft_env_free(ctx.env);
+	env_free(ctx.env);
 	return (0);
 }

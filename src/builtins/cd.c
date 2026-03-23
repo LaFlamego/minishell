@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 12:18:23 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/22 21:47:37 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/23 04:26:30 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ unsigned int	update_cwd(char *key, t_ctx *ctx)
 		return (free(buf.content), 1);
 	else
 	{
-		ft_env_set(ctx->env, buf.content);
+		env_set(ctx->env, buf.content);
 		free(buf.content);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:21:12 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/22 19:04:25 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/23 04:26:42 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	export_variables(int argc, char **argv, t_ctx *ctx)
 	while (i < argc)
 	{
 		if (is_valid_arg(argv[i]))
-			ft_env_set(ctx->env, argv[i]);
+			env_set(ctx->env, argv[i]);
 		else
 		{
 			ft_dprintf(2, "export: `%s': not a valid identifier\n", argv[i]);

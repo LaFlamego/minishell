@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 17:41:16 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/22 18:52:13 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/23 19:04:03 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_string	*ft_string_new(size_t capacity);
 char		*ft_string_realloc(t_string *s, size_t new_size);
 void		*ft_string_resize(t_string *s, size_t size);
 void		ft_string_free(void *raw_t_string);
+void		ft_string_pop(t_string *s, char *ptr);
 size_t		ft_string_push(t_string *s, char c);
 size_t		ft_string_push_str(t_string *s, const char *str);
 size_t		ft_string_push_string(t_string *dst, const t_string *src);

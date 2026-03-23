@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:34:36 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/22 19:22:00 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/23 04:06:44 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_array	*ft_split_space(const char *s)
 	t_array	*splits;
 	char	*split;
 
-	splits = ft_array_alloc();
+	splits = ft_array_new();
 	if (!splits)
 		return (NULL);
 	s = next_split(s);

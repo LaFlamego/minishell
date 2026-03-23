@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 16:20:32 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/22 21:58:45 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/23 04:05:55 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_array	*cmd_parse_command(const char *s)
 	t_array		*words;
 	t_string	*word;
 
-	words = ft_array_alloc();
+	words = ft_array_new();
 	i = 0;
 	parse_skip_whitespace(s, &i);
 	while (s && s[i])

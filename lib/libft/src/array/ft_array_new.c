@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 17:31:35 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/22 19:37:03 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/23 04:01:11 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 #include "ft_array.h"
 #include <stdlib.h>
 
-t_array	*ft_array_alloc(void)
+t_array	*ft_array_new(void)
 {
 	t_array	*arr;
 
 	arr = malloc(sizeof(t_array));
+	if (!arr)
+		return (NULL);
 	ft_bzero(arr, sizeof(t_array));
 	return (arr);
 }

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 16:50:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/22 22:19:34 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/23 19:07:42 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ struct			s_node
 };
 
 bool			is_sq_string(t_string *s);
-unsigned int	cmd_handle(char *input, t_ctx *ctx);
+unsigned int	cmd_handle(const char *input, t_ctx *ctx);
+void			cmd_quotes_remove(const t_array *words);
 
 #endif

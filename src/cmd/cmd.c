@@ -6,11 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:11:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/23 04:12:07 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/23 19:07:31 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "minishell/cmd.h"
 #include "minishell/ctx.h"
 #include "minishell/exec.h"
 #include "minishell/expand.h"
@@ -48,6 +49,7 @@ unsigned int	cmd_handle(const char *input, t_ctx *ctx)
 	if (!words)
 		return (1);
 	words = cmd_expand_command(ctx->env, words);
+	cmd_quotes_remove(words);
 	argc = (int)words->size;
 	argv = get_argv(words);
 	cmd_exec(ctx, argc, argv);

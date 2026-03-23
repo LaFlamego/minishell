@@ -3,11 +3,11 @@ NAME=minishell
 SRCS_DIR = src
 INCL_DIR = includes
 
-BASE_SRCS = main.c prompt_display.c signal.c
+BASE_SRCS = main.c prompt_display.c
 ENV_SRCS = env.c env_set_exit_code.c
 CTX_SRCS = ctx_init.c
 CMD_SRCS = cmd.c
-CMD_EXEC_SRCS = exec.c exec_bin.c exec_cmd.c exec_fork.c exec_path.c
+CMD_EXEC_SRCS = exec_bin.c exec_cmd.c exec_fork.c exec_path.c
 PARSE_SRCS = parse_command.c parse_string.c parse_utils.c
 EXPAND_SRCS = expand_command.c expand_dollar.c expand_word.c
 BUILTINS_SRCS = echo.c env.c exit.c export.c pwd.c unset.c cd.c

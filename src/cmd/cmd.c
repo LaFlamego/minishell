@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:11:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/22 22:31:40 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/23 04:12:07 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,8 @@ unsigned int	cmd_handle(const char *input, t_ctx *ctx)
 	if (!words)
 		return (1);
 	words = cmd_expand_command(ctx->env, words);
-	ft_printf("Words = %p\n", words->data);
-	ft_printf("ARGV[0] = %s\n", words->data);
 	argc = (int)words->size;
 	argv = (words->data);
-	ft_printf("Words = %p\n", argv);
-	ft_printf("ARGV[0] = %s\n", argv[0]);
 	cmd_exec(ctx, argc, (char **)argv);
 	return (0);
 }

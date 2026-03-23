@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 13:15:33 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/22 22:19:05 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/23 04:20:43 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	prompt_display(t_ctx *ctx)
 		// TODO: Check if input is good
 		// > Empty Input should not be added to the history
 		add_history(input);
-		free_splits(argv);
 		free(input);
 	}
 	rl_clear_history();

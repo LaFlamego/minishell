@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/07 16:55:40 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/13 18:55:51 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/23 04:19:09 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,5 @@ typedef struct s_node
 	struct s_node	*left;
 	struct s_node	*right;
 }					t_node;
-
-void				prompt_display(t_ctx *ctx);
-
 
 #endif

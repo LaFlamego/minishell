@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:20:54 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/22 21:01:45 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/23 04:12:50 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,5 @@ t_string	*cmd_expand_word(t_env *env, t_string *word)
 	final_word = ft_string_join(&parts);
 	// TODO: Join can fail
 	ft_array_foreach(&parts, &ft_string_free);
-	ft_printf("Final Word = %s\n", final_word->content);
 	return (final_word);
 }

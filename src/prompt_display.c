@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 13:15:33 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/23 04:20:43 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/24 17:20:33 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ void	prompt_display(t_ctx *ctx)
 			rl_on_new_line();
 			rl_redisplay();
 			return ;
+		}
+		if (*input == '\0')
+		{
+			free(input);
+			continue ;
 		}
 		cmd_handle(input, ctx);
 		// TODO: Check if input is good

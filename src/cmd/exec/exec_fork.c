@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:35:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/24 17:36:10 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/24 19:01:24 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+// FIXME: Wrong error when running $PWD
+// > execve: Permission denied
+// > bash: /home/oery/Documents/42/minishell: Is a directory
 pid_t	cmd_exec_fork(char *argv[], t_env *env)
 {
 	char	*cmd_path;

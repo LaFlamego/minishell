@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:03:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/23 04:27:06 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/24 17:45:31 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,22 @@
 #include "minishell/ctx.h"
 #include "minishell/env.h"
 #include "minishell/exec.h"
+
+static char	**get_argv(t_array *argv, t_array *words)
+{
+	size_t		i;
+	t_string	*word;
+
+	ft_bzero(argv, sizeof(t_array));
+	i = 0;
+	while (i < words->size)
+	{
+		word = words->data[i];
+		ft_array_push(argv, word->content);
+		i++;
+	}
+	return ((char **)argv->data);
+}
 
 static unsigned int (*get_builtin(char *cmd_name))(int, char **, t_ctx *)
 {
@@ -35,15 +51,22 @@ static unsigned int (*get_builtin(char *cmd_name))(int, char **, t_ctx *)
 		return (NULL);
 }
 
-void	cmd_exec(t_ctx *ctx, int argc, char **argv)
+void	cmd_exec(t_ctx *ctx, t_array *args)
 {
 	unsigned int	exit_code;
 	unsigned int	(*builtin)(int, char **, t_ctx *);
+	t_array			argv;
 
-	builtin = get_builtin(argv[0]);
+	get_argv(&argv, args);
+	builtin = get_builtin(argv.data[0]);
 	if (builtin)
-		exit_code = builtin(argc, argv, ctx);
+	{
+		exit_code = builtin(argv.size, (char **)argv.data, ctx);
+	}
 	else
-		exit_code = cmd_exec_bin(argv, ctx->env);
+	{
+		ft_array_push(&argv, NULL);
+		exit_code = cmd_exec_bin((char **)argv.data, ctx->env);
+	}
 	env_set_exit_code(exit_code, ctx->env);
 }

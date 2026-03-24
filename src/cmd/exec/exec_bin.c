@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:02:13 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/22 22:04:51 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/24 17:44:00 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static unsigned int	wait_exit_code(pid_t pid)
 	return (exit_code);
 }
 
-unsigned int	cmd_exec_bin(char **cmds, t_env *env)
+unsigned int	cmd_exec_bin(char *argv[], t_env *env)
 {
 	pid_t			pid;
 	unsigned int	exit_code;
 
-	pid = cmd_exec_fork(cmds, env);
+	pid = cmd_exec_fork(argv, env);
 	exit_code = wait_exit_code(pid);
 	return (exit_code);
 }

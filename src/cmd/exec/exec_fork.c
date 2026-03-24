@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:35:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/22 21:55:12 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/24 17:36:10 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-pid_t	cmd_exec_fork(char **cmds, t_env *env)
+pid_t	cmd_exec_fork(char *argv[], t_env *env)
 {
 	char	*cmd_path;
 	pid_t	pid;
@@ -33,13 +33,13 @@ pid_t	cmd_exec_fork(char **cmds, t_env *env)
 	}
 	else if (pid == 0)
 	{
-		cmd_path = cmd_exec_get_path(cmds[0], env);
+		cmd_path = cmd_exec_get_path(argv[0], env);
 		if (!cmd_path)
 		{
-			ft_dprintf(2, "minishell: '%s': %s\n", cmds[0], strerror(errno));
+			ft_dprintf(2, "minishell: '%s': %s\n", argv[0], strerror(errno));
 			exit(errno);
 		}
-		execve(cmd_path, cmds, (char **)env->data);
+		execve(cmd_path, argv, (char **)env->data);
 		perror("execve");
 		exit(errno);
 		// TODO free cmd

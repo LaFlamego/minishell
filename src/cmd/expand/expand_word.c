@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:20:54 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/23 04:12:50 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/25 16:08:37 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "minishell/env.h"
 #include "minishell/expand.h"
 
-// FIXME: It stops after expanding the first $VAR,
-// > probably due to some random NULL terminators
 // FIXME: expand_dollar can fail
 // FIXME: push can fail
 // TODO: This needs to be able to return an exit code

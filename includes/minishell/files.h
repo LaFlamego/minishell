@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand.h                                           :+:      :+:    :+:   */
+/*   files.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/22 20:21:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/25 19:16:38 by Oery             ###   ########.fr       */
+/*   Created: 2026/03/25 15:37:35 by Oery              #+#    #+#             */
+/*   Updated: 2026/03/25 15:38:29 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPAND_H
-# define EXPAND_H
+#ifndef FILES_H
+# define FILES_H
 
-# include "minishell/env.h"
+# include "libft.h"
 
-t_array		*cmd_expand_command(t_env *env, t_array *words);
-t_string	*cmd_expand_dollar(t_env *env, t_string *word, size_t *i);
-t_string	*cmd_expand_word(t_env *env, t_string *word);
-void		*cmd_expand_wildcard(t_env *env, t_array *words);
+t_array	*dir_get_files(const char *name);
 
 #endif

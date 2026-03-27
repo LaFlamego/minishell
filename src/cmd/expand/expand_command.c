@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:29:42 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/25 19:18:48 by Oery             ###   ########.fr       */
+/*   Updated: 2026/03/27 11:56:59 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@
 static bool	is_sq_string(t_string *s)
 {
 	return (s->content[0] == '\'');
+}
+
+static bool	is_string(t_string *s)
+{
+	if (s->content[0] == '"')
+		return (true);
+	if (s->content[0] == '\'')
+		return (true);
+	return (false);
 }
 
 // TODO: Expand substitutions
@@ -39,7 +48,7 @@ t_array	*cmd_expand_command(t_env *env, t_array *words)
 		word = words->data[i];
 		if (!is_sq_string(word))
 			word = cmd_expand_word(env, word);
-		if (ft_strchr(word->content, '*'))
+		if (!is_string(word) && ft_strchr(word->content, '*'))
 			cmd_expand_wildcard(env, words);
 		else
 			ft_array_push(expanded, word);

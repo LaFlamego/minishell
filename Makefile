@@ -23,6 +23,7 @@ SRCS = $(addprefix $(SRCS_DIR)/, $(BASE_SRCS))               \
        $(addprefix $(SRCS_DIR)/files/, $(FILES_SRCS))        \
 	   $(addprefix $(SRCS_DIR)/builtins/, $(BUILTINS_SRCS))
 OBJS = $(SRCS:.c=.o)
+DEPS = $(SRCS:.c=.d)
 
 LIBFT  = lib/libft
 LIBS   = -L $(LIBFT) -lft -lreadline -lncurses
@@ -30,7 +31,7 @@ LIBS   = -L $(LIBFT) -lft -lreadline -lncurses
 INCLUDES = -I $(LIBFT)/ -I $(INCL_DIR)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -pedantic
+CFLAGS = -MMD -Wall -Wextra -Werror -pedantic
 
 all: $(NAME)
 
@@ -43,10 +44,12 @@ $(LIBFT)/libft.a: FORCE
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
+-include $(DEPS)
+
 FORCE:
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(DEPS)
 	make -C $(LIBFT) fclean
 
 fclean: clean

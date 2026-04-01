@@ -1,5 +1,6 @@
 .cache/
 *.o
+*.d
 *.a
 compile_commands.json
 minishell

@@ -1,7 +1,7 @@
 NAME = libft.a
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -MMD
 
 SRCS_DIR = src
 INCLUDE_DIR = src
@@ -51,6 +51,7 @@ SRCS = $(addprefix $(SRCS_DIR)/lst/, $(LST_SRCS))       \
 	   $(addprefix $(SRCS_DIR)/string/, $(STRING_SRCS)) \
 	   $(addprefix $(SRCS_DIR)/printf/, $(PRINTF_SRCS)) 
 OBJS = $(SRCS:.c=.o)
+DEPS = $(SRCS:.c=.d)
 
 all: $(NAME)
 
@@ -60,8 +61,10 @@ $(NAME): $(OBJS)
 %.o: %.c
 	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -c $< -o $@
 
+-include $(DEPS)
+
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
+	rm -f $(DEPS) $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
 	rm -f $(NAME)

@@ -6,12 +6,12 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:55:09 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/23 04:25:35 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/02 01:19:08 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "./env.h"
 #include "libft.h"
-#include "minishell/env.h"
 #include <stdlib.h>
 
 int	env_set_exit_code(unsigned int exit_code, t_env *env)

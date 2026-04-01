@@ -6,12 +6,12 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 23:56:01 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/23 04:26:14 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/02 01:28:52 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "minishell/ctx.h"
+#include "src/ctx/ctx.h"
 
 static bool	is_valid(const char *key)
 {

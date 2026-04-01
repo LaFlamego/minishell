@@ -6,14 +6,14 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 12:18:23 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/23 04:26:30 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/02 01:29:48 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "minishell.h"
-#include "minishell/ctx.h"
+#include "src/ctx/ctx.h"
 #include <errno.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 

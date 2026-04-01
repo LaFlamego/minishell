@@ -6,14 +6,14 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:03:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/24 17:45:31 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/02 01:23:57 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell/builtins.h"
-#include "minishell/ctx.h"
-#include "minishell/env.h"
-#include "minishell/exec.h"
+#include "./exec.h"
+#include "src/builtins/builtins.h"
+#include "src/ctx/ctx.h"
+#include "src/env/env.h"
 
 static char	**get_argv(t_array *argv, t_array *words)
 {
@@ -35,20 +35,19 @@ static unsigned int (*get_builtin(char *cmd_name))(int, char **, t_ctx *)
 {
 	if (ft_streq(cmd_name, "echo"))
 		return (&mini_echo);
-	else if (ft_streq(cmd_name, "cd"))
+	if (ft_streq(cmd_name, "cd"))
 		return (&mini_cd);
-	else if (ft_streq(cmd_name, "env"))
+	if (ft_streq(cmd_name, "env"))
 		return (&mini_env);
-	else if (ft_streq(cmd_name, "export"))
+	if (ft_streq(cmd_name, "export"))
 		return (&mini_export);
-	else if (ft_streq(cmd_name, "pwd"))
+	if (ft_streq(cmd_name, "pwd"))
 		return (&mini_pwd);
-	else if (ft_streq(cmd_name, "unset"))
+	if (ft_streq(cmd_name, "unset"))
 		return (&mini_unset);
-	else if (ft_streq(cmd_name, "exit"))
+	if (ft_streq(cmd_name, "exit"))
 		return (&mini_exit);
-	else
-		return (NULL);
+	return (NULL);
 }
 
 void	cmd_exec(t_ctx *ctx, t_array *args)
@@ -61,7 +60,7 @@ void	cmd_exec(t_ctx *ctx, t_array *args)
 	builtin = get_builtin(argv.data[0]);
 	if (builtin)
 	{
-		exit_code = builtin(argv.size, (char **)argv.data, ctx);
+		exit_code = builtin((int)argv.size, (char **)argv.data, ctx);
 	}
 	else
 	{

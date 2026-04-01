@@ -6,11 +6,11 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:11:29 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/23 04:25:54 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/02 01:17:14 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell/prompt.h"
+#include "src/prompt/prompt.h"
 
 // #include "minishell/signal.h"
 

@@ -6,12 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:35:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/24 19:01:24 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/02 01:24:20 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell/env.h"
-#include "minishell/exec.h"
+#include "./exec.h"
+#include "src/env/env.h"
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>

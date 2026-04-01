@@ -6,12 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 19:01:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/23 04:30:02 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/02 01:18:54 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "./env.h"
 #include "libft.h"
-#include "minishell/env.h"
 #include <stdlib.h>
 
 char	*env_get(t_env *env, char *key)

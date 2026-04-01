@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   files.h                                            :+:      :+:    :+:   */
+/*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/25 15:37:35 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/25 15:38:29 by Oery             ###   ########.fr       */
+/*   Created: 2026/03/22 21:05:59 by Oery              #+#    #+#             */
+/*   Updated: 2026/04/02 01:20:52 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILES_H
-# define FILES_H
+#ifndef EXEC_H
+# define EXEC_H
 
-# include "libft.h"
+# include "src/ctx/ctx.h"
+# include <sys/types.h>
 
-t_array	*dir_get_files(const char *name);
+void			cmd_exec(t_ctx *ctx, t_array *args);
+unsigned int	cmd_exec_bin(char *argv[], t_env *env);
+pid_t			cmd_exec_fork(char *argv[], t_env *env);
+char			*cmd_exec_get_path(char *cmd_name, t_env *env);
 
 #endif

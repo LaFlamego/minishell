@@ -1,14 +1,15 @@
 NAME=minishell
 
-SRCS_DIR = src
-INCL_DIR = includes
+SRCS_DIR = ./src
+INCL_DIR = ./
 
-BASE_SRCS = main.c prompt_display.c
+BASE_SRCS = main.c
 ENV_SRCS = env.c env_find.c env_from.c env_merge.c env_set_exit_code.c
 CTX_SRCS = ctx_init.c
 CMD_SRCS = cmd.c cmd_quotes.c
 CMD_EXEC_SRCS = exec_bin.c exec_cmd.c exec_fork.c exec_path.c
 PARSE_SRCS = parse_command.c parse_string.c parse_utils.c
+PROMPT_SRCS = prompt_display.c
 EXPAND_SRCS = expand_command.c expand_dollar.c expand_word.c expand_wildcard.c
 BUILTINS_SRCS = echo.c env.c exit.c export.c pwd.c unset.c cd.c
 FILES_SRCS = dir.c
@@ -21,6 +22,7 @@ SRCS = $(addprefix $(SRCS_DIR)/, $(BASE_SRCS))               \
        $(addprefix $(SRCS_DIR)/cmd/parse/, $(PARSE_SRCS))    \
        $(addprefix $(SRCS_DIR)/cmd/expand/, $(EXPAND_SRCS))  \
        $(addprefix $(SRCS_DIR)/files/, $(FILES_SRCS))        \
+       $(addprefix $(SRCS_DIR)/prompt/, $(PROMPT_SRCS))      \
 	   $(addprefix $(SRCS_DIR)/builtins/, $(BUILTINS_SRCS))
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)

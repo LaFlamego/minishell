@@ -6,12 +6,12 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 17:21:48 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/22 21:49:20 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/02 01:28:03 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "minishell/ctx.h"
+#include "src/ctx/ctx.h"
 
 unsigned int	mini_echo(int argc, char *argv[], t_ctx *ctx)
 {

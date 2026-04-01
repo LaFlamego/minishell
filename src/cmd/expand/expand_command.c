@@ -6,13 +6,13 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:29:42 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/27 11:56:59 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/02 01:24:40 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "./expand.h"
 #include "libft.h"
-#include "minishell/env.h"
-#include "minishell/expand.h"
+#include "src/env/env.h"
 
 static bool	is_sq_string(t_string *s)
 {

@@ -6,12 +6,12 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 13:59:50 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/22 21:40:28 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/02 01:24:27 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "minishell/env.h"
+#include "src/env/env.h"
 #include <stdlib.h>
 #include <unistd.h>
 

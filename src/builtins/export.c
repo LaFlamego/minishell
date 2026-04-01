@@ -6,12 +6,12 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:21:12 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/23 04:26:42 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/02 01:28:39 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "minishell/ctx.h"
+#include "src/ctx/ctx.h"
 
 // export: `23=1': not a valid identifier
 // export: `23': not a valid identifier

@@ -6,12 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:33:08 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/23 04:26:58 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/02 01:24:47 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "minishell/env.h"
+#include "src/env/env.h"
 #include <stdlib.h>
 
 // FIXME: Single $ should stay a single dollar sign

@@ -6,12 +6,12 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:02:13 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/24 17:44:00 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/02 01:22:57 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell/env.h"
-#include "minishell/exec.h"
+#include "src/cmd/exec/exec.h"
+#include "src/env/env.h"
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>

@@ -6,13 +6,13 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:20:54 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/25 16:08:37 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/02 01:25:06 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "./expand.h"
 #include "libft.h"
-#include "minishell/env.h"
-#include "minishell/expand.h"
+#include "src/env/env.h"
 
 // FIXME: expand_dollar can fail
 // FIXME: push can fail

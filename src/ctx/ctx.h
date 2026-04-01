@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand.h                                           :+:      :+:    :+:   */
+/*   ctx.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/22 20:21:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/25 19:16:38 by Oery             ###   ########.fr       */
+/*   Created: 2026/03/13 18:29:55 by Oery              #+#    #+#             */
+/*   Updated: 2026/04/02 01:17:30 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPAND_H
-# define EXPAND_H
+#ifndef CTX_H
+# define CTX_H
 
-# include "minishell/env.h"
+# include "src/env/env.h"
 
-t_array		*cmd_expand_command(t_env *env, t_array *words);
-t_string	*cmd_expand_dollar(t_env *env, t_string *word, size_t *i);
-t_string	*cmd_expand_word(t_env *env, t_string *word);
-void		*cmd_expand_wildcard(t_env *env, t_array *words);
+typedef struct s_ctx
+{
+	t_env	*env;
+	bool	exit;
+}			t_ctx;
+
+void		ctx_init(t_ctx *ctx, char **envp);
 
 #endif

@@ -6,13 +6,12 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 13:15:33 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/24 17:20:33 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/02 01:27:47 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "minishell/cmd.h"
-#include "minishell/prompt.h"
+#include "./prompt.h"
+#include "src/cmd/cmd.h"
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <stdlib.h>

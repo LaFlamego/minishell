@@ -6,11 +6,11 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:40:56 by crevette          #+#    #+#             */
-/*   Updated: 2026/03/23 04:26:06 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/02 01:22:04 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell/ctx.h"
+#include "./ctx.h"
 
 void	ctx_init(t_ctx *ctx, char **envp)
 {

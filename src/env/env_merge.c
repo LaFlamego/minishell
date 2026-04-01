@@ -6,11 +6,11 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 04:28:25 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/23 04:28:35 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/02 01:19:03 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell/env.h"
+#include "./env.h"
 
 // Merge two environments. If a key is in both, the one in DST will be kept.
 // FIXME: ft_env_set will return an error

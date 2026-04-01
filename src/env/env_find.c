@@ -6,11 +6,11 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 04:28:46 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/23 04:29:15 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/02 01:18:50 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell/env.h"
+#include "./env.h"
 
 static bool	is_key(const char *var, const char *key)
 {

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 16:54:48 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/07 15:47:43 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/08 17:36:47 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_scanner
 t_scanner		scanner_new(const char *source);
 char			scanner_advance(t_scanner *s);
 char			scanner_peek(t_scanner *s);
+char			scanner_peek_next(t_scanner *s);
 bool			scanner_match(t_scanner *s, char expected);
 t_token			*scanner_add_token(t_scanner *s, t_token_type type);
 t_token			*scanner_add_token_lit(t_scanner *s, t_token_type type,

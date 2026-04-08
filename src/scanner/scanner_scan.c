@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:28:15 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/07 15:49:19 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/08 17:36:39 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ char	scanner_peek(t_scanner *s)
 	if (s->source[s->current] == '\0')
 		return ('\0');
 	return (s->source[s->current]);
+}
+
+char	scanner_peek_next(t_scanner *s)
+{
+	if (scanner_peek(s) == '\0')
+		return ('\0');
+	return (s->source[s->current + 1]);
 }
 
 bool	scanner_match(t_scanner *s, char expected)

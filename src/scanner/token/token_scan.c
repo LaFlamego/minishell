@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:24:33 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/07 17:41:10 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/08 17:36:59 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ static t_token	*scan_grouping(t_scanner *s, char c)
 
 // TODO: Handle DQ Strings
 // > End with operator or "
-
-// TODO: Handle identifiers
-// > End with operator or space
 
 // TODO: Maybe group with kinds, like grouping / binary ops / unary
 // > Would a dollar sign be an unary?

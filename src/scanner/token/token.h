@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:13:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/07 16:31:31 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/08 17:23:47 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef enum e_token_type
 	STAR,
 	LEFT_BRACE,
 	RIGHT_BRACE,
+	IDENT,
 	STRING,
 	AND,
 	OR,

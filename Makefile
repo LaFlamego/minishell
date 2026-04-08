@@ -9,6 +9,9 @@ CTX_SRCS = ctx_init.c
 CMD_SRCS = cmd.c cmd_quotes.c
 CMD_EXEC_SRCS = exec_bin.c exec_cmd.c exec_fork.c exec_path.c
 PARSE_SRCS = parse_command.c parse_string.c parse_utils.c
+PARSER_SRCS = parser_new.c parser_command.c parser_tokens.c
+LEXER_SRCS = lexer_advance.c lexer_new.c
+TOKENS_SRCS = tokens_blank.c tokens_char.c tokens_ident.c tokens_sq_string.c
 PROMPT_SRCS = prompt_display.c
 EXPAND_SRCS = expand_command.c expand_dollar.c expand_word.c expand_wildcard.c
 BUILTINS_SRCS = echo.c env.c exit.c export.c pwd.c unset.c cd.c
@@ -19,7 +22,10 @@ SRCS = $(addprefix $(SRCS_DIR)/, $(BASE_SRCS))               \
        $(addprefix $(SRCS_DIR)/ctx/, $(CTX_SRCS))            \
        $(addprefix $(SRCS_DIR)/cmd/, $(CMD_SRCS))            \
        $(addprefix $(SRCS_DIR)/cmd/exec/, $(CMD_EXEC_SRCS))  \
+	$(addprefix $(SRCS_DIR)/cmd/lexer/, $(LEXER_SRCS))    \
+	$(addprefix $(SRCS_DIR)/cmd/lexer/tokens/, $(TOKENS_SRCS))    \
        $(addprefix $(SRCS_DIR)/cmd/parse/, $(PARSE_SRCS))    \
+       $(addprefix $(SRCS_DIR)/cmd/parser/, $(PARSER_SRCS))  \
        $(addprefix $(SRCS_DIR)/cmd/expand/, $(EXPAND_SRCS))  \
        $(addprefix $(SRCS_DIR)/files/, $(FILES_SRCS))        \
        $(addprefix $(SRCS_DIR)/prompt/, $(PROMPT_SRCS))      \

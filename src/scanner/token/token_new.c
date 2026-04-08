@@ -1,16 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.h                                           :+:      :+:    :+:   */
+/*   token_new.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/13 18:55:10 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/02 01:14:01 by Oery             ###   ########.fr       */
+/*   Created: 2026/04/07 15:12:39 by Oery              #+#    #+#             */
+/*   Updated: 2026/04/07 15:17:14 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROMPT_H
-# define PROMPT_H
+#include "./token.h"
+#include <stdlib.h>
 
-#endif
+t_token	*token_new(t_token_type type, char *text)
+{
+	t_token	*token;
+
+	token = malloc(sizeof(t_token));
+	if (!token)
+		return (NULL);
+	token->type = type;
+	token->text = text;
+	return (token);
+}
+
+t_token	*token_free(t_token *token)
+{
+	if (!token)
+		return (NULL);
+	if (token->text)
+		free(token->text);
+	free(token);
+	return (NULL);
+}

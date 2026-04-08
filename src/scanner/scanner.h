@@ -33,6 +33,7 @@ typedef struct s_scanner
 
 t_scanner		scanner_new(const char *source);
 char			scanner_advance(t_scanner *s);
+t_array			*scanner_scan(t_scanner *s);
 char			scanner_peek(t_scanner *s);
 char			scanner_peek_next(t_scanner *s);
 bool			scanner_match(t_scanner *s, char expected);

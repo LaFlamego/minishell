@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:13:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/09 16:41:53 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/09 16:58:43 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ typedef enum e_token_type
 	AND,
 	OR,
 	PIPE,
+	REDIRECT_IN,
+	REDIRECT_IN_UNTIL,
+	REDIRECT_OUT,
+	REDIRECT_OUT_APPEND,
 	EOF,
 }					t_token_type;
 

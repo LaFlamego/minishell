@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:24:33 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/09 16:26:06 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/09 16:59:24 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,25 @@ static t_token	*scan_grouping(t_scanner *s, char c)
 		return (scanner_add_token(s, LEFT_BRACE));
 	else if (c == '}')
 		return (scanner_add_token(s, RIGHT_BRACE));
+	return (NULL);
+}
+
+static t_token	*scan_redirection(t_scanner *s, char c)
+{
+	if (c == '<')
+	{
+		if (scanner_match(s, '<'))
+			return (scanner_add_token(s, REDIRECT_IN_UNTIL));
+		else
+			return (scanner_add_token(s, REDIRECT_IN));
+	}
+	else if (c == '>')
+	{
+		if (scanner_match(s, '>'))
+			return (scanner_add_token(s, REDIRECT_OUT_APPEND));
+		else
+			return (scanner_add_token(s, REDIRECT_OUT));
+	}
 	return (NULL);
 }
 
@@ -80,6 +99,8 @@ t_token	*token_scan(t_scanner *s)
 		else
 			return (scanner_add_token(s, PIPE));
 	}
+	else if (c == '<' || c == '>')
+		return (scan_redirection(s, c));
 	else if (c == '\'')
 		return (token_scan_string(s));
 	else if (ft_isspace(c))

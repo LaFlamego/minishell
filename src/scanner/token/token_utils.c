@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 15:54:27 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/09 16:42:04 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/09 17:00:46 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@ void	token_debug(t_token *token)
 		ft_printf("EOF\n");
 	else if (token->type == BLANK)
 		ft_printf("BLANK\n");
+	else if (token->type == REDIRECT_IN)
+		ft_printf("REDIRECT_IN\n");
+	else if (token->type == REDIRECT_IN_UNTIL)
+		ft_printf("REDIRECT_IN_UNTIL\n");
+	else if (token->type == REDIRECT_OUT)
+		ft_printf("REDIRECT_OUT\n");
+	else if (token->type == REDIRECT_OUT_APPEND)
+		ft_printf("REDIRECT_OUT_APPEND\n");
 	else
 		ft_printf("UNKNOWN TOKEN\n");
 }

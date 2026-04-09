@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 16:54:48 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/09 16:26:31 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/09 16:50:37 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ t_array			*scanner_scan(t_scanner *s);
 char			scanner_peek(t_scanner *s);
 char			scanner_peek_next(t_scanner *s);
 bool			scanner_match(t_scanner *s, char expected);
-void			*scanner_error(t_scanner *s, char expected, size_t current);
+void			*scanner_error(t_scanner *s, char token);
+
 t_token			*scanner_add_token(t_scanner *s, t_token_type type);
 t_token			*scanner_add_token_lit(t_scanner *s, t_token_type type,
 					char *text);

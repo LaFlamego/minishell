@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 00:18:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/08 17:11:12 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/09 16:50:26 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 // TODO: Print error message with current i
 // > Should it be printed to stderr?
-void	*scanner_error(t_scanner *s, char expected, size_t current)
+void	*scanner_error(t_scanner *s, char token)
 {
 	char	found;
 
-	found = s->source[current];
-	ft_dprintf(2, "Syntax error: expected '%c' but found '%c'.\n", expected,
-		found);
+	ft_dprintf(2, "minishell: syntax error near unexpected token `%c'\n",
+		token);
 	return (NULL);
 }

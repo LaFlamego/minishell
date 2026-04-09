@@ -82,5 +82,7 @@ t_token	*token_scan(t_scanner *s)
 	}
 	else if (c == '\'')
 		return (token_scan_string(s));
+	else if (is_valid_ident(c))
+		return (token_scan_ident(s));
 	return (NULL);
 }

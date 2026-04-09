@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:24:33 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/09 17:03:04 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/09 17:06:19 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,29 @@ static t_token	*scan_redirection(t_scanner *s, char c)
 	return (NULL);
 }
 
+// TODO: how should we handle a single '&'
+static t_token	*scan_binary(t_scanner *s, char c)
+{
+	if (c == '&')
+	{
+		if (scanner_match(s, '&'))
+			return (scanner_add_token(s, AND));
+		else
+			return (NULL);
+	}
+	else if (c == '|')
+	{
+		if (scanner_match(s, '|'))
+			return (scanner_add_token(s, OR));
+		else
+			return (scanner_add_token(s, PIPE));
+	}
+	return (NULL);
+}
+
 // TODO: Handle DQ Strings
 // > End with operator or "
-
-// TODO: Maybe group with kinds, like grouping / binary ops / unary
-// > Would a dollar sign be an unary?
+//
 t_token	*token_scan(t_scanner *s)
 {
 	char	c;
@@ -60,23 +78,8 @@ t_token	*token_scan(t_scanner *s)
 		return (scanner_add_token(s, DOLLAR));
 	else if (c == '*')
 		return (scanner_add_token(s, STAR));
-	else if (c == '&')
-	{
-		if (scanner_match(s, '&'))
-			return (scanner_add_token(s, AND));
-		else
-		{
-			// TODO: should it be printable then?
-			return (NULL);
-		}
-	}
-	else if (c == '|')
-	{
-		if (scanner_match(s, '|'))
-			return (scanner_add_token(s, OR));
-		else
-			return (scanner_add_token(s, PIPE));
-	}
+	else if (c == '&' || c == '|')
+		return (scan_binary(s, c));
 	else if (c == '<' || c == '>')
 		return (scan_redirection(s, c));
 	else if (c == '\'')

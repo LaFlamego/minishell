@@ -43,6 +43,7 @@ t_token			*scanner_add_token_lit(t_scanner *s, t_token_type type,
 					char *text);
 
 t_token			*token_scan(t_scanner *s);
+t_token			*token_scan_blank(t_scanner *s);
 t_token			*token_scan_ident(t_scanner *s);
 t_token			*token_scan_string(t_scanner *s);
 

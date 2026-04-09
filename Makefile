@@ -13,7 +13,7 @@ EXPAND_SRCS = expand_command.c expand_dollar.c expand_word.c expand_wildcard.c
 BUILTINS_SRCS = echo.c env.c exit.c export.c pwd.c unset.c cd.c
 FILES_SRCS = dir.c
 
-TOKEN_SRCS = token_new.c token_scan.c token_scan_string.c token_scan_ident.c
+TOKEN_SRCS = token_new.c token_scan.c token_scan_blank.c token_scan_string.c token_scan_ident.c
 SCANNER_SRCS = scanner_new.c scanner_add_token.c scanner_error.c scanner_scan.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(BASE_SRCS))               \

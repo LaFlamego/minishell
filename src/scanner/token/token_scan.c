@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:24:33 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/09 16:59:24 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/09 17:03:04 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,8 @@ t_token	*token_scan(t_scanner *s)
 	char	c;
 
 	c = scanner_advance(s);
-	if (c == '(')
-		return (scanner_add_token(s, LEFT_PAREN));
-	else if (c == ')')
-		return (scanner_add_token(s, RIGHT_PAREN));
-	else if (c == '{')
-		return (scanner_add_token(s, LEFT_BRACE));
-	else if (c == '}')
-		return (scanner_add_token(s, RIGHT_BRACE));
+	if (c == '(' || c == ')' || c == '{' || c == '}')
+		return (scan_grouping(s, c));
 	else if (c == '$')
 		return (scanner_add_token(s, DOLLAR));
 	else if (c == '*')
@@ -79,22 +73,6 @@ t_token	*token_scan(t_scanner *s)
 	else if (c == '|')
 	{
 		if (scanner_match(s, '|'))
-			return (scanner_add_token(s, OR));
-		else
-			return (scanner_add_token(s, PIPE));
-	}
-	// TODO: that redirection
-	else if (c == '<')
-	{
-		if (scanner_match(s, '<'))
-			return (scanner_add_token(s, ));
-		else
-			return (scanner_add_token(s, PIPE));
-	}
-	// TODO: also that redirection
-	else if (c == '>')
-	{
-		if (scanner_match(s, '>'))
 			return (scanner_add_token(s, OR));
 		else
 			return (scanner_add_token(s, PIPE));

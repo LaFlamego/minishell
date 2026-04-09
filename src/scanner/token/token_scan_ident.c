@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 17:13:58 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/09 16:46:59 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/09 17:11:17 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ t_token	*token_scan_ident(t_scanner *s)
 		c = scanner_peek(s);
 	}
 	ident = ft_substr(s->source, s->start, s->current - s->start);
-	return (scanner_add_token_lit(s, IDENT, ident));
+	return (scanner_add_token_lit(s, STRING, ident));
 }

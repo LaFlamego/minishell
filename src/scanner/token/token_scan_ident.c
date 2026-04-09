@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 17:13:58 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/09 17:11:17 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/09 17:21:31 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_token	*token_scan_ident(t_scanner *s)
 	c = scanner_peek(s);
 	while (is_valid_ident(c))
 	{
-		if (c == '$' && !ft_isspace(scanner_peek_next(s)))
+		if (c == '$' && is_valid_ident(scanner_peek_next(s)))
 			break ;
 		scanner_advance(s);
 		c = scanner_peek(s);

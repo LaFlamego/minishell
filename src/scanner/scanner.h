@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 16:54:48 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/09 16:50:37 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/09 18:00:56 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_token			*token_scan(t_scanner *s);
 t_token			*token_scan_blank(t_scanner *s);
 t_token			*token_scan_ident(t_scanner *s);
 t_token			*token_scan_string(t_scanner *s);
+t_token			*token_scan_string_double(t_scanner *s);
 
 bool			is_valid_ident(const char c);
 

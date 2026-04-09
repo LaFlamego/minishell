@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 17:13:58 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/09 16:39:34 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/09 16:46:59 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ bool	is_valid_ident(const char c)
 	if (c == '(' || c == ')')
 		return (false);
 	if (c == '{' || c == '}')
+		return (false);
+	if (c == '\'' || c == '"')
 		return (false);
 	if (ft_isspace(c))
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:24:33 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/10 19:51:33 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/10 20:36:51 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,6 @@ static t_token	*scan_binary(t_scanner *s, char c)
 	}
 	return (NULL);
 }
-
-// TODO: Handle DQ Strings
-// > End with operator or "
 
 // TODO: can $STRINGS have any string as ident?
 t_token	*token_scan(t_scanner *s)

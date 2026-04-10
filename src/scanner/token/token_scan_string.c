@@ -6,12 +6,13 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:39:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/10 16:03:40 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/10 17:47:44 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../scanner.h"
 #include "./token.h"
+#include "stdlib.h"
 
 // FIXME: substr can fail
 t_token	*token_scan_string(t_scanner *s)
@@ -46,10 +47,14 @@ static t_token	*scan_part(t_scanner *s)
 		c = scanner_peek(s);
 	}
 	ident = ft_substr(s->source, s->start, s->current - s->start);
+	if (ft_streq(ident, "$"))
+	{
+		free(ident);
+		return (scanner_add_token(s, DOLLAR));
+	}
 	return (scanner_add_token_lit(s, STRING, ident));
 }
 
-// WARN: Watch out for multiple dollarsigns
 t_token	*token_scan_string_double(t_scanner *s)
 {
 	char	c;

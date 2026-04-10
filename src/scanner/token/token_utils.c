@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 15:54:27 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/09 17:11:39 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/10 14:58:24 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	token_debug(t_token *token)
 	else if (token->type == RIGHT_BRACE)
 		ft_printf("RIGHT_BRACE\n");
 	else if (token->type == STRING)
-		ft_printf("STRING -> %s\n", token->text);
+		ft_printf("STRING %d -> \"%s\"\n", ft_strlen(token->text), token->text);
 	else if (token->type == OR)
 		ft_printf("OR\n");
 	else if (token->type == AND)

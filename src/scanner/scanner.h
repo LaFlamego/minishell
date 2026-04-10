@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 16:54:48 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/10 12:50:43 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/10 21:25:06 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_scanner
 }				t_scanner;
 
 t_scanner		scanner_new(const char *source);
+t_scanner		*scanner_free(t_scanner *s);
 char			scanner_advance(t_scanner *s);
 t_array			*scanner_scan(t_scanner *s);
 char			scanner_peek(t_scanner *s);

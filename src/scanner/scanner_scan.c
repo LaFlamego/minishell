@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:28:15 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/08 17:36:39 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/10 21:26:31 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ t_array	*scanner_scan(t_scanner *s)
 	while (s->source[s->current])
 	{
 		s->start = s->current;
-		token_scan(s);
+		if (!token_scan(s))
+			return (NULL);
 	}
 	eof = token_new(EOF, NULL);
 	if (!eof || !ft_array_push(&s->tokens, eof))

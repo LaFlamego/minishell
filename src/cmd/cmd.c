@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:11:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/10 12:54:24 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/10 21:24:39 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ unsigned int	cmd_handle(const char *input, t_ctx *ctx)
 	t_scanner	s;
 
 	s = scanner_new(input);
-	scanner_scan(&s);
+	if (!scanner_scan(&s))
+	{
+		scanner_free(&s);
+		return (1);
+	};
 	debug_tokens(&s.tokens);
 	(void)ctx;
 	// words = cmd_parse_command(input);

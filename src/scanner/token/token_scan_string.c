@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:39:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/10 17:47:44 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/10 21:30:46 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "./token.h"
 #include "stdlib.h"
 
-// FIXME: substr can fail
 t_token	*token_scan_string(t_scanner *s)
 {
 	char	*text;
@@ -29,10 +28,11 @@ t_token	*token_scan_string(t_scanner *s)
 	}
 	scanner_advance(s);
 	text = ft_substr(s->source, s->start + 1, s->current - s->start - 2);
+	if (!text)
+		return (NULL);
 	return (scanner_add_token_lit(s, STRING, text));
 }
 
-// FIXME: substr can fail
 static t_token	*scan_part(t_scanner *s)
 {
 	char	c;
@@ -47,6 +47,8 @@ static t_token	*scan_part(t_scanner *s)
 		c = scanner_peek(s);
 	}
 	ident = ft_substr(s->source, s->start, s->current - s->start);
+	if (!ident)
+		return (NULL);
 	if (ft_streq(ident, "$"))
 	{
 		free(ident);
@@ -65,17 +67,16 @@ t_token	*token_scan_string_double(t_scanner *s)
 		c = scanner_advance(s);
 		if (c == '$' && is_valid_ident(scanner_peek(s)))
 		{
-			// FIXME: can fail
-			scanner_add_token(s, DOLLAR);
+			if (!scanner_add_token(s, DOLLAR))
+				return (NULL);
 			s->start = s->current;
-			// FIXME: can fail
-			if (scanner_peek(s) != '$')
-				token_scan_ident(s);
+			if (scanner_peek(s) != '$' && !token_scan_ident(s))
+				return (NULL);
 		}
 		else
 		{
-			// FIXME: can fail
-			scan_part(s);
+			if (!scan_part(s))
+				return (NULL);
 		}
 	}
 	if (scanner_peek(s) == '\0')

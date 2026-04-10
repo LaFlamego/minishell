@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:24:33 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/09 17:42:53 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/10 19:51:33 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,9 @@
 static t_token	*scan_grouping(t_scanner *s, char c)
 {
 	if (c == '(')
-		return (scanner_add_token(s, LEFT_PAREN));
+		return (token_scan_group(s));
 	else if (c == ')')
-		return (scanner_add_token(s, RIGHT_PAREN));
-	else if (c == '{')
-		return (scanner_add_token(s, LEFT_BRACE));
-	else if (c == '}')
-		return (scanner_add_token(s, RIGHT_BRACE));
+		return (scanner_error(')'));
 	return (NULL);
 }
 
@@ -73,7 +69,7 @@ t_token	*token_scan(t_scanner *s)
 	char	c;
 
 	c = scanner_advance(s);
-	if (c == '(' || c == ')' || c == '{' || c == '}')
+	if (c == '(' || c == ')')
 		return (scan_grouping(s, c));
 	else if (c == '$')
 		return (scanner_add_token(s, DOLLAR));

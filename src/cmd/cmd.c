@@ -6,16 +6,27 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:11:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/02 01:32:00 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/10 12:54:24 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./cmd.h"
-#include "./parser/parser.h"
-#include "src/cmd/exec/exec.h"
 #include "src/ctx/ctx.h"
+#include "src/scanner/scanner.h"
 
 // #include "minishell/expand.h"
+
+static void	debug_tokens(t_array *tokens)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < tokens->size)
+	{
+		token_debug(tokens->data[i]);
+		i++;
+	}
+}
 
 // TODO: AST
 // 1. Tokenize the command (is this necessary?)
@@ -27,10 +38,11 @@
 // TODO: Free Resources after the command ran
 unsigned int	cmd_handle(const char *input, t_ctx *ctx)
 {
-	t_parser	p;
+	t_scanner	s;
 
-	p = parser_new(input);
-	parse_command(&p);
+	s = scanner_new(input);
+	scanner_scan(&s);
+	debug_tokens(&s.tokens);
 	(void)ctx;
 	// words = cmd_parse_command(input);
 	// if (!words)

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 16:29:31 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/02 01:27:00 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/10 18:25:31 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static int	error(t_parser *p)
 	free((void *)p->lex.input);
 	return (1);
 }
+
+// NOTE: There cannot be 3 pipes in a row
 
 // NOTE: First token should be part of a classic command?
 // > Keep Adding to the command

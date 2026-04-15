@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
+/*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 16:50:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/02 01:19:46 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/15 17:55:22 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,16 @@ typedef struct s_node
 		t_array		*tokens;
 	};
 }					t_node;
+
+typedef struct s_cmd
+{
+	char			*path;
+	char			**cmds;
+	int				nb;
+	bool			valid;
+	bool			f_no_x;
+	bool			is_path;
+}					t_cmd;
 
 bool				is_sq_string(t_string *s);
 unsigned int		cmd_handle(const char *input, t_ctx *ctx);

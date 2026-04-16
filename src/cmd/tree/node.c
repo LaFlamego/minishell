@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:21:36 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/15 16:32:25 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/16 14:28:36 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,10 @@ t_cmd_node	*node_new(enum e_kind kind)
 		}
 	}
 	return (node);
+}
+
+// TODO: Free subvalues
+t_cmd_node	*node_free(t_cmd_node *node)
+{
+	return (NULL);
 }

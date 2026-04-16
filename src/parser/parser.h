@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/04 16:44:20 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/04 16:44:58 by Oery             ###   ########.fr       */
+/*   Created: 2026/04/13 18:55:02 by Oery              #+#    #+#             */
+/*   Updated: 2026/04/16 12:29:26 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef PARSER_H
+# define PARSER_H
 
-typedef struct s_expr
+# include "src/cmd/tree/node.h"
+# include "src/scanner/token/token.h"
+
+typedef struct s_parser
 {
-}	t_expr;
+	t_array		*tokens;
+	size_t		current;
+	t_cmd_node	*tree;
+}				t_parser;
+
+t_token			*parser_advance(t_parser *p);
+t_token			*parser_peek(t_parser *p);
 
 #endif

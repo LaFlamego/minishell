@@ -6,15 +6,13 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:13:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/16 14:36:23 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/16 14:51:45 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKEN_H
 # define TOKEN_H
 
-// TODO: Add Redirections
-// TODO: Blank spaces have meaning and should store their content
 typedef enum e_token_type
 {
 	LEFT_PAREN,

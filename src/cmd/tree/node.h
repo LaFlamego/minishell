@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:03:17 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/16 14:28:29 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/16 14:59:56 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_pipe_args
 
 typedef struct s_cmd_args
 {
-	t_array		*args;
+	t_array		args;
 }				t_cmd_args;
 
 typedef struct s_bin_op_args

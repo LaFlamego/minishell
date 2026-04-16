@@ -6,12 +6,29 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:21:36 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/16 14:28:36 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/16 15:08:03 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./node.h"
 #include <stdlib.h>
+
+static void	*node_alloc_args(t_cmd_node *node)
+{
+	size_t	size;
+
+	if (node->kind == COMMAND)
+		size = sizeof(t_cmd_args);
+	if (node->kind == OP_AND || node->kind == OP_OR)
+		size = sizeof(t_bin_op_args);
+	if (node->kind == PIPELINE)
+		size = sizeof(t_pipe_args);
+	node->data = malloc(size);
+	if (node->data)
+		return (NULL);
+	ft_bzero(node->data, size);
+	return (node->data);
+}
 
 t_cmd_node	*node_new(enum e_kind kind)
 {
@@ -22,15 +39,9 @@ t_cmd_node	*node_new(enum e_kind kind)
 		return (NULL);
 	ft_bzero(node, sizeof(t_cmd_node));
 	node->kind = kind;
-	if (node->kind == COMMAND)
-	{
-		node->data = ft_array_new();
-		if (!node->data)
-		{
-			free(node);
-			return (NULL);
-		}
-	}
+	node->data = node_alloc_args(node);
+	if (!node->data)
+		return (node_free(node));
 	return (node);
 }
 

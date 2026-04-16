@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:13:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/10 19:56:01 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/16 14:36:23 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_token
 t_token				*token_new(t_token_type type, char *text);
 t_token				*token_free(t_token *token);
 
+char				*token_to_string(t_token *token);
 void				token_debug(t_token *token);
 
 #endif

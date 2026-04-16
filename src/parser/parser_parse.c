@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:01:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/15 16:19:14 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/16 15:10:40 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,15 @@ t_token	*parser_peek(t_parser *p)
 	return (p->tokens->data[p->current]);
 }
 
-static void	skip_blanks(t_parser *p)
+void	parser_skip_blank(t_parser *p)
 {
-	while (parser_peek(p)->type == BLANK)
-		p->current++;
 }
 
 t_cmd_node	*parser_parse(t_parser *p)
 {
 	if (!p->tokens)
 		return (NULL);
-	skip_blanks(p);
+	parser_skip_blank(p);
 	while (p->tokens->data[p->current])
 	{
 		if (!parse_token(p))

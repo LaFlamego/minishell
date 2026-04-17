@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 13:59:50 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/16 15:32:34 by crevette         ###   ########.fr       */
+/*   Updated: 2026/04/17 15:59:53 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,46 +39,59 @@ static char	**extract_path(char **envp)
 	return (res);
 }
 
-static bool	cmd_access(t_cmd *cmd, char *target_path)
+static bool	cmd_access(char *target_path, int *find_no_x, int *no_find)
 {
-	cmd->f_no_x = false;
 	if (access(target_path, F_OK) == 0)
 	{
+		*no_find = 0;
 		if (access(target_path, X_OK) == 0)
 			return (true);
 		else
-			cmd->f_no_x= true;
+			*find_no_x = 1;
 		// TODO return for permission issue and free
 	}
+	else
+		*no_find = 1;
 	return (false);
 }
 
-static char	*find_path(t_cmd *cmd, char *cmd_name, char **cddt_paths)
+static unsigned int	find_path(t_cmd *cmd, char *cmd_name, char **cddt_paths)
 {
 	char	*tpr;
 	char	*res;
+	int		find_no_x;
+	int		no_find;
 
+	find_no_x = 0;
+	no_find = 0;
 	if (cddt_paths)
 	{
 		while (*cddt_paths)
 		{
 			tpr = ft_strjoin(*cddt_paths, "/");
 			if (!tpr)
-				return (NULL);
+				return (1);
 			res = ft_strjoin(tpr, cmd_name);
 			free(tpr);
 			if (!res)
-				return (NULL);
-			if (cmd_access(cmd, res))
-				return (res);
-			else
-				ft_printf("%s: permission denied\n", ctx->args[ctx->cmd.nb + 1]);
-				return (126);
+				return (1);
+			if (cmd_access(res, &find_no_x, &no_find))
+				return (cmd->path = res, 0);
 			free(res);
 			++cddt_paths;
 		}
 	}
-	return (NULL);
+	if (find_no_x == 1)
+	{
+		ft_printf("%s: permission denied\n", cmd_name);
+		return (126);
+	}
+	else if (no_find == 1)
+	{
+		return (ft_printf("%s: command not found\n", cmd_name), 126);
+		return (126);
+	}
+	return (0);
 }
 
 unsigned int error_print_exit(int  )

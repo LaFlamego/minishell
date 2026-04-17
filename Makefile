@@ -13,19 +13,36 @@ EXPAND_SRCS = expand_command.c expand_dollar.c expand_word.c expand_wildcard.c
 BUILTINS_SRCS = echo.c env.c exit.c export.c pwd.c unset.c cd.c
 FILES_SRCS = dir.c
 
-TOKEN_SRCS = token_new.c token_scan.c token_scan_blank.c token_scan_group.c token_scan_string.c token_scan_ident.c token_utils.c
 SCANNER_SRCS = scanner_new.c scanner_add_token.c scanner_error.c scanner_scan.c
 
-SRCS = $(addprefix $(SRCS_DIR)/, $(BASE_SRCS))               \
-       $(addprefix $(SRCS_DIR)/env/, $(ENV_SRCS))            \
-       $(addprefix $(SRCS_DIR)/ctx/, $(CTX_SRCS))            \
-       $(addprefix $(SRCS_DIR)/cmd/, $(CMD_SRCS))            \
-       $(addprefix $(SRCS_DIR)/cmd/exec/, $(CMD_EXEC_SRCS))  \
-       $(addprefix $(SRCS_DIR)/cmd/expand/, $(EXPAND_SRCS))  \
-       $(addprefix $(SRCS_DIR)/files/, $(FILES_SRCS))        \
-       $(addprefix $(SRCS_DIR)/prompt/, $(PROMPT_SRCS))      \
-       $(addprefix $(SRCS_DIR)/scanner/, $(SCANNER_SRCS))    \
-       $(addprefix $(SRCS_DIR)/scanner/token/, $(TOKEN_SRCS))    \
+TOKEN_SRCS =	token_new.c			\
+				token_scan.c		\
+				token_scan_blank.c	\
+				token_scan_group.c	\
+				token_scan_ident.c	\
+				token_scan_string.c	\
+				token_utils.c
+
+PARSER_SRCS = 	parser_new.c		\
+				parser_error.c		\
+				parser_parse.c		\
+				parser_parse_cmd.c	\
+				parser_parse_node.c
+
+NODE_SRCS =	node.c					\
+			node_debug.c			\
+
+SRCS = $(addprefix $(SRCS_DIR)/, $(BASE_SRCS))					\
+       $(addprefix $(SRCS_DIR)/env/, $(ENV_SRCS))				\
+       $(addprefix $(SRCS_DIR)/ctx/, $(CTX_SRCS))				\
+       $(addprefix $(SRCS_DIR)/cmd/, $(CMD_SRCS))				\
+       $(addprefix $(SRCS_DIR)/cmd/exec/, $(CMD_EXEC_SRCS))		\
+       $(addprefix $(SRCS_DIR)/files/, $(FILES_SRCS))			\
+       $(addprefix $(SRCS_DIR)/prompt/, $(PROMPT_SRCS))			\
+       $(addprefix $(SRCS_DIR)/scanner/, $(SCANNER_SRCS))		\
+       $(addprefix $(SRCS_DIR)/scanner/token/, $(TOKEN_SRCS))	\
+       $(addprefix $(SRCS_DIR)/parser/, $(PARSER_SRCS))			\
+       $(addprefix $(SRCS_DIR)/cmd/tree/, $(NODE_SRCS))			\
 	   $(addprefix $(SRCS_DIR)/builtins/, $(BUILTINS_SRCS))
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)

@@ -34,10 +34,9 @@ t_cmd_node	*node_new(enum e_kind kind)
 {
 	t_cmd_node	*node;
 
-	node = malloc(sizeof(t_cmd_node));
+	node = ft_calloc(1, sizeof(t_cmd_node));
 	if (!node)
 		return (NULL);
-	ft_bzero(node, sizeof(t_cmd_node));
 	node->kind = kind;
 	node->data = node_alloc_args(node);
 	if (!node->data)

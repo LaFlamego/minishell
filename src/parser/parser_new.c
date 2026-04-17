@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 18:56:53 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/14 21:00:17 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/17 12:21:30 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ void	*parser_free(t_parser *p)
 		return (NULL);
 	if (p->tokens)
 		ft_array_free(p->tokens, free);
-	// TODO: Free Tree
+	node_free(p->tree);
 	return (NULL);
 }

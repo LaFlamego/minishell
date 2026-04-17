@@ -45,8 +45,34 @@ t_cmd_node	*node_new(enum e_kind kind)
 	return (node);
 }
 
-// TODO: Free subvalues
+// free the node pointer and its content
+// TODO: Free command and pipeline
 t_cmd_node	*node_free(t_cmd_node *node)
 {
+	t_bin_op_args	*lr;
+
+	if (!node)
+		return (NULL);
+	if (!node->data)
+	{
+		free(node);
+		return (NULL);
+	}
+	if (node->kind == OP_AND || node->kind == OP_OR)
+	{
+		lr = node->data;
+		node_free(lr->left);
+		node_free(lr->right);
+	}
+	// if (node->kind == COMMAND)
+	// {
+	//
+	// }
+	// if (node->kind == PIPELINE)
+	// {
+	//
+	// }
+	free(node->data);
+	free(node);
 	return (NULL);
 }

@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_init.c                                        :+:      :+:    :+:   */
+/*   exec_ops.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/16 10:13:53 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/16 13:30:49 by crevette         ###   ########.fr       */
+/*   Created: 2026/04/16 11:01:42 by crevette          #+#    #+#             */
+/*   Updated: 2026/04/16 14:20:40 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
 #include "libft.h"
+#include "cmd.h"
 
-void    init_cmd(t_cmd *cmd)
+void    handle_and_sign(char *token, t_op *ops)
 {
-    ft_bzero(cmd, sizeof(t_cmd));
-    cmd->path = NULL;
-    cmd->cmds = NULL;
-    cmd->valid = false;
-    cmd->f_no_x = false;
+    if (ft_streq(token, "&&"))
+    {
+        ops->left
+    }
+    return ;
 }
+
+void    handle_or_sign()
+{
+
+}
+
+void    handle_pipe_sign()
+{
+
+}
+

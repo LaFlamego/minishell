@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 13:59:50 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/15 17:57:35 by crevette         ###   ########.fr       */
+/*   Updated: 2026/04/16 15:32:34 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ static char	*find_path(t_cmd *cmd, char *cmd_name, char **cddt_paths)
 				return (NULL);
 			if (cmd_access(cmd, res))
 				return (res);
+			else
+				ft_printf("%s: permission denied\n", ctx->args[ctx->cmd.nb + 1]);
+				return (126);
 			free(res);
 			++cddt_paths;
 		}
@@ -78,36 +81,41 @@ static char	*find_path(t_cmd *cmd, char *cmd_name, char **cddt_paths)
 	return (NULL);
 }
 
-static char	*path_is_cmd_name(char *cmd_name, char *path, t_cmd *cmd)
+unsigned int error_print_exit(int  )
 {
-	path = cmd_name;
-	cmd->is_path = true;
-	if (access(path, X_OK) == 0 && access(path, F_OK) == 0)
-		return (path);
-	return (NULL);
+
 }
 
-char	*cmd_exec_get_path(char *cmd_name, t_cmd *cmd, t_env *env)
+static unsigned int	*path_is_cmd_name(char *cmd_name, t_cmd *cmd)
 {
-	char	*path;
+	if (access(cmd_name, X_OK) == 0 && access(cmd_name, F_OK) == 0)
+		cmd->path = cmd_name;
+	else
+	{
+		ft_printf("%s: No such file or directory\n", cmd_name);
+		return (127);
+	}
+	return (0);
+}
+
+unsigned int	*cmd_exec_get_path(char *cmd_name, t_cmd *cmd, t_env *env)
+{
 	char	*path_find;
 	char	**cddt_paths;
 
 	if (!cmd_name)
-		return (NULL);
-	cmd->is_path = false;
-	path = ft_strchr(cmd_name, '/');
+		return (ft_printf("'': command not found\n"), 127);
+	if (ft_strchr(cmd_name, '/'))
+		return (path_is_cmd_name(cmd_name, cmd));
 	cddt_paths = extract_path((char **)env->data);
 	if (!cddt_paths)
-		return (NULL);
+		return (1);
 	path_find = find_path(cmd, cmd_name, cddt_paths);
 	if (!path_find)
-		return (free_splits(cddt_paths), NULL);
-	if (cddt_paths)
-		free_splits(cddt_paths);
-	if (path)
-		return (path_is_cmd_name(cmd_name, path, cmd));
-	else if (path_find)
-		return (path_find);
-	return (NULL);
+		return (free_splits(cddt_paths), 
+			ft_printf("%s: command not found\n", cmd_name), 127);
+	free_splits(cddt_paths);
+	if (path_find)
+		cmd->path = path_find;
+	return (0);
 }

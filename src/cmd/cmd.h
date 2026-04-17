@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 16:50:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/16 12:42:48 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/16 13:29:21 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@
 
 typedef struct s_cmd
 {
-	char		*path;
-	char		**cmds;
-	// int				nb;
-	bool		valid;
-	bool		f_no_x;
-	bool		is_path;
-}				t_cmd;
+	char			*path;
+	char			**cmds;
+	//int				nb;
+	bool			valid;
+	bool			f_no_x;
+	//bool			is_path;
+}					t_cmd;
 
-bool			is_sq_string(t_string *s);
-unsigned int	cmd_handle(const char *input, t_ctx *ctx);
-void			cmd_quotes_remove(const t_array *words);
+bool				is_sq_string(t_string *s);
+unsigned int		cmd_handle(const char *input, t_ctx *ctx);
+void				cmd_quotes_remove(const t_array *words);
 
 #endif

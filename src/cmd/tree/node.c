@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:21:36 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/16 15:08:03 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/17 12:42:39 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	*node_alloc_args(t_cmd_node *node)
 	if (node->kind == PIPELINE)
 		size = sizeof(t_pipe_args);
 	node->data = malloc(size);
-	if (node->data)
+	if (!node->data)
 		return (NULL);
 	ft_bzero(node->data, size);
 	return (node->data);

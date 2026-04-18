@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 16:50:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/16 13:29:21 by crevette         ###   ########.fr       */
+/*   Updated: 2026/04/18 15:46:10 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ typedef struct s_cmd
 	char			*path;
 	char			**cmds;
 	//int				nb;
-	bool			valid;
-	bool			f_no_x;
 	//bool			is_path;
 }					t_cmd;
 

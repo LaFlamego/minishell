@@ -6,18 +6,19 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 11:01:42 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/16 14:20:40 by crevette         ###   ########.fr       */
+/*   Updated: 2026/04/22 20:15:52 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "cmd.h"
+#include "../tree/node.h" 
 
-void    handle_and_sign(char *token, t_op *ops)
+void    handle_and_sign(t_cmd_node *node)
 {
-    if (ft_streq(token, "&&"))
+    if (node->data )
     {
-        ops->left
+
     }
     return ;
 }
@@ -28,6 +29,11 @@ void    handle_or_sign()
 }
 
 void    handle_pipe_sign()
+{
+
+}
+
+void	handle_single_command()
 {
 
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
+/*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:03:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/02 01:23:57 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/22 16:43:26 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static unsigned int (*get_builtin(char *cmd_name))(int, char **, t_ctx *)
 	return (NULL);
 }
 
-void	cmd_exec(t_ctx *ctx, t_array *args)
+unsigned int	cmd_exec(t_ctx *ctx, t_array *args)
 {
 	unsigned int	exit_code;
 	unsigned int	(*builtin)(int, char **, t_ctx *);
@@ -68,4 +68,5 @@ void	cmd_exec(t_ctx *ctx, t_array *args)
 		exit_code = cmd_exec_bin((char **)argv.data, ctx->env);
 	}
 	env_set_exit_code(exit_code, ctx->env);
+	return (exit_code);
 }

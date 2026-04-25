@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_pipe.c                                        :+:      :+:    :+:   */
+/*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:35:32 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/25 15:12:32 by crevette         ###   ########.fr       */
+/*   Updated: 2026/04/25 17:46:24 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	fd_close_reset(int *pipein, int *pipeout, int *prevfd)
 	}
 }
 
-static void	pipe_build(t_pipe_fd *fd)
+static void	pipe_build(t_fds *fd)
 {
 	int	pipefd[2];
 
@@ -45,7 +45,7 @@ static void	pipe_build(t_pipe_fd *fd)
 	fd->pipe_out = pipefd[1];
 }
 
-static void	to_dup(t_pipe_fd *fd, int fd_dup, bool is_pipe_in)
+static void	to_dup(t_fds *fd, int fd_dup, bool is_pipe_in)
 {
 	int	dup;
 
@@ -61,7 +61,7 @@ static void	to_dup(t_pipe_fd *fd, int fd_dup, bool is_pipe_in)
 	}
 }
 
-static void	fd_proceed(t_pipe_fd *fd, size_t index)
+static void	fd_proceed(t_fds *fd, size_t index)
 {
 	int	in_fd;
 	int	out_fd;
@@ -75,31 +75,29 @@ static void	fd_proceed(t_pipe_fd *fd, size_t index)
 	fd_close_reset(fd->pipe_in, fd->pipe_out, fd->prev_fd);
 }
 
-pid_t	exec_pipeline(t_pipe_args *list, size_t index)
+pid_t	exec_pipeline(t_pipe_args *list, t_fds *fd, size_t index)
 {
 	pid_t			pid;
-	t_pipe_fd		fd;
 
 	pid = -1;
-	fd.args_nb = list->commands->size;
-	if (index != fd.args_nb)
+	fd->args_nb = list->commands->size;
+	if (index != fd->args_nb)
 		pipe_build(&fd);
 	pid = fork();
-	//! following is child
 	if (pid < 0)
 	{
-		fd_close_reset(&fd.pipe_in, &fd.pipe_out, &fd.prev_fd);
+		fd_close_reset(&fd->pipe_in, &fd->pipe_out, &fd->prev_fd);
 		perror("pid");
 	}
 	if (pid == 0)
 	{
-		fd_proceed(&fd, index);
+		fd_proceed(fd, index);
 		track_nodes(list->commands->data[index - 1]);//execute command in track_nodes
 	}
 	if (pid > 0)
 	{
-		fd_close_reset(NULL, &fd.pipe_out, &fd.prev_fd);
-		fd.prev_fd = fd.pipe_in;
+		fd_close_reset(NULL, &fd->pipe_out, &fd->prev_fd);
+		fd->prev_fd = fd->pipe_in;
 	}
 	return (pid);
 }

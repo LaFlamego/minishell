@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 20:24:51 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/25 15:13:07 by crevette         ###   ########.fr       */
+/*   Updated: 2026/04/25 16:27:57 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # include "../tree/node.h"
 
 //TODO < > << >>
+//TODO pass fd to proceed
 
 unsigned int	track_node(t_cmd_node *node)
 {

@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 16:50:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 17:36:29 by crevette         ###   ########.fr       */
+/*   Updated: 2026/04/25 22:38:59 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ typedef struct s_cmd
 
 typedef struct s_fds
 {
-	int		pipe_in;
-	int		pipe_out;
-	int		prev_fd;
-	int		args_nb;
-}			t_fds;
+	int			pipe_in;
+	int			pipe_out;
+	int			prev_fd;
+	size_t		args_nb;
+}				t_fds;
 
 bool				is_sq_string(t_string *s);
 unsigned int		cmd_handle(const char *input, t_ctx *ctx);

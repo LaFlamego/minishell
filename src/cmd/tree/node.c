@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:21:36 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/24 10:47:10 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/25 16:41:51 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static void	*node_alloc_args(t_cmd_node *node)
 {
 	size_t	size;
 
-	if (node->kind == COMMAND)
-		size = sizeof(t_cmd_args);
 	if (node->kind == OP_AND || node->kind == OP_OR)
 		size = sizeof(t_bin_op_args);
 	if (node->kind == PIPELINE)

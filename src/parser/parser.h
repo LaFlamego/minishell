@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 18:55:02 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 14:59:57 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/25 17:17:35 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@
 
 typedef struct s_parser
 {
-	t_array		*tokens;
-	size_t		current;
+	t_list		*tokens;
+	t_list		*current;
+	t_list		*previous;
 	t_cmd_node	*tree;
 }				t_parser;
 
-t_parser		parser_new(t_array *tokens);
+t_parser		parser_new(t_list *tokens);
 void			*parser_free(t_parser *p);
 
 t_token			*parser_advance(t_parser *p);
 t_token			*parser_peek(t_parser *p);
-t_token			*parser_previous(t_parser *p);
 void			*parser_error(t_token *t);
 
 bool			parser_check(t_parser *p, t_token_type type);

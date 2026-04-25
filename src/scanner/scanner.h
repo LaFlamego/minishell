@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 16:54:48 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/10 21:34:14 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/25 17:19:22 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 /**
  * struct s_scanner - lexical scanner state
  * @source: input source buffer (null-terminated, not owned)
- * @tokens: token output array
+ * @tokens: token output list
  * @current: current cursor position in source
  * @start: start of current lexeme
  */
 typedef struct s_scanner
 {
 	const char	*source;
-	t_array		tokens;
+	t_list		*tokens;
 	size_t		current;
 	size_t		start;
 }				t_scanner;
@@ -34,7 +34,7 @@ typedef struct s_scanner
 t_scanner		scanner_new(const char *source);
 t_scanner		*scanner_free(t_scanner *s);
 char			scanner_advance(t_scanner *s);
-t_array			*scanner_scan(t_scanner *s);
+t_list			*scanner_scan(t_scanner *s);
 char			scanner_peek(t_scanner *s);
 char			scanner_peek_next(t_scanner *s);
 bool			scanner_match(t_scanner *s, char expected);

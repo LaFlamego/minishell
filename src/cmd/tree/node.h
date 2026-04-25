@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:03:17 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/24 10:47:16 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/25 17:22:26 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ enum			e_kind
 	OP_OR,
 };
 
+/*
+ * A tree representing the command to execute
+ *
+ * The type of the data field depends on the kind of the node:
+ * COMMAND -> An array of arrays, each is a word containing a list of tokens.
+ * PIPELINE -> An array of t_cmd_node to execute.
+ * OP_AND / OP_OR -> t_bin_op_args
+ */
 typedef struct s_cmd_node
 {
 	enum e_kind	kind;
@@ -33,11 +41,6 @@ typedef struct s_pipe_args
 {
 	t_array		*commands;
 }				t_pipe_args;
-
-typedef struct s_cmd_args
-{
-	t_array		args;
-}				t_cmd_args;
 
 typedef struct s_bin_op_args
 {

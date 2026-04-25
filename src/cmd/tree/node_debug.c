@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 11:43:15 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 15:11:32 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/25 16:59:00 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,21 @@ static void	debug_tokens(t_array *tokens)
 	}
 }
 
-static void	debug_command(t_cmd_args *data)
+static void	debug_command(t_list *head)
 {
 	size_t	i;
+	t_list	*curr;
 
-	if (!data)
-		ft_printf("DATA is NULL\n");
+	if (!head)
+		ft_printf("head is NULL\n");
+	curr = head;
 	i = 0;
-	while (i < data->args.size)
+	while (curr)
 	{
 		ft_printf("[%d] = ", i);
-		debug_tokens(data->args.data[i]);
+		debug_tokens(curr->content);
 		ft_printf("\n");
-		i++;
+		curr = curr->next;
 	}
 }
 

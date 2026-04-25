@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:11:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 18:18:20 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/25 21:41:22 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ unsigned int	cmd_handle(const char *input, t_ctx *ctx)
 	{
 		// TODO: handle error
 	}
-	debug_tokens(s.tokens);
 	p = parser_new(s.tokens);
 	head = parser_parse(&p);
 	ft_printf("head -> %p\n", head);
-	ft_printf("Head Kind -> %d\n", head->kind);
-	// ft_printf("Args size -> %d\n", node->args.size);
-	node_debug(head, 0);
+	if (head)
+	{
+		node_debug(head, 0);
+	}
 	(void)ctx;
 	return (0);
 }

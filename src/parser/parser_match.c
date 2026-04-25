@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 10:20:27 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 18:01:48 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/25 21:17:25 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ bool	parser_match_binary(t_parser *p)
 
 bool	parser_match(t_parser *p, t_token_type type)
 {
+	if (type != BLANK)
+	{
+		while (parser_match(p, BLANK))
+			;
+	}
 	if (parser_check(p, type))
 	{
 		parser_advance(p);

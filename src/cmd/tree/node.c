@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:21:36 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 18:27:33 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/25 21:15:50 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ static void	*node_alloc_args(t_cmd_node *node)
 {
 	size_t	size;
 
-	if (node->kind == OP_AND || node->kind == OP_OR)
-		size = sizeof(t_bin_op_args);
-	if (node->kind == PIPELINE)
-		size = sizeof(t_pipe_args);
+	size = sizeof(t_bin_op_args);
 	node->data = malloc(size);
 	if (!node->data)
 		return (NULL);
@@ -37,7 +34,7 @@ t_cmd_node	*node_new(enum e_kind kind)
 	if (!node)
 		return (NULL);
 	node->kind = kind;
-	if (node->kind == COMMAND)
+	if (node->kind == COMMAND || node->kind == PIPELINE)
 		return (node);
 	node->data = node_alloc_args(node);
 	if (!node->data)

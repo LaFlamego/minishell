@@ -30,6 +30,7 @@ PARSER_SRCS = 	parser_new.c			\
 				parser_parse_binary.c	\
 				parser_parse_command.c	\
 				parser_parse_expr.c		\
+				parser_parse_pipe.c		\
 				parser_parse_primary.c
 
 NODE_SRCS =	node.c					\

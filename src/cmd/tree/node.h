@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:03:17 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 18:16:22 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/25 20:37:21 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ typedef struct s_cmd_node
 	enum e_kind	kind;
 	void		*data;
 }				t_cmd_node;
-
-typedef struct s_pipe_args
-{
-	t_array		*commands;
-}				t_pipe_args;
 
 typedef struct s_bin_op_args
 {

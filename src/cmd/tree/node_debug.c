@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 11:43:15 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 18:24:24 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/25 21:23:45 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,19 @@ static void	debug_binary_op(t_cmd_node *n, t_bin_op_args *data, size_t depth)
 	node_debug(data->right, depth + 2);
 }
 
-// static void	debug_pipeline(t_pipe_args *data)
-// {
-// }
+static void	debug_pipeline(t_list *commands, size_t depth)
+{
+	t_list	*curr;
+
+	indent(depth);
+	ft_printf("PIPELINE\n");
+	curr = commands;
+	while (curr)
+	{
+		node_debug(curr->content, depth + 1);
+		curr = curr->next;
+	}
+}
 
 void	node_debug(t_cmd_node *n, size_t depth)
 {
@@ -110,8 +120,8 @@ void	node_debug(t_cmd_node *n, size_t depth)
 	}
 	if (n->kind == COMMAND)
 		debug_command(n->data, depth);
-	// if (n->kind == PIPELINE)
-	// 	debug_pipeline(n->data);
+	if (n->kind == PIPELINE)
+		debug_pipeline(n->data, depth);
 	if (n->kind == OP_AND || n->kind == OP_OR)
 		debug_binary_op(n, n->data, depth);
 }

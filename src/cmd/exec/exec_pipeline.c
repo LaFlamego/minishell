@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:35:32 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/25 17:46:24 by crevette         ###   ########.fr       */
+/*   Updated: 2026/04/25 20:25:03 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ pid_t	exec_pipeline(t_pipe_args *list, t_fds *fd, size_t index)
 
 	pid = -1;
 	fd->args_nb = list->commands->size;
+	fd->prev_fd = STDIN_FILENO;
 	if (index != fd->args_nb)
 		pipe_build(&fd);
 	pid = fork();

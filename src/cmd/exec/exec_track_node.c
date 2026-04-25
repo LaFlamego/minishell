@@ -6,13 +6,14 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 20:24:51 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/25 17:47:08 by crevette         ###   ########.fr       */
+/*   Updated: 2026/04/25 20:21:33 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cmd.h"
 #include "../tree/node.h"
 #include "src/ctx/ctx.h"
+#include <unistd.h>
 
 //TODO < > << >>
 //TODO pass fd to proceed

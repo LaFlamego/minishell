@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 18:55:02 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 17:17:35 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/25 17:32:05 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ bool			parser_match(t_parser *p, t_token_type type);
 bool			parser_match_binary(t_parser *p);
 bool			parser_match_command(t_parser *p);
 bool			parser_match_redirection(t_parser *p);
+
+bool			parser_check_command(t_parser *p);
 
 t_cmd_node		*parser_parse(t_parser *p);
 t_cmd_node		*parser_parse_expr(t_parser *p);

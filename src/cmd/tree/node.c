@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:21:36 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 16:41:51 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/25 18:27:33 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ t_cmd_node	*node_new(enum e_kind kind)
 	if (!node)
 		return (NULL);
 	node->kind = kind;
+	if (node->kind == COMMAND)
+		return (node);
 	node->data = node_alloc_args(node);
 	if (!node->data)
 		return (node_free(node));

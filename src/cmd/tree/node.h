@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:03:17 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 17:22:26 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/25 18:16:22 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ t_cmd_node		*node_new_bin(t_cmd_node *left, enum e_kind op,
 					t_cmd_node *right);
 t_cmd_node		*node_free(t_cmd_node *node);
 
-void			node_debug(t_cmd_node *n);
+void			node_debug(t_cmd_node *n, size_t depth);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 11:01:42 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/24 13:01:54 by crevette         ###   ########.fr       */
+/*   Updated: 2026/04/25 15:00:02 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,11 @@ unsigned int    handle_and_sign(t_cmd_node *node)
 
 	exit_code = 0;
 	op_node = node->data;
-	if (op_node->left)
-	{
-    	exit_code = track_nodes(op_node->left);
-		if (exit_code != 0)
-			return (exit_code);
-		if (op_node->right)
-		{
-			exit_code = track_nodes(op_node->right);
-			return (exit_code);
-		}
-	}
-	return (1);
+	exit_code = track_nodes(op_node->left);
+	if (exit_code != 0)
+		return (exit_code);
+	exit_code = track_nodes(op_node->right);
+	return (exit_code);
 }
 
 unsigned int	handle_or_sign(t_cmd_node *node)
@@ -43,18 +36,11 @@ unsigned int	handle_or_sign(t_cmd_node *node)
 
 	exit_code = 0;
 	op_node = node->data;
-	if (op_node->left)
-	{
-    	exit_code = track_nodes(op_node->left);
-		if (exit_code == 0)
-			return (exit_code);
-		else if (op_node->right)
-		{
-			exit_code = track_nodes(op_node->right);
-			return (exit_code);
-		}
-	}
-	return (1);
+	exit_code = track_nodes(op_node->left);
+	if (exit_code == 0)
+		return (exit_code);
+	exit_code = track_nodes(op_node->right);
+	return (exit_code);
 }
 
 unsigned int    handle_pipe_sign(t_cmd_node *node)
@@ -69,7 +55,7 @@ unsigned int    handle_pipe_sign(t_cmd_node *node)
 	get_pipe = node->data;
 	pipe_node = get_pipe->commands->data;
 	i = 1;
-	while (i < get_pipe->commands->size)
+	while (i <= get_pipe->commands->size)
 	{
 		pid_last = exec_pipeline(get_pipe, i);
 		i++;

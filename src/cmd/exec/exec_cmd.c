@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:03:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/22 16:43:26 by crevette         ###   ########.fr       */
+/*   Updated: 2026/04/25 17:13:58 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 #include "src/ctx/ctx.h"
 #include "src/env/env.h"
 
-static char	**get_argv(t_array *argv, t_array *words)
-{
-	size_t		i;
-	t_string	*word;
+// static char	**get_argv(t_array *argv, t_array *words)
+// {
+// 	size_t		i;
+// 	t_string	*word;
 
-	ft_bzero(argv, sizeof(t_array));
-	i = 0;
-	while (i < words->size)
-	{
-		word = words->data[i];
-		ft_array_push(argv, word->content);
-		i++;
-	}
-	return ((char **)argv->data);
-}
+// 	ft_bzero(argv, sizeof(t_array));
+// 	i = 0;
+// 	while (i < words->size)
+// 	{
+// 		word = words->data[i];
+// 		ft_array_push(argv, word->content);
+// 		i++;
+// 	}
+// 	return ((char **)argv->data);
+// }
 
 static unsigned int (*get_builtin(char *cmd_name))(int, char **, t_ctx *)
 {
@@ -50,22 +50,22 @@ static unsigned int (*get_builtin(char *cmd_name))(int, char **, t_ctx *)
 	return (NULL);
 }
 
-unsigned int	cmd_exec(t_ctx *ctx, t_array *args)
+unsigned int	cmd_exec(t_ctx *ctx, char **argv)
 {
 	unsigned int	exit_code;
 	unsigned int	(*builtin)(int, char **, t_ctx *);
-	t_array			argv;
+	int				argc;
 
-	get_argv(&argv, args);
-	builtin = get_builtin(argv.data[0]);
+	builtin = get_builtin(argv[0]);
+	argc = 0;
+	while (argv[argc])
+		argc++;
 	if (builtin)
-	{
-		exit_code = builtin((int)argv.size, (char **)argv.data, ctx);
-	}
+		exit_code = builtin(argc, argv, ctx);
 	else
 	{
 		ft_array_push(&argv, NULL);
-		exit_code = cmd_exec_bin((char **)argv.data, ctx->env);
+		exit_code = cmd_exec_bin(argv, ctx->env);
 	}
 	env_set_exit_code(exit_code, ctx->env);
 	return (exit_code);

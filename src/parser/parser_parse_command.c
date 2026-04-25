@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:16:02 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 18:10:14 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/25 19:03:32 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,8 @@ t_cmd_node	*parser_parse_command(t_parser *p)
 	while (parser_match_command(p))
 	{
 		t = p->previous->content;
-		// ft_printf("Current Kind = %s\n",
-		// token_to_string(p->current->content));
-		ft_printf("Previous Kind = %s\n", token_to_string(t));
 		if (t->type == BLANK)
 		{
-			ft_printf("Curr = %p\n", curr);
 			if (curr)
 			{
 				new = ft_lstnew(curr);

@@ -23,11 +23,14 @@ TOKEN_SRCS =	token_new.c			\
 				token_scan_string.c	\
 				token_utils.c
 
-PARSER_SRCS = 	parser_new.c		\
-				parser_error.c		\
-				parser_parse.c		\
-				parser_parse_cmd.c	\
-				parser_parse_node.c
+PARSER_SRCS = 	parser_new.c			\
+				parser_error.c			\
+				parser_match.c			\
+				parser_parse.c			\
+				parser_parse_binary.c	\
+				parser_parse_command.c	\
+				parser_parse_expr.c		\
+				parser_parse_primary.c
 
 NODE_SRCS =	node.c					\
 			node_debug.c			\
@@ -36,7 +39,6 @@ SRCS = $(addprefix $(SRCS_DIR)/, $(BASE_SRCS))					\
        $(addprefix $(SRCS_DIR)/env/, $(ENV_SRCS))				\
        $(addprefix $(SRCS_DIR)/ctx/, $(CTX_SRCS))				\
        $(addprefix $(SRCS_DIR)/cmd/, $(CMD_SRCS))				\
-       $(addprefix $(SRCS_DIR)/cmd/exec/, $(CMD_EXEC_SRCS))		\
        $(addprefix $(SRCS_DIR)/files/, $(FILES_SRCS))			\
        $(addprefix $(SRCS_DIR)/prompt/, $(PROMPT_SRCS))			\
        $(addprefix $(SRCS_DIR)/scanner/, $(SCANNER_SRCS))		\

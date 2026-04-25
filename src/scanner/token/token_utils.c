@@ -6,12 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 15:54:27 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/16 14:38:42 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/25 15:06:28 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./token.h"
-#include "libft.h"
+#include "src/cmd/tree/node.h"
 
 // Return value should not be freed
 char	*token_to_string(t_token *token)
@@ -25,7 +25,7 @@ char	*token_to_string(t_token *token)
 	else if (token->type == STAR)
 		return ("*");
 	else if (token->type == STRING)
-		return (token->text);
+		return ("STRING");
 	else if (token->type == OR)
 		return ("||");
 	else if (token->type == AND)
@@ -48,36 +48,23 @@ char	*token_to_string(t_token *token)
 		return ("UNKNOWN_TOKEN");
 }
 
-void	token_debug(t_token *token)
+// TODO: Add Redirections
+enum e_kind	token_tokind(t_token *t)
 {
-	if (token->type == LEFT_PAREN)
-		ft_printf("LEFT_PAREN\n");
-	else if (token->type == RIGHT_PAREN)
-		ft_printf("RIGHT_PAREN\n");
-	else if (token->type == DOLLAR)
-		ft_printf("DOLLAR\n");
-	else if (token->type == STAR)
-		ft_printf("STAR\n");
-	else if (token->type == STRING)
-		ft_printf("STRING %d -> \"%s\"\n", ft_strlen(token->text), token->text);
-	else if (token->type == OR)
-		ft_printf("OR\n");
-	else if (token->type == AND)
-		ft_printf("AND\n");
-	else if (token->type == PIPE)
-		ft_printf("PIPE\n");
-	else if (token->type == EOF)
-		ft_printf("EOF\n");
-	else if (token->type == BLANK)
-		ft_printf("BLANK\n");
-	else if (token->type == REDIRECT_IN)
-		ft_printf("REDIRECT_IN\n");
-	else if (token->type == REDIRECT_IN_UNTIL)
-		ft_printf("REDIRECT_IN_UNTIL\n");
-	else if (token->type == REDIRECT_OUT)
-		ft_printf("REDIRECT_OUT\n");
-	else if (token->type == REDIRECT_OUT_APPEND)
-		ft_printf("REDIRECT_OUT_APPEND\n");
-	else
-		ft_printf("UNKNOWN TOKEN\n");
+	if (t->type == AND)
+		return (OP_AND);
+	if (t->type == OR)
+		return (OP_OR);
+	if (t->type == PIPE)
+		return (PIPELINE);
+	return (0);
+}
+
+bool	token_is_redirect(t_token *t)
+{
+	if (t->type == REDIRECT_IN || t->type == REDIRECT_OUT)
+		return (true);
+	if (t->type == REDIRECT_IN_UNTIL || t->type == REDIRECT_OUT_APPEND)
+		return (true);
+	return (false);
 }

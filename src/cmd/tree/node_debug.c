@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 11:43:15 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/17 12:43:24 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/25 15:11:32 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ static void	debug_tokens(t_array *tokens)
 {
 	size_t	i;
 
+	if (!tokens)
+		ft_printf("*tokens is NULL\n");
 	i = 0;
 	while (i < tokens->size)
 	{
+		ft_printf("Token: %p", tokens->data[i]);
 		ft_printf("%s", token_to_string(tokens->data[i]));
 		i++;
 	}
@@ -32,10 +35,12 @@ static void	debug_command(t_cmd_args *data)
 {
 	size_t	i;
 
+	if (!data)
+		ft_printf("DATA is NULL\n");
 	i = 0;
 	while (i < data->args.size)
 	{
-		ft_printf("[%d] = ");
+		ft_printf("[%d] = ", i);
 		debug_tokens(data->args.data[i]);
 		ft_printf("\n");
 		i++;
@@ -61,7 +66,10 @@ static void	debug_binary_op(t_cmd_node *n, t_bin_op_args *data)
 void	node_debug(t_cmd_node *n)
 {
 	if (!n)
+	{
 		ft_printf("(null)");
+		return ;
+	}
 	if (n->kind == COMMAND)
 		debug_command(n->data);
 	// if (n->kind == PIPELINE)

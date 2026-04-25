@@ -6,11 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:21:36 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/17 12:42:39 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/24 10:47:10 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./node.h"
+#include "src/scanner/token/token.h"
 #include <stdlib.h>
 
 static void	*node_alloc_args(t_cmd_node *node)
@@ -41,6 +42,20 @@ t_cmd_node	*node_new(enum e_kind kind)
 	node->data = node_alloc_args(node);
 	if (!node->data)
 		return (node_free(node));
+	return (node);
+}
+
+t_cmd_node	*node_new_bin(t_cmd_node *left, enum e_kind op, t_cmd_node *right)
+{
+	t_cmd_node		*node;
+	t_bin_op_args	*args;
+
+	node = node_new(op);
+	if (!node)
+		return (NULL);
+	args = node->data;
+	args->left = left;
+	args->right = right;
 	return (node);
 }
 

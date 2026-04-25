@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:03:17 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/17 11:49:44 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/24 10:47:16 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_bin_op_args
 }				t_bin_op_args;
 
 t_cmd_node		*node_new(enum e_kind kind);
+t_cmd_node		*node_new_bin(t_cmd_node *left, enum e_kind op,
+					t_cmd_node *right);
 t_cmd_node		*node_free(t_cmd_node *node);
 
 void			node_debug(t_cmd_node *n);

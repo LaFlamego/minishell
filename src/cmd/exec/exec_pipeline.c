@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:35:32 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/25 20:25:03 by crevette         ###   ########.fr       */
+/*   Updated: 2026/04/25 23:21:55 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,11 @@ static void	fd_proceed(t_fds *fd, size_t index)
 	fd_close_reset(fd->pipe_in, fd->pipe_out, fd->prev_fd);
 }
 
-pid_t	exec_pipeline(t_pipe_args *list, t_fds *fd, size_t index)
+pid_t	exec_pipeline(t_list *list, t_fds *fd, size_t index)
 {
 	pid_t			pid;
 
 	pid = -1;
-	fd->args_nb = list->commands->size;
 	fd->prev_fd = STDIN_FILENO;
 	if (index != fd->args_nb)
 		pipe_build(&fd);
@@ -93,7 +92,7 @@ pid_t	exec_pipeline(t_pipe_args *list, t_fds *fd, size_t index)
 	if (pid == 0)
 	{
 		fd_proceed(fd, index);
-		track_nodes(list->commands->data[index - 1]);//execute command in track_nodes
+		track_nodes(list->content);
 	}
 	if (pid > 0)
 	{

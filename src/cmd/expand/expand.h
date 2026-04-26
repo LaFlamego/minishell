@@ -6,24 +6,29 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:21:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 15:59:04 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/26 21:46:16 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXPAND_H
 # define EXPAND_H
 
+# include "src/cmd/tree/word/word.h"
 # include "src/env/env.h"
 
-// TODO: If the result of an expansion is nothing, the argument is discarded
+// TODO: This should be renamed to preprocess or whatever
 
-t_string	*cmd_expand_dollar(t_env *env, t_string *word, size_t *i);
-t_string	*cmd_expand_word(t_env *env, t_string *word);
-void		*cmd_expand_wildcard(t_env *env, t_array *words);
-
-size_t		get_arg_expanded_size(t_array *tokens, t_env *env);
-
-char		**expand_args(t_array *args);
-char		*expand_redirection(t_array *tokens);
+/**
+ * expand_command() - expand a command
+ * @words: a command's content
+ * @env: environment variables
+ *
+ * Setup redirections and build the command's `argv`
+ *
+ * Return:
+ * Pointer to `argv` on success. Must be freed.
+ * NULL on failure.
+ */
+t_array	*expand_command(t_word *words, t_env *env);
 
 #endif

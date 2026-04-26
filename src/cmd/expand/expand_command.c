@@ -6,66 +6,119 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:39:11 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/17 17:22:38 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/26 21:45:02 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./expand.h"
-#include "libft.h"
-#include "src/cmd/tree/node.h"
+#include "src/cmd/tree/word/word.h"
 #include "src/env/env.h"
-#include "src/scanner/token/token.h"
+#include "src/files/files.h"
 #include <stdlib.h>
 
-// WARN: Watch out for errors
+// TODO: expand the file, then setup the redirection
+// > How to handle delimiters?
+void	handle_redirection(void);
 
-char	*expand_arg(t_array *argv, t_array *tokens, t_env *env)
+// TODO: filtering?
+int	expand_files(t_array *argv, t_env *env)
 {
-	size_t	size;
-	char	*arg;
+	t_array		*files;
+	char		*path;
+	size_t		i;
+	t_string	*file;
 
-	size = get_arg_expanded_size(tokens, env);
-	arg = malloc(size);
-	if (!arg)
-		return (NULL);
-	// TODO: Copy all values
-	// > push result char * to argv
-	if (!ft_array_push(argv, arg))
+	path = env_get(env, "PWD");
+	if (!path)
+		return (0);
+	files = dir_get_files(path);
+	if (!files)
+		return (0);
+	i = 0;
+	while (i < files->size)
 	{
-		free(arg);
-		return (NULL);
+		file = files->data[i];
+		if (!ft_array_push(argv, file->content))
+		{
+			ft_array_free(files, ft_string_free);
+			return (0);
+		}
+		i++;
 	}
-	return (arg);
+	free(files);
+	return (1);
 }
 
-static int	expand_args(t_cmd_args *node, t_env *env)
+int	expand_variable(t_string *arg, char *key, t_env *env)
 {
+	char	*value;
+
+	value = env_get(env, key);
+	if (!value)
+		return (1);
+	if (!ft_string_push_str(arg, value))
+		return (0);
+	return (1);
+}
+
+int	expand_part(t_word_part *part, t_string *arg, t_array *argv, t_env *env)
+{
+	if (part->kind == WK_STRING && !ft_string_push_str(arg, part->data))
+		return (0);
+	if (part->kind == WK_FILES && !expand_files(argv, env))
+		return (0);
+	if (part->kind == WK_VARIABLE && !expand_variable(arg, part->data, env))
+		return (0);
+	// if (part->kind >= WK_REDIRECT_IN && part->kind <= WK_REDIRECT_OUT_APPEND)
+	// {
+	// 	// TODO: handle redirection
+	// }
+	return (1);
+}
+
+int	expand_word(t_list *parts, t_array *argv, t_env *env)
+{
+	t_string	*arg;
+	t_list		*curr;
+
+	arg = ft_string_new(0);
+	curr = parts;
+	if (!arg)
+		return (0);
+	while (curr)
+	{
+		if (!expand_part(curr->content, arg, argv, env))
+		{
+			ft_string_free(arg);
+			return (0);
+		};
+		curr = curr->next;
+	}
+	if (arg->size > 1 && !ft_array_push(argv, arg->content))
+	{
+		ft_string_free(arg);
+		return (0);
+	};
+	free(arg);
+	return (1);
+}
+
+t_array	*expand_command(t_word *words, t_env *env)
+{
+	t_word	*curr;
 	t_array	*argv;
-	size_t	i;
 
 	argv = ft_array_new();
 	if (!argv)
-		return (1);
-	i = 0;
-	while (i < node->args.size)
+		return (NULL);
+	curr = words;
+	while (curr)
 	{
-		if (!expand_arg(argv, node->args.data[i], env))
+		if (!expand_word(curr->content, argv, env))
 		{
-			ft_array_foreach(&node->args, token_free);
-			return (1);
+			ft_array_free(argv, free);
+			return (NULL);
 		};
-		i++;
+		curr = curr->next;
 	}
-	ft_array_foreach(&node->args, token_free);
-	ft_memmove(&node->args, argv, sizeof(t_array));
-	free(argv);
-	return (0);
-}
-
-// TODO: Expand redirections
-int	expand_node(t_cmd_args *data)
-{
-	if (expand_args(data))
-		return (1);
-	return (0);
+	return (argv);
 }

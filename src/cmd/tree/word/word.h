@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 14:16:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/26 16:43:46 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/26 21:37:57 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 /**
  * typedef t_word - a list of parts making up a word.
  *
- * each part is of type `t_word_node *`
+ * each part is of type `t_word_part *`
  */
 typedef t_list	t_word;
 

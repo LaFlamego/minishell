@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:35:32 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/25 23:21:55 by crevette         ###   ########.fr       */
+/*   Updated: 2026/04/26 12:12:49 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ pid_t	exec_pipeline(t_list *list, t_fds *fd, size_t index)
 	if (pid == 0)
 	{
 		fd_proceed(fd, index);
-		track_nodes(list->content);
+		track_node(list->content);
 	}
 	if (pid > 0)
 	{

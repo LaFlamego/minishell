@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 23:36:59 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/22 18:40:39 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/26 12:01:46 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ size_t	ft_string_push_str(t_string *s, const char *str)
 	i = 0;
 	while (str && str[i])
 	{
-		ft_string_push(s, str[i]);
+		if (!ft_string_push(s, str[i]))
+			return (0);
 		i++;
 	}
 	return (s->size);
@@ -48,7 +49,8 @@ size_t	ft_string_push_string(t_string *dst, const t_string *src)
 	i = 0;
 	while (i < src->size && src->content[i])
 	{
-		ft_string_push(dst, src->content[i]);
+		if (!ft_string_push(dst, src->content[i]))
+			return (0);
 		i++;
 	}
 	return (dst->size);
@@ -67,7 +69,11 @@ t_string	*ft_string_join(const t_array *parts)
 	while (i < parts->size)
 	{
 		part = parts->data[i];
-		ft_string_push_string(s, part);
+		if (!ft_string_push_string(s, part))
+		{
+			ft_string_free(s);
+			return (NULL);
+		}
 		i++;
 	}
 	return (s);

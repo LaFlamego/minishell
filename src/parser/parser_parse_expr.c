@@ -6,32 +6,23 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 11:08:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/26 16:04:43 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/26 18:43:28 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./parser.h"
 
-// enum e_kind	token_tokind(t_token *t);
-
 t_cmd_node	*parser_parse_expr(t_parser *p)
 {
 	t_cmd_node	*expr;
-	t_cmd_node	*right;
-	t_token		*op;
+	t_token		*last;
 
-	// if (parser_match_redirection(p))
-	// {
-	// 	op = p->previous->content;
-	// 	right = parser_parse_primary(p);
-	// 	if (!right)
-	// 		return (NULL);
-	// 	expr = node_new_bin(NULL, token_tokind(op), right);
-	// 	return (expr);
-	// }
-	// else
-	// {
+	last = p->current->content;
 	expr = parser_parse_binary(p);
+	if (parser_match(p, LEFT_PAREN))
+	{
+		parser_error(last);
+		return (node_free(expr));
+	}
 	return (expr);
-	// }
 }

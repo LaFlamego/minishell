@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:21:36 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 21:15:50 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/26 16:00:29 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,19 @@ t_cmd_node	*node_new_bin(t_cmd_node *left, enum e_kind op, t_cmd_node *right)
 	args->right = right;
 	return (node);
 }
+
+// t_cmd_node	*node_new_string(char *text)
+// {
+// 	t_cmd_node	*word;
+//
+// 	word = node_new(WK_STRING);
+// 	if (!word)
+// 		return (NULL);
+// 	word->data = ft_string_new(ft_strlen(text));
+// 	if (!word->data || !ft_string_push_str(word->data, text))
+// 		return (node_free(word));
+// 	return (word);
+// }
 
 // free the node pointer and its content
 // TODO: Free command and pipeline

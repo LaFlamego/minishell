@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 10:20:27 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 21:17:25 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/26 13:09:29 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,24 @@
 
 bool	parser_match_command(t_parser *p)
 {
-	if (parser_match(p, BLANK) || parser_match(p, STRING))
+	if (parser_match(p, STRING))
 		return (true);
 	if (parser_match(p, DOLLAR) || parser_match(p, STAR))
 		return (true);
-	return (false);
+	return (parser_match_redirection(p));
 }
 
 bool	parser_check_command(t_parser *p)
 {
+	while (parser_match(p, BLANK))
+		;
 	if (parser_check(p, BLANK) || parser_check(p, STRING))
 		return (true);
 	if (parser_check(p, DOLLAR) || parser_check(p, STAR))
+		return (true);
+	if (parser_check(p, REDIRECT_IN) || parser_check(p, REDIRECT_IN_UNTIL))
+		return (true);
+	if (parser_check(p, REDIRECT_OUT) || parser_check(p, REDIRECT_OUT_APPEND))
 		return (true);
 	return (false);
 }

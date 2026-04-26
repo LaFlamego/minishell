@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:13:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 14:53:18 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/26 00:43:21 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ typedef enum e_token_type
 {
 	LEFT_PAREN,
 	RIGHT_PAREN,
-	DOLLAR,
-	STAR,
 	BLANK,
-	STRING,
 	AND,
 	OR,
 	PIPE,
+	STRING,
+	DOLLAR,
+	STAR,
 	REDIRECT_IN,
 	REDIRECT_IN_UNTIL,
 	REDIRECT_OUT,

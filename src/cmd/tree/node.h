@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:03:17 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 20:37:21 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/26 14:18:08 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,13 @@ enum			e_kind
 	PIPELINE,
 	OP_AND,
 	OP_OR,
-	OP_REDIRECT_IN,
-	OP_REDIRECT_IN_UNTIL,
-	OP_REDIRECT_OUT,
-	OP_REDIRECT_OUT_APPEND,
 };
 
 /*
  * A tree representing the command to execute
  *
  * The type of the data field depends on the kind of the node:
- * COMMAND -> An array of arrays, each is a word containing a list of tokens.
+ * COMMAND -> An array of nodes, each is a word (a t_list of nodes).
  * PIPELINE -> An array of t_cmd_node to execute.
  * OP_AND / OP_OR -> t_bin_op_args
  */
@@ -48,10 +44,12 @@ typedef struct s_bin_op_args
 }				t_bin_op_args;
 
 t_cmd_node		*node_new(enum e_kind kind);
+t_cmd_node		*node_new_string(char *text);
 t_cmd_node		*node_new_bin(t_cmd_node *left, enum e_kind op,
 					t_cmd_node *right);
 t_cmd_node		*node_free(t_cmd_node *node);
 
 void			node_debug(t_cmd_node *n, size_t depth);
+void			node_mermaid(t_cmd_node *root, int *next_id);
 
 #endif

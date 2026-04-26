@@ -23,18 +23,20 @@ TOKEN_SRCS =	token_new.c			\
 				token_scan_string.c	\
 				token_utils.c
 
-PARSER_SRCS = 	parser_new.c			\
-				parser_error.c			\
-				parser_match.c			\
-				parser_parse.c			\
-				parser_parse_binary.c	\
-				parser_parse_command.c	\
-				parser_parse_expr.c		\
-				parser_parse_pipe.c		\
+PARSER_SRCS = 	parser_new.c				\
+				parser_error.c				\
+				parser_match.c				\
+				parser_parse.c				\
+				parser_parse_binary.c		\
+				parser_parse_command.c		\
+				parser_parse_expr.c			\
+				parser_parse_pipe.c			\
 				parser_parse_primary.c
 
 NODE_SRCS =	node.c					\
 			node_debug.c			\
+
+WORD_SRCS	=	word.c	
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(BASE_SRCS))					\
        $(addprefix $(SRCS_DIR)/env/, $(ENV_SRCS))				\
@@ -46,6 +48,7 @@ SRCS = $(addprefix $(SRCS_DIR)/, $(BASE_SRCS))					\
        $(addprefix $(SRCS_DIR)/scanner/token/, $(TOKEN_SRCS))	\
        $(addprefix $(SRCS_DIR)/parser/, $(PARSER_SRCS))			\
        $(addprefix $(SRCS_DIR)/cmd/tree/, $(NODE_SRCS))			\
+       $(addprefix $(SRCS_DIR)/cmd/tree/word/, $(WORD_SRCS))	\
 	   $(addprefix $(SRCS_DIR)/builtins/, $(BUILTINS_SRCS))
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)

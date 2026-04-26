@@ -6,15 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 11:43:15 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 21:23:45 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/26 18:31:13 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./node.h"
-#include "src/scanner/token/token.h"
-
-// TODO: Add pipeline debug
-// TODO: Add indent
+#include "./word/word.h"
 
 static void	indent(size_t lvl)
 {
@@ -28,52 +25,70 @@ static void	indent(size_t lvl)
 	}
 }
 
-static void	debug_tokens(t_list *tokens, size_t depth)
-{
-	t_list	*curr;
-	t_token	*t;
+void		debug_words(t_word *parts, size_t depth);
+void		debug_part(t_word_part *part, size_t depth);
 
-	if (!tokens)
-	{
-		indent(depth);
-		ft_printf("*tokens is NULL\n");
-	}
-	curr = tokens;
-	while (curr)
-	{
-		t = curr->content;
-		indent(depth);
-		ft_printf("Token: %p\n", t);
-		indent(depth);
-		ft_printf("== KIND: %s\n", token_to_string(t));
-		if (t->type == STRING)
-		{
-			indent(depth);
-			ft_printf("== VALUE: %s\n", t->text);
-		}
-		curr = curr->next;
-	}
-	ft_printf("\n");
+static void	debug_redirect(t_word_part *node, size_t depth)
+{
+	indent(depth);
+	ft_printf("> REDIRECT [%d]\n", node->kind);
+	indent(depth);
+	ft_printf("== Value:\n");
+	debug_part(node->data, depth + 1);
 }
 
-static void	debug_command(t_list *head, size_t depth)
+void	debug_part(t_word_part *part, size_t depth)
 {
-	t_list	*curr;
-	size_t	i;
-
-	if (!head)
-		ft_printf("head is NULL\n");
-	indent(depth);
-	ft_printf("COMMAND\n");
-	curr = head;
-	i = 0;
-	while (curr)
+	if (part->kind == WK_STRING)
 	{
 		indent(depth);
-		ft_printf("[%d]\n", i);
-		debug_tokens(curr->content, depth + 1);
+		ft_printf("> STRING\n");
+		indent(depth);
+		ft_printf("== Value: %s\n", part->data);
+	}
+	if (part->kind == WK_VARIABLE)
+	{
+		indent(depth);
+		ft_printf("> VARIABLE\n");
+		indent(depth);
+		ft_printf("== Value: %s\n", part->data);
+	}
+	if (part->kind == WK_FILES)
+	{
+		indent(depth);
+		ft_printf("> FILES\n");
+	}
+	if (part->kind >= WK_REDIRECT_IN && part->kind <= WK_REDIRECT_OUT_APPEND)
+		debug_redirect(part, depth);
+}
+
+void	debug_words(t_word *parts, size_t depth)
+{
+	t_list	*curr;
+
+	indent(depth);
+	ft_printf("> WORDS\n");
+	curr = parts;
+	while (curr)
+	{
+		debug_part(curr->content, depth + 1);
 		curr = curr->next;
-		i++;
+	}
+}
+
+static void	debug_command(t_list *words, size_t depth)
+{
+	t_list	*curr;
+
+	if (!words)
+		ft_printf("head is NULL\n");
+	indent(depth);
+	ft_printf("> COMMAND\n");
+	curr = words;
+	while (curr)
+	{
+		debug_words(curr->content, depth + 1);
+		curr = curr->next;
 	}
 }
 
@@ -82,19 +97,19 @@ static void	debug_binary_op(t_cmd_node *n, t_bin_op_args *data, size_t depth)
 	if (n->kind == OP_AND)
 	{
 		indent(depth);
-		ft_printf("AND\n");
+		ft_printf("> AND\n");
 	}
 	else
 	{
 		indent(depth);
-		ft_printf("OR\n");
+		ft_printf("> OR\n");
 	}
-	indent(depth + 1);
+	indent(depth);
 	ft_printf("== LEFT\n");
-	node_debug(data->left, depth + 2);
-	indent(depth + 1);
+	node_debug(data->left, depth + 1);
+	indent(depth);
 	ft_printf("== RIGHT\n");
-	node_debug(data->right, depth + 2);
+	node_debug(data->right, depth + 1);
 }
 
 static void	debug_pipeline(t_list *commands, size_t depth)
@@ -102,7 +117,7 @@ static void	debug_pipeline(t_list *commands, size_t depth)
 	t_list	*curr;
 
 	indent(depth);
-	ft_printf("PIPELINE\n");
+	ft_printf("> PIPELINE\n");
 	curr = commands;
 	while (curr)
 	{
@@ -115,7 +130,8 @@ void	node_debug(t_cmd_node *n, size_t depth)
 {
 	if (!n)
 	{
-		ft_printf("(null)");
+		indent(depth);
+		ft_printf("> (null)\n");
 		return ;
 	}
 	if (n->kind == COMMAND)

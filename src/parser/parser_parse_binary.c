@@ -6,13 +6,26 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:05:53 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 21:38:42 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/26 16:04:06 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./parser.h"
 
-enum e_kind	token_tokind(t_token *t);
+static enum e_kind	tokind(t_token *t)
+{
+	if (t->type == AND)
+		return (OP_AND);
+	if (t->type == OR)
+		return (OP_OR);
+	return (0);
+}
+
+static void	*error(t_cmd_node *expr)
+{
+	node_free(expr);
+	return (NULL);
+}
 
 t_cmd_node	*parser_parse_binary(t_parser *p)
 {
@@ -22,17 +35,14 @@ t_cmd_node	*parser_parse_binary(t_parser *p)
 
 	expr = parser_parse_pipe(p);
 	if (!expr)
-		return (NULL);
+		return (error(NULL));
 	while (parser_match(p, AND) || parser_match(p, OR))
 	{
 		op = p->previous->content;
 		right = parser_parse_pipe(p);
 		if (!right)
-		{
-			node_free(expr);
-			return (NULL);
-		}
-		expr = node_new_bin(expr, token_tokind(op), right);
+			return (error(expr));
+		expr = node_new_bin(expr, tokind(op), right);
 	}
 	return (expr);
 }

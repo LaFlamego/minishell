@@ -6,13 +6,13 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:39:11 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/26 21:45:02 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/28 23:16:06 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "src/cmd/tree/word/word.h"
 #include "src/env/env.h"
-#include "src/files/files.h"
+#include "src/utils/utils.h"
 #include <stdlib.h>
 
 // TODO: expand the file, then setup the redirection

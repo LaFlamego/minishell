@@ -18,7 +18,6 @@ CMD_EXEC_SRCS = exec_bin.c exec_cmd.c exec_fork.c exec_path.c
 PROMPT_SRCS = prompt_display.c
 EXPAND_SRCS = expand_command.c
 BUILTINS_SRCS = echo.c env.c exit.c export.c pwd.c unset.c cd.c
-FILES_SRCS = dir.c
 
 SCANNER_SRCS = scanner_new.c scanner_add_token.c scanner_error.c scanner_scan.c
 
@@ -47,7 +46,8 @@ WORD_SRCS	=	word.c
 
 EXPAND_SRCS	=	expand_command.c
 
-UTILS_SRCS	=	history.c					\
+UTILS_SRCS	=	files.c		\
+				history.c	\
 				signals.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(BASE_SRCS))					\

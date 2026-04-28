@@ -16,7 +16,7 @@ CTX_SRCS = ctx_init.c
 CMD_SRCS = cmd.c cmd_quotes.c
 CMD_EXEC_SRCS = exec_bin.c exec_cmd.c exec_fork.c exec_path.c
 PROMPT_SRCS = prompt_display.c
-EXPAND_SRCS = expand_command.c expand_dollar.c expand_word.c expand_wildcard.c
+EXPAND_SRCS = expand_command.c
 BUILTINS_SRCS = echo.c env.c exit.c export.c pwd.c unset.c cd.c
 FILES_SRCS = dir.c
 

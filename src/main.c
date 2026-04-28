@@ -6,12 +6,13 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:11:29 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/28 21:55:11 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/29 00:22:00 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "src/prompt/prompt.h"
+#include "src/utils/utils.h"
 
 // #include "minishell/signal.h"
 
@@ -21,15 +22,21 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_ctx	ctx;
 
-	(void)argc;
-	(void)argv;
 	if (!ctx_init(&ctx, envp))
 	{
 		ft_dprintf(2, "minishell: failed to initialize context\n");
 		return (1);
 	};
-	// set_sigactions();
-	prompt_display(&ctx);
+	if (argc > 1)
+	{
+		// TODO: handle errors
+		handle_args(argc, argv, &ctx);
+	}
+	else
+	{
+		prompt_display(&ctx);
+	}
+	// TODO: proper cleaning
 	env_free(ctx.env);
 	return (0);
 }

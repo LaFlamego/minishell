@@ -46,7 +46,8 @@ WORD_SRCS	=	word.c
 
 EXPAND_SRCS	=	expand_command.c
 
-UTILS_SRCS	=	files.c		\
+UTILS_SRCS	=	cli.c		\
+				files.c		\
 				history.c	\
 				signals.c
 

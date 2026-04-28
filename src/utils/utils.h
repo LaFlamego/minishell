@@ -6,13 +6,14 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 21:22:12 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/28 23:14:29 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/29 00:28:32 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
+# include "src/ctx/ctx.h"
 # include "src/env/env.h"
 // Required for readline/history
 # include <stdio.h>
@@ -59,5 +60,19 @@ int		setup_signals_handlers(void);
  * Caller must free each string and the array.
  */
 t_array	*dir_get_files(const char *path);
+
+/**
+ * handle_args() - validate and handle arguments
+ * @argc: amount of arguments
+ * @argv: arguments
+ * @ctx: shell context
+ *
+ * Arguments:
+ * -c command: Runs the given command then exits.
+ *
+ * Return:
+ * Last command exit code, or 1 on failure.
+ */
+int		handle_args(int argc, char **argv, t_ctx *ctx);
 
 #endif

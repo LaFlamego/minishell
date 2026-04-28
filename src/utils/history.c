@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 20:55:50 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/28 22:10:59 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/28 22:14:28 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ void	history_load(t_env *env)
 	close(fd);
 }
 
-// TODO: Check if input is good
-// > Empty Input should not be added to the history
 void	history_save(t_env *env, const char *line)
 {
 	int	fd;
 
+	if (!line || *line == '\0')
+		return ;
 	add_history(line);
 	fd = open(get_history_file(env), O_WRONLY | O_CREAT | O_APPEND, S_IRWXU);
 	if (fd <= 0)

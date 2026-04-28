@@ -38,6 +38,8 @@ NODE_SRCS =	node.c					\
 
 WORD_SRCS	=	word.c	
 
+UTILS_SRCS	=	history.c
+
 SRCS = $(addprefix $(SRCS_DIR)/, $(BASE_SRCS))					\
        $(addprefix $(SRCS_DIR)/env/, $(ENV_SRCS))				\
        $(addprefix $(SRCS_DIR)/ctx/, $(CTX_SRCS))				\
@@ -49,7 +51,8 @@ SRCS = $(addprefix $(SRCS_DIR)/, $(BASE_SRCS))					\
        $(addprefix $(SRCS_DIR)/parser/, $(PARSER_SRCS))			\
        $(addprefix $(SRCS_DIR)/cmd/tree/, $(NODE_SRCS))			\
        $(addprefix $(SRCS_DIR)/cmd/tree/word/, $(WORD_SRCS))	\
-	   $(addprefix $(SRCS_DIR)/builtins/, $(BUILTINS_SRCS))
+	   $(addprefix $(SRCS_DIR)/builtins/, $(BUILTINS_SRCS))		\
+	   $(addprefix $(SRCS_DIR)/utils/, $(UTILS_SRCS))
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)
 

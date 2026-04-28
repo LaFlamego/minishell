@@ -6,12 +6,13 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 13:15:33 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/02 01:27:47 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/28 22:10:44 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./prompt.h"
 #include "src/cmd/cmd.h"
+#include "src/utils/utils.h"
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <stdlib.h>
@@ -41,9 +42,7 @@ void	prompt_display(t_ctx *ctx)
 			continue ;
 		}
 		cmd_handle(input, ctx);
-		// TODO: Check if input is good
-		// > Empty Input should not be added to the history
-		add_history(input);
+		history_save(ctx->env, input);
 		free(input);
 	}
 	rl_clear_history();

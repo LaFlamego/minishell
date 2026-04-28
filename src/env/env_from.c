@@ -6,12 +6,13 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 04:30:09 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/02 01:18:44 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/28 19:47:42 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./env.h"
 
+// TODO: Improve error handling here
 t_env	*env_from(char **envp)
 {
 	t_env	*env;

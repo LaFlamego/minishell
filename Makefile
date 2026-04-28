@@ -4,7 +4,14 @@ SRCS_DIR = ./src
 INCL_DIR = ./
 
 BASE_SRCS = main.c
-ENV_SRCS = env.c env_find.c env_from.c env_merge.c env_set_exit_code.c
+
+ENV_SRCS	= 	env.c				\
+				env_find.c			\
+				env_from.c			\
+				env_merge.c			\
+				env_set.c			\
+				env_set_exit_code.c
+
 CTX_SRCS = ctx_init.c
 CMD_SRCS = cmd.c cmd_quotes.c
 CMD_EXEC_SRCS = exec_bin.c exec_cmd.c exec_fork.c exec_path.c

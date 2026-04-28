@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 04:28:46 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/02 01:18:50 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/28 19:19:02 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static bool	is_key(const char *var, const char *key)
 	return (false);
 }
 
-char	**env_find(t_env *env, char *key)
+char	**env_find(t_env *env, const char *key)
 {
 	size_t	i;
 

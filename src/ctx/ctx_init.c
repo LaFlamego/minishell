@@ -6,16 +6,31 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:40:56 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/02 01:22:04 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/28 21:58:58 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./ctx.h"
+#include "src/utils/utils.h"
 
-void	ctx_init(t_ctx *ctx, char **envp)
+static int	set_shell_variables(t_env *env)
 {
-	ctx->env = env_from(envp);
+	if (!env_set(env, "?=0"))
+		return (0);
+	if (!env_set(env, "HISTFILE=minishell_history.txt"))
+		return (0);
+	return (1);
+}
+
+int	ctx_init(t_ctx *ctx, char **envp)
+{
+	ft_bzero(ctx, sizeof(t_ctx));
 	ctx->exit = false;
-	if (ctx->env && ctx->env->data)
-		env_set(ctx->env, "?=0");
+	ctx->env = env_from(envp);
+	if (!ctx->env)
+		return (0);
+	if (!set_shell_variables(ctx->env))
+		return (0);
+	history_load(ctx->env);
+	return (1);
 }

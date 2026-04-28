@@ -45,12 +45,16 @@ NODE_SRCS =	node.c					\
 
 WORD_SRCS	=	word.c	
 
-UTILS_SRCS	=	history.c
+EXPAND_SRCS	=	expand_command.c
+
+UTILS_SRCS	=	history.c					\
+				signals.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(BASE_SRCS))					\
        $(addprefix $(SRCS_DIR)/env/, $(ENV_SRCS))				\
        $(addprefix $(SRCS_DIR)/ctx/, $(CTX_SRCS))				\
        $(addprefix $(SRCS_DIR)/cmd/, $(CMD_SRCS))				\
+       $(addprefix $(SRCS_DIR)/cmd/expand/, $(EXPAND_SRCS))		\
        $(addprefix $(SRCS_DIR)/files/, $(FILES_SRCS))			\
        $(addprefix $(SRCS_DIR)/prompt/, $(PROMPT_SRCS))			\
        $(addprefix $(SRCS_DIR)/scanner/, $(SCANNER_SRCS))		\

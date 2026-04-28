@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:40:56 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/28 21:58:58 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/28 22:26:31 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int	set_shell_variables(t_env *env)
 	return (1);
 }
 
+// FIXME: Free Context on error
 int	ctx_init(t_ctx *ctx, char **envp)
 {
 	ft_bzero(ctx, sizeof(t_ctx));
@@ -32,5 +33,7 @@ int	ctx_init(t_ctx *ctx, char **envp)
 	if (!set_shell_variables(ctx->env))
 		return (0);
 	history_load(ctx->env);
+	if (!setup_signals_handlers())
+		return (0);
 	return (1);
 }

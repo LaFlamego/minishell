@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 21:22:12 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/28 22:08:18 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/28 22:26:23 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,14 @@ void	history_load(t_env *env);
  * On failure, does nothing.
  */
 void	history_save(t_env *env, const char *line);
+
+/**
+ * setup_signal_handlers() - register the signal handlers
+ *
+ * Return:
+ * On success, 1.
+ * On failure, 0.
+ */
+int		setup_signals_handlers(void);
 
 #endif

@@ -6,12 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:21:36 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/26 16:00:29 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/29 01:55:53 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./node.h"
-#include "src/scanner/token/token.h"
+#include "src/cmd/tree/word/word.h"
 #include <stdlib.h>
 
 static void	*node_alloc_args(t_cmd_node *node)
@@ -69,8 +69,11 @@ t_cmd_node	*node_new_bin(t_cmd_node *left, enum e_kind op, t_cmd_node *right)
 // 	return (word);
 // }
 
-// free the node pointer and its content
-// TODO: Free command and pipeline
+static void	node_free_lst(void *node_raw)
+{
+	node_free(node_raw);
+}
+
 t_cmd_node	*node_free(t_cmd_node *node)
 {
 	t_bin_op_args	*lr;
@@ -85,18 +88,20 @@ t_cmd_node	*node_free(t_cmd_node *node)
 	if (node->kind == OP_AND || node->kind == OP_OR)
 	{
 		lr = node->data;
-		node_free(lr->left);
-		node_free(lr->right);
+		if (lr->left)
+			node_free(lr->left);
+		if (lr->right)
+			node_free(lr->right);
+		free(node->data);
 	}
-	// if (node->kind == COMMAND)
-	// {
-	//
-	// }
-	// if (node->kind == PIPELINE)
-	// {
-	//
-	// }
-	free(node->data);
+	if (node->kind == COMMAND)
+	{
+		ft_lstclear((t_list **)&node->data, &word_free);
+	}
+	if (node->kind == PIPELINE)
+	{
+		ft_lstclear((t_list **)&node->data, &node_free_lst);
+	}
 	free(node);
 	return (NULL);
 }

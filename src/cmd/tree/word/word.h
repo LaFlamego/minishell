@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 14:16:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/26 21:37:57 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/29 01:58:24 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ typedef enum e_word_kind
  * @WK_STRING: `char *`
  * @WK_VARIABLE: `char *`
  * @WK_FILES: `none`
- * @WK_REDIRECT_IN: 't_word'
- * @WK_REDIRECT_IN_UNTIL: a redirection
- * @WK_REDIRECT_OUT: a redirection
- * @WK_REDIRECT_OUT_APPEND: a redirection
+ * @WK_REDIRECT_IN: 't_word_part'
+ * @WK_REDIRECT_IN_UNTIL: 't_word_part'
+ * @WK_REDIRECT_OUT: 't_word_part'
+ * @WK_REDIRECT_OUT_APPEND: 't_word_part'
  */
 typedef struct s_word_part
 {
@@ -72,11 +72,23 @@ typedef struct s_word_part
 t_word_part		*part_new(t_word_kind kind, void *content);
 
 /**
+ * part_free() - free a `t_word_part` recursively
+ * @raw_part - pointer to a `t_word_part`
+ */
+void			part_free(void *raw_part);
+
+/**
  * word_from() - create a new `t_word_part` and wrap it in a `t_word`
  * @kind - kind of `t_word_part`
  * @content - data field for `t_word_part`
  */
 t_word			*word_from(t_word_kind kind, void *content);
+
+/**
+ * word_free() - free a `t_word`
+ * @raw_word - pointer to a `t_word`
+ */
+void			word_free(void *raw_word);
 
 /**
  * parser_parse_string() - parse a single `t_word`

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 20:55:50 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/28 22:14:28 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/29 00:47:21 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	history_load(t_env *env)
 			add_history(stripped);
 			free(stripped);
 		}
+		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);

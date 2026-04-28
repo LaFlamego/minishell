@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:16:02 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/26 17:14:35 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/29 01:24:54 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ t_cmd_node	*parser_parse_command(t_parser *p)
 			return (node_free(node));
 		if (!push_word(&node->data, word))
 		{
-			ft_lstclear(&word, free);
+			ft_lstclear(&word, word_free);
 			return (node_free(node));
 		}
 	}

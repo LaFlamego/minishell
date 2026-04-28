@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 18:43:28 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/28 21:59:36 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/29 00:49:37 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*add_variable(t_env *env, const char *key)
 	if (!new)
 		return (NULL);
 	env->size--;
-	if (!ft_array_push(env, ft_strdup(key)))
+	if (!ft_array_push(env, new))
 		return (NULL);
 	if (!ft_array_push(env, NULL))
 		return (NULL);

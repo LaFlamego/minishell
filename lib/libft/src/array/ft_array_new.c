@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 17:31:35 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/23 04:01:11 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/29 01:27:18 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ t_array	ft_array_init(void)
 
 void	ft_array_free(t_array *arr, void (*f)(void *))
 {
-	ft_array_foreach(arr, f);
-	free(arr->data);
-	arr->capacity = 0;
-	arr->size = 0;
+	if (arr->data)
+	{
+		ft_array_foreach(arr, f);
+		free(arr->data);
+	}
+	free(arr);
 }
 
 // TODO: Handle Down Sizing

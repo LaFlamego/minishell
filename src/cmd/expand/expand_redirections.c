@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:01:11 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/29 14:33:03 by crevette         ###   ########.fr       */
+/*   Updated: 2026/04/29 15:12:55 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	fd_close_reset(int *pipein, int *pipeout, int *prevfd);
 //TODO echo 123 < infile hello | cmd1
 //TODO < infile
 
-int	redirect_in(t_fds *fd, char *file_to)
+int	redirect_in(char *file_to)
 {
 	int	fd_file_to;
 	int	dup;

@@ -6,13 +6,14 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:21:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/26 21:46:16 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/29 15:00:24 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXPAND_H
 # define EXPAND_H
 
+# include "src/cmd/cmd.h"
 # include "src/cmd/tree/word/word.h"
 # include "src/env/env.h"
 
@@ -22,6 +23,7 @@
  * expand_command() - expand a command
  * @words: a command's content
  * @env: environment variables
+ * @fds: command input/output file descriptors
  *
  * Setup redirections and build the command's `argv`
  *
@@ -29,6 +31,12 @@
  * Pointer to `argv` on success. Must be freed.
  * NULL on failure.
  */
-t_array	*expand_command(t_word *words, t_env *env);
+t_array	*expand_command(t_word *words, t_env *env, t_fds *fds);
+
+// TODO: add documentation
+int		redirect_in(t_fds *fd, char *file_to);
+int		redirect_out(char *file_to);
+int		redirect_in_until(t_fds *fd, char *limiter);
+int		redirect_out_append(char *file_to);
 
 #endif

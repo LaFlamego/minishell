@@ -44,7 +44,8 @@ NODE_SRCS =	node.c					\
 
 WORD_SRCS	=	word.c	
 
-EXPAND_SRCS	=	expand_command.c
+EXPAND_SRCS	=	expand_command.c			\
+				expand_redirections.c
 
 UTILS_SRCS	=	cli.c		\
 				files.c		\

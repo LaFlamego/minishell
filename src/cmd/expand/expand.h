@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:21:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/29 15:00:24 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/29 23:30:58 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
  * expand_command() - expand a command
  * @words: a command's content
  * @env: environment variables
- * @fds: command input/output file descriptors
+ * @ctx: command execution context
  *
  * Setup redirections and build the command's `argv`
  *
@@ -31,12 +31,12 @@
  * Pointer to `argv` on success. Must be freed.
  * NULL on failure.
  */
-t_array	*expand_command(t_word *words, t_env *env, t_fds *fds);
+t_array	*expand_command(t_word *words, t_env *env, t_exec_ctx *ctx);
 
 // TODO: add documentation
-int		redirect_in(t_fds *fd, char *file_to);
+int		redirect_in(char *file_to);
 int		redirect_out(char *file_to);
-int		redirect_in_until(t_fds *fd, char *limiter);
+int		redirect_in_until(t_exec_ctx *ctx, char *limiter);
 int		redirect_out_append(char *file_to);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:39:11 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/29 15:03:02 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/29 23:34:37 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,26 @@ char	*expand_filepath(t_word_part *file, t_env *env)
 	return (expanded);
 }
 
+// FIXME: Allocation can fail
+// > needs to be handled
+// > "?" is a valid key and should be readable
+// FIXME: ft_isalnum is not correct and will reject $? as a valid key
+// FIXME: ft_string_push can fail
+
 // TODO: expand the file, then setup the redirection
 // > How to handle delimiters?
 
 // FIXME: data must be expanded first
 // FIXME: handle error from redirection functions
-int	handle_redirection(t_word_part *part, t_fds *fds, t_env *env)
+int	handle_redirection(t_word_part *part, t_exec_ctx *ctx, t_env *env)
 {
 	if (part->kind == WK_REDIRECT_IN)
 	{
-		redirect_in(fds, expand_filepath(part->data, env));
+		redirect_in(expand_filepath(part->data, env));
 	}
 	if (part->kind == WK_REDIRECT_IN_UNTIL)
 	{
-		redirect_in_until(fds, expand_filepath(part->data, env));
+		redirect_in_until(ctx, expand_filepath(part->data, env));
 	}
 	if (part->kind == WK_REDIRECT_OUT)
 	{
@@ -97,7 +103,7 @@ int	expand_variable(t_string *arg, char *key, t_env *env)
 }
 
 int	expand_part(t_word_part *part, t_string *arg, t_array *argv, t_env *env,
-		t_fds *fds)
+		t_exec_ctx *ctx)
 {
 	if (part->kind == WK_STRING && !ft_string_push_str(arg, part->data))
 		return (0);
@@ -106,11 +112,11 @@ int	expand_part(t_word_part *part, t_string *arg, t_array *argv, t_env *env,
 	if (part->kind == WK_VARIABLE && !expand_variable(arg, part->data, env))
 		return (0);
 	if (part->kind >= WK_REDIRECT_IN && part->kind <= WK_REDIRECT_OUT_APPEND)
-		return (handle_redirection(part, fds, env));
+		return (handle_redirection(part, ctx, env));
 	return (1);
 }
 
-int	expand_word(t_list *parts, t_array *argv, t_env *env, t_fds *fds)
+int	expand_word(t_list *parts, t_array *argv, t_env *env, t_exec_ctx *ctx)
 {
 	t_string	*arg;
 	t_list		*curr;
@@ -121,7 +127,7 @@ int	expand_word(t_list *parts, t_array *argv, t_env *env, t_fds *fds)
 		return (0);
 	while (curr)
 	{
-		if (!expand_part(curr->content, arg, argv, env, fds))
+		if (!expand_part(curr->content, arg, argv, env, ctx))
 		{
 			ft_string_free(arg);
 			return (0);
@@ -137,7 +143,7 @@ int	expand_word(t_list *parts, t_array *argv, t_env *env, t_fds *fds)
 	return (1);
 }
 
-t_array	*expand_command(t_word *words, t_env *env, t_fds *fds)
+t_array	*expand_command(t_word *words, t_env *env, t_exec_ctx *ctx)
 {
 	t_word	*curr;
 	t_array	*argv;
@@ -148,7 +154,7 @@ t_array	*expand_command(t_word *words, t_env *env, t_fds *fds)
 	curr = words;
 	while (curr)
 	{
-		if (!expand_word(curr->content, argv, env, fds))
+		if (!expand_word(curr->content, argv, env, ctx))
 		{
 			ft_array_free(argv, free);
 			return (NULL);

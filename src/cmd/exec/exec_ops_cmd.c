@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:08:52 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/29 23:08:32 by crevette         ###   ########.fr       */
+/*   Updated: 2026/04/30 18:44:35 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,23 @@
 #include <sys/types.h>
 
 
-pid_t	fork_single_cmd()
-{
-	pid_t			pid;
+// unsigned int	fork_single_cmd(t_ctx *ctx, char *argv)
+// {
+// 	pid_t			pid;
+// 	unsigned int	exit_code;
 
-	pid = -1;
-	if (pid < 0)
-	{
-		perror("pid");
-	}
-	if (pid == 0)
-	{
-
-	}
-	if (pid > 0)
-	{
-
-	}
-}
+// 	pid = -1;
+// 	if (pid < 0)
+// 	{
+// 		perror("pid");
+// 		return (1);
+// 	}
+// 	if (pid == 0)
+// 		exit_code = cmd_exec(ctx, argv);
+// 	if (pid > 0)
+// 		(void);
+// 	return (exit_code);
+// }
 
 unsigned int	handle_single_command(t_cmd_node *node, t_ctx *ctx, t_exec_ctx *exec_ctx)
 {
@@ -46,12 +45,5 @@ unsigned int	handle_single_command(t_cmd_node *node, t_ctx *ctx, t_exec_ctx *exe
 	argv = expand_args(cmd_node->data);
 	if (!argv)
 		return (1);
-	if (exec_ctx->is_pipe_cmd == true)
-		return (cmd_exec(ctx, argv));
-	else
-	{
-		//TODO fork for each cmd
-
-	}
-		
+	return (cmd_exec(ctx, argv));
 }

@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:35:32 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/30 10:06:57 by crevette         ###   ########.fr       */
+/*   Updated: 2026/04/30 12:38:55 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ void	fd_close_reset(int *pipein, int *pipeout, int *prevfd)
 	}
 }
 
-void	pipe_build(t_exec_ctx *exec_ctx)
+void	pipe_build(int *pipe_in, int *pipe_out)
 {
 	int	pipefd[2];
 
 	if (pipe(pipefd) == -1)
 		perror("pipe");
-	exec_ctx->fd.in = pipefd[0];
-	exec_ctx->fd.out = pipefd[1];
+	*pipe_in = pipefd[0];
+	*pipe_out = pipefd[1];
 }
 
 static void	pipeline_dup(t_exec_ctx *exec_ctx, int fd_dup, bool is_pipe_in)
@@ -82,7 +82,7 @@ pid_t	exec_pipeline(t_list *list, t_exec_ctx *exec_ctx)
 	pid = -1;
 	//TODO (?)if prev_fd == -1?
 	if (exec_ctx->pipe.index != exec_ctx->args_nb)
-		pipe_build(&exec_ctx);
+		pipe_build(&exec_ctx->fd.in, &exec_ctx->fd.out);
 	pid = fork();
 	if (pid < 0)
 	{

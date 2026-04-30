@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:02:13 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/02 01:22:57 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/30 18:57:11 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+
+pid_t	cmd_exec_fork(char *argv[], t_cmd *cmd, t_env *env);
 
 static unsigned int	wait_exit_code(pid_t pid)
 {
@@ -36,8 +38,11 @@ unsigned int	cmd_exec_bin(char *argv[], t_env *env)
 {
 	pid_t			pid;
 	unsigned int	exit_code;
+	t_cmd			cmd;
 
-	pid = cmd_exec_fork(argv, env);
+	cmd.cmds = NULL;
+	cmd.path = NULL;
+	pid = cmd_exec_fork(argv, &cmd, env);
 	exit_code = wait_exit_code(pid);
 	return (exit_code);
 }

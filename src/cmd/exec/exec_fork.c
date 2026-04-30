@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_fork.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
+/*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:35:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/02 01:24:20 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/30 18:55:41 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 // FIXME: Wrong error when running $PWD
 // > execve: Permission denied
 // > bash: /home/oery/Documents/42/minishell: Is a directory
-pid_t	cmd_exec_fork(char *argv[], t_env *env)
+pid_t	cmd_exec_fork(char *argv[], t_cmd *cmd, t_env *env)
 {
 	char	*cmd_path;
 	pid_t	pid;
@@ -36,7 +36,7 @@ pid_t	cmd_exec_fork(char *argv[], t_env *env)
 	}
 	else if (pid == 0)
 	{
-		cmd_path = cmd_exec_get_path(argv[0], env);
+		cmd_path = cmd_exec_get_path(argv[0], cmd, env);
 		if (!cmd_path)
 		{
 			ft_dprintf(2, "minishell: '%s': %s\n", argv[0], strerror(errno));

@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:35:32 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/29 22:39:17 by crevette         ###   ########.fr       */
+/*   Updated: 2026/04/30 10:06:57 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	pipe_build(t_exec_ctx *exec_ctx)
 
 	if (pipe(pipefd) == -1)
 		perror("pipe");
-	exec_ctx->pipe.in = pipefd[0];
-	exec_ctx->pipe.out = pipefd[1];
+	exec_ctx->fd.in = pipefd[0];
+	exec_ctx->fd.out = pipefd[1];
 }
 
 static void	pipeline_dup(t_exec_ctx *exec_ctx, int fd_dup, bool is_pipe_in)
@@ -56,7 +56,7 @@ static void	pipeline_dup(t_exec_ctx *exec_ctx, int fd_dup, bool is_pipe_in)
 		dup = dup2(fd_dup, STDOUT_FILENO);
 	if (dup == -1)
 	{
-		fd_close_reset(exec_ctx->pipe.in, exec_ctx->pipe.out, exec_ctx->prev_fd);
+		fd_close_reset(&exec_ctx->fd.in, &exec_ctx->fd.out, &exec_ctx->pipe.fd);
 		perror("dup");
 	}
 }
@@ -66,13 +66,13 @@ static void	fd_proceed(t_exec_ctx *exec_ctx)
 	int	in_fd;
 	int	out_fd;
 
-	in_fd = exec_ctx->prev_fd;
-	out_fd = exec_ctx->pipe.out;
+	in_fd = exec_ctx->pipe.fd;
+	out_fd = exec_ctx->fd.out;
 	if (in_fd != -1 && exec_ctx->pipe.index != 1)
 		pipeline_dup(exec_ctx, in_fd, true);
 	if (out_fd != -1 && exec_ctx->pipe.index != exec_ctx->args_nb)
 		pipeline_dup(exec_ctx, out_fd, false);
-	fd_close_reset(exec_ctx->pipe.in, exec_ctx->pipe.out, exec_ctx->prev_fd);
+	fd_close_reset(&exec_ctx->fd.in, &exec_ctx->fd.out, &exec_ctx->pipe.fd);
 }
 
 pid_t	exec_pipeline(t_list *list, t_exec_ctx *exec_ctx)
@@ -81,13 +81,12 @@ pid_t	exec_pipeline(t_list *list, t_exec_ctx *exec_ctx)
 
 	pid = -1;
 	//TODO (?)if prev_fd == -1?
-	exec_ctx->prev_fd = STDIN_FILENO;
 	if (exec_ctx->pipe.index != exec_ctx->args_nb)
 		pipe_build(&exec_ctx);
 	pid = fork();
 	if (pid < 0)
 	{
-		fd_close_reset(&exec_ctx->pipe.in, &exec_ctx->pipe.out, &exec_ctx->prev_fd);
+		fd_close_reset(&exec_ctx->fd.in, &exec_ctx->fd.out, &exec_ctx->pipe.fd);
 		perror("pid");
 	}
 	if (pid == 0)
@@ -97,8 +96,8 @@ pid_t	exec_pipeline(t_list *list, t_exec_ctx *exec_ctx)
 	}
 	if (pid > 0)
 	{
-		fd_close_reset(NULL, &exec_ctx->pipe.out, &exec_ctx->prev_fd);
-		exec_ctx->prev_fd = exec_ctx->pipe.in;
+		fd_close_reset(NULL, &exec_ctx->fd.out, &exec_ctx->pipe.fd);
+		exec_ctx->pipe.fd = exec_ctx->fd.in;
 	}
 	return (pid);
 }

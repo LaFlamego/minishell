@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:35:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/01 18:20:03 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/01 21:29:15 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,15 @@ pid_t	cmd_exec_fork(char *argv[], t_exec_ctx *exec, t_env *env)
 	pid = fork();
 	if (pid < 0)
 	{
-		return (perror("pid"), pid);
-		// TODO free cmd
+		perror("pid");
+		free_cmd_path(exec);
+		return (pid);
 	}
 	else if (pid == 0)
 	{
 		redir_fd(exec);
 		get_and_exec_cmd(argv, exec, env);
-		// TODO free cmd
+		free_cmd_path(exec);
 	}
 	else
 		(void)pid;

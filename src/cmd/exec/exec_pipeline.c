@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:35:32 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/30 18:03:56 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/01 18:42:12 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,6 @@ void	fd_close_reset(int *pipein, int *pipeout, int *prevfd)
 		close(prevfd);
 		prevfd = -1;
 	}
-}
-
-void	pipe_build(int *pipe_in, int *pipe_out)
-{
-	int	pipefd[2];
-
-	if (pipe(pipefd) == -1)
-		perror("pipe");
-	*pipe_in = pipefd[0];
-	*pipe_out = pipefd[1];
 }
 
 static void	pipeline_dup(t_exec_ctx *exec_ctx, int fd_dup, bool is_pipe_in)

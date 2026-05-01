@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:01:11 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/01 18:11:15 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/01 18:42:57 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <unistd.h>
 #include "libft.h"
 
-void	pipe_build(int *pipe_in, int *pipe_out);
 void	fd_close_reset(int *pipein, int *pipeout, int *prevfd);
 
 void	redirect_in(char *file_to, t_exec_ctx *exec_ctx)
@@ -27,7 +26,6 @@ void	redirect_in(char *file_to, t_exec_ctx *exec_ctx)
 		return (perror("open"));
 	exec_ctx->fd.in = fd_file_to;
 	exec_ctx->redir = READ_IN;
-	//TODO need to close fd.in after dup
 }
 
 int	redirect_out(char *file_to, t_exec_ctx *exec_ctx)
@@ -39,7 +37,6 @@ int	redirect_out(char *file_to, t_exec_ctx *exec_ctx)
 		return (perror("open"));
 	exec_ctx->fd.out = fd_file_to;
 	exec_ctx->redir = WRITE_OUT;
-	//TODO need to close fd.out after dup
 }
 
 int	redirect_in_until(t_exec_ctx *exec_ctx, char *limiter)
@@ -78,6 +75,5 @@ int	redirect_out_append(char *file_to, t_exec_ctx *exec_ctx)
 		return (perror("open"));
 	exec_ctx->fd.out = fd_file_to;
 	exec_ctx->redir = APPEND;
-	//TODO need to close fd.out after dup
 }
 

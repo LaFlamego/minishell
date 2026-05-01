@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 16:50:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/30 18:44:01 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/01 15:28:04 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,19 @@
 # include "libft.h"
 # include "src/ctx/ctx.h"
 
+enum	e_redir
+{
+	READ_IN,
+	WRITE_OUT,
+	HEREDOC,
+	APPEND,
+	NO_REDIR,
+};
+
 typedef struct s_cmd
 {
 	char	*path;
-	char	**cmds;
-	//int				nb;
-	//bool			is_path;
+	//char	**cmds;
 }			t_cmd;
 
 typedef struct s_exec_io
@@ -40,6 +47,8 @@ typedef struct s_exec_pipe
 typedef struct	s_exec_ctx
 {
 	size_t				args_nb;
+	enum e_redir		redir;
+	struct s_cmd		cmd;
 	struct s_exec_io	fd;
 	struct s_exec_pipe	pipe;
 }						t_exec_ctx;

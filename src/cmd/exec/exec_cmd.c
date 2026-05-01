@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:03:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 17:13:58 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/01 15:15:01 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "src/ctx/ctx.h"
 #include "src/env/env.h"
 
+unsigned int	cmd_exec_bin(char *argv[], t_env *env, t_exec_ctx *exec);
 // static char	**get_argv(t_array *argv, t_array *words)
 // {
 // 	size_t		i;
@@ -50,7 +51,7 @@ static unsigned int (*get_builtin(char *cmd_name))(int, char **, t_ctx *)
 	return (NULL);
 }
 
-unsigned int	cmd_exec(t_ctx *ctx, char **argv)
+unsigned int	cmd_exec(t_ctx *ctx, t_exec_ctx *exec, char *argv[])
 {
 	unsigned int	exit_code;
 	unsigned int	(*builtin)(int, char **, t_ctx *);
@@ -65,7 +66,7 @@ unsigned int	cmd_exec(t_ctx *ctx, char **argv)
 	else
 	{
 		ft_array_push(&argv, NULL);
-		exit_code = cmd_exec_bin(argv, ctx->env);
+		exit_code = cmd_exec_bin(argv, ctx->env, exec);
 	}
 	env_set_exit_code(exit_code, ctx->env);
 	return (exit_code);

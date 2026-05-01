@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:35:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/30 18:55:41 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/01 15:31:17 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,48 @@
 // FIXME: Wrong error when running $PWD
 // > execve: Permission denied
 // > bash: /home/oery/Documents/42/minishell: Is a directory
-pid_t	cmd_exec_fork(char *argv[], t_cmd *cmd, t_env *env)
+
+static void	redir_setup_fd(t_exec_ctx *exec)
+{
+	if (exec->redir == READ_IN)
+	{
+
+	}
+	if (exec->redir == WRITE_OUT)
+	{
+		
+	}
+	if (exec->redir == HEREDOC)
+	{
+		
+	}
+	if (exec->redir == APPEND)
+	{
+		
+	}
+	if (exec->redir == NO_REDIR)
+	{
+		
+	}
+}
+
+static void	get_and_exec_cmd(char *argv[], t_exec_ctx *exec, t_env *env)
 {
 	char	*cmd_path;
+
+	cmd_path = cmd_exec_get_path(argv[0], exec, env);
+	if (!cmd_path)
+	{
+		ft_dprintf(2, "minishell: '%s': %s\n", argv[0], strerror(errno));
+		exit(errno);
+	}
+	execve(cmd_path, argv, (char **)env->data);
+	perror("execve");
+	exit(errno);
+}
+
+pid_t	cmd_exec_fork(char *argv[], t_exec_ctx *exec, t_env *env)
+{
 	pid_t	pid;
 
 	pid = fork();
@@ -36,15 +75,7 @@ pid_t	cmd_exec_fork(char *argv[], t_cmd *cmd, t_env *env)
 	}
 	else if (pid == 0)
 	{
-		cmd_path = cmd_exec_get_path(argv[0], cmd, env);
-		if (!cmd_path)
-		{
-			ft_dprintf(2, "minishell: '%s': %s\n", argv[0], strerror(errno));
-			exit(errno);
-		}
-		execve(cmd_path, argv, (char **)env->data);
-		perror("execve");
-		exit(errno);
+		get_and_exec_cmd(argv, exec, env);
 		// TODO free cmd
 	}
 	else

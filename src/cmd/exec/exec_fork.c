@@ -6,46 +6,58 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:35:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/01 15:31:17 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/01 18:20:03 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./exec.h"
 #include "src/env/env.h"
 #include <errno.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <string.h>
+//#include <sys/types.h>
+//#include <sys/wait.h>
 #include <unistd.h>
 
 // FIXME: Wrong error when running $PWD
 // > execve: Permission denied
 // > bash: /home/oery/Documents/42/minishell: Is a directory
 
-static void	redir_setup_fd(t_exec_ctx *exec)
+static void to_dup_and_close(t_exec_ctx *exec, bool is_redir_in)
 {
-	if (exec->redir == READ_IN)
-	{
+	int	dup;
 
+	if (is_redir_in)
+		dup = dup2(exec->fd.in, STDIN_FILENO);
+	else
+		dup = dup2(exec->fd.out, STDOUT_FILENO);
+	if (dup == -1)
+	{
+		fd_close_reset(&exec->fd.in, &exec->fd.out, &exec->pipe.fd);
+		perror("dup");
 	}
+	if (is_redir_in)
+		fd_close_reset(&exec->fd.in, NULL, NULL);
+	else
+		fd_close_reset(NULL, &exec->fd.in, NULL);
+}
+
+static void	redir_fd(t_exec_ctx *exec)
+{
+	int	dup;
+	
+	if (exec->redir == READ_IN)
+		to_dup_and_close(exec, true);
 	if (exec->redir == WRITE_OUT)
-	{
-		
-	}
+		to_dup_and_close(exec, false);
 	if (exec->redir == HEREDOC)
-	{
-		
-	}
+		to_dup_and_close(exec, true);
 	if (exec->redir == APPEND)
-	{
-		
-	}
-	if (exec->redir == NO_REDIR)
-	{
-		
-	}
+		to_dup_and_close(exec, false);
+	else if (exec->redir == NO_REDIR)
+		return ;
+	exec->redir = NO_REDIR;
 }
 
 static void	get_and_exec_cmd(char *argv[], t_exec_ctx *exec, t_env *env)
@@ -75,6 +87,7 @@ pid_t	cmd_exec_fork(char *argv[], t_exec_ctx *exec, t_env *env)
 	}
 	else if (pid == 0)
 	{
+		redir_fd(exec);
 		get_and_exec_cmd(argv, exec, env);
 		// TODO free cmd
 	}

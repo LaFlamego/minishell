@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:01:11 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/01 15:34:39 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/01 18:11:15 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	redirect_in(char *file_to, t_exec_ctx *exec_ctx)
 
 	fd_file_to = open(file_to, O_RDONLY);
 	if (fd_file_to == -1)
-		perror("open");
-	else
-		exec_ctx->fd.in = fd_file_to;
+		return (perror("open"));
+	exec_ctx->fd.in = fd_file_to;
+	exec_ctx->redir = READ_IN;
 	//TODO need to close fd.in after dup
 }
 
@@ -36,9 +36,9 @@ int	redirect_out(char *file_to, t_exec_ctx *exec_ctx)
 
 	fd_file_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd_file_to == -1)
-		perror("open");
-	else
-		exec_ctx->fd.out = fd_file_to;
+		return (perror("open"));
+	exec_ctx->fd.out = fd_file_to;
+	exec_ctx->redir = WRITE_OUT;
 	//TODO need to close fd.out after dup
 }
 
@@ -66,6 +66,7 @@ int	redirect_in_until(t_exec_ctx *exec_ctx, char *limiter)
 	}
 	fd_close_reset(NULL, fd_out, NULL);
 	exec_ctx->fd.in = fd_in;
+	exec_ctx->redir = HEREDOC;
 }
 
 int	redirect_out_append(char *file_to, t_exec_ctx *exec_ctx)
@@ -75,8 +76,8 @@ int	redirect_out_append(char *file_to, t_exec_ctx *exec_ctx)
 	fd_file_to = open(file_to, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd_file_to == -1)
 		return (perror("open"));
-	else
-		exec_ctx->fd.out = fd_file_to;
+	exec_ctx->fd.out = fd_file_to;
+	exec_ctx->redir = APPEND;
 	//TODO need to close fd.out after dup
 }
 

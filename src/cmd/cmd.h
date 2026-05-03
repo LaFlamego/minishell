@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 16:50:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/01 15:28:04 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/03 16:50:31 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ enum	e_redir
 typedef struct s_cmd
 {
 	char	*path;
-	//char	**cmds;
 }			t_cmd;
 
 typedef struct s_exec_io

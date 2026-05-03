@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:35:32 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/01 18:42:12 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/03 20:17:13 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ pid_t	exec_pipeline(t_list *list, t_exec_ctx *exec_ctx)
 	if (pid < 0)
 	{
 		fd_close_reset(&exec_ctx->fd.in, &exec_ctx->fd.out, &exec_ctx->pipe.fd);
-		perror("pid");
+		return (perror("pid"));
 	}
 	if (pid == 0)
 	{

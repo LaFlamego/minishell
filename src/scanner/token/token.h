@@ -6,13 +6,14 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:13:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/26 00:43:21 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/30 18:57:22 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKEN_H
 # define TOKEN_H
 
+# include "libft.h"
 # include <stdbool.h>
 
 typedef enum e_token_type
@@ -44,6 +45,8 @@ void				token_free(void *token_raw);
 
 char				*token_to_string(t_token *token);
 void				token_debug(t_token *token);
+
+void				token_list_debug(t_list *tokens);
 
 bool				token_is_redirect(t_token *token);
 

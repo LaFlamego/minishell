@@ -6,13 +6,18 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:39:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/10 21:30:46 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/01 18:02:56 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../scanner.h"
 #include "./token.h"
 #include "stdlib.h"
+
+// NOTE: Do we still need to differentiate strings/idents/dq/sq?
+
+// FIXME: Treat symbols as strings separator
+// a string can start with one but not end?
 
 t_token	*token_scan_string(t_scanner *s)
 {

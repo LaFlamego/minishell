@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:24:33 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/10 21:34:36 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/03 16:16:12 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static t_token	*scan_grouping(t_scanner *s, char c)
 {
 	if (c == '(')
-		return (token_scan_group(s));
+		return (scanner_add_token(s, LEFT_PAREN));
 	else if (c == ')')
-		return (scanner_error(')'));
+		return (scanner_add_token(s, RIGHT_PAREN));
 	return (NULL);
 }
 
@@ -40,15 +40,11 @@ static t_token	*scan_redirection(t_scanner *s, char c)
 	return (NULL);
 }
 
-// TODO: how should we handle a single '&'
 static t_token	*scan_binary(t_scanner *s, char c)
 {
 	if (c == '&')
 	{
-		if (scanner_match(s, '&'))
-			return (scanner_add_token(s, AND));
-		else
-			return (NULL);
+		return (scanner_add_token(s, AND));
 	}
 	else if (c == '|')
 	{
@@ -60,7 +56,6 @@ static t_token	*scan_binary(t_scanner *s, char c)
 	return (NULL);
 }
 
-// TODO: can $STRINGS have any string as ident?
 t_token	*token_scan(t_scanner *s)
 {
 	char	c;
@@ -72,7 +67,7 @@ t_token	*token_scan(t_scanner *s)
 		return (scanner_add_token(s, DOLLAR));
 	else if (c == '*')
 		return (scanner_add_token(s, STAR));
-	else if (c == '&' || c == '|')
+	else if ((c == '&' && scanner_match(s, '&')) || c == '|')
 		return (scan_binary(s, c));
 	else if (c == '<' || c == '>')
 		return (scan_redirection(s, c));
@@ -82,7 +77,6 @@ t_token	*token_scan(t_scanner *s)
 		return (token_scan_string_double(s));
 	else if (ft_isspace(c))
 		return (token_scan_blank(s));
-	else if (is_valid_ident(c))
+	else
 		return (token_scan_ident(s));
-	return (NULL);
 }

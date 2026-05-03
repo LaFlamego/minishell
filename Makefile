@@ -23,7 +23,6 @@ SCANNER_SRCS = scanner_new.c scanner_add_token.c scanner_error.c scanner_scan.c
 TOKEN_SRCS =	token_new.c			\
 				token_scan.c		\
 				token_scan_blank.c	\
-				token_scan_group.c	\
 				token_scan_ident.c	\
 				token_scan_string.c	\
 				token_utils.c

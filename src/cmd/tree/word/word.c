@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 14:45:06 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/29 01:55:29 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/03 16:29:18 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	part_free(void *raw_part)
 	}
 	if (part->kind == WK_STRING || part->kind == WK_VARIABLE)
 	{
-		// free(part->data);
+		// TODO: free(part->data);
 	}
 	if (part->kind == WK_REDIRECT_IN || part->kind == WK_REDIRECT_IN_UNTIL)
 		part_free(part->data);
@@ -102,8 +102,28 @@ static bool	parser_match_word(t_parser *p)
 	return (parser_match(p, STRING) || parser_match(p, DOLLAR));
 }
 
-// TODO: A single '$' should turn into a word
-// > if there is nothing after
+// TODO: push_part can fail
+// NOTE: BLANK must be checked first as the other match would skip it
+static t_word	*handle_dollar(t_parser *p, t_word *word, t_token *t)
+{
+	if (!p->current->next || parser_check(p, BLANK))
+	{
+		word = push_part(word, WK_STRING, "$");
+	}
+	else if (parser_match(p, DOLLAR))
+	{
+		word = push_part(word, WK_VARIABLE, "$");
+	}
+	else if (parser_match(p, STRING))
+	{
+		t = p->previous->content;
+		word = push_part(word, WK_VARIABLE, t->text);
+	}
+	return (word);
+}
+
+// TODO: maybe pass a ref to the t_word var instead of returning it
+// then we could directly do if (!push_part(&word))
 t_word	*parser_parse_string(t_parser *p)
 {
 	t_word	*word;
@@ -121,15 +141,9 @@ t_word	*parser_parse_string(t_parser *p)
 		}
 		if (t->type == DOLLAR)
 		{
-			if (parser_match(p, DOLLAR) || !p->current->next)
-			{
-				word = push_part(word, WK_STRING, "$");
-				continue ;
-			}
-			else if (!parser_match(p, STRING))
-				continue ;
-			t = p->previous->content;
-			word = push_part(word, WK_VARIABLE, t->text);
+			word = handle_dollar(p, word, t);
+			if (!word)
+				return (NULL);
 		}
 	}
 	return (word);

@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 20:24:51 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/04 18:27:03 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/04 20:44:59 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "exec.h"
 #include <unistd.h>
 
-//TODO check fd close
 unsigned int	track_node(t_cmd_node *node, t_ctx *ctx)
 {
 	t_exec_ctx	exec_ctx;

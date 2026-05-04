@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:02:13 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/04 18:27:42 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/04 20:35:19 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static unsigned int	wait_exit_code(pid_t pid)
 	int				status;
 	unsigned int	exit_code;
 
-	// pid_t		pid_wait;
 	exit_code = 0;
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))

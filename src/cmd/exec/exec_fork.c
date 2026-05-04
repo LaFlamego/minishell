@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:35:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/04 18:28:28 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/04 20:29:55 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void to_dup_and_close(t_exec_ctx *exec, bool is_redir_in)
 	if (is_redir_in)
 		fd_close_reset(&exec->fd.in, NULL, NULL);
 	else
-		fd_close_reset(NULL, &exec->fd.in, NULL);
+		fd_close_reset(NULL, &exec->fd.out, NULL);
 }
 
 static void	redir_fd(t_exec_ctx *exec)

@@ -6,11 +6,11 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:35:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/03 16:19:27 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/04 18:28:28 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./exec.h"
+#include "exec.h"
 #include "src/env/env.h"
 #include <errno.h>
 //#include <stdio.h>

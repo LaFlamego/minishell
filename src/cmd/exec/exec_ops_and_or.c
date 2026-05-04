@@ -6,13 +6,12 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 11:01:42 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/25 15:13:35 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/04 18:29:13 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "cmd.h"
-#include "../tree/node.h" 
+#include "exec.h"
 
 unsigned int    handle_and_sign(t_cmd_node *node)
 {

@@ -6,18 +6,16 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:02:13 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/01 15:14:22 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/04 18:27:42 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "src/cmd/exec/exec.h"
+#include "exec.h"
 #include "src/env/env.h"
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
-
-pid_t	cmd_exec_fork(char *argv[], t_exec_ctx *exec, t_env *env);
 
 static unsigned int	wait_exit_code(pid_t pid)
 {

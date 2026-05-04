@@ -6,12 +6,12 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 18:37:56 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/01 21:28:42 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/04 18:30:24 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../cmd.h"
+#include "exec.h"
 
 void	pipe_build(int *pipe_in, int *pipe_out)
 {

@@ -6,12 +6,11 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:06:02 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/29 22:21:19 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/04 18:23:17 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
-#include "../tree/node.h"
+#include "exec.h"
 #include <sys/types.h>
 
 static unsigned int	wait_exit_code(pid_t pid_last)

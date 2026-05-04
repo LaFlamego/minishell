@@ -6,15 +6,14 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:35:32 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/03 20:17:13 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/04 18:24:39 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/types.h>
 #include <unistd.h>
 #include "libft.h"
-#include "../cmd.h"
-#include "../tree/node.h"
+#include "exec.h"
 
 void	fd_close_reset(int *pipein, int *pipeout, int *prevfd)
 {

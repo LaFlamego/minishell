@@ -6,13 +6,13 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 13:59:50 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/01 15:10:11 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/04 18:29:54 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "exec.h"
 #include "src/env/env.h"
-#include "cmd.h"
 #include <stdlib.h>
 #include <unistd.h>
 

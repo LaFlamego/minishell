@@ -66,6 +66,7 @@ SRCS = $(addprefix $(SRCS_DIR)/, $(BASE_SRCS))					\
        $(addprefix $(SRCS_DIR)/env/, $(ENV_SRCS))				\
        $(addprefix $(SRCS_DIR)/ctx/, $(CTX_SRCS))				\
        $(addprefix $(SRCS_DIR)/cmd/, $(CMD_SRCS))				\
+       $(addprefix $(SRCS_DIR)/cmd/exec/, $(CMD_EXEC_SRCS))     \
        $(addprefix $(SRCS_DIR)/debug/, $(DEBUG_SRCS))			\
        $(addprefix $(SRCS_DIR)/cmd/expand/, $(EXPAND_SRCS))		\
        $(addprefix $(SRCS_DIR)/files/, $(FILES_SRCS))			\

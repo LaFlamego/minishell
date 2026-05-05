@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 22:28:27 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/05 00:33:03 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/05 20:07:49 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static t_word	*push_part(t_word *word, t_word_part *part)
 
 static bool	parser_match_word(t_parser *p)
 {
+	if (parser_check(p, BLANK))
+		return (false);
 	return (parser_match(p, STRING) || parser_match(p, DOLLAR));
 }
 

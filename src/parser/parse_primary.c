@@ -6,13 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:46:30 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 21:39:13 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/01 15:23:54 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./parser.h"
 
-// TODO: Do we need to free something here?
 t_cmd_node	*parser_parse_primary(t_parser *p)
 {
 	t_cmd_node	*expr;
@@ -20,14 +19,17 @@ t_cmd_node	*parser_parse_primary(t_parser *p)
 	if (parser_match(p, LEFT_PAREN))
 	{
 		expr = parser_parse_expr(p);
-		if (!expr || !parser_match(p, RIGHT_PAREN))
+		if (!expr)
 			return (NULL);
+		if (!parser_match(p, RIGHT_PAREN))
+		{
+			parser_error(parser_peek(p));
+			return (node_free(expr));
+		}
 		return (expr);
 	}
 	if (parser_check_command(p))
-	{
-		expr = parser_parse_command(p);
-		return (expr);
-	}
+		return (parser_parse_command(p));
+	parser_error(parser_peek(p));
 	return (NULL);
 }

@@ -6,56 +6,38 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 17:13:58 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/03 16:16:20 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/05 12:24:23 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../scanner.h"
+#include "libft.h"
 #include <stdlib.h>
 
-// TODO: Ident stop on symbol
-// First char can be symbol
-
-// TODO: Is Alnum?
-// are underscore accepted?
-bool	is_valid_ident(const char c)
+static bool	is_still_valid(const char c)
 {
-	return (ft_isalnum(c));
-	// if (c == '\0')
-	// 	return (false);
-	// if (c == '&' || c == '|')
-	// 	return (false);
-	// if (c == '<' || c == '>')
-	// 	return (false);
-	// if (c == '(' || c == ')')
-	// 	return (false);
-	// if (c == '\'' || c == '"')
-	// 	return (false);
-	// if (ft_isspace(c))
-	// 	return (false);
-	// if (c == '$')
-	// 	return (false);
-	// return (true);
+	return (ft_isalpha(c) || ft_isdigit(c) || c == '_');
 }
 
-// 	return (scanner_add_token(s, DOLLAR));
+// FIXME: this is parsed as 2 strings instead of a variable
+// > ./minishell -d -c '"$$"'
+
 t_token	*token_scan_ident(t_scanner *s)
 {
 	char	c;
 	char	*ident;
 
-	// TODO: Check if first character is a symbol
-	// can we just advance anyway?
-	// c = scanner_peek(s);
-	// scanner_advance(s);
 	c = scanner_peek(s);
-	while (c && is_valid_ident(c))
+	if (ft_isalpha(c) || c == '_')
 	{
-		// if (c == '$' && is_valid_ident(scanner_peek_next(s)))
-		// 	break ;
-		scanner_advance(s);
-		c = scanner_peek(s);
+		while (c && is_still_valid(c))
+		{
+			scanner_advance(s);
+			c = scanner_peek(s);
+		}
 	}
+	else
+		scanner_advance(s);
 	ident = ft_substr(s->source, s->start, s->current - s->start);
 	if (!ident)
 		return (NULL);

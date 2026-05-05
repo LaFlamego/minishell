@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 14:16:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/29 01:58:24 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/04 22:15:19 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define WORD_H
 
 # include "libft.h"
-# include "src/parser/parser.h"
 
 /**
  * typedef t_word - a list of parts making up a word.
@@ -77,23 +76,13 @@ t_word_part		*part_new(t_word_kind kind, void *content);
  */
 void			part_free(void *raw_part);
 
-/**
- * word_from() - create a new `t_word_part` and wrap it in a `t_word`
- * @kind - kind of `t_word_part`
- * @content - data field for `t_word_part`
- */
-t_word			*word_from(t_word_kind kind, void *content);
+// TODO: Docs
+t_word			*word_from(t_word_part *part);
 
 /**
  * word_free() - free a `t_word`
  * @raw_word - pointer to a `t_word`
  */
 void			word_free(void *raw_word);
-
-/**
- * parser_parse_string() - parse a single `t_word`
- * @parser - instance of a `t_parser`
- */
-t_word			*parser_parse_string(t_parser *parser);
 
 #endif

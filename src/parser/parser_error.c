@@ -6,14 +6,13 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 14:09:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/26 18:42:44 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/01 16:07:33 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./parser.h"
 #include "libft.h"
 
-// TODO: Should it be printed to stderr?
 void	*parser_error(t_token *t)
 {
 	char	*text;

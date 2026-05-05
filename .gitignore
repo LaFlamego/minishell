@@ -6,3 +6,4 @@ compile_commands.json
 minishell
 !minishell/
 vgcore.*
+minishell_history.txt

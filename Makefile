@@ -30,17 +30,20 @@ TOKEN_SRCS =	token_new.c			\
 PARSER_SRCS = 	parser_new.c				\
 				parser_error.c				\
 				parser_match.c				\
-				parser_parse.c				\
-				parser_parse_binary.c		\
-				parser_parse_command.c		\
-				parser_parse_expr.c			\
-				parser_parse_pipe.c			\
-				parser_parse_primary.c
+				parse.c						\
+				parse_binary.c				\
+				parse_cmd.c					\
+				parse_cmd_arg.c				\
+				parse_cmd_word.c			\
+				parse_expr.c				\
+				parse_pipe.c				\
+				parse_primary.c				\
+				parse_variable.c
 
-NODE_SRCS =	node.c					\
-			node_debug.c			\
+NODE_SRCS =	node.c
 
-WORD_SRCS	=	word.c	
+WORD_SRCS	=	word.c						\
+				word_part.c
 
 EXPAND_SRCS	=	expand_command.c			\
 				expand_redirections.c
@@ -48,12 +51,20 @@ EXPAND_SRCS	=	expand_command.c			\
 UTILS_SRCS	=	cli.c		\
 				files.c		\
 				history.c	\
+				path.c		\
 				signals.c
+
+DEBUG_SRCS	=	debug_argv.c			\
+				debug_node.c			\
+				debug_node_utils.c		\
+				debug_token.c			\
+				debug_word.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(BASE_SRCS))					\
        $(addprefix $(SRCS_DIR)/env/, $(ENV_SRCS))				\
        $(addprefix $(SRCS_DIR)/ctx/, $(CTX_SRCS))				\
        $(addprefix $(SRCS_DIR)/cmd/, $(CMD_SRCS))				\
+       $(addprefix $(SRCS_DIR)/debug/, $(DEBUG_SRCS))			\
        $(addprefix $(SRCS_DIR)/cmd/expand/, $(EXPAND_SRCS))		\
        $(addprefix $(SRCS_DIR)/files/, $(FILES_SRCS))			\
        $(addprefix $(SRCS_DIR)/prompt/, $(PROMPT_SRCS))			\

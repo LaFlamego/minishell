@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 10:13:53 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/04 18:28:45 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/05 22:14:47 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 void    init_exec_ctx(t_exec_ctx *exec)
 {
     ft_bzero(exec, sizeof(t_exec_ctx));
+	exec->redir = NO_REDIR;
     exec->cmd.path = NULL;
 	exec->fd.in = -1;
 	exec->fd.out = -1;

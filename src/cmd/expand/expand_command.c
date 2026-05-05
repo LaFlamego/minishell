@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:39:11 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/29 23:34:37 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/05 15:49:17 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	*expand_filepath(t_word_part *file, t_env *env)
 // FIXME: Allocation can fail
 // > needs to be handled
 // > "?" is a valid key and should be readable
-// FIXME: ft_isalnum is not correct and will reject $? as a valid key
 // FIXME: ft_string_push can fail
 
 // TODO: expand the file, then setup the redirection
@@ -143,6 +142,7 @@ int	expand_word(t_list *parts, t_array *argv, t_env *env, t_exec_ctx *ctx)
 	return (1);
 }
 
+// FIXME: handle array_push failures
 t_array	*expand_command(t_word *words, t_env *env, t_exec_ctx *ctx)
 {
 	t_word	*curr;
@@ -161,5 +161,6 @@ t_array	*expand_command(t_word *words, t_env *env, t_exec_ctx *ctx)
 		};
 		curr = curr->next;
 	}
+	ft_array_push(argv, NULL);
 	return (argv);
 }

@@ -6,17 +6,16 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:21:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/05 14:29:48 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:52:54 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXPAND_H
 # define EXPAND_H
 
-# include "src/cmd/cmd.h"
+# include "src/cmd/exec/exec.h"
 # include "src/cmd/tree/word/word.h"
 # include "src/env/env.h"
-# include "src/cmd/exec/exec.h"
 
 // TODO: This should be renamed to preprocess or whatever
 

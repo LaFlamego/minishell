@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 20:02:51 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/05 12:25:55 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/05 22:37:53 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static bool	is_reserved(char c)
 {
 	if (c == '?')
 		return (true);
+	if (ft_isdigit(c))
+		return (true);
 	return (false);
 }
 
@@ -24,10 +26,6 @@ static bool	is_forbidden_char(char c)
 {
 	return (c != '_' && !ft_isdigit(c) && !ft_isalpha(c));
 }
-
-// FIXME:
-// Variables cannot start with a number but redirections target can
-// i think we simply don't care? it should fix itself
 
 static bool	is_valid_ident(const char *ident)
 {
@@ -38,8 +36,6 @@ static bool	is_valid_ident(const char *ident)
 		return (true);
 	while (ident && ident[i])
 	{
-		if (i == 0 && ft_isdigit(ident[i]))
-			return (false);
 		if (is_forbidden_char(ident[i]))
 			return (false);
 		i++;

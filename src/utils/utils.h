@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 21:22:12 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/29 00:28:32 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/01 18:09:48 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,18 @@ int		setup_signals_handlers(void);
  */
 t_array	*dir_get_files(const char *path);
 
+// TODO: docs
+int		cli_parse_args(int argc, char **argv, t_ctx *ctx);
+
 /**
- * handle_args() - validate and handle arguments
- * @argc: amount of arguments
- * @argv: arguments
- * @ctx: shell context
+ * get_pwd() - get current path
  *
- * Arguments:
- * -c command: Runs the given command then exits.
+ * Simple wrapper around getcwd
  *
  * Return:
- * Last command exit code, or 1 on failure.
+ * On success, a pointer to the path, must be freed
+ * On failure, a NULL pointer
  */
-int		handle_args(int argc, char **argv, t_ctx *ctx);
+char	*get_pwd(void);
 
 #endif

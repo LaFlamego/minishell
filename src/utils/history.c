@@ -18,6 +18,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+// TODO: Should we only load last x entries?
+
 /**
  * get_history_file() - get history file path
  * @env: environment variables

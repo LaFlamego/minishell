@@ -6,13 +6,16 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 21:51:19 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/28 22:57:46 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/28 23:11:09 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <signal.h>
 #include <unistd.h>
+
+// TODO: Do we have to handle signals differently when in non interactive mode?
+// We should check what happens when sending CTRL+C while a command is being ran
 
 int			g_sigint_received = 0;
 

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 18:29:55 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/28 21:49:40 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/01 18:14:15 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,19 @@
 
 # include "src/env/env.h"
 
+// TODO: does that mean we have to handle non interactive mode?
+# define FLAG_CLI_MODE 1
+# define FLAG_DEBUG 2
+
 typedef struct s_ctx
 {
 	t_env	*env;
 	bool	exit;
+	int		flags;
+	char	*command;
 }			t_ctx;
 
 int			ctx_init(t_ctx *ctx, char **envp);
+int			ctx_free(t_ctx *ctx);
 
 #endif

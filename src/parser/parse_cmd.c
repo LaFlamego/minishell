@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:16:02 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/04 23:09:15 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/05 21:42:29 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,12 @@
 
 static void	*push_word(void *lst_raw, void *content)
 {
-	t_list	**lst;
 	t_list	*node;
 
-	lst = lst_raw;
-	if (!content)
-		return (NULL);
 	node = ft_lstnew(content);
-	if (!node)
+	if (!content || !node)
 		return (NULL);
-	ft_lstadd_back(lst, node);
+	ft_lstadd_back(lst_raw, node);
 	return (node);
 }
 

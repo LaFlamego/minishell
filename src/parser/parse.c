@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_parse.c                                     :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:01:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 18:01:33 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/05 21:48:25 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ t_cmd_node	*parser_parse(t_parser *p)
 	t_cmd_node	*head;
 
 	head = parser_parse_expr(p);
+	if (!parser_check(p, EOF))
+	{
+		parser_error(parser_peek(p));
+	}
 	p->tree = head;
 	return (p->tree);
 }

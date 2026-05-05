@@ -6,28 +6,18 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:11:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/25 21:41:22 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/05 13:02:09 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./cmd.h"
 #include "src/ctx/ctx.h"
+#include "src/debug/debug.h"
 #include "src/parser/parser.h"
 #include "src/scanner/scanner.h"
 
-static void	debug_tokens(t_list *tokens)
-{
-	t_list	*curr;
-
-	curr = tokens;
-	while (curr)
-	{
-		ft_printf("%s\n", token_to_string(curr->content));
-		curr = curr->next;
-	}
-}
-
-// TODO: Free Resources after the command ran
+// TODO: differentiate syntax error from logic error in the parser
+// > Minishell should not quit on syntax error
 unsigned int	cmd_handle(const char *input, t_ctx *ctx)
 {
 	t_scanner	s;
@@ -35,22 +25,20 @@ unsigned int	cmd_handle(const char *input, t_ctx *ctx)
 	t_cmd_node	*head;
 
 	s = scanner_new(input);
-	if (!scanner_scan(&s))
+	if (!scanner_scan(&s) || !s.tokens)
 	{
 		scanner_free(&s);
-		return (1);
+		return (0);
 	};
-	if (!s.tokens)
-	{
-		// TODO: handle error
-	}
+	if (ctx->flags & FLAG_DEBUG)
+		debug_token_list(s.tokens);
 	p = parser_new(s.tokens);
 	head = parser_parse(&p);
-	ft_printf("head -> %p\n", head);
-	if (head)
-	{
-		node_debug(head, 0);
-	}
-	(void)ctx;
+	if (ctx->flags & FLAG_DEBUG)
+		debug_node(head, 0);
+	// TODO: Run the Execution Tree
+	// track_nodes(head);
+	scanner_free(&s);
+	node_free(head);
 	return (0);
 }

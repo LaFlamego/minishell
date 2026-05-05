@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 13:59:50 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/04 18:29:54 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/05 19:21:54 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,10 @@ static unsigned int	find_path(t_exec_ctx *exec, char *cmd_name, char **cddt_path
 	return (print_if_target_fail(cmd_name, find_no_x, no_find));
 }
 
-unsigned int	*cmd_exec_get_path(char *cmd_name, t_exec_ctx *exec, t_env *env)
+unsigned int	cmd_exec_get_path(char *cmd_name, t_exec_ctx *exec, t_env *env)
 {
-	char	*path_find;
-	char	**cddt_paths;
+	char			**cddt_paths;
+	unsigned int	exit_code;
 
 	if (!cmd_name)
 		return (ft_printf("'': command not found\n"), 127);
@@ -109,12 +109,9 @@ unsigned int	*cmd_exec_get_path(char *cmd_name, t_exec_ctx *exec, t_env *env)
 	cddt_paths = extract_path((char **)env->data);
 	if (!cddt_paths)
 		return (1);
-	path_find = find_path(exec, cmd_name, cddt_paths);
-	if (!path_find)
-		return (free_splits(cddt_paths), 
-			ft_printf("%s: command not found\n", cmd_name), 127);
+	exit_code = find_path(exec, cmd_name, cddt_paths);
+	if (exit_code != 0)
+		return (free_splits(cddt_paths), exit_code);
 	free_splits(cddt_paths);
-	if (path_find)
-		exec->cmd.path = path_find;
-	return (0);
+	return (exit_code);
 }

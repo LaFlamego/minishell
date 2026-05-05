@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:05:59 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/05 14:45:15 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/05 19:11:31 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ void			free_cmd_path(t_exec_ctx *exec);
 void			fd_close_reset(int *pipein, int *pipeout, int *prevfd);
 void    		init_exec_ctx(t_exec_ctx *exec);
 unsigned int	track_node(t_cmd_node *node, t_ctx *ctx);
-unsigned int	cmd_exec(t_ctx *ctx, t_exec_ctx *exec, char *argv[]);
+unsigned int	cmd_exec(t_ctx *ctx, t_exec_ctx *exec, t_array *argv);
 unsigned int	cmd_exec_bin(char *argv[], t_env *env, t_exec_ctx *exec);
 pid_t			cmd_exec_fork(char *argv[], t_exec_ctx *exec, t_env *env);
-unsigned int	*cmd_exec_get_path(char *cmd_name, t_exec_ctx *exec, t_env *env);
-unsigned int    handle_and_sign(t_cmd_node *node);
-unsigned int	handle_or_sign(t_cmd_node *node);
+unsigned int	cmd_exec_get_path(char *cmd_name, t_exec_ctx *exec, t_env *env);
+unsigned int    handle_and_sign(t_cmd_node *node, t_ctx *ctx);
+unsigned int	handle_or_sign(t_cmd_node *node, t_ctx *ctx);
 unsigned int	handle_single_command(t_cmd_node *node, t_ctx *ctx, t_exec_ctx *exec_ctx);
 unsigned int    handle_pipe_sign(t_cmd_node *node, t_exec_ctx *exec_ctx, t_ctx *ctx);
 pid_t			exec_pipeline(t_list *list, t_exec_ctx *exec_ctx, t_ctx *ctx);

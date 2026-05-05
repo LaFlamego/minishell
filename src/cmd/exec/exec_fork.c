@@ -6,18 +6,16 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:35:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/04 20:34:13 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/05 19:08:49 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "src/env/env.h"
 #include <errno.h>
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <string.h>
-//#include <sys/types.h>
-//#include <sys/wait.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 
 // FIXME: Wrong error when running $PWD
@@ -45,8 +43,6 @@ static void to_dup_and_close(t_exec_ctx *exec, bool is_redir_in)
 
 static void	redir_fd(t_exec_ctx *exec)
 {
-	int	dup;
-	
 	if (exec->redir == READ_IN)
 		to_dup_and_close(exec, true);
 	if (exec->redir == WRITE_OUT)
@@ -64,7 +60,8 @@ static void	get_and_exec_cmd(char *argv[], t_exec_ctx *exec, t_env *env)
 {
 	char	*cmd_path;
 
-	cmd_path = cmd_exec_get_path(argv[0], exec, env);
+	cmd_exec_get_path(argv[0], exec, env);
+	cmd_path = exec->cmd.path;
 	if (!cmd_path)
 	{
 		ft_dprintf(2, "minishell: '%s': %s\n", argv[0], strerror(errno));

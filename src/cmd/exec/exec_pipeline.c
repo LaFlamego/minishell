@@ -6,12 +6,13 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:35:32 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/05 14:44:14 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/05 19:51:27 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/types.h>
 #include <unistd.h>
+#include <stdio.h>
 #include "libft.h"
 #include "exec.h"
 
@@ -58,7 +59,7 @@ pid_t	exec_pipeline(t_list *list, t_exec_ctx *exec_ctx, t_ctx *ctx)
 	if (pid < 0)
 	{
 		fd_close_reset(&exec_ctx->fd.in, &exec_ctx->fd.out, &exec_ctx->pipe.fd);
-		return (perror("pid"));
+		return (perror("pid"), -1);
 	}
 	if (pid == 0)
 	{

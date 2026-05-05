@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:35:32 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/04 18:24:39 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/05 14:44:14 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,6 @@
 #include <unistd.h>
 #include "libft.h"
 #include "exec.h"
-
-void	fd_close_reset(int *pipein, int *pipeout, int *prevfd)
-{
-	if (pipein && *pipein >= 0)
-	{
-		close(pipein);
-		pipein = -1;
-	}
-	if (pipeout && *pipeout >= 0)
-	{
-		close(pipeout);
-		pipeout = -1;
-	}
-	if (prevfd && *prevfd >= 0)
-	{
-		close(prevfd);
-		prevfd = -1;
-	}
-}
 
 static void	pipeline_dup(t_exec_ctx *exec_ctx, int fd_dup, bool is_pipe_in)
 {
@@ -66,7 +47,7 @@ static void	fd_proceed(t_exec_ctx *exec_ctx)
 	fd_close_reset(&exec_ctx->fd.in, &exec_ctx->fd.out, &exec_ctx->pipe.fd);
 }
 
-pid_t	exec_pipeline(t_list *list, t_exec_ctx *exec_ctx)
+pid_t	exec_pipeline(t_list *list, t_exec_ctx *exec_ctx, t_ctx *ctx)
 {
 	pid_t			pid;
 
@@ -82,7 +63,7 @@ pid_t	exec_pipeline(t_list *list, t_exec_ctx *exec_ctx)
 	if (pid == 0)
 	{
 		fd_proceed(exec_ctx);
-		track_node(list->content);
+		track_node(list->content, ctx);
 	}
 	if (pid > 0)
 	{

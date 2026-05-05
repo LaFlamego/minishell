@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:06:02 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/04 18:23:17 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/05 14:45:01 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static size_t	get_list_size(t_list *list)
 	}
 	return (size);
 }
-unsigned int    handle_pipe_sign(t_cmd_node *node, t_exec_ctx *exec_ctx)
+unsigned int    handle_pipe_sign(t_cmd_node *node, t_exec_ctx *exec_ctx, t_ctx *ctx)
 {
 	t_list			*pipe_node;
 	pid_t			pid_last;
@@ -61,7 +61,7 @@ unsigned int    handle_pipe_sign(t_cmd_node *node, t_exec_ctx *exec_ctx)
 	exec_ctx->pipe.index = 1;
 	while (exec_ctx->pipe.index <= size)
 	{
-		pid_last = exec_pipeline(pipe_node, exec_ctx);
+		pid_last = exec_pipeline(pipe_node, exec_ctx, ctx);
 		exec_ctx->pipe.index++;
 		pipe_node = pipe_node->next;
 	}

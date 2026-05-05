@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
+/*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:21:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/29 23:30:58 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/05 14:29:48 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "src/cmd/cmd.h"
 # include "src/cmd/tree/word/word.h"
 # include "src/env/env.h"
+# include "src/cmd/exec/exec.h"
 
 // TODO: This should be renamed to preprocess or whatever
 

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 01:13:39 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/02 01:18:21 by Oery             ###   ########.fr       */
+/*   Updated: 2026/04/30 18:25:44 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "src/ctx/ctx.h"
 # include <stdio.h>
 
-void	prompt_display(t_ctx *ctx);
+unsigned int	prompt_display(t_ctx *ctx);
 
 #endif

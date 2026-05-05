@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 13:15:33 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/28 22:30:41 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/05 12:59:16 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <readline/readline.h>
 #include <stdlib.h>
 
-void	prompt_display(t_ctx *ctx)
+unsigned int	prompt_display(t_ctx *ctx)
 {
 	char	*input;
 
@@ -27,16 +27,20 @@ void	prompt_display(t_ctx *ctx)
 		if (!input)
 		{
 			ft_printf("exit\n");
-			return ;
+			return (1);
 		}
 		if (*input == '\0')
 		{
 			free(input);
 			continue ;
 		}
-		cmd_handle(input, ctx);
 		history_save(ctx->env, input);
+		if (cmd_handle(input, ctx))
+		{
+			free(input);
+			return (0);
+		}
 		free(input);
 	}
-	rl_clear_history();
+	return (1);
 }

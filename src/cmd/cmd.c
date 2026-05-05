@@ -6,11 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:11:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/05 13:02:09 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/05 20:07:15 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./cmd.h"
+#include "./exec/exec.h"
 #include "src/ctx/ctx.h"
 #include "src/debug/debug.h"
 #include "src/parser/parser.h"
@@ -36,8 +37,7 @@ unsigned int	cmd_handle(const char *input, t_ctx *ctx)
 	head = parser_parse(&p);
 	if (ctx->flags & FLAG_DEBUG)
 		debug_node(head, 0);
-	// TODO: Run the Execution Tree
-	// track_nodes(head);
+	track_node(head, ctx);
 	scanner_free(&s);
 	node_free(head);
 	return (0);

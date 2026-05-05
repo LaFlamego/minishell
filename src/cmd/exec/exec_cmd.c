@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:03:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/04 18:28:07 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/05 17:42:16 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,16 @@ static unsigned int (*get_builtin(char *cmd_name))(int, char **, t_ctx *)
 	return (NULL);
 }
 
-unsigned int	cmd_exec(t_ctx *ctx, t_exec_ctx *exec, char *argv[])
+unsigned int	cmd_exec(t_ctx *ctx, t_exec_ctx *exec, t_array *argv)
 {
 	unsigned int	exit_code;
 	unsigned int	(*builtin)(int, char **, t_ctx *);
-	int				argc;
 
-	builtin = get_builtin(argv[0]);
-	argc = 0;
-	while (argv[argc])
-		argc++;
+	builtin = get_builtin(argv->data);
 	if (builtin)
-		exit_code = builtin(argc, argv, ctx);
+		exit_code = builtin(argv->size - 1, argv->data, ctx);
 	else
-	{
-		ft_array_push(&argv, NULL);
-		exit_code = cmd_exec_bin(argv, ctx->env, exec);
-	}
+		exit_code = cmd_exec_bin(argv->data, ctx->env, exec);
 	env_set_exit_code(exit_code, ctx->env);
 	return (exit_code);
 }

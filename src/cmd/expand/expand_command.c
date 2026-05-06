@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:39:11 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/05 15:49:17 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/06 19:32:34 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,6 @@
 #include "src/env/env.h"
 #include "src/utils/utils.h"
 #include <stdlib.h>
-
-// TODO: Can the file be in multiple part?
-// like "test"something
-// FIXME: handle errors
-char	*expand_filepath(t_word_part *file, t_env *env)
-{
-	char	*expanded;
-
-	if (file->kind == WK_STRING)
-		return (file->data);
-	expanded = env_get(env, file->data);
-	return (expanded);
-}
 
 // FIXME: Allocation can fail
 // > needs to be handled
@@ -41,21 +28,24 @@ char	*expand_filepath(t_word_part *file, t_env *env)
 // FIXME: handle error from redirection functions
 int	handle_redirection(t_word_part *part, t_exec_ctx *ctx, t_env *env)
 {
+	char	*arg;
+
+	arg = expand_target(part->data, env);
 	if (part->kind == WK_REDIRECT_IN)
 	{
-		redirect_in(expand_filepath(part->data, env));
+		redirect_in(arg, ctx);
 	}
 	if (part->kind == WK_REDIRECT_IN_UNTIL)
 	{
-		redirect_in_until(ctx, expand_filepath(part->data, env));
+		redirect_in_until(ctx, arg);
 	}
 	if (part->kind == WK_REDIRECT_OUT)
 	{
-		redirect_out(expand_filepath(part->data, env));
+		redirect_out(arg, ctx);
 	}
 	if (part->kind == WK_REDIRECT_OUT_APPEND)
 	{
-		redirect_out_append(expand_filepath(part->data, env));
+		redirect_out_append(arg, ctx);
 	}
 	return (1);
 }

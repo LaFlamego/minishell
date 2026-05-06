@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:35:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/06 18:06:14 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/06 18:19:34 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void to_dup_and_close(t_exec_ctx *exec, bool is_redir_in)
 {
 	int	dup;
 
-	if (is_redir_in)
+	if (is_redir_in && exec->fd.in != -1)
 		dup = dup2(exec->fd.in, STDIN_FILENO);
-	else
+	if (!is_redir_in && exec->fd.out != -1)
 		dup = dup2(exec->fd.out, STDOUT_FILENO);
 	if (dup == -1)
 	{

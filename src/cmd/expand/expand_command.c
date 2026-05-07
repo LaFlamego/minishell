@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:39:11 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/07 21:24:54 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/07 21:26:28 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	handle_redirection(t_word_part *part, t_exec_ctx *ctx, t_env *env)
 
 	target = part->data;
 	target_part = NULL;
-	if (target)
+	if (part->kind != WK_REDIRECT_IN_UNTIL && target)
 	{
 		target_part = target->content;
 		if (target_part->kind == WK_FILES)

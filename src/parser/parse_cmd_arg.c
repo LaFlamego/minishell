@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 21:14:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/07 20:59:59 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/07 21:13:50 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ t_word	*parser_parse_cmd_arg(t_parser *p)
 			;
 		word = parser_parse_cmd_word(p);
 		if (!word)
+		{
+			parser_error(parser_peek(p));
 			return (NULL);
+		}
 		return (word_from(part_new(tokind(op->type), word)));
 	}
 	while (parser_match(p, BLANK))

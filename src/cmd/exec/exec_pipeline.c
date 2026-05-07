@@ -6,13 +6,14 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:35:32 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/07 21:28:49 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/07 22:29:47 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "libft.h"
 #include "exec.h"
 
@@ -39,18 +40,10 @@ static void	fd_proceed(t_exec_ctx *exec_ctx)
 
 	if (exec_ctx->pipe.index == 1)
 	{
-		if (exec_ctx->fd.in == -1)
-			exec_ctx->pipe.fd = STDIN_FILENO;
-		else
-			exec_ctx->pipe.fd = exec_ctx->fd.in;
-	}
-	out_fd = exec_ctx->fd.out;
-	if (exec_ctx->pipe.index == exec_ctx->args_nb)
-	{
-		if (exec_ctx->fd.out == -1)
-			out_fd = STDOUT_FILENO;
+		exec_ctx->pipe.fd = exec_ctx->fd.in;
 	}
 	in_fd = exec_ctx->pipe.fd;
+	out_fd = exec_ctx->fd.out;
 	if (in_fd != -1 && exec_ctx->pipe.index != 1)
 		pipeline_dup(exec_ctx, in_fd, true);
 	if (out_fd != -1 && exec_ctx->pipe.index != exec_ctx->args_nb)
@@ -78,6 +71,7 @@ pid_t	exec_pipeline(t_list *list, t_exec_ctx *exec_ctx, t_ctx *ctx)
 	{
 		fd_proceed(exec_ctx);
 		track_node(list->content, ctx);
+		exit(pid);
 	}
 	if (pid > 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 21:14:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/06 18:33:00 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/07 20:59:59 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,6 @@ t_word	*parser_parse_cmd_arg(t_parser *p)
 	t_token	*op;
 	t_word	*word;
 
-	if (parser_match(p, STAR))
-	{
-		return (word_from(part_new(WK_FILES, NULL)));
-	}
 	if (parser_match_redirection(p))
 	{
 		op = p->previous->content;

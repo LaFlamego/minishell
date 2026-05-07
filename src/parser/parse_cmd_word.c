@@ -6,11 +6,29 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 22:28:27 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/05 20:07:49 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/07 20:59:14 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./parser.h"
+
+static bool	has_wildcard(t_word *word)
+{
+	t_word_part	*part;
+	t_word		*curr;
+
+	curr = word;
+	while (curr)
+	{
+		part = curr->content;
+		if (part->kind == WK_FILES)
+			return (true);
+		curr = curr->next;
+	}
+	return (false);
+}
+
+// FIXME: Make sure a word does not have a wildcard?
 
 static t_word	*push_part(t_word *word, t_word_part *part)
 {
@@ -32,6 +50,8 @@ static bool	parser_match_word(t_parser *p)
 {
 	if (parser_check(p, BLANK))
 		return (false);
+	if (parser_match(p, STAR))
+		return (true);
 	return (parser_match(p, STRING) || parser_match(p, DOLLAR));
 }
 
@@ -50,6 +70,16 @@ t_word	*parser_parse_cmd_word(t_parser *p)
 	{
 		part = NULL;
 		t = p->previous->content;
+		if (has_wildcard(word) || (word && t->type == STAR))
+		{
+			parser_error(t);
+			word_free(word);
+			return (NULL);
+		}
+		if (t->type == STAR)
+		{
+			part = part_new(WK_FILES, NULL);
+		}
 		if (t->type == STRING)
 		{
 			part = part_new(WK_STRING, t->text);

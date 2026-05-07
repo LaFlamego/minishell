@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:06:02 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/05 19:49:57 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/07 14:00:38 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static size_t	get_list_size(t_list *list)
 	size_t	size;
 
 	size = 0;
-	while (list->content)
+	while (list)
 	{
 		list = list->next;
 		size++;

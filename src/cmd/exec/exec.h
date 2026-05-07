@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:05:59 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/07 12:42:42 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/07 20:44:45 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_exec_pipe
 typedef struct	s_exec_ctx
 {
 	size_t				args_nb;
+	bool				is_pipe;
 	enum e_redir		redir;
 	struct s_cmd		cmd;
 	struct s_exec_io	fd;

@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 20:24:51 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/05 19:53:42 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/07 20:52:02 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,20 @@ unsigned int	track_node(t_cmd_node *node, t_ctx *ctx)
 
 	exit_code = -1;
 	init_exec_ctx(&exec_ctx);
-	if (node->kind == COMMAND)
-		exit_code = handle_single_command(node, ctx, &exec_ctx);
 	if (node->kind == PIPELINE)
+	{
+		exec_ctx.is_pipe = true;
 		exit_code = handle_pipe_sign(node, &exec_ctx, ctx);
-	if (node->kind == OP_AND)
-		exit_code = handle_and_sign(node, ctx);
-	if (node->kind == OP_OR)
-		exit_code = handle_or_sign(node, ctx);
+	}
+	else
+	{
+		exec_ctx.is_pipe = false;
+		if (node->kind == COMMAND)
+			exit_code = handle_single_command(node, ctx, &exec_ctx);
+		if (node->kind == OP_AND)
+			exit_code = handle_and_sign(node, ctx);
+		if (node->kind == OP_OR)
+			exit_code = handle_or_sign(node, ctx);
+	}
 	return (exit_code);
 }

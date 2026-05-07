@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:35:32 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/07 14:46:25 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/07 21:28:49 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ static void	fd_proceed(t_exec_ctx *exec_ctx)
 		else
 			exec_ctx->pipe.fd = exec_ctx->fd.in;
 	}
+	out_fd = exec_ctx->fd.out;
 	if (exec_ctx->pipe.index == exec_ctx->args_nb)
 	{
 		if (exec_ctx->fd.out == -1)
-			exec_ctx->pipe.fd = STDOUT_FILENO;
+			out_fd = STDOUT_FILENO;
 	}
 	in_fd = exec_ctx->pipe.fd;
-	out_fd = exec_ctx->fd.out;
 	if (in_fd != -1 && exec_ctx->pipe.index != 1)
 		pipeline_dup(exec_ctx, in_fd, true);
 	if (out_fd != -1 && exec_ctx->pipe.index != exec_ctx->args_nb)

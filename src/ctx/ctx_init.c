@@ -6,15 +6,12 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:40:56 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/03 17:39:04 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/07 21:03:14 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./ctx.h"
 #include "src/utils/utils.h"
-#include <stdlib.h>
-
-// TODO: add format! to libft
 
 int	ctx_free(t_ctx *ctx)
 {
@@ -22,39 +19,11 @@ int	ctx_free(t_ctx *ctx)
 	return (0);
 }
 
-// TODO: rename this
-char	*ssss(char *key, char *val, t_env *env)
-{
-	t_string	*s;
-	char		*content;
-	size_t		size;
-
-	size = ft_strlen(key) + ft_strlen(val);
-	s = ft_string_new(size);
-	if (!s || ft_string_push_str(s, "PWD="))
-		return (NULL);
-	ft_string_push_str(s, val);
-	content = s->content;
-	env_set(env, content);
-	free(s);
-	return (content);
-}
-
 static int	set_shell_variables(t_env *env)
 {
-	char	*pwd;
-
 	if (!env_set(env, "?=0"))
 		return (0);
 	if (!env_set(env, "HISTFILE=minishell_history.txt"))
-		return (0);
-	pwd = get_pwd();
-	if (!pwd)
-	{
-		// handle error
-	}
-	// add pwd
-	if (!env_set(env, ""))
 		return (0);
 	return (1);
 }

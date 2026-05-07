@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:39:11 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/07 21:26:28 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/07 21:49:15 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	handle_redirection(t_word_part *part, t_exec_ctx *ctx, t_env *env)
 	t_word		*target;
 	t_word_part	*target_part;
 
+	arg = NULL;
 	target = part->data;
 	target_part = NULL;
 	if (part->kind != WK_REDIRECT_IN_UNTIL && target)
@@ -61,6 +62,7 @@ int	handle_redirection(t_word_part *part, t_exec_ctx *ctx, t_env *env)
 		arg = expand_target(part->data, env, false);
 		redirect_out_append(arg, ctx);
 	}
+	free(arg);
 	return (1);
 }
 
@@ -141,7 +143,10 @@ int	expand_word(t_list *parts, t_array *argv, t_env *env, t_exec_ctx *ctx)
 		ft_string_free(arg);
 		return (0);
 	};
-	free(arg);
+	if (arg->size <= 1)
+		ft_string_free(arg);
+	else
+		free(arg);
 	return (1);
 }
 

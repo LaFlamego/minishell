@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 19:38:42 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/04 19:40:02 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/07 21:44:55 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,9 @@ void	part_free(void *raw_part)
 		free(part);
 		return ;
 	}
-	if (part->kind == WK_STRING || part->kind == WK_VARIABLE)
-	{
-		// TODO: free(part->data);
-	}
 	if (part->kind == WK_REDIRECT_IN || part->kind == WK_REDIRECT_IN_UNTIL)
-		part_free(part->data);
+		word_free(part->data);
 	if (part->kind == WK_REDIRECT_OUT || part->kind == WK_REDIRECT_OUT_APPEND)
-		part_free(part->data);
+		word_free(part->data);
 	free(part);
 }

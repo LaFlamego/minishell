@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:39:11 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/07 20:42:46 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/07 21:24:54 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 #include <stdlib.h>
 
 // FIXME: Heredoc
-// > Arg of heredoc should not be expanded
-// [https://www.gnu.org/software/bash/manual/html_node/Redirections.html]
 
 // FIXME: Allocation can fail
 // > needs to be handled
@@ -28,8 +26,21 @@
 // FIXME: handle error from redirection functions
 int	handle_redirection(t_word_part *part, t_exec_ctx *ctx, t_env *env)
 {
-	char	*arg;
+	char		*arg;
+	t_word		*target;
+	t_word_part	*target_part;
 
+	target = part->data;
+	target_part = NULL;
+	if (target)
+	{
+		target_part = target->content;
+		if (target_part->kind == WK_FILES)
+		{
+			ft_dprintf(2, "minishell: *: ambiguous redirect\n");
+			return (0);
+		}
+	}
 	if (part->kind == WK_REDIRECT_IN)
 	{
 		arg = expand_target(part->data, env, false);
@@ -53,7 +64,6 @@ int	handle_redirection(t_word_part *part, t_exec_ctx *ctx, t_env *env)
 	return (1);
 }
 
-// TODO: filtering?
 int	expand_files(t_array *argv, t_env *env)
 {
 	t_array		*files;

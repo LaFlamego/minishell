@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:39:11 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/06 19:32:34 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/07 20:42:46 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,38 @@
 #include "src/utils/utils.h"
 #include <stdlib.h>
 
+// FIXME: Heredoc
+// > Arg of heredoc should not be expanded
+// [https://www.gnu.org/software/bash/manual/html_node/Redirections.html]
+
 // FIXME: Allocation can fail
 // > needs to be handled
 // > "?" is a valid key and should be readable
 // FIXME: ft_string_push can fail
 
-// TODO: expand the file, then setup the redirection
-// > How to handle delimiters?
-
-// FIXME: data must be expanded first
 // FIXME: handle error from redirection functions
 int	handle_redirection(t_word_part *part, t_exec_ctx *ctx, t_env *env)
 {
 	char	*arg;
 
-	arg = expand_target(part->data, env);
 	if (part->kind == WK_REDIRECT_IN)
 	{
+		arg = expand_target(part->data, env, false);
 		redirect_in(arg, ctx);
 	}
 	if (part->kind == WK_REDIRECT_IN_UNTIL)
 	{
+		arg = expand_target(part->data, env, true);
 		redirect_in_until(ctx, arg);
 	}
 	if (part->kind == WK_REDIRECT_OUT)
 	{
+		arg = expand_target(part->data, env, false);
 		redirect_out(arg, ctx);
 	}
 	if (part->kind == WK_REDIRECT_OUT_APPEND)
 	{
+		arg = expand_target(part->data, env, false);
 		redirect_out_append(arg, ctx);
 	}
 	return (1);

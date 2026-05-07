@@ -6,12 +6,26 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:07:18 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/06 19:12:07 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/07 20:43:30 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./expand.h"
 #include <stdlib.h>
+
+int	expand_heredoc(t_word_part *part, t_string *arg)
+{
+	if (part->kind == WK_STRING && !ft_string_push_str(arg, part->data))
+		return (0);
+	if (part->kind == WK_VARIABLE)
+	{
+		if (!ft_string_push(arg, '$'))
+			return (0);
+		if (!ft_string_push_str(arg, part->data))
+			return (0);
+	}
+	return (1);
+}
 
 // TODO: Handle incorrect part kinds
 static int	expand_part(t_word_part *part, t_string *arg, t_env *env)
@@ -23,7 +37,7 @@ static int	expand_part(t_word_part *part, t_string *arg, t_env *env)
 	return (1);
 }
 
-char	*expand_target(t_word *parts, t_env *env)
+char	*expand_target(t_word *parts, t_env *env, bool is_heredoc)
 {
 	t_string	*arg;
 	t_word		*curr;
@@ -35,7 +49,12 @@ char	*expand_target(t_word *parts, t_env *env)
 		return (0);
 	while (curr)
 	{
-		if (!expand_part(curr->content, arg, env))
+		if (is_heredoc && !expand_heredoc(curr->content, arg))
+		{
+			ft_string_free(arg);
+			return (0);
+		};
+		if (!is_heredoc && !expand_part(curr->content, arg, env))
 		{
 			ft_string_free(arg);
 			return (0);

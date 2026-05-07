@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:05:59 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/05 19:11:31 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/07 12:42:42 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct	s_exec_ctx
 	struct s_exec_pipe	pipe;
 }						t_exec_ctx;
 
-void			pipe_build(int *pipe_in, int *pipe_out);
+unsigned int	pipe_build(int *pipe_in, int *pipe_out);
 void			free_cmd_path(t_exec_ctx *exec);
 void			fd_close_reset(int *pipein, int *pipeout, int *prevfd);
 void    		init_exec_ctx(t_exec_ctx *exec);

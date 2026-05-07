@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 18:37:56 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/05 19:56:40 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/07 12:42:50 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,18 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void	pipe_build(int *pipe_in, int *pipe_out)
+unsigned int	pipe_build(int *pipe_in, int *pipe_out)
 {
 	int	pipefd[2];
 
 	if (pipe(pipefd) == -1)
+	{
 		perror("pipe");
+		return (1);
+	}
 	*pipe_in = pipefd[0];
 	*pipe_out = pipefd[1];
+	return (0);
 }
 
 void	fd_close_reset(int *pipein, int *pipeout, int *prevfd)

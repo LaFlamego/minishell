@@ -48,7 +48,8 @@ WORD_SRCS	=	word.c						\
 				word_part.c
 
 EXPAND_SRCS	=	expand_command.c			\
-				expand_redirections.c
+				expand_redirections.c		\
+				expand_target.c
 
 UTILS_SRCS	=	cli.c		\
 				files.c		\

@@ -6,11 +6,12 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:08:52 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/05 19:49:07 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/07 21:08:01 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 #include <sys/types.h>
 #include "exec.h"
 #include "../expand/expand.h"
@@ -24,5 +25,6 @@ unsigned int	handle_single_command(t_cmd_node *node, t_ctx *ctx, t_exec_ctx *exe
 	if (!argv)
 		return (1);
 	exit_code = cmd_exec(ctx, exec_ctx, argv);
+	ft_array_free(argv, free);
 	return (exit_code);
 }

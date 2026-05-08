@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:11:29 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/03 10:43:44 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/08 19:52:58 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		ft_dprintf(2, "minishell: failed to initialize context\n");
 		return (1);
-	};
+	}
 	if (!cli_parse_args(argc, argv, &ctx))
 		return (1);
 	if (ctx.flags & FLAG_CLI_MODE)

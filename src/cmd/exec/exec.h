@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:05:59 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/07 20:44:45 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/08 19:36:06 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ typedef struct s_cmd
 	char	*path;
 }			t_cmd;
 
-typedef struct s_exec_io
+typedef struct s_exec_fds
 {
 	int					in;
 	int					out;
-}						t_exec_io;
+	int					stdin_tpr;
+	int					stdout_tpr;
+}						t_exec_fd;
 
 typedef struct s_exec_pipe
 {
@@ -51,7 +53,7 @@ typedef struct	s_exec_ctx
 	bool				is_pipe;
 	enum e_redir		redir;
 	struct s_cmd		cmd;
-	struct s_exec_io	fd;
+	struct s_exec_fds	fd;
 	struct s_exec_pipe	pipe;
 }						t_exec_ctx;
 
@@ -59,6 +61,8 @@ unsigned int	pipe_build(int *pipe_in, int *pipe_out);
 void			free_cmd_path(t_exec_ctx *exec);
 void			fd_close_reset(int *pipein, int *pipeout, int *prevfd);
 void    		init_exec_ctx(t_exec_ctx *exec);
+void			redir_fd(t_exec_ctx *exec, bool to_save_stdio);
+void			restore_stdio(t_exec_ctx *exec);
 unsigned int	track_node(t_cmd_node *node, t_ctx *ctx);
 unsigned int	cmd_exec(t_ctx *ctx, t_exec_ctx *exec, t_array *argv);
 unsigned int	cmd_exec_bin(char *argv[], t_env *env, t_exec_ctx *exec);

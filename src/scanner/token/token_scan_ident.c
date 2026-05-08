@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 17:13:58 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/05 12:24:23 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/08 20:20:57 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@ static bool	is_still_valid(const char c)
 {
 	return (ft_isalpha(c) || ft_isdigit(c) || c == '_');
 }
-
-// FIXME: this is parsed as 2 strings instead of a variable
-// > ./minishell -d -c '"$$"'
 
 t_token	*token_scan_ident(t_scanner *s)
 {

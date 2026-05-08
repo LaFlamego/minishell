@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:01:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/05 21:48:25 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/08 20:10:03 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,16 @@ bool	parser_check(t_parser *p, t_token_type type)
 	return (token->type == type);
 }
 
-// TODO: Clean parser on error here
 t_cmd_node	*parser_parse(t_parser *p)
 {
 	t_cmd_node	*head;
 
-	head = parser_parse_expr(p);
+	head = parser_parse_binary(p);
 	if (!parser_check(p, EOF))
 	{
-		parser_error(parser_peek(p));
+		parser_error(p, parser_peek(p));
+		node_free(head);
+		return (NULL);
 	}
 	p->tree = head;
 	return (p->tree);

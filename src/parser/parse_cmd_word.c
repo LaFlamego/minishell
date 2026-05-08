@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 22:28:27 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/07 20:59:14 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/08 20:08:52 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_word	*parser_parse_cmd_word(t_parser *p)
 		t = p->previous->content;
 		if (has_wildcard(word) || (word && t->type == STAR))
 		{
-			parser_error(t);
+			parser_error(p, t);
 			word_free(word);
 			return (NULL);
 		}

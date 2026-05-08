@@ -37,7 +37,6 @@ PARSER_SRCS = 	parser_new.c				\
 				parse_cmd.c					\
 				parse_cmd_arg.c				\
 				parse_cmd_word.c			\
-				parse_expr.c				\
 				parse_pipe.c				\
 				parse_primary.c				\
 				parse_variable.c

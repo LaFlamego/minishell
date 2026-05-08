@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 18:55:02 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/04 22:51:38 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/08 19:52:25 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void			*parser_free(t_parser *p);
 
 t_token			*parser_advance(t_parser *p);
 t_token			*parser_peek(t_parser *p);
-void			*parser_error(t_token *t);
+void			*parser_error(t_parser *p, t_token *t);
 
 bool			parser_check(t_parser *p, t_token_type type);
 bool			parser_match(t_parser *p, t_token_type type);
@@ -41,7 +41,6 @@ bool			parser_match_redirection(t_parser *p);
 bool			parser_check_command(t_parser *p);
 
 t_cmd_node		*parser_parse(t_parser *p);
-t_cmd_node		*parser_parse_expr(t_parser *p);
 t_cmd_node		*parser_parse_pipe(t_parser *p);
 
 /**

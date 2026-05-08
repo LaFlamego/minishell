@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 22:28:27 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/08 20:08:52 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/08 20:32:22 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ static bool	has_wildcard(t_word *word)
 	}
 	return (false);
 }
-
-// FIXME: Make sure a word does not have a wildcard?
 
 static t_word	*push_part(t_word *word, t_word_part *part)
 {
@@ -55,41 +53,36 @@ static bool	parser_match_word(t_parser *p)
 	return (parser_match(p, STRING) || parser_match(p, DOLLAR));
 }
 
-// TODO: maybe pass a ref to the t_word var instead of returning it
-// then we could directly do if (!push_part(&word))
+static t_word_part	*parse_part(t_parser *p, t_word *word)
+{
+	t_token	*t;
 
-// FIXME: Watch out for error handling, word should be freed probably
+	t = p->previous->content;
+	if (has_wildcard(word) || (word && t->type == STAR))
+		return (parser_error(p, t));
+	if (t->type == STAR)
+		return (part_new(WK_FILES, NULL));
+	if (t->type == STRING)
+		return (part_new(WK_STRING, t->text));
+	if (t->type == DOLLAR)
+		return (parser_parse_variable(p));
+	return (NULL);
+}
+
 t_word	*parser_parse_cmd_word(t_parser *p)
 {
-	t_token		*t;
 	t_word		*word;
 	t_word_part	*part;
 
 	word = NULL;
 	while (parser_match_word(p))
 	{
-		part = NULL;
-		t = p->previous->content;
-		if (has_wildcard(word) || (word && t->type == STAR))
+		part = parse_part(p, word);
+		if (!part)
 		{
-			parser_error(p, t);
 			word_free(word);
 			return (NULL);
 		}
-		if (t->type == STAR)
-		{
-			part = part_new(WK_FILES, NULL);
-		}
-		if (t->type == STRING)
-		{
-			part = part_new(WK_STRING, t->text);
-		}
-		if (t->type == DOLLAR)
-		{
-			part = parser_parse_variable(p);
-		}
-		if (!part)
-			return (NULL);
 		word = push_part(word, part);
 		if (!word)
 			return (NULL);

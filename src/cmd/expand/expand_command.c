@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:39:11 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/07 21:49:15 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/08 21:12:37 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	expand_files(t_array *argv, t_env *env)
 		}
 		i++;
 	}
-	free(files);
+	ft_array_free(files, free);
 	return (1);
 }
 

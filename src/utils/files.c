@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 15:26:04 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/27 13:30:26 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/08 21:15:52 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,16 @@ static t_string	*ft_to_string(const char *str)
 	t_string	*s;
 
 	s = ft_string_new(0);
-	if (!s)
-		return (NULL);
-	s->size = ft_strlen(str) + 1;
-	s->capacity = s->size;
-	s->content = ft_strdup(str);
-	if (!s->content)
+	if (!s || !ft_string_push_str(s, str))
 	{
-		free(s);
+		ft_string_free(s);
 		return (NULL);
 	}
 	return (s);
 }
 
+// FIXME: to_string can fail
+// FIXME: push can fail
 static t_array	*get_file_list(DIR *dir)
 {
 	struct dirent	*ent;

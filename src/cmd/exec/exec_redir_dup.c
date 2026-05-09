@@ -6,13 +6,13 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 14:27:44 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/08 20:34:23 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/09 10:33:06 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-#include <unistd.h>
 #include <stdio.h>
+#include <unistd.h>
 
 void	save_stdio(t_exec_ctx *exec, bool is_redir_in, bool to_save_stdio)
 {
@@ -38,10 +38,12 @@ void	restore_stdio(t_exec_ctx *exec)
 	}
 }
 
-static void	to_dup_and_close(t_exec_ctx *exec, bool is_redir_in, bool to_save_stdio)
+static void	to_dup_and_close(t_exec_ctx *exec, bool is_redir_in,
+		bool to_save_stdio)
 {
 	int	dup;
 
+	dup = -1;
 	save_stdio(exec, is_redir_in, to_save_stdio);
 	if (is_redir_in && exec->fd.in != -1)
 		dup = dup2(exec->fd.in, STDIN_FILENO);

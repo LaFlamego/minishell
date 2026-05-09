@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 20:24:51 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/07 20:52:02 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/09 11:11:29 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ unsigned int	track_node(t_cmd_node *node, t_ctx *ctx)
 		if (node->kind == OP_OR)
 			exit_code = handle_or_sign(node, ctx);
 	}
+	env_set_exit_code(exit_code, ctx->env);
 	return (exit_code);
 }

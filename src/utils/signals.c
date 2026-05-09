@@ -6,18 +6,15 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 21:51:19 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/28 23:11:09 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/08 19:15:38 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "./utils.h"
 #include "libft.h"
+#include <readline/readline.h>
 #include <signal.h>
 #include <unistd.h>
-
-// TODO: Do we have to handle signals differently when in non interactive mode?
-// We should check what happens when sending CTRL+C while a command is being ran
-
-int			g_sigint_received = 0;
 
 static int	error(void)
 {
@@ -28,13 +25,17 @@ static int	error(void)
 /** handle_signal() - handle incoming signals
  * @signal: signal to handle
  *
- * On SIGINT, kill the running command
+ * On SIGINT, display a new prompt on a new line
  * On SIGQUIT, do nothing. (cancels signal sent by CTRL+\)
  */
 static void	handle_signal(int signal)
 {
-	if (signal == SIGINT)
-		g_sigint_received = 0;
+	if (signal == SIGINT && isatty(0))
+	{
+		ft_dprintf(0, "\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+	}
 	if (signal == SIGQUIT)
 		return ;
 }

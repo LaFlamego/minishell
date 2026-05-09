@@ -16,7 +16,7 @@ CTX_SRCS = ctx_init.c
 CMD_SRCS = cmd.c cmd_quotes.c
 CMD_EXEC_SRCS = exec_bin.c exec_cmd.c exec_fork.c exec_path.c exec_init.c       \
 				exec_ops_and_or.c exec_ops_cmd.c exec_ops_pipe.c		        \
-				exec_pipeline.c exec_track_node.c exec_utils.c exec_redir_dup.c \
+				exec_pipeline.c exec_track_node.c exec_utils.c exec_redir_dup.c
 PROMPT_SRCS = prompt_display.c
 BUILTINS_SRCS = echo.c env.c exit.c export.c pwd.c unset.c cd.c
 

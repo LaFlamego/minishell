@@ -6,12 +6,12 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 13:59:50 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/05 19:21:54 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/09 19:20:49 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "exec.h"
+#include "libft.h"
 #include "src/env/env.h"
 #include <stdlib.h>
 #include <unistd.h>
@@ -54,16 +54,18 @@ static bool	cmd_access(char *target_path, int *find_no_x, int *no_find)
 		*no_find = 1;
 	return (false);
 }
-static unsigned int	print_if_target_fail(char *cmd_name, int find_no_x, int no_find)
+static unsigned int	print_if_target_fail(char *cmd_name, int find_no_x,
+		int no_find)
 {
 	if (find_no_x == 1)
-		return(ft_printf("%s: permission denied\n", cmd_name), 126);
+		return (ft_printf("%s: permission denied\n", cmd_name), 126);
 	else if (no_find == 1)
 		return (ft_printf("%s: command not found\n", cmd_name), 127);
 	return (0);
 }
 
-static unsigned int	find_path(t_exec_ctx *exec, char *cmd_name, char **cddt_paths)
+static unsigned int	find_path(t_exec_ctx *exec, char *cmd_name,
+		char **cddt_paths)
 {
 	char	*tpr;
 	char	*res;
@@ -102,9 +104,13 @@ unsigned int	cmd_exec_get_path(char *cmd_name, t_exec_ctx *exec, t_env *env)
 	if (ft_strchr(cmd_name, '/'))
 	{
 		if (access(cmd_name, X_OK) == 0 && access(cmd_name, F_OK) == 0)
+		{
 			exec->cmd.path = cmd_name;
+			return (0);
+		}
 		else
-			return (ft_printf("%s: No such file or directory\n", cmd_name), 127);
+			return (ft_printf("%s: No such file or directory\n", cmd_name),
+				127);
 	}
 	cddt_paths = extract_path((char **)env->data);
 	if (!cddt_paths)

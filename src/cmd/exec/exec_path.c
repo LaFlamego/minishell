@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 13:59:50 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/09 19:20:49 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/09 20:17:18 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static unsigned int	print_if_target_fail(char *cmd_name, int find_no_x,
 		int no_find)
 {
 	if (find_no_x == 1)
-		return (ft_printf("%s: permission denied\n", cmd_name), 126);
+		return (ft_printf("%s: Permission denied\n", cmd_name), 126);
 	else if (no_find == 1)
 		return (ft_printf("%s: command not found\n", cmd_name), 127);
 	return (0);
@@ -94,23 +94,22 @@ static unsigned int	find_path(t_exec_ctx *exec, char *cmd_name,
 	return (print_if_target_fail(cmd_name, find_no_x, no_find));
 }
 
+//TODO nice to have: handle ./normalfile by doing fallback
 unsigned int	cmd_exec_get_path(char *cmd_name, t_exec_ctx *exec, t_env *env)
 {
 	char			**cddt_paths;
 	unsigned int	exit_code;
 
-	if (!cmd_name)
-		return (ft_printf("'': command not found\n"), 127);
 	if (ft_strchr(cmd_name, '/'))
 	{
-		if (access(cmd_name, X_OK) == 0 && access(cmd_name, F_OK) == 0)
+		if (access(cmd_name, F_OK) == 0)
 		{
-			exec->cmd.path = cmd_name;
-			return (0);
+			if (access(cmd_name, X_OK) == 0)
+				return (exec->cmd.path = cmd_name, 0);
+			return (ft_printf("%s: Permission denied\n", cmd_name), 126);
 		}
 		else
-			return (ft_printf("%s: No such file or directory\n", cmd_name),
-				127);
+			return (ft_printf("%s: No such file or directory\n", cmd_name), 127);
 	}
 	cddt_paths = extract_path((char **)env->data);
 	if (!cddt_paths)

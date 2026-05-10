@@ -6,13 +6,12 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:08:52 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/07 21:55:39 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/10 21:18:24 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../expand/expand.h"
 #include "exec.h"
-#include "libft.h"
 #include "src/debug/debug.h"
 #include <stdlib.h>
 #include <sys/types.h>
@@ -28,7 +27,10 @@ unsigned int	handle_single_command(t_cmd_node *node, t_ctx *ctx,
 		return (1);
 	if (ctx->flags & FLAG_DEBUG)
 		debug_argv(argv);
-	exit_code = cmd_exec(ctx, exec_ctx, argv);
+	if (argv->size <= 1)
+		exit_code = 0;
+	else
+		exit_code = cmd_exec(ctx, exec_ctx, argv);
 	ft_array_free(argv, free);
 	return (exit_code);
 }

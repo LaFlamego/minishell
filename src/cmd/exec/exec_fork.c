@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:35:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/10 19:54:36 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/10 23:17:34 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,12 @@ pid_t	cmd_exec_fork(t_array *argv, t_exec_ctx *exec, t_env *env)
 		get_and_exec_cmd(argv, exec, env);
 	}
 	else if (pid > 0)
+	{
+		if (exec->redir == READ_IN || exec->redir == HEREDOC)
+			fd_close_reset(&exec->fd.in, NULL, NULL);
+		if (exec->redir == WRITE_OUT || exec->redir == APPEND)
+			fd_close_reset(NULL, &exec->fd.out, NULL);
 		free_cmd_path(exec);
+	}
 	return (pid);
 }

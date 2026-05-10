@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:01:11 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/07 22:33:22 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/11 00:29:27 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	redirect_in(char *file_to, t_exec_ctx *exec_ctx)
 {
 	int	fd_file_to;
 
+	if (exec_ctx->fd.in > 2)
+		fd_close_reset(&exec_ctx->fd.in, NULL, NULL);
 	fd_file_to = open(file_to, O_RDONLY);
 	if (fd_file_to == -1)
 	{
@@ -40,6 +42,8 @@ void	redirect_out(char *file_to, t_exec_ctx *exec_ctx)
 {
 	int	fd_file_to;
 
+	if (exec_ctx->fd.out > 2)
+		fd_close_reset(NULL, &exec_ctx->fd.out, NULL);
 	fd_file_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd_file_to == -1)
 	{
@@ -58,6 +62,8 @@ void	redirect_in_until(t_exec_ctx *exec_ctx, char *limiter)
 	int		fd_in;
 	int		fd_out;
 
+	if (exec_ctx->fd.in > 2)
+		fd_close_reset(&exec_ctx->fd.in, NULL, NULL);
 	len_limiter = ft_strlen(limiter);
 	pipe_build(&fd_in, &fd_out);
 	new_line = readline("> ");
@@ -80,6 +86,8 @@ void	redirect_out_append(char *file_to, t_exec_ctx *exec_ctx)
 {
 	int	fd_file_to;
 
+	if (exec_ctx->fd.out > 2)
+		fd_close_reset(NULL, &exec_ctx->fd.out, NULL);
 	fd_file_to = open(file_to, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd_file_to == -1)
 	{

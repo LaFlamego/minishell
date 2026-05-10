@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:03:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/08 19:58:57 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/10 19:07:34 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ unsigned int	cmd_exec(t_ctx *ctx, t_exec_ctx *exec, t_array *argv)
 		restore_stdio(exec);
 	}
 	else
-		exit_code = cmd_exec_bin((char **)argv->data, ctx->env, exec);
+		exit_code = cmd_exec_bin(argv, ctx->env, exec);
 	env_set_exit_code(exit_code, ctx->env);
 	return (exit_code);
 }

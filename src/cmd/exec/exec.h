@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:05:59 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/08 19:36:06 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/10 19:00:46 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void			redir_fd(t_exec_ctx *exec, bool to_save_stdio);
 void			restore_stdio(t_exec_ctx *exec);
 unsigned int	track_node(t_cmd_node *node, t_ctx *ctx);
 unsigned int	cmd_exec(t_ctx *ctx, t_exec_ctx *exec, t_array *argv);
-unsigned int	cmd_exec_bin(char *argv[], t_env *env, t_exec_ctx *exec);
-pid_t			cmd_exec_fork(char *argv[], t_exec_ctx *exec, t_env *env);
+unsigned int	cmd_exec_bin(t_array *argv, t_env *env, t_exec_ctx *exec);
+pid_t			cmd_exec_fork(t_array *argv, t_exec_ctx *exec, t_env *env);
 unsigned int	cmd_exec_get_path(char *cmd_name, t_exec_ctx *exec, t_env *env);
 unsigned int    handle_and_sign(t_cmd_node *node, t_ctx *ctx);
 unsigned int	handle_or_sign(t_cmd_node *node, t_ctx *ctx);

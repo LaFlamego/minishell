@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:35:32 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/11 13:38:16 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/11 16:26:44 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,12 @@ static void	pipeline_dup(t_exec_ctx *exec_ctx, int fd_dup, bool is_pipe_in)
 	{
 		fd_close_reset(&exec_ctx->fd.in, &exec_ctx->fd.out, &exec_ctx->pipe.fd);
 		perror("minishell: dup");
+		return ;
 	}
+	if (is_pipe_in)
+		fd_close_reset(&exec_ctx->fd.in, NULL, NULL);
+	else
+		fd_close_reset(NULL, &exec_ctx->fd.out, NULL);
 }
 
 static void	fd_proceed(t_exec_ctx *exec_ctx)

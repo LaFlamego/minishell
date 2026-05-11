@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:01:11 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/11 00:29:27 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/11 13:04:23 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-// TODO: How to handle errors here?
-
-void	redirect_in(char *file_to, t_exec_ctx *exec_ctx)
+int	redirect_in(char *file_to, t_exec_ctx *exec_ctx)
 {
 	int	fd_file_to;
 
@@ -32,13 +30,14 @@ void	redirect_in(char *file_to, t_exec_ctx *exec_ctx)
 	if (fd_file_to == -1)
 	{
 		perror("open");
-		return ;
+		return (0);
 	}
 	exec_ctx->fd.in = fd_file_to;
 	exec_ctx->redir = READ_IN;
+	return (1);
 }
 
-void	redirect_out(char *file_to, t_exec_ctx *exec_ctx)
+int	redirect_out(char *file_to, t_exec_ctx *exec_ctx)
 {
 	int	fd_file_to;
 
@@ -48,14 +47,15 @@ void	redirect_out(char *file_to, t_exec_ctx *exec_ctx)
 	if (fd_file_to == -1)
 	{
 		perror("open");
-		return ;
+		return (0);
 	}
 	exec_ctx->fd.out = fd_file_to;
 	exec_ctx->redir = WRITE_OUT;
+	return (1);
 }
 
 // TODO: Maybe add a history line ehre
-void	redirect_in_until(t_exec_ctx *exec_ctx, char *limiter)
+int	redirect_in_until(t_exec_ctx *exec_ctx, char *limiter)
 {
 	char	*new_line;
 	size_t	len_limiter;
@@ -80,9 +80,10 @@ void	redirect_in_until(t_exec_ctx *exec_ctx, char *limiter)
 	fd_close_reset(NULL, &fd_out, NULL);
 	exec_ctx->fd.in = fd_in;
 	exec_ctx->redir = HEREDOC;
+	return (1);
 }
 
-void	redirect_out_append(char *file_to, t_exec_ctx *exec_ctx)
+int	redirect_out_append(char *file_to, t_exec_ctx *exec_ctx)
 {
 	int	fd_file_to;
 
@@ -92,8 +93,9 @@ void	redirect_out_append(char *file_to, t_exec_ctx *exec_ctx)
 	if (fd_file_to == -1)
 	{
 		perror("open");
-		return ;
+		return (0);
 	}
 	exec_ctx->fd.out = fd_file_to;
 	exec_ctx->redir = APPEND;
+	return (1);
 }

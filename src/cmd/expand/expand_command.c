@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:39:11 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/08 21:12:37 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/11 13:02:51 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ int	handle_redirection(t_word_part *part, t_exec_ctx *ctx, t_env *env)
 	char		*arg;
 	t_word		*target;
 	t_word_part	*target_part;
+	int			res;
 
+	res = 1;
 	arg = NULL;
 	target = part->data;
 	target_part = NULL;
@@ -45,25 +47,25 @@ int	handle_redirection(t_word_part *part, t_exec_ctx *ctx, t_env *env)
 	if (part->kind == WK_REDIRECT_IN)
 	{
 		arg = expand_target(part->data, env, false);
-		redirect_in(arg, ctx);
+		res = redirect_in(arg, ctx);
 	}
 	if (part->kind == WK_REDIRECT_IN_UNTIL)
 	{
 		arg = expand_target(part->data, env, true);
-		redirect_in_until(ctx, arg);
+		res = redirect_in_until(ctx, arg);
 	}
 	if (part->kind == WK_REDIRECT_OUT)
 	{
 		arg = expand_target(part->data, env, false);
-		redirect_out(arg, ctx);
+		res = redirect_out(arg, ctx);
 	}
 	if (part->kind == WK_REDIRECT_OUT_APPEND)
 	{
 		arg = expand_target(part->data, env, false);
-		redirect_out_append(arg, ctx);
+		res = redirect_out_append(arg, ctx);
 	}
 	free(arg);
-	return (1);
+	return (res);
 }
 
 int	expand_files(t_array *argv, t_env *env)

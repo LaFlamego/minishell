@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:21:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/07 20:41:52 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/11 13:03:16 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int		expand_variable(t_string *arg, char *key, t_env *env);
 
 char	*expand_target(t_word *parts, t_env *env, bool is_heredoc);
 
-void	redirect_in(char *file_to, t_exec_ctx *exec_ctx);
-void	redirect_out(char *file_to, t_exec_ctx *exec_ctx);
-void	redirect_in_until(t_exec_ctx *exec_ctx, char *limiter);
-void	redirect_out_append(char *file_to, t_exec_ctx *exec_ctx);
+int		redirect_in(char *file_to, t_exec_ctx *exec_ctx);
+int		redirect_out(char *file_to, t_exec_ctx *exec_ctx);
+int		redirect_in_until(t_exec_ctx *exec_ctx, char *limiter);
+int		redirect_out_append(char *file_to, t_exec_ctx *exec_ctx);
 
 #endif

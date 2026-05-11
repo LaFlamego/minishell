@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:01:11 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/11 16:06:02 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/11 17:42:46 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include <fcntl.h>
 #include <readline/history.h>
 #include <readline/readline.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -55,32 +54,29 @@ int	redirect_out(char *file_to, t_exec_ctx *exec_ctx)
 	return (1);
 }
 
-// TODO: Maybe add a history line ehre
-int	redirect_in_until(t_exec_ctx *exec_ctx, char *limiter)
+// TODO: This should be done in the child for CTRL+C to work
+int	redirect_in_until(t_exec_ctx *ctx, char *del)
 {
-	char	*new_line;
-	size_t	len_limiter;
+	char	*line;
 	int		fd_in;
 	int		fd_out;
 
-	if (exec_ctx->fd.in > 2)
-		fd_close_reset(&exec_ctx->fd.in, NULL, NULL);
-	len_limiter = ft_strlen(limiter);
-	pipe_build(&fd_in, &fd_out);
-	new_line = readline("> ");
-	while (new_line != NULL)
+	if (ctx->fd.in > 2)
+		fd_close_reset(&ctx->fd.in, NULL, NULL);
+	if (pipe_build(&fd_in, &fd_out))
+		return (1);
+	line = readline("> ");
+	while (line != NULL && !ft_streq(line, del))
 	{
-		if (len_limiter > 0 && ft_strcmp(new_line, limiter) == 0)
-			break ;
-		write(fd_out, new_line, ft_strlen(new_line));
+		write(fd_out, line, ft_strlen(line));
 		write(fd_out, "\n", 1);
-		free(new_line);
-		new_line = readline("> ");
+		free(line);
+		line = readline("> ");
 	}
-	free(new_line);
+	free(line);
 	fd_close_reset(NULL, &fd_out, NULL);
-	exec_ctx->fd.in = fd_in;
-	exec_ctx->redir = HEREDOC;
+	ctx->fd.in = fd_in;
+	ctx->redir = HEREDOC;
 	return (1);
 }
 

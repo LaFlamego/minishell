@@ -18,10 +18,6 @@
 #include <string.h>
 #include <unistd.h>
 
-// FIXME: Wrong error when running $PWD
-// > execve: Permission denied
-// > bash: /home/oery/Documents/42/minishell: Is a directory
-
 static unsigned int	get_and_exec_cmd(t_array *argv, t_exec_ctx *exec,
 		t_env *env)
 {

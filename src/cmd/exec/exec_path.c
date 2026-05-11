@@ -6,15 +6,24 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 13:59:50 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/11 14:19:27 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/11 16:29:31 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "libft.h"
 #include "src/env/env.h"
+#include <errno.h>
 #include <stdlib.h>
+#include <string.h>
+#include <sys/stat.h>
 #include <unistd.h>
+
+// TODO: How do bash handle symlinks?
+static bool	is_dir(struct stat *sb)
+{
+	return ((sb->st_mode & S_IFMT) == S_IFDIR);
+}
 
 static char	**extract_path(char **envp)
 {
@@ -39,6 +48,7 @@ static char	**extract_path(char **envp)
 	return (res);
 }
 
+// TODO: use an enum
 static bool	cmd_access(char *target_path, int *find_no_x, int *no_find)
 {
 	if (access(target_path, F_OK) == 0)
@@ -58,9 +68,11 @@ static unsigned int	print_if_target_fail(char *cmd_name, int find_no_x,
 		int no_find)
 {
 	if (find_no_x == 1)
-		return (ft_printf("%s: Permission denied\n", cmd_name), 126);
+		return (ft_dprintf(2, "minishell: %s: Permission denied\n", cmd_name),
+			126);
 	else if (no_find == 1)
-		return (ft_printf("%s: command not found\n", cmd_name), 127);
+		return (ft_dprintf(2, "minishell: %s: command not found\n", cmd_name),
+			127);
 	return (0);
 }
 
@@ -94,24 +106,37 @@ static unsigned int	find_path(t_exec_ctx *exec, char *cmd_name,
 	return (print_if_target_fail(cmd_name, find_no_x, no_find));
 }
 
-//TODO nice to have: handle ./normalfile by doing fallback
+// TODO nice to have: handle ./normalfile by doing fallback
+// TODO: reverse strchr check
 unsigned int	cmd_exec_get_path(char *cmd_name, t_exec_ctx *exec, t_env *env)
 {
 	char			**cddt_paths;
 	unsigned int	exit_code;
+	struct stat		sb;
 
 	if (ft_strchr(cmd_name, '/'))
 	{
-		if (cmd_name[ft_strlen((const char *)cmd_name) - 1] == '/')
-			return (ft_printf("%s: Is a directory\n", cmd_name), 126);
-		if (access(cmd_name, F_OK) == 0)
+		if (stat(cmd_name, &sb) == -1)
 		{
-			if (access(cmd_name, X_OK) == 0)
-				return (exec->cmd.path = cmd_name, 0);
-			return (ft_printf("%s: Permission denied\n", cmd_name), 126);
+			ft_dprintf(2, "minishell: %s: %s\n", cmd_name, strerror(errno));
+			return (1);
 		}
-		else
-			return (ft_printf("%s: No such file or directory\n", cmd_name), 127);
+		if (is_dir(&sb))
+		{
+			ft_dprintf(2, "minishell: %s: Is a directory\n", cmd_name);
+			return (126);
+		}
+		if (access(cmd_name, F_OK) != 0)
+		{
+			ft_dprintf(2, "minishell: %s: No such file or directory\n", cmd_name);
+			return (127);
+		}
+		if (access(cmd_name, X_OK) != 0)
+		{
+			ft_dprintf(2, "minishell: %s: Permission denied\n", cmd_name);
+			return (1);
+		}
+		return (exec->cmd.path = cmd_name, 0);
 	}
 	cddt_paths = extract_path((char **)env->data);
 	if (!cddt_paths)

@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:35:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/11 13:39:09 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/11 15:55:33 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static unsigned int	get_and_exec_cmd(t_array *argv, t_exec_ctx *exec,
 	if (exit_code != 0)
 	{
 		free_cmd_path(exec);
-		ft_array_free(argv, free);
 		exit(exit_code);
 	}
 	cmd_path = exec->cmd.path;
@@ -40,7 +39,6 @@ static unsigned int	get_and_exec_cmd(t_array *argv, t_exec_ctx *exec,
 	execve(cmd_path, (char *const *)argv->data, (char **)env->data);
 	perror("minishell: execve");
 	free_cmd_path(exec);
-	ft_array_free(argv, free);
 	exit(errno);
 }
 

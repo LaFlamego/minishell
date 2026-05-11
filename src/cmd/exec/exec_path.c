@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 13:59:50 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/09 20:17:18 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/11 14:19:27 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ unsigned int	cmd_exec_get_path(char *cmd_name, t_exec_ctx *exec, t_env *env)
 
 	if (ft_strchr(cmd_name, '/'))
 	{
+		if (cmd_name[ft_strlen((const char *)cmd_name) - 1] == '/')
+			return (ft_printf("%s: Is a directory\n", cmd_name), 126);
 		if (access(cmd_name, F_OK) == 0)
 		{
 			if (access(cmd_name, X_OK) == 0)

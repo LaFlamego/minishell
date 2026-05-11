@@ -6,13 +6,14 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:01:11 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/11 13:04:23 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/11 13:12:48 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../exec/exec.h"
 #include "libft.h"
 #include "src/utils/utils.h"
+#include <errno.h>
 #include <fcntl.h>
 #include <readline/history.h>
 #include <readline/readline.h>
@@ -29,7 +30,7 @@ int	redirect_in(char *file_to, t_exec_ctx *exec_ctx)
 	fd_file_to = open(file_to, O_RDONLY);
 	if (fd_file_to == -1)
 	{
-		perror("open");
+		ft_dprintf(2, "minishell: %s: %s\n", file_to, strerror(errno));
 		return (0);
 	}
 	exec_ctx->fd.in = fd_file_to;
@@ -46,7 +47,7 @@ int	redirect_out(char *file_to, t_exec_ctx *exec_ctx)
 	fd_file_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd_file_to == -1)
 	{
-		perror("open");
+		ft_dprintf(2, "minishell: %s: %s\n", file_to, strerror(errno));
 		return (0);
 	}
 	exec_ctx->fd.out = fd_file_to;
@@ -92,7 +93,7 @@ int	redirect_out_append(char *file_to, t_exec_ctx *exec_ctx)
 	fd_file_to = open(file_to, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd_file_to == -1)
 	{
-		perror("open");
+		ft_dprintf(2, "minishell: %s: %s\n", file_to, strerror(errno));
 		return (0);
 	}
 	exec_ctx->fd.out = fd_file_to;

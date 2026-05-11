@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 14:27:44 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/09 10:33:06 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/11 13:37:18 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	to_dup_and_close(t_exec_ctx *exec, bool is_redir_in,
 	if (dup == -1)
 	{
 		fd_close_reset(&exec->fd.in, &exec->fd.out, &exec->pipe.fd);
-		perror("dup");
+		perror("minishell: dup");
 		return ;
 	}
 	if (is_redir_in)

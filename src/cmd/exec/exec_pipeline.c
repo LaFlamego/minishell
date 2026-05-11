@@ -6,16 +6,16 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:35:32 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/07 22:29:47 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/11 13:38:16 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <unistd.h>
+#include "exec.h"
+#include "libft.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "libft.h"
-#include "exec.h"
+#include <sys/types.h>
+#include <unistd.h>
 
 static void	pipeline_dup(t_exec_ctx *exec_ctx, int fd_dup, bool is_pipe_in)
 {
@@ -29,7 +29,7 @@ static void	pipeline_dup(t_exec_ctx *exec_ctx, int fd_dup, bool is_pipe_in)
 	if (dup == -1)
 	{
 		fd_close_reset(&exec_ctx->fd.in, &exec_ctx->fd.out, &exec_ctx->pipe.fd);
-		perror("dup");
+		perror("minishell: dup");
 	}
 }
 
@@ -53,7 +53,7 @@ static void	fd_proceed(t_exec_ctx *exec_ctx)
 
 pid_t	exec_pipeline(t_list *list, t_exec_ctx *exec_ctx, t_ctx *ctx)
 {
-	pid_t			pid;
+	pid_t	pid;
 
 	pid = -1;
 	if (exec_ctx->pipe.index != exec_ctx->args_nb)
@@ -65,7 +65,7 @@ pid_t	exec_pipeline(t_list *list, t_exec_ctx *exec_ctx, t_ctx *ctx)
 	if (pid < 0)
 	{
 		fd_close_reset(&exec_ctx->fd.in, &exec_ctx->fd.out, &exec_ctx->pipe.fd);
-		return (perror("pid"), pid);
+		return (perror("minishell: pid"), pid);
 	}
 	if (pid == 0)
 	{

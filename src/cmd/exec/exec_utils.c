@@ -6,12 +6,12 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 18:37:56 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/07 12:42:50 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/11 13:37:50 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "exec.h"
+#include "libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -22,7 +22,7 @@ unsigned int	pipe_build(int *pipe_in, int *pipe_out)
 
 	if (pipe(pipefd) == -1)
 	{
-		perror("pipe");
+		perror("minishell: pipe");
 		return (1);
 	}
 	*pipe_in = pipefd[0];

@@ -6,15 +6,15 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:35:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/10 23:17:34 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/11 13:39:09 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "src/env/env.h"
 #include <errno.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -22,7 +22,8 @@
 // > execve: Permission denied
 // > bash: /home/oery/Documents/42/minishell: Is a directory
 
-static unsigned int	get_and_exec_cmd(t_array *argv, t_exec_ctx *exec, t_env *env)
+static unsigned int	get_and_exec_cmd(t_array *argv, t_exec_ctx *exec,
+		t_env *env)
 {
 	char			*cmd_path;
 	unsigned int	exit_code;
@@ -40,8 +41,8 @@ static unsigned int	get_and_exec_cmd(t_array *argv, t_exec_ctx *exec, t_env *env
 	// 	ft_dprintf(2, "minishell: '%s': %s\n", argv[0], strerror(errno));
 	// 	exit(errno);
 	// }
-	execve(cmd_path, (char * const*)argv->data, (char **)env->data);
-	perror("execve");
+	execve(cmd_path, (char *const *)argv->data, (char **)env->data);
+	perror("minishell: execve");
 	free_cmd_path(exec);
 	ft_array_free(argv, free);
 	exit(errno);
@@ -53,7 +54,7 @@ pid_t	cmd_exec_fork(t_array *argv, t_exec_ctx *exec, t_env *env)
 
 	pid = fork();
 	if (pid < 0)
-		return (perror("pid"), pid);
+		return (perror("minishell: pid"), pid);
 	else if (pid == 0)
 	{
 		redir_fd(exec, false);

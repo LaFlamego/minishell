@@ -6,16 +6,19 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 12:18:23 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/02 01:29:48 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/11 13:16:50 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "src/ctx/ctx.h"
 #include <errno.h>
-#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
+
+// TODO: Use get_pwd utils
+// > We still need to check errnor afterhand
 
 #define BUFFER_SIZE 64
 
@@ -58,7 +61,10 @@ unsigned int	mini_cd(int argc, char *argv[], t_ctx *ctx)
 				return (1);
 		}
 		if (argv[1] && chdir(argv[1]) == -1)
-			return (perror("cd"), 1);
+		{
+			ft_dprintf(2, "minishell: cd: %s\n", strerror(errno));
+			return (1);
+		}
 		else
 		{
 			if (update_cwd("PWD=", ctx) == 1)

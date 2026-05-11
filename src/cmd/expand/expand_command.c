@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:39:11 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/11 13:02:51 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/11 17:14:41 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,7 @@
 #include "src/utils/utils.h"
 #include <stdlib.h>
 
-// FIXME: Heredoc
-
-// FIXME: Allocation can fail
-// > needs to be handled
-// > "?" is a valid key and should be readable
-// FIXME: ft_string_push can fail
-
-// FIXME: handle error from redirection functions
-int	handle_redirection(t_word_part *part, t_exec_ctx *ctx, t_env *env)
+int	handle_redirection(t_word_part *part, t_exec_ctx *ctx)
 {
 	char		*arg;
 	t_word		*target;
@@ -46,22 +38,22 @@ int	handle_redirection(t_word_part *part, t_exec_ctx *ctx, t_env *env)
 	}
 	if (part->kind == WK_REDIRECT_IN)
 	{
-		arg = expand_target(part->data, env, false);
+		arg = expand_target(part->data, ctx->env, false);
 		res = redirect_in(arg, ctx);
 	}
 	if (part->kind == WK_REDIRECT_IN_UNTIL)
 	{
-		arg = expand_target(part->data, env, true);
+		arg = expand_target(part->data, ctx->env, true);
 		res = redirect_in_until(ctx, arg);
 	}
 	if (part->kind == WK_REDIRECT_OUT)
 	{
-		arg = expand_target(part->data, env, false);
+		arg = expand_target(part->data, ctx->env, false);
 		res = redirect_out(arg, ctx);
 	}
 	if (part->kind == WK_REDIRECT_OUT_APPEND)
 	{
-		arg = expand_target(part->data, env, false);
+		arg = expand_target(part->data, ctx->env, false);
 		res = redirect_out_append(arg, ctx);
 	}
 	free(arg);
@@ -108,21 +100,22 @@ int	expand_variable(t_string *arg, char *key, t_env *env)
 	return (1);
 }
 
-int	expand_part(t_word_part *part, t_string *arg, t_array *argv, t_env *env,
+int	expand_part(t_word_part *part, t_string *arg, t_array *argv,
 		t_exec_ctx *ctx)
 {
 	if (part->kind == WK_STRING && !ft_string_push_str(arg, part->data))
 		return (0);
-	if (part->kind == WK_FILES && !expand_files(argv, env))
+	if (part->kind == WK_FILES && !expand_files(argv, ctx->env))
 		return (0);
-	if (part->kind == WK_VARIABLE && !expand_variable(arg, part->data, env))
+	if (part->kind == WK_VARIABLE && !expand_variable(arg, part->data,
+			ctx->env))
 		return (0);
 	if (part->kind >= WK_REDIRECT_IN && part->kind <= WK_REDIRECT_OUT_APPEND)
-		return (handle_redirection(part, ctx, env));
+		return (handle_redirection(part, ctx));
 	return (1);
 }
 
-int	expand_word(t_list *parts, t_array *argv, t_env *env, t_exec_ctx *ctx)
+int	expand_word(t_list *parts, t_array *argv, t_exec_ctx *ctx)
 {
 	t_string	*arg;
 	t_list		*curr;
@@ -133,18 +126,18 @@ int	expand_word(t_list *parts, t_array *argv, t_env *env, t_exec_ctx *ctx)
 		return (0);
 	while (curr)
 	{
-		if (!expand_part(curr->content, arg, argv, env, ctx))
+		if (!expand_part(curr->content, arg, argv, ctx))
 		{
 			ft_string_free(arg);
 			return (0);
-		};
+		}
 		curr = curr->next;
 	}
 	if (arg->size > 1 && !ft_array_push(argv, arg->content))
 	{
 		ft_string_free(arg);
 		return (0);
-	};
+	}
 	if (arg->size <= 1)
 		ft_string_free(arg);
 	else
@@ -152,8 +145,7 @@ int	expand_word(t_list *parts, t_array *argv, t_env *env, t_exec_ctx *ctx)
 	return (1);
 }
 
-// FIXME: handle array_push failures
-t_array	*expand_command(t_word *words, t_env *env, t_exec_ctx *ctx)
+t_array	*expand_command(t_word *words, t_exec_ctx *ctx)
 {
 	t_word	*curr;
 	t_array	*argv;
@@ -164,13 +156,17 @@ t_array	*expand_command(t_word *words, t_env *env, t_exec_ctx *ctx)
 	curr = words;
 	while (curr)
 	{
-		if (!expand_word(curr->content, argv, env, ctx))
+		if (!expand_word(curr->content, argv, ctx))
 		{
 			ft_array_free(argv, free);
 			return (NULL);
-		};
+		}
 		curr = curr->next;
 	}
-	ft_array_push(argv, NULL);
+	if (!ft_array_push(argv, NULL))
+	{
+		ft_array_free(argv, free);
+		return (NULL);
+	}
 	return (argv);
 }

@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 20:24:51 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/11 13:30:08 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/11 22:52:52 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ unsigned int	track_node(t_cmd_node *node, t_ctx *ctx)
 	unsigned int	exit_code;
 
 	exit_code = -1;
-	init_exec_ctx(&exec_ctx);
+	init_exec_ctx(&exec_ctx, ctx);
 	if (node->kind == PIPELINE)
 	{
 		exec_ctx.is_pipe = true;

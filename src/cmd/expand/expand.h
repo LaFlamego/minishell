@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:21:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/11 13:03:16 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/11 17:12:50 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 /**
  * expand_command() - expand a command
  * @words: a command's content
- * @env: environment variables
  * @ctx: command execution context
  *
  * Setup redirections and build the command's `argv`
@@ -31,7 +30,7 @@
  * Pointer to `argv` on success. Must be freed.
  * NULL on failure.
  */
-t_array	*expand_command(t_word *words, t_env *env, t_exec_ctx *ctx);
+t_array	*expand_command(t_word *words, t_exec_ctx *ctx);
 
 // TODO: add documentation
 int		expand_variable(t_string *arg, char *key, t_env *env);

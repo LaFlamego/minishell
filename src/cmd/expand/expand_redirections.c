@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:01:11 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/11 17:42:46 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/11 23:06:00 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	redirect_in_until(t_exec_ctx *ctx, char *del)
 		fd_close_reset(&ctx->fd.in, NULL, NULL);
 	if (pipe_build(&fd_in, &fd_out))
 		return (1);
+	dup2(ctx->shell->stdin, STDIN_FILENO);
 	line = readline("> ");
 	while (line != NULL && !ft_streq(line, del))
 	{

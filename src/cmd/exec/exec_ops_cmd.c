@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:08:52 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/10 21:18:24 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/11 17:13:11 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ unsigned int	handle_single_command(t_cmd_node *node, t_ctx *ctx,
 	t_array			*argv;
 	unsigned int	exit_code;
 
-	argv = expand_command(node->data, ctx->env, exec_ctx);
+	argv = expand_command(node->data, exec_ctx);
 	if (!argv)
 		return (1);
 	if (ctx->flags & FLAG_DEBUG)

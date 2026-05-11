@@ -6,12 +6,13 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:40:56 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/07 21:03:14 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/11 22:50:15 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./ctx.h"
 #include "src/utils/utils.h"
+#include <unistd.h>
 
 int	ctx_free(t_ctx *ctx)
 {
@@ -28,6 +29,7 @@ static int	set_shell_variables(t_env *env)
 	return (1);
 }
 
+// TODO: dup can fail
 int	ctx_init(t_ctx *ctx, char **envp)
 {
 	ft_bzero(ctx, sizeof(t_ctx));
@@ -40,5 +42,6 @@ int	ctx_init(t_ctx *ctx, char **envp)
 	// WARN: history_load(ctx->env);
 	if (!setup_signals_handlers())
 		return (ctx_free(ctx));
+	ctx->stdin = dup(STDIN_FILENO);
 	return (1);
 }

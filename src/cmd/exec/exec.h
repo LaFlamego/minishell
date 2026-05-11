@@ -6,19 +6,19 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:05:59 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/10 19:00:46 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/11 22:58:10 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
+# include "../cmd.h"
+# include "../tree/node.h"
 # include "src/ctx/ctx.h"
 # include <sys/types.h>
-# include "../tree/node.h" 
-# include "../cmd.h"
 
-enum	e_redir
+enum					e_redir
 {
 	READ_IN,
 	WRITE_OUT,
@@ -29,8 +29,8 @@ enum	e_redir
 
 typedef struct s_cmd
 {
-	char	*path;
-}			t_cmd;
+	char				*path;
+}						t_cmd;
 
 typedef struct s_exec_fds
 {
@@ -46,8 +46,7 @@ typedef struct s_exec_pipe
 	int					fd;
 }						t_exec_pipe;
 
-
-typedef struct	s_exec_ctx
+typedef struct s_exec_ctx
 {
 	size_t				args_nb;
 	bool				is_pipe;
@@ -55,23 +54,31 @@ typedef struct	s_exec_ctx
 	struct s_cmd		cmd;
 	struct s_exec_fds	fd;
 	struct s_exec_pipe	pipe;
+	t_env				*env;
+	t_ctx				*shell;
 }						t_exec_ctx;
 
-unsigned int	pipe_build(int *pipe_in, int *pipe_out);
-void			free_cmd_path(t_exec_ctx *exec);
-void			fd_close_reset(int *pipein, int *pipeout, int *prevfd);
-void    		init_exec_ctx(t_exec_ctx *exec);
-void			redir_fd(t_exec_ctx *exec, bool to_save_stdio);
-void			restore_stdio(t_exec_ctx *exec);
-unsigned int	track_node(t_cmd_node *node, t_ctx *ctx);
-unsigned int	cmd_exec(t_ctx *ctx, t_exec_ctx *exec, t_array *argv);
-unsigned int	cmd_exec_bin(t_array *argv, t_env *env, t_exec_ctx *exec);
-pid_t			cmd_exec_fork(t_array *argv, t_exec_ctx *exec, t_env *env);
-unsigned int	cmd_exec_get_path(char *cmd_name, t_exec_ctx *exec, t_env *env);
-unsigned int    handle_and_sign(t_cmd_node *node, t_ctx *ctx);
-unsigned int	handle_or_sign(t_cmd_node *node, t_ctx *ctx);
-unsigned int	handle_single_command(t_cmd_node *node, t_ctx *ctx, t_exec_ctx *exec_ctx);
-unsigned int    handle_pipe_sign(t_cmd_node *node, t_exec_ctx *exec_ctx, t_ctx *ctx);
-pid_t			exec_pipeline(t_list *list, t_exec_ctx *exec_ctx, t_ctx *ctx);
+unsigned int			pipe_build(int *pipe_in, int *pipe_out);
+void					free_cmd_path(t_exec_ctx *exec);
+void					fd_close_reset(int *pipein, int *pipeout, int *prevfd);
+void					init_exec_ctx(t_exec_ctx *exec, t_ctx *ctx);
+void					redir_fd(t_exec_ctx *exec, bool to_save_stdio);
+void					restore_stdio(t_exec_ctx *exec);
+unsigned int			track_node(t_cmd_node *node, t_ctx *ctx);
+unsigned int			cmd_exec(t_ctx *ctx, t_exec_ctx *exec, t_array *argv);
+unsigned int			cmd_exec_bin(t_array *argv, t_env *env,
+							t_exec_ctx *exec);
+pid_t					cmd_exec_fork(t_array *argv, t_exec_ctx *exec,
+							t_env *env);
+unsigned int			cmd_exec_get_path(char *cmd_name, t_exec_ctx *exec,
+							t_env *env);
+unsigned int			handle_and_sign(t_cmd_node *node, t_ctx *ctx);
+unsigned int			handle_or_sign(t_cmd_node *node, t_ctx *ctx);
+unsigned int			handle_single_command(t_cmd_node *node, t_ctx *ctx,
+							t_exec_ctx *exec_ctx);
+unsigned int			handle_pipe_sign(t_cmd_node *node, t_exec_ctx *exec_ctx,
+							t_ctx *ctx);
+pid_t					exec_pipeline(t_list *list, t_exec_ctx *exec_ctx,
+							t_ctx *ctx);
 
 #endif

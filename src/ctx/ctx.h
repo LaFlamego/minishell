@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 18:29:55 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/01 18:14:15 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/11 22:49:04 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_ctx
 	bool	exit;
 	int		flags;
 	char	*command;
+	int		stdin;
 }			t_ctx;
 
 int			ctx_init(t_ctx *ctx, char **envp);

@@ -6,29 +6,28 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 13:12:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 13:34:38 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 20:49:55 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./expand.h"
 #include <stdint.h>
 
-static void	traverse_pipe(t_cmd_node *node)
+static int	traverse_pipe(t_cmd_node *node)
 {
 	t_list	*curr;
 
 	curr = node->data;
 	while (curr)
 	{
-		preprocess_heredocs(curr->content);
+		if (!preprocess_heredocs(curr->content))
+			return (0);
 		curr = curr->next;
 	}
+	return (1);
 }
 
-// TODO: Make sure t_string does not leak
-// FIXME: handle errors
-// > pretty much everything can fail
-static void	traverse_arg(t_word *parts)
+static int	traverse_arg(t_word *parts)
 {
 	t_list		*curr;
 	t_word_part	*part;
@@ -42,11 +41,18 @@ static void	traverse_arg(t_word *parts)
 		if (part->kind == WK_REDIRECT_IN_UNTIL)
 		{
 			arg = ft_string_new(0);
-			expand_heredoc(part, arg);
+			if (!arg)
+				return (0);
+			if (!expand_heredoc(part, arg))
+			{
+				ft_string_free(arg);
+				return (0);
+			}
 			fd = redirect_in_until(arg);
 			if (fd < 0)
 			{
-				// FIXME: handle error
+				ft_string_free(arg);
+				return (0);
 			}
 			word_free(part->data);
 			part->data = (void *)(intptr_t)fd;
@@ -54,36 +60,42 @@ static void	traverse_arg(t_word *parts)
 		}
 		curr = curr->next;
 	}
+	return (1);
 }
 
-static void	traverse_command(t_list *words)
+static int	traverse_command(t_list *words)
 {
 	t_list	*curr;
 
 	curr = words;
 	while (curr)
 	{
-		traverse_arg(curr->content);
+		if (!traverse_arg(curr->content))
+			return (0);
 		curr = curr->next;
 	}
+	return (1);
 }
 
-void	preprocess_heredocs(t_cmd_node *node)
+int	preprocess_heredocs(t_cmd_node *node)
 {
 	t_bin_op_args	*args;
 
 	if (node->kind == PIPELINE)
 	{
-		traverse_pipe(node);
+		return (traverse_pipe(node));
 	}
 	if (node->kind == COMMAND)
 	{
-		traverse_command(node->data);
+		return (traverse_command(node->data));
 	}
 	if (node->kind == OP_AND || node->kind == OP_OR)
 	{
 		args = node->data;
-		preprocess_heredocs(args->left);
-		preprocess_heredocs(args->right);
+		if (!preprocess_heredocs(args->left))
+			return (0);
+		if (!preprocess_heredocs(args->right))
+			return (0);
 	}
+	return (1);
 }

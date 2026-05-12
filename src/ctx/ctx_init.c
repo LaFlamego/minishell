@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:40:56 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/11 22:50:15 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 20:01:40 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ static int	set_shell_variables(t_env *env)
 {
 	if (!env_set(env, "?=0"))
 		return (0);
-	if (!env_set(env, "HISTFILE=minishell_history.txt"))
-		return (0);
 	return (1);
 }
 
@@ -39,7 +37,6 @@ int	ctx_init(t_ctx *ctx, char **envp)
 		return (ctx_free(ctx));
 	if (!set_shell_variables(ctx->env))
 		return (ctx_free(ctx));
-	// WARN: history_load(ctx->env);
 	if (!setup_signals_handlers())
 		return (ctx_free(ctx));
 	ctx->stdin = dup(STDIN_FILENO);

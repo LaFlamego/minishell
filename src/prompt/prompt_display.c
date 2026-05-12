@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 13:15:33 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/05 12:59:16 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 20:02:28 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ unsigned int	prompt_display(t_ctx *ctx)
 			free(input);
 			continue ;
 		}
-		history_save(ctx->env, input);
+		add_history(input);
 		if (cmd_handle(input, ctx))
 		{
 			free(input);

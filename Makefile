@@ -52,7 +52,6 @@ EXPAND_SRCS	=	expand_command.c			\
 
 UTILS_SRCS	=	cli.c		\
 				files.c		\
-				history.c	\
 				path.c		\
 				signals.c
 

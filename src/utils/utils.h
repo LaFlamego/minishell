@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 21:22:12 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 19:57:44 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 20:06:03 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,40 +15,17 @@
 
 # include "src/ctx/ctx.h"
 # include "src/env/env.h"
-// Required for readline/history
 # include <stdio.h>
 
 /**
  * enum e_cli_error - cli errors
  */
-enum		e_cli_error
+enum	e_cli_error
 {
 	CLI_MISSING_ARGUMENT,
 	CLI_INVALID_OPTION,
 	CLI_NOT_AN_OPTION,
 };
-
-/**
- * history_load() - load the command history
- * @env: environment variables
- *
- * Opens $HISTFILE and adds every line to the history.
- *
- * On failure, does nothing.
- */
-void	history_load(t_env *env);
-
-/**
- * history_save() - save a line to the history
- * @env: environment variables
- * @line: the command to save
- *
- * Opens $HISTFILE in append mode, creating the file if not existing.
- * Then writes the line to the file, followed by a new line.
- *
- * On failure, does nothing.
- */
-void	history_save(t_env *env, const char *line);
 
 /**
  * setup_signal_handlers() - register the signal handlers

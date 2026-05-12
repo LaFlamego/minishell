@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:40:56 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/12 20:01:40 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 21:03:55 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static int	set_shell_variables(t_env *env)
 	return (1);
 }
 
-// TODO: dup can fail
 int	ctx_init(t_ctx *ctx, char **envp)
 {
 	ft_bzero(ctx, sizeof(t_ctx));
@@ -39,6 +38,5 @@ int	ctx_init(t_ctx *ctx, char **envp)
 		return (ctx_free(ctx));
 	if (!setup_signals_handlers())
 		return (ctx_free(ctx));
-	ctx->stdin = dup(STDIN_FILENO);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 21:22:12 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 20:06:03 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 21:27:12 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ enum	e_cli_error
 int		setup_signals_handlers(void);
 
 /**
- * dir_get_files - list entries in a directory
+ * dir_get_files() - list entries in a directory
  * @path: path to directory (must not be NULL)
  *
  * Returns an array of allocated strings containing
@@ -48,7 +48,18 @@ int		setup_signals_handlers(void);
  */
 t_array	*dir_get_files(const char *path);
 
-// TODO: docs
+/**
+ * cli_parse_args() - parse cli arguments
+ * @argc: length of argv
+ * @argv: argument list
+ * @ctx: shell context
+ *
+ * Parse the arguments of the CLI and set the corresponding flags.
+ *
+ * Return:
+ * On success, 1
+ * On failure, 0
+ */
 int		cli_parse_args(int argc, char **argv, t_ctx *ctx);
 
 /**

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 17:31:35 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/29 01:27:18 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 21:09:06 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,6 @@ t_array	*ft_array_new(void)
 	if (!arr)
 		return (NULL);
 	ft_bzero(arr, sizeof(t_array));
-	return (arr);
-}
-
-t_array	ft_array_init(void)
-{
-	t_array	arr;
-
-	arr.capacity = 0;
-	arr.data = NULL;
-	arr.size = 0;
 	return (arr);
 }
 

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 17:31:59 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/23 04:01:17 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 21:09:10 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef struct s_array
 }			t_array;
 
 // > ft_array.c
-t_array		ft_array_init(void);
 t_array		*ft_array_new(void);
 void		ft_array_free(t_array *arr, void (*f)(void *));
 void		ft_array_pop(t_array *arr, void **ptr);

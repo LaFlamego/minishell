@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 19:24:44 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/08 20:04:50 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 21:10:44 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static void	*push_to_pipe(t_cmd_node *expr, t_cmd_node *right)
 	return (expr);
 }
 
-// TODO: Pushtopipe can fail
 t_cmd_node	*parser_parse_pipe(t_parser *p)
 {
 	t_cmd_node	*right;
@@ -73,6 +72,8 @@ t_cmd_node	*parser_parse_pipe(t_parser *p)
 		if (!right)
 			return (node_free(expr));
 		expr = push_to_pipe(expr, right);
+		if (!expr)
+			return (NULL);
 	}
 	return (expr);
 }

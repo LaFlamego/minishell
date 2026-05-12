@@ -6,16 +6,31 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 15:54:27 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/03 17:27:30 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 20:11:25 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./token.h"
 
+static char	*token_to_string_redirection(t_token *token)
+{
+	if (token->type == REDIRECT_IN)
+		return ("<");
+	else if (token->type == REDIRECT_IN_UNTIL)
+		return ("<<");
+	else if (token->type == REDIRECT_OUT)
+		return (">");
+	else if (token->type == REDIRECT_OUT_APPEND)
+		return (">>");
+	return (NULL);
+}
+
 // Return value should not be freed
 char	*token_to_string(t_token *token)
 {
-	if (token->type == LEFT_PAREN)
+	if (token->type >= REDIRECT_IN && token->type <= REDIRECT_OUT_APPEND)
+		return (token_to_string_redirection(token));
+	else if (token->type == LEFT_PAREN)
 		return ("(");
 	else if (token->type == RIGHT_PAREN)
 		return (")");
@@ -35,14 +50,6 @@ char	*token_to_string(t_token *token)
 		return ("EOF");
 	else if (token->type == BLANK)
 		return ("BLANK");
-	else if (token->type == REDIRECT_IN)
-		return ("<");
-	else if (token->type == REDIRECT_IN_UNTIL)
-		return ("<<");
-	else if (token->type == REDIRECT_OUT)
-		return (">");
-	else if (token->type == REDIRECT_OUT_APPEND)
-		return (">>");
 	else
 		return ("UNKNOWN_TOKEN");
 }

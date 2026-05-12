@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:21:36 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/29 01:55:53 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 20:55:15 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,24 +56,12 @@ t_cmd_node	*node_new_bin(t_cmd_node *left, enum e_kind op, t_cmd_node *right)
 	return (node);
 }
 
-// t_cmd_node	*node_new_string(char *text)
-// {
-// 	t_cmd_node	*word;
-//
-// 	word = node_new(WK_STRING);
-// 	if (!word)
-// 		return (NULL);
-// 	word->data = ft_string_new(ft_strlen(text));
-// 	if (!word->data || !ft_string_push_str(word->data, text))
-// 		return (node_free(word));
-// 	return (word);
-// }
-
 static void	node_free_lst(void *node_raw)
 {
 	node_free(node_raw);
 }
 
+// FIXME: How to free redirect_until that have been processed? theyre just numbers and should be skipped
 t_cmd_node	*node_free(t_cmd_node *node)
 {
 	t_bin_op_args	*lr;

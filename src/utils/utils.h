@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 21:22:12 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/01 18:09:48 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 19:57:44 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@
 # include "src/env/env.h"
 // Required for readline/history
 # include <stdio.h>
+
+/**
+ * enum e_cli_error - cli errors
+ */
+enum		e_cli_error
+{
+	CLI_MISSING_ARGUMENT,
+	CLI_INVALID_OPTION,
+	CLI_NOT_AN_OPTION,
+};
 
 /**
  * history_load() - load the command history

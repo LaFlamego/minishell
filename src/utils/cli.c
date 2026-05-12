@@ -6,19 +6,13 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 23:43:54 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/30 18:53:11 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 19:59:28 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "./utils.h"
 #include "libft.h"
 #include "src/ctx/ctx.h"
-
-enum		e_cli_error
-{
-	CLI_MISSING_ARGUMENT,
-	CLI_INVALID_OPTION,
-	CLI_NOT_AN_OPTION,
-};
 
 static void	print_help_message(void)
 {

@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 16:14:45 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/02 01:28:22 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 21:02:48 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 #include "src/ctx/ctx.h"
 #include "src/env/env.h"
 
-// TODO: $? should not printed?
 static void	print_env(t_env *env)
 {
 	size_t	i;
+	char	*kvp;
 
 	i = 0;
 	while (i < env->size - 1)
 	{
-		ft_dprintf(1, "%s\n", env->data[i]);
+		kvp = env->data[i];
+		if (kvp && ft_isalpha(kvp[0]))
+			ft_dprintf(1, "%s\n", env->data[i]);
 		i++;
 	}
 }

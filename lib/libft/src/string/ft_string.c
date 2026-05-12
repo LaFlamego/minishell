@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:00:54 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/22 18:41:50 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 20:13:33 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 #include "mem/ft_mem.h"
 #include "str/ft_str.h"
 #include <stdlib.h>
-
-t_string	ft_string_init(void)
-{
-	t_string	s;
-
-	s.capacity = 0;
-	s.content = NULL;
-	s.size = 0;
-	return (s);
-}
 
 t_string	*ft_string_new(size_t capacity)
 {

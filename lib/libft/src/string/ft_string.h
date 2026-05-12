@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 17:41:16 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/23 19:04:03 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 20:13:56 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef struct s_string
 	size_t	capacity;
 }			t_string;
 
-t_string	ft_string_init(void);
 t_string	*ft_string_new(size_t capacity);
 char		*ft_string_realloc(t_string *s, size_t new_size);
 void		*ft_string_resize(t_string *s, size_t size);

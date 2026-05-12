@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:06:02 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/09 20:45:06 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/12 14:00:15 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static size_t	get_list_size(t_list *list)
 	}
 	return (size);
 }
+
 unsigned int	handle_pipe_sign(t_cmd_node *node, t_exec_ctx *exec_ctx,
 		t_ctx *ctx)
 {

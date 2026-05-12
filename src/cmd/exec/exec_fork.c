@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:35:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 15:57:43 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/12 21:28:16 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static unsigned int	get_and_exec_cmd(t_array *argv, t_exec_ctx *exec,
 	exit(errno);
 }
 
-pid_t	cmd_exec_fork(t_array *argv, t_exec_ctx *exec, t_env *env, int *heredoc_fd)
+pid_t	cmd_exec_fork(t_array *argv, t_exec_ctx *exec, t_env *env)
 {
 	pid_t	pid;
 
@@ -51,7 +51,7 @@ pid_t	cmd_exec_fork(t_array *argv, t_exec_ctx *exec, t_env *env, int *heredoc_fd
 		return (perror("minishell: pid"), pid);
 	else if (pid == 0)
 	{
-		redir_fd(exec, false, heredoc_fd);
+		redir_fd(exec, false);
 		get_and_exec_cmd(argv, exec, env);
 	}
 	else if (pid > 0)

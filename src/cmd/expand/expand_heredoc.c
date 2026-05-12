@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_heredoc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
+/*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 13:12:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 20:49:55 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 21:32:52 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	traverse_arg(t_word *parts)
 				ft_string_free(arg);
 				return (0);
 			}
-			fd = redirect_in_until(arg);
+			fd = redirect_in_until(arg->content);
 			if (fd < 0)
 			{
 				ft_string_free(arg);

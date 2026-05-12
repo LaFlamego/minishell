@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
+/*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:39:11 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/11 17:14:41 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 21:29:54 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "src/env/env.h"
 #include "src/utils/utils.h"
 #include <stdlib.h>
+#include <stdint.h>
 
 int	handle_redirection(t_word_part *part, t_exec_ctx *ctx)
 {
@@ -43,8 +44,10 @@ int	handle_redirection(t_word_part *part, t_exec_ctx *ctx)
 	}
 	if (part->kind == WK_REDIRECT_IN_UNTIL)
 	{
-		arg = expand_target(part->data, ctx->env, true);
-		res = redirect_in_until(ctx, arg);
+		if (ctx->fd.in > 2)
+			fd_close_reset(&ctx->fd.in, NULL, NULL);
+		ctx->fd.in = (int)(intptr_t)part->data;
+		ctx->redir = HEREDOC;
 	}
 	if (part->kind == WK_REDIRECT_OUT)
 	{

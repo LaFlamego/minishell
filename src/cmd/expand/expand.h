@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:21:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 20:46:40 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/12 21:31:44 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		preprocess_heredocs(t_cmd_node *node);
 
 int		redirect_in(char *file_to, t_exec_ctx *exec_ctx);
 int		redirect_out(char *file_to, t_exec_ctx *exec_ctx);
-int		redirect_in_until(t_exec_ctx *exec_ctx, char *limiter);
+int		redirect_in_until(char *del);
 int		redirect_out_append(char *file_to, t_exec_ctx *exec_ctx);
 
 #endif

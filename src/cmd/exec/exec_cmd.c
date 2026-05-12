@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:03:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 15:53:49 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/12 21:28:04 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static unsigned int (*get_builtin(char *cmd_name))(int, char **, t_ctx *)
 }
 
 
-unsigned int	cmd_exec(t_ctx *ctx, t_exec_ctx *exec, t_array *argv, int *heredoc_fd)
+unsigned int	cmd_exec(t_ctx *ctx, t_exec_ctx *exec, t_array *argv)
 {
 	unsigned int	exit_code;
 	unsigned int	(*builtin)(int, char **, t_ctx *);
@@ -43,12 +43,12 @@ unsigned int	cmd_exec(t_ctx *ctx, t_exec_ctx *exec, t_array *argv, int *heredoc_
 	builtin = get_builtin(argv->data[0]);
 	if (builtin && exec->is_pipe == false)
 	{
-		redir_fd(exec, true, heredoc_fd);
+		redir_fd(exec, true);
 		exit_code = builtin(argv->size - 1, (char **)argv->data, ctx);
 		restore_stdio(exec);
 	}
 	else
-		exit_code = cmd_exec_bin(argv, ctx->env, exec, heredoc_fd);
+		exit_code = cmd_exec_bin(argv, ctx->env, exec);
 	env_set_exit_code(exit_code, ctx->env);
 	return (exit_code);
 }

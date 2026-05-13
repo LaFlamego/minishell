@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:21:36 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 20:55:15 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/13 10:05:13 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static void	node_free_lst(void *node_raw)
 	node_free(node_raw);
 }
 
-// FIXME: How to free redirect_until that have been processed? theyre just numbers and should be skipped
 t_cmd_node	*node_free(t_cmd_node *node)
 {
 	t_bin_op_args	*lr;

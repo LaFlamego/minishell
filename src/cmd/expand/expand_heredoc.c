@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 13:12:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/13 09:51:44 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/13 10:06:38 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static int	traverse_arg(t_word *parts)
 			word_free(part->data);
 			part->data = (void *)(intptr_t)fd;
 			ft_string_free(arg);
+			part->kind = WK_REDIRECT_IN_UNTIL_FD;
 		}
 		curr = curr->next;
 	}

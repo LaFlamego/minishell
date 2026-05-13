@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 14:16:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/04 22:15:19 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/13 10:12:49 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef t_list	t_word;
  * @WK_FILES: a list of files in the current directory
  * @WK_REDIRECT_IN: a redirection
  * @WK_REDIRECT_IN_UNTIL: a redirection
+ * @WK_REDIRECT_IN_UNTIL_FD: a preprocessed redirection
  * @WK_REDIRECT_OUT: a redirection
  * @WK_REDIRECT_OUT_APPEND: a redirection
  */
@@ -39,6 +40,7 @@ typedef enum e_word_kind
 	WK_FILES,
 	WK_REDIRECT_IN,
 	WK_REDIRECT_IN_UNTIL,
+	WK_REDIRECT_IN_UNTIL_FD,
 	WK_REDIRECT_OUT,
 	WK_REDIRECT_OUT_APPEND,
 }				t_word_kind;

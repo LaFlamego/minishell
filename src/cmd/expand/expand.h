@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:21:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 21:31:44 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/13 09:52:08 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_array	*expand_command(t_word *words, t_exec_ctx *ctx);
 // TODO: add documentation
 int		expand_variable(t_string *arg, char *key, t_env *env);
 
-char	*expand_target(t_word *parts, t_env *env, bool is_heredoc);
+char	*expand_target(t_word *parts, t_env *env);
 
 int		expand_heredoc(t_word_part *part, t_string *arg);
 

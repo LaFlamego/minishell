@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:39:11 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 21:29:54 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/13 09:52:32 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "src/cmd/tree/word/word.h"
 #include "src/env/env.h"
 #include "src/utils/utils.h"
-#include <stdlib.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 int	handle_redirection(t_word_part *part, t_exec_ctx *ctx)
 {
@@ -39,7 +39,7 @@ int	handle_redirection(t_word_part *part, t_exec_ctx *ctx)
 	}
 	if (part->kind == WK_REDIRECT_IN)
 	{
-		arg = expand_target(part->data, ctx->env, false);
+		arg = expand_target(part->data, ctx->env);
 		res = redirect_in(arg, ctx);
 	}
 	if (part->kind == WK_REDIRECT_IN_UNTIL)
@@ -51,12 +51,12 @@ int	handle_redirection(t_word_part *part, t_exec_ctx *ctx)
 	}
 	if (part->kind == WK_REDIRECT_OUT)
 	{
-		arg = expand_target(part->data, ctx->env, false);
+		arg = expand_target(part->data, ctx->env);
 		res = redirect_out(arg, ctx);
 	}
 	if (part->kind == WK_REDIRECT_OUT_APPEND)
 	{
-		arg = expand_target(part->data, ctx->env, false);
+		arg = expand_target(part->data, ctx->env);
 		res = redirect_out_append(arg, ctx);
 	}
 	free(arg);

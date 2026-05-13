@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 13:12:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 21:32:52 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/13 09:51:44 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,22 @@ static int	traverse_pipe(t_cmd_node *node)
 	while (curr)
 	{
 		if (!preprocess_heredocs(curr->content))
+			return (0);
+		curr = curr->next;
+	}
+	return (1);
+}
+
+static int	expand_del(t_list *parts, t_string *arg)
+{
+	t_list		*curr;
+	t_word_part	*part;
+
+	curr = parts;
+	while (curr)
+	{
+		part = curr->content;
+		if (!expand_heredoc(part, arg))
 			return (0);
 		curr = curr->next;
 	}
@@ -43,7 +59,7 @@ static int	traverse_arg(t_word *parts)
 			arg = ft_string_new(0);
 			if (!arg)
 				return (0);
-			if (!expand_heredoc(part, arg))
+			if (!expand_del(part->data, arg))
 			{
 				ft_string_free(arg);
 				return (0);

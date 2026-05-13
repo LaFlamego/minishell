@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 14:27:44 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/12 21:26:58 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/13 12:12:12 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,9 @@ static void	to_dup_and_close(t_exec_ctx *exec, bool is_redir_in,
 
 void	redir_fd(t_exec_ctx *exec, bool to_save_stdio)
 {
-	if (exec->redir == READ_IN)
+	if (exec->redir == READ_IN || exec->redir == HEREDOC)
 		to_dup_and_close(exec, true, to_save_stdio);
-	if (exec->redir == WRITE_OUT)
-		to_dup_and_close(exec, false, to_save_stdio);
-	if (exec->redir == HEREDOC)
-		to_dup_and_close(exec, true, to_save_stdio);
-	if (exec->redir == APPEND)
+	if (exec->redir == WRITE_OUT || exec->redir == APPEND)
 		to_dup_and_close(exec, false, to_save_stdio);
 	else if (exec->redir == NO_REDIR)
 		return ;

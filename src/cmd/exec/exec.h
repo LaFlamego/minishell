@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:05:59 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 21:29:21 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/13 19:23:11 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_exec_fds
 	int					out;
 	int					stdin_tpr;
 	int					stdout_tpr;
+	int					heredoc;
 }						t_exec_fd;
 
 typedef struct s_exec_pipe
@@ -78,7 +79,7 @@ unsigned int			handle_single_command(t_cmd_node *node, t_ctx *ctx,
 							t_exec_ctx *exec_ctx);
 unsigned int			handle_pipe_sign(t_cmd_node *node, t_exec_ctx *exec_ctx,
 							t_ctx *ctx);
-pid_t					exec_pipeline(t_list *list, t_exec_ctx *exec_ctx,
-							t_ctx *ctx);
+pid_t					exec_pipeline(t_list *curr, t_list *head,
+								t_exec_ctx *exec_ctx, t_ctx *ctx);
 
 #endif

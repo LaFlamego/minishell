@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:06:02 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/13 12:59:03 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/13 19:23:11 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ unsigned int	handle_pipe_sign(t_cmd_node *node, t_exec_ctx *exec_ctx,
 	exec_ctx->pipe.index = 1;
 	while (exec_ctx->pipe.index <= size)
 	{
-		pid_last = exec_pipeline(pipe_node, exec_ctx, ctx);
+		pid_last = exec_pipeline(pipe_node, node->data, exec_ctx, ctx);
 		exec_ctx->pipe.index++;
 		pipe_node = pipe_node->next;
 		//ft_printf("pipefd = %d\n", exec_ctx->pipe.fd);

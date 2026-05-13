@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:35:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 21:28:16 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/13 19:07:06 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,6 @@ static unsigned int	get_and_exec_cmd(t_array *argv, t_exec_ctx *exec,
 		exit(exit_code);
 	}
 	cmd_path = exec->cmd.path;
-	// if (!cmd_path)
-	// {
-	// 	ft_dprintf(2, "minishell: '%s': %s\n", argv[0], strerror(errno));
-	// 	exit(errno);
-	// }
 	execve(cmd_path, (char *const *)argv->data, (char **)env->data);
 	perror("minishell: execve");
 	free_cmd_path(exec);
@@ -56,8 +51,10 @@ pid_t	cmd_exec_fork(t_array *argv, t_exec_ctx *exec, t_env *env)
 	}
 	else if (pid > 0)
 	{
-		if (exec->redir == READ_IN || exec->redir == HEREDOC)
+		if (exec->redir == READ_IN)
 			fd_close_reset(&exec->fd.in, NULL, NULL);
+		if (exec->redir == HEREDOC)
+			fd_close_reset(NULL, NULL, &exec->fd.heredoc);
 		if (exec->redir == WRITE_OUT || exec->redir == APPEND)
 			fd_close_reset(NULL, &exec->fd.out, NULL);
 		free_cmd_path(exec);

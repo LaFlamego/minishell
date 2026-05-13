@@ -23,6 +23,7 @@ void	init_exec_ctx(t_exec_ctx *exec, t_ctx *ctx)
 	exec->fd.out = -1;
 	exec->fd.stdin_tpr = -1;
 	exec->fd.stdout_tpr = -1;
+	exec->fd.heredoc = -1;
 	exec->pipe.fd = -1;
 	exec->pipe.index = 0;
 	exec->env = ctx->env;

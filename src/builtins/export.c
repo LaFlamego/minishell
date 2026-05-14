@@ -6,13 +6,14 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:21:12 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/02 01:28:39 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/11 17:58:54 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "src/ctx/ctx.h"
 
+// TODO: Remove that
 // export: `23=1': not a valid identifier
 // export: `23': not a valid identifier
 // export: `=': not a valid identifier
@@ -62,7 +63,8 @@ static int	export_variables(int argc, char **argv, t_ctx *ctx)
 			env_set(ctx->env, argv[i]);
 		else
 		{
-			ft_dprintf(2, "export: `%s': not a valid identifier\n", argv[i]);
+			ft_dprintf(2, "minishell: export: `%s': not a valid identifier\n",
+				argv[i]);
 			exit_code = 1;
 		}
 		++i;

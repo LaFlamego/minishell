@@ -27,6 +27,8 @@ GNL_SRCS  = get_next_line.c get_next_line_utils.c
 CHAR_SRCS = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c   \
 			ft_tolower.c ft_toupper.c ft_isspace.c
 
+FORMAT_SRCS = ft_format.c
+
 MATHS_SRCS = ft_abs.c ft_max.c ft_min.c
 
 PRINTF_SRCS = ft_pad.c ft_printf.c ft_printf_char.c ft_printf_flags.c          \
@@ -46,6 +48,7 @@ SRCS = $(addprefix $(SRCS_DIR)/lst/, $(LST_SRCS))       \
 	   $(addprefix $(SRCS_DIR)/str/, $(STR_SRCS))       \
 	   $(addprefix $(SRCS_DIR)/get_next_line/, $(GNL_SRCS))       \
 	   $(addprefix $(SRCS_DIR)/char/, $(CHAR_SRCS))     \
+	   $(addprefix $(SRCS_DIR)/format/, $(FORMAT_SRCS)) \
 	   $(addprefix $(SRCS_DIR)/array/, $(ARRAY_SRCS))   \
 	   $(addprefix $(SRCS_DIR)/maths/, $(MATHS_SRCS))   \
 	   $(addprefix $(SRCS_DIR)/string/, $(STRING_SRCS)) \

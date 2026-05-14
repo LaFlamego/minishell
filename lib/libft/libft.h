@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 15:00:56 by Oery              #+#    #+#             */
-/*   Updated: 2026/03/22 18:58:21 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/14 14:45:59 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include "src/char/ft_char.h"                // IWYU pragma: export
+# include "src/format/ft_format.h"            // IWYU pragma: export
 # include "src/get_next_line/get_next_line.h" // IWYU pragma: export
 # include "src/lst/ft_list.h"                 // IWYU pragma: export
 # include "src/maths/ft_maths.h"              // IWYU pragma: export

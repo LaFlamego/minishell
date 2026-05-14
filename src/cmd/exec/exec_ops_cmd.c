@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:08:52 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/12 21:28:56 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/14 22:04:55 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ unsigned int	handle_single_command(t_cmd_node *node, t_ctx *ctx,
 	if (ctx->flags & FLAG_DEBUG)
 		debug_argv(argv);
 	if (argv->size <= 1)
+	{
+		if (exec_ctx->redir != NO_REDIR)
+			fd_close_reset(&exec_ctx->fd.in, &exec_ctx->fd.out, &exec_ctx->fd.heredoc);
 		exit_code = 0;
+	}
 	else
 		exit_code = cmd_exec(ctx, exec_ctx, argv);
 	ft_array_free(argv, free);

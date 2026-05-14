@@ -6,12 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 14:48:33 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/14 14:48:51 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/14 21:25:50 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORMAT_H
-# define FORMAT_H
+#ifndef FT_FORMAT_H
+# define FT_FORMAT_H
 
 char	*ft_format(const char *fmt, ...);
 

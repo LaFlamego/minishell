@@ -6,12 +6,14 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 19:38:42 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/07 21:44:55 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/14 13:15:15 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./word.h"
+#include <stdint.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 t_word_part	*part_new(t_word_kind kind, void *content)
 {
@@ -34,10 +36,17 @@ t_word_part	*part_new(t_word_kind kind, void *content)
 void	part_free(void *raw_part)
 {
 	t_word_part	*part;
+	int			fd;
 
 	if (!raw_part)
 		return ;
 	part = raw_part;
+	if (part->kind == WK_REDIRECT_IN_UNTIL_FD)
+	{
+		fd = (int)(intptr_t)part->data;
+		if (fd >= 0)
+			close(fd);
+	}
 	if (!part->data)
 	{
 		free(part);

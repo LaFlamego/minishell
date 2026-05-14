@@ -6,12 +6,13 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:02:13 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/12 21:27:45 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/13 19:05:09 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "src/env/env.h"
+#include <src/utils/utils.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -23,11 +24,18 @@ static unsigned int	wait_exit_code(pid_t pid)
 	unsigned int	exit_code;
 
 	exit_code = 0;
+	status = 0;
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
+	{
 		exit_code = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
+	}
+	if (WIFSIGNALED(status))
+	{
 		exit_code = WTERMSIG(status) + 128;
+	}
+	if (g_signal == SIGINT)
+		ft_printf("\n");
 	return (exit_code);
 }
 

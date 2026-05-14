@@ -6,13 +6,14 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:35:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/13 19:07:06 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/14 13:08:36 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "src/env/env.h"
 #include <errno.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -46,6 +47,8 @@ pid_t	cmd_exec_fork(t_array *argv, t_exec_ctx *exec, t_env *env)
 		return (perror("minishell: pid"), pid);
 	else if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		redir_fd(exec, false);
 		get_and_exec_cmd(argv, exec, env);
 	}

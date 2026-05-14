@@ -6,12 +6,13 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 22:01:11 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/13 20:40:48 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/14 13:09:22 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../exec/exec.h"
 #include "libft.h"
+#include "src/prompt/prompt.h"
 #include "src/utils/utils.h"
 #include <errno.h>
 #include <fcntl.h>
@@ -54,7 +55,6 @@ int	redirect_out(char *file_to, t_exec_ctx *exec_ctx)
 	return (1);
 }
 
-// TODO: This should be done in the child for CTRL+C to work
 int	redirect_in_until(char *del)
 {
 	char	*line;
@@ -62,14 +62,29 @@ int	redirect_in_until(char *del)
 	int		fd_out;
 
 	if (pipe_build(&fd_in, &fd_out))
-		return (1);
+		return (-1);
+	g_signal = 0;
 	line = readline("> ");
+	if (g_signal == SIGINT)
+	{
+		close(fd_in);
+		close(fd_out);
+		return (-1);
+	}
 	while (line != NULL && !ft_streq(line, del))
 	{
 		write(fd_out, line, ft_strlen(line));
 		write(fd_out, "\n", 1);
 		free(line);
+		g_signal = 0;
 		line = readline("> ");
+		if (g_signal == SIGINT)
+		{
+			g_signal = 0;
+			close(fd_in);
+			close(fd_out);
+			return (-1);
+		}
 	}
 	free(line);
 	fd_close_reset(NULL, &fd_out, NULL);

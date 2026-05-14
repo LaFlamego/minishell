@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 21:51:19 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/08 19:15:38 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/13 18:56:37 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,16 @@
 #include <signal.h>
 #include <unistd.h>
 
+volatile sig_atomic_t	g_signal = 0;
+
 static int	error(void)
 {
 	ft_dprintf(2, "error: failed to set signal handler\n");
 	return (0);
 }
+
+// TODO: CTRL+C must stop cat
+// > track_nodes must listen to it and kill the running child if needed
 
 /** handle_signal() - handle incoming signals
  * @signal: signal to handle
@@ -32,9 +37,7 @@ static void	handle_signal(int signal)
 {
 	if (signal == SIGINT && isatty(0))
 	{
-		ft_dprintf(0, "\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
+		g_signal = SIGINT;
 	}
 	if (signal == SIGQUIT)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 21:22:12 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 21:27:12 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/13 17:45:25 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 
 # include "src/ctx/ctx.h"
 # include "src/env/env.h"
+# include <signal.h>
 # include <stdio.h>
+
+extern volatile sig_atomic_t	g_signal;
 
 /**
  * enum e_cli_error - cli errors
  */
-enum	e_cli_error
+enum							e_cli_error
 {
 	CLI_MISSING_ARGUMENT,
 	CLI_INVALID_OPTION,
@@ -34,7 +37,7 @@ enum	e_cli_error
  * On success, 1.
  * On failure, 0.
  */
-int		setup_signals_handlers(void);
+int								setup_signals_handlers(void);
 
 /**
  * dir_get_files() - list entries in a directory
@@ -46,7 +49,7 @@ int		setup_signals_handlers(void);
  * Return: pointer to array on success, NULL on failure.
  * Caller must free each string and the array.
  */
-t_array	*dir_get_files(const char *path);
+t_array							*dir_get_files(const char *path);
 
 /**
  * cli_parse_args() - parse cli arguments
@@ -60,7 +63,8 @@ t_array	*dir_get_files(const char *path);
  * On success, 1
  * On failure, 0
  */
-int		cli_parse_args(int argc, char **argv, t_ctx *ctx);
+int								cli_parse_args(int argc, char **argv,
+									t_ctx *ctx);
 
 /**
  * get_pwd() - get current path
@@ -71,6 +75,6 @@ int		cli_parse_args(int argc, char **argv, t_ctx *ctx);
  * On success, a pointer to the path, must be freed
  * On failure, a NULL pointer
  */
-char	*get_pwd(void);
+char							*get_pwd(void);
 
 #endif

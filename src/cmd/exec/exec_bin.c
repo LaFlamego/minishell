@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:02:13 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/13 19:05:09 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/14 21:40:38 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ static unsigned int	wait_exit_code(pid_t pid)
 		exit_code = WTERMSIG(status) + 128;
 	}
 	if (g_signal == SIGINT)
+	{
 		ft_printf("\n");
+		exit_code = 130;
+	}
 	return (exit_code);
 }
 

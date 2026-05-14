@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 19:38:42 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/14 13:15:15 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/14 13:45:50 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,17 @@ void	part_free(void *raw_part)
 	if (!raw_part)
 		return ;
 	part = raw_part;
+	if (!part->data)
+	{
+		free(part);
+		return ;
+	}
 	if (part->kind == WK_REDIRECT_IN_UNTIL_FD)
 	{
 		fd = (int)(intptr_t)part->data;
 		if (fd >= 0)
 			close(fd);
-	}
-	if (!part->data)
-	{
-		free(part);
-		return ;
+		part->data = NULL;
 	}
 	if (part->kind == WK_REDIRECT_IN || part->kind == WK_REDIRECT_IN_UNTIL)
 		word_free(part->data);

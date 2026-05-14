@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:39:11 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/13 17:11:51 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/14 13:43:53 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,8 @@ int	handle_redirection(t_word_part *part, t_exec_ctx *ctx)
 	char	*arg;
 	int		res;
 
-	// t_word		*target;
-	// t_word_part	*target_part;
 	res = 1;
 	arg = NULL;
-	// target = part->data;
-	// target_part = NULL;
-	// FIXME: This needs to move to preprocessing
-	// if (part->kind != WK_REDIRECT_IN_UNTIL && target)
-	// {
-	// 	target_part = target->content;
-	// 	if (target_part->kind == WK_FILES)
-	// 	{
-	// 		ft_dprintf(2, "minishell: *: ambiguous redirect\n");
-	// 		return (0);
-	// 	}
-	// }
 	if (part->kind == WK_REDIRECT_IN)
 	{
 		arg = expand_target(part->data, ctx->env);

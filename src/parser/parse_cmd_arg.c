@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 21:14:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/11 12:59:22 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/14 14:23:09 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,33 @@ static t_word_kind	tokind(t_token_type kind)
 	return (0);
 }
 
+static bool	has_wildcard(t_list *parts)
+{
+	t_list		*curr;
+	t_word_part	*part;
+
+	curr = parts;
+	while (curr)
+	{
+		part = curr->content;
+		if (part->kind == WK_FILES)
+			return (true);
+		curr = curr->next;
+	}
+	return (false);
+}
+
+static bool	check_word(t_parser *p)
+{
+	while (parser_match(p, BLANK))
+		;
+	if (parser_check(p, BLANK) || parser_check(p, STRING))
+		return (true);
+	if (parser_check(p, DOLLAR) || parser_check(p, STAR))
+		return (true);
+	return (false);
+}
+
 t_word	*parser_parse_cmd_arg(t_parser *p)
 {
 	t_token	*op;
@@ -35,12 +62,17 @@ t_word	*parser_parse_cmd_arg(t_parser *p)
 	if (parser_match_redirection(p))
 	{
 		op = p->previous->content;
-		while (parser_match(p, BLANK))
-			;
+		if (!check_word(p))
+			return (parser_error(p, parser_peek(p)));
 		word = parser_parse_cmd_word(p);
 		if (!word)
+			return (NULL);
+		if (op->type != REDIRECT_IN_UNTIL && has_wildcard(word))
 		{
-			parser_error(p, parser_peek(p));
+			ft_dprintf(2, "minishell: *: ambiguous redirect\n");
+			while (p->current && p->current->next)
+				p->current = p->current->next;
+			word_free(word);
 			return (NULL);
 		}
 		return (word_from(part_new(tokind(op->type), word)));

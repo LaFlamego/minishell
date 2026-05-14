@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 13:06:22 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/02 01:28:46 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/01 18:11:04 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 #include <errno.h>
 #include <string.h>
 #include <unistd.h>
+
+// TODO: Use get_pwd utils
+// > We still need to check errnor afterhand
 
 #define BUFFER_SIZE 64
 

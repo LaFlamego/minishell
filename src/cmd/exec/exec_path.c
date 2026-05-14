@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 13:59:50 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/11 16:29:31 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/14 15:41:27 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,125 +25,121 @@ static bool	is_dir(struct stat *sb)
 	return ((sb->st_mode & S_IFMT) == S_IFDIR);
 }
 
-static char	**extract_path(char **envp)
+enum						e_access_result
 {
-	char	*path_str;
-	char	**res;
+	OK,
+	FILE_NOT_FOUND,
+	ACCESS_DENIED,
+	CMD_NOT_FOUND,
+};
 
-	if (!envp || !*envp)
+static enum e_access_result	can_execute(char *path)
+{
+	if (access(path, F_OK) != 0)
+		return (CMD_NOT_FOUND);
+	if (access(path, X_OK) != 0)
+		return (ACCESS_DENIED);
+	return (OK);
+}
+
+// FIXME: If no path, use the current directory
+static char	*get_binary_path(t_env *env, char *cmd, enum e_access_result *last)
+{
+	char	*var;
+	char	*cmd_path;
+	char	**paths;
+	size_t	i;
+
+	var = env_get(env, "PATH=");
+	if (!var)
 		return (NULL);
-	path_str = NULL;
-	while (*envp)
+	paths = ft_split(var, ':');
+	i = 0;
+	if (!paths[0])
 	{
-		if (ft_strncmp(*envp, "PATH=", 5) == 0)
-		{
-			path_str = *envp + 5;
+		free_splits(paths);
+		*last = can_execute(cmd);
+		if (*last == OK)
+			return (ft_strdup(cmd));
+		if (*last == CMD_NOT_FOUND)
+			*last = FILE_NOT_FOUND;
+		return (NULL);
+	}
+	while (paths && paths[i])
+	{
+		cmd_path = ft_format("%s/%s", paths[i], cmd);
+		if (!cmd_path)
 			break ;
+		*last = can_execute(cmd_path);
+		if (*last == OK)
+		{
+			free_splits(paths);
+			return (cmd_path);
 		}
-		++envp;
+		free(cmd_path);
+		i++;
 	}
-	if (!path_str)
-		return (NULL);
-	res = ft_split(path_str, ':');
-	return (res);
+	free_splits(paths);
+	return (NULL);
 }
 
-// TODO: use an enum
-static bool	cmd_access(char *target_path, int *find_no_x, int *no_find)
+static unsigned int	find_command_path(t_exec_ctx *ctx, char *cmd, t_env *env)
 {
-	if (access(target_path, F_OK) == 0)
+	enum e_access_result	last;
+	char					*path;
+
+	path = get_binary_path(env, cmd, &last);
+	if (!path)
 	{
-		*no_find = 0;
-		if (access(target_path, X_OK) == 0)
-			return (true);
-		else
-			*find_no_x = 1;
-		// TODO return for permission issue and free
+		if (last == ACCESS_DENIED)
+		{
+			ft_dprintf(2, "minishell: %s: Permission denied\n", cmd);
+			return (126);
+		}
+		if (last == CMD_NOT_FOUND)
+		{
+			ft_dprintf(2, "minishell: %s: command not found\n", cmd);
+			return (127);
+		}
+		if (last == FILE_NOT_FOUND)
+		{
+			ft_dprintf(2, "minishell: %s: No such file or directory\n", cmd);
+			return (127);
+		}
+		return (1);
 	}
-	else
-		*no_find = 1;
-	return (false);
-}
-static unsigned int	print_if_target_fail(char *cmd_name, int find_no_x,
-		int no_find)
-{
-	if (find_no_x == 1)
-		return (ft_dprintf(2, "minishell: %s: Permission denied\n", cmd_name),
-			126);
-	else if (no_find == 1)
-		return (ft_dprintf(2, "minishell: %s: command not found\n", cmd_name),
-			127);
+	ctx->cmd.path = path;
 	return (0);
 }
 
-static unsigned int	find_path(t_exec_ctx *exec, char *cmd_name,
-		char **cddt_paths)
-{
-	char	*tpr;
-	char	*res;
-	int		find_no_x;
-	int		no_find;
-
-	find_no_x = 0;
-	no_find = 0;
-	if (cddt_paths)
-	{
-		while (*cddt_paths)
-		{
-			tpr = ft_strjoin(*cddt_paths, "/");
-			if (!tpr)
-				return (1);
-			res = ft_strjoin(tpr, cmd_name);
-			free(tpr);
-			if (!res)
-				return (1);
-			if (cmd_access(res, &find_no_x, &no_find))
-				return (exec->cmd.path = res, 0);
-			free(res);
-			++cddt_paths;
-		}
-	}
-	return (print_if_target_fail(cmd_name, find_no_x, no_find));
-}
-
 // TODO nice to have: handle ./normalfile by doing fallback
-// TODO: reverse strchr check
-unsigned int	cmd_exec_get_path(char *cmd_name, t_exec_ctx *exec, t_env *env)
+unsigned int	cmd_exec_get_path(char *cmd, t_exec_ctx *exec, t_env *env)
 {
-	char			**cddt_paths;
-	unsigned int	exit_code;
-	struct stat		sb;
+	struct stat	sb;
 
-	if (ft_strchr(cmd_name, '/'))
+	if (!ft_strchr(cmd, '/'))
 	{
-		if (stat(cmd_name, &sb) == -1)
-		{
-			ft_dprintf(2, "minishell: %s: %s\n", cmd_name, strerror(errno));
-			return (1);
-		}
-		if (is_dir(&sb))
-		{
-			ft_dprintf(2, "minishell: %s: Is a directory\n", cmd_name);
-			return (126);
-		}
-		if (access(cmd_name, F_OK) != 0)
-		{
-			ft_dprintf(2, "minishell: %s: No such file or directory\n", cmd_name);
-			return (127);
-		}
-		if (access(cmd_name, X_OK) != 0)
-		{
-			ft_dprintf(2, "minishell: %s: Permission denied\n", cmd_name);
-			return (1);
-		}
-		return (exec->cmd.path = cmd_name, 0);
+		return (find_command_path(exec, cmd, env));
 	}
-	cddt_paths = extract_path((char **)env->data);
-	if (!cddt_paths)
+	if (stat(cmd, &sb) == -1)
+	{
+		ft_dprintf(2, "minishell: %s: %s\n", cmd, strerror(errno));
 		return (1);
-	exit_code = find_path(exec, cmd_name, cddt_paths);
-	if (exit_code != 0)
-		return (free_splits(cddt_paths), exit_code);
-	free_splits(cddt_paths);
-	return (exit_code);
+	}
+	if (is_dir(&sb))
+	{
+		ft_dprintf(2, "minishell: %s: Is a directory\n", cmd);
+		return (126);
+	}
+	if (access(cmd, F_OK) != 0)
+	{
+		ft_dprintf(2, "minishell: %s: No such file or directory\n", cmd);
+		return (127);
+	}
+	if (access(cmd, X_OK) != 0)
+	{
+		ft_dprintf(2, "minishell: %s: Permission denied\n", cmd);
+		return (1);
+	}
+	return (exec->cmd.path = cmd, 0);
 }

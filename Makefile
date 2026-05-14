@@ -41,7 +41,8 @@ PARSER_SRCS = 	parser_new.c				\
 				parse_primary.c				\
 				parse_variable.c
 
-NODE_SRCS =	node.c
+NODE_SRCS 	=	node.c						\
+				node_free.c
 
 WORD_SRCS	=	word.c						\
 				word_part.c

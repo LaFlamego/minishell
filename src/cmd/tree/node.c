@@ -6,12 +6,11 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:21:36 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/13 10:05:13 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/14 21:50:27 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./node.h"
-#include "src/cmd/tree/word/word.h"
 #include <stdlib.h>
 
 static void	*node_alloc_args(t_cmd_node *node)
@@ -54,41 +53,4 @@ t_cmd_node	*node_new_bin(t_cmd_node *left, enum e_kind op, t_cmd_node *right)
 	args->left = left;
 	args->right = right;
 	return (node);
-}
-
-static void	node_free_lst(void *node_raw)
-{
-	node_free(node_raw);
-}
-
-t_cmd_node	*node_free(t_cmd_node *node)
-{
-	t_bin_op_args	*lr;
-
-	if (!node)
-		return (NULL);
-	if (!node->data)
-	{
-		free(node);
-		return (NULL);
-	}
-	if (node->kind == OP_AND || node->kind == OP_OR)
-	{
-		lr = node->data;
-		if (lr->left)
-			node_free(lr->left);
-		if (lr->right)
-			node_free(lr->right);
-		free(node->data);
-	}
-	if (node->kind == COMMAND)
-	{
-		ft_lstclear((t_list **)&node->data, &word_free);
-	}
-	if (node->kind == PIPELINE)
-	{
-		ft_lstclear((t_list **)&node->data, &node_free_lst);
-	}
-	free(node);
-	return (NULL);
 }

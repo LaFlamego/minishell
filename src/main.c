@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:11:29 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/08 19:52:58 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/11 20:12:32 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,22 @@
 #include "src/cmd/cmd.h"
 #include "src/prompt/prompt.h"
 #include "src/utils/utils.h"
+#include <unistd.h>
 
 // TODO: What happens when we send the signal to stop the current job
 // when a bultin command is running
 
 // TODO: What is main's exit code?
+// What should be the default value
+static int	get_exit_code(t_ctx *ctx)
+{
+	char	*value;
+
+	value = env_get(ctx->env, "?");
+	if (!value)
+		return (1);
+	return (ft_atoi(value));
+}
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -33,9 +44,10 @@ int	main(int argc, char *argv[], char *envp[])
 	if (!cli_parse_args(argc, argv, &ctx))
 		return (1);
 	if (ctx.flags & FLAG_CLI_MODE)
-		exit_code = cmd_handle(ctx.command, &ctx);
+		cmd_handle(ctx.command, &ctx);
 	else
-		exit_code = prompt_display(&ctx);
+		prompt_display(&ctx);
+	exit_code = get_exit_code(&ctx);
 	ctx_free(&ctx);
 	return (exit_code);
 }

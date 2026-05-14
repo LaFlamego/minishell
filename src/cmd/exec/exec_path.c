@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 13:59:50 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/14 18:21:57 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/14 22:24:58 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,33 +106,25 @@ static unsigned int	find_command_path(t_exec_ctx *ctx, char *cmd, t_env *env)
 	return (0);
 }
 
+static unsigned int	error(char *cmd, char *msg, unsigned int ret)
+{
+	ft_dprintf(2, "minishell: %s: %s\n", cmd, msg);
+	return (ret);
+}
+
 unsigned int	cmd_exec_get_path(char *cmd, t_exec_ctx *exec, t_env *env)
 {
 	struct stat	sb;
 
 	if (!ft_strchr(cmd, '/'))
-	{
 		return (find_command_path(exec, cmd, env));
-	}
 	if (stat(cmd, &sb) == -1)
-	{
-		ft_dprintf(2, "minishell: %s: %s\n", cmd, strerror(errno));
-		return (1);
-	}
+		return (error(cmd, strerror(errno), 1));
 	if ((sb.st_mode & S_IFMT) == S_IFDIR)
-	{
-		ft_dprintf(2, "minishell: %s: Is a directory\n", cmd);
-		return (126);
-	}
+		return (error(cmd, "Is a directory", 126));
 	if (access(cmd, F_OK) != 0)
-	{
-		ft_dprintf(2, "minishell: %s: No such file or directory\n", cmd);
-		return (127);
-	}
+		return (error(cmd, "No such file or directory", 127));
 	if (access(cmd, X_OK) != 0)
-	{
-		ft_dprintf(2, "minishell: %s: Permission denied\n", cmd);
-		return (1);
-	}
+		return (error(cmd, "Permission denied", 1));
 	return (exec->cmd.path = cmd, 0);
 }

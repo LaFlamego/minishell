@@ -6,11 +6,12 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:06:02 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/13 19:23:11 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/14 21:23:19 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "src/utils/utils.h"
 #include <sys/types.h>
 #include <sys/wait.h>
 
@@ -33,6 +34,8 @@ static unsigned int	wait_exit_code(pid_t pid_last)
 		}
 		pid_wait = wait(&status);
 	}
+	if (g_signal == SIGINT)
+		ft_printf("\n");
 	return (exit_code);
 }
 
@@ -68,7 +71,7 @@ unsigned int	handle_pipe_sign(t_cmd_node *node, t_exec_ctx *exec_ctx,
 		pid_last = exec_pipeline(pipe_node, node->data, exec_ctx, ctx);
 		exec_ctx->pipe.index++;
 		pipe_node = pipe_node->next;
-		//ft_printf("pipefd = %d\n", exec_ctx->pipe.fd);
+		// ft_printf("pipefd = %d\n", exec_ctx->pipe.fd);
 	}
 	if (exec_ctx->pipe.fd != -1)
 		fd_close_reset(NULL, NULL, &exec_ctx->pipe.fd);

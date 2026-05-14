@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:03:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 21:28:04 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/14 21:55:08 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static unsigned int (*get_builtin(char *cmd_name))(int, char **, t_ctx *)
 		return (&mini_exit);
 	return (NULL);
 }
-
 
 unsigned int	cmd_exec(t_ctx *ctx, t_exec_ctx *exec, t_array *argv)
 {

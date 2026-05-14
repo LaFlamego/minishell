@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:35:32 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/13 19:23:11 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/14 15:34:38 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,10 @@ static void	fd_proceed(t_exec_ctx *exec_ctx)
 		if (exec_ctx->fd.heredoc != -1)
 			exec_ctx->pipe.fd = exec_ctx->fd.heredoc;
 		else
+		{
 			exec_ctx->pipe.fd = exec_ctx->fd.in;
+			exec_ctx->fd.in = -1;
+		}
 	}
 	in_fd = exec_ctx->pipe.fd;
 	out_fd = exec_ctx->fd.out;
@@ -104,7 +107,10 @@ static void	fd_proceed(t_exec_ctx *exec_ctx)
 		pipeline_dup(exec_ctx, out_fd, false);
 	if (exec_ctx->pipe.index != 1 && exec_ctx->fd.heredoc != -1)
 		fd_close_reset(NULL, NULL, &exec_ctx->fd.heredoc);
-	fd_close_reset(&exec_ctx->fd.in, &exec_ctx->fd.out, &exec_ctx->pipe.fd);
+	if (exec_ctx->pipe.fd != exec_ctx->fd.in)
+		fd_close_reset(&exec_ctx->fd.in, &exec_ctx->fd.out, &exec_ctx->pipe.fd);
+	else
+		fd_close_reset(&exec_ctx->fd.in, &exec_ctx->fd.out, NULL);
 }
 
 pid_t	exec_pipeline(t_list *list, t_list *head, t_exec_ctx *exec_ctx,
@@ -140,6 +146,7 @@ pid_t	exec_pipeline(t_list *list, t_list *head, t_exec_ctx *exec_ctx,
 		if (exec_ctx->fd.heredoc != -1)
 			fd_close_reset(NULL, NULL, &exec_ctx->fd.heredoc);
 		exec_ctx->pipe.fd = exec_ctx->fd.in;
+		exec_ctx->fd.in = -1;
 	}
 	return (pid);
 }

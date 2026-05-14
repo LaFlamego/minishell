@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:39:11 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/14 13:43:53 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/14 15:53:37 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	handle_redirection(t_word_part *part, t_exec_ctx *ctx)
 		if (ctx->fd.in > 2)
 			fd_close_reset(&ctx->fd.in, NULL, NULL);
 		ctx->fd.heredoc = (int)(intptr_t)part->data;
+		part->data = (void *)(intptr_t)-1;
 		ctx->redir = HEREDOC;
 	}
 	if (part->kind == WK_REDIRECT_OUT)

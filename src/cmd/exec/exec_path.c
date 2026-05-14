@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 13:59:50 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/14 15:41:27 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/14 18:21:57 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <unistd.h>
-
-// TODO: How do bash handle symlinks?
-static bool	is_dir(struct stat *sb)
-{
-	return ((sb->st_mode & S_IFMT) == S_IFDIR);
-}
 
 enum						e_access_result
 {
@@ -42,7 +36,6 @@ static enum e_access_result	can_execute(char *path)
 	return (OK);
 }
 
-// FIXME: If no path, use the current directory
 static char	*get_binary_path(t_env *env, char *cmd, enum e_access_result *last)
 {
 	char	*var;
@@ -88,6 +81,7 @@ static unsigned int	find_command_path(t_exec_ctx *ctx, char *cmd, t_env *env)
 	enum e_access_result	last;
 	char					*path;
 
+	last = OK;
 	path = get_binary_path(env, cmd, &last);
 	if (!path)
 	{
@@ -112,7 +106,6 @@ static unsigned int	find_command_path(t_exec_ctx *ctx, char *cmd, t_env *env)
 	return (0);
 }
 
-// TODO nice to have: handle ./normalfile by doing fallback
 unsigned int	cmd_exec_get_path(char *cmd, t_exec_ctx *exec, t_env *env)
 {
 	struct stat	sb;
@@ -126,7 +119,7 @@ unsigned int	cmd_exec_get_path(char *cmd, t_exec_ctx *exec, t_env *env)
 		ft_dprintf(2, "minishell: %s: %s\n", cmd, strerror(errno));
 		return (1);
 	}
-	if (is_dir(&sb))
+	if ((sb.st_mode & S_IFMT) == S_IFDIR)
 	{
 		ft_dprintf(2, "minishell: %s: Is a directory\n", cmd);
 		return (126);

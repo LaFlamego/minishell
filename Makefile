@@ -48,15 +48,19 @@ PARSER_SRCS = 	parser_new.c				\
 				parse_variable.c
 
 NODE_SRCS 	=	node.c						\
-				node_free.c
+				node_free.c					\
+				node_traverse.c
 
 WORD_SRCS	=	word.c						\
 				word_part.c
 
 EXPAND_SRCS	=	expand_command.c			\
+				expand_files.c				\
 				expand_heredoc.c			\
 				expand_redirections.c		\
-				expand_target.c
+				expand_redirections_setup.c	\
+				expand_target.c				\
+				expand_word.c
 
 UTILS_SRCS	=	cli.c		\
 				files.c		\

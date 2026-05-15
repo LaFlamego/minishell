@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:21:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/13 09:52:08 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/15 16:26:49 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ t_array	*expand_command(t_word *words, t_exec_ctx *ctx);
 int		expand_variable(t_string *arg, char *key, t_env *env);
 
 char	*expand_target(t_word *parts, t_env *env);
+
+int		expand_word(t_list *parts, t_array *argv, t_exec_ctx *ctx);
+
+int		expand_redirection(t_word_part *part, t_exec_ctx *ctx);
+
+int		expand_files(t_array *argv, t_env *env);
 
 int		expand_heredoc(t_word_part *part, t_string *arg);
 

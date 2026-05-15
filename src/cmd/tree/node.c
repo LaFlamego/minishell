@@ -6,11 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 16:21:36 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/14 21:50:27 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/15 16:49:21 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./node.h"
+#include "libft.h"
 #include <stdlib.h>
 
 static void	*node_alloc_args(t_cmd_node *node)

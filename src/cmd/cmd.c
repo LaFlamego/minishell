@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:11:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 20:54:28 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/15 16:39:34 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ unsigned int	cmd_handle(const char *input, t_ctx *ctx)
 	head = parser_parse(&p);
 	if (ctx->flags & FLAG_DEBUG)
 		debug_node(head, 0);
-	if (head && preprocess_heredocs(head))
+	if (head && node_traverse(head, &preprocess_heredocs))
 		track_node(head, ctx);
 	scanner_free(&s);
 	node_free(head);

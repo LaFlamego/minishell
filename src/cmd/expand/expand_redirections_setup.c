@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:22:55 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/15 16:52:07 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/15 17:10:33 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,38 +55,37 @@ int	redirect_out(char *file_to, t_exec_ctx *exec_ctx)
 	return (1);
 }
 
-int	redirect_in_until(char *del)
+static int	read_heredoc_input(int in, int out, const char *del)
 {
 	char	*line;
-	int		fd_in;
-	int		fd_out;
 
-	if (pipe_build(&fd_in, &fd_out))
-		return (-1);
-	g_signal = 0;
-	line = readline("> ");
-	if (g_signal == SIGINT)
+	while (1)
 	{
-		close(fd_in);
-		close(fd_out);
-		return (-1);
-	}
-	while (line != NULL && !ft_streq(line, del))
-	{
-		write(fd_out, line, ft_strlen(line));
-		write(fd_out, "\n", 1);
-		free(line);
 		g_signal = 0;
 		line = readline("> ");
 		if (g_signal == SIGINT)
 		{
-			g_signal = 0;
-			close(fd_in);
-			close(fd_out);
-			return (-1);
+			close(in);
+			close(out);
+			return (0);
 		}
+		if (!line || ft_streq(line, del))
+			break ;
+		ft_dprintf(out, "%s\n", line);
+		free(line);
 	}
-	free(line);
+	return (1);
+}
+
+int	redirect_in_until(char *del)
+{
+	int	fd_in;
+	int	fd_out;
+
+	if (pipe_build(&fd_in, &fd_out))
+		return (-1);
+	if (!read_heredoc_input(fd_in, fd_out, del))
+		return (-1);
 	fd_close_reset(NULL, &fd_out, NULL);
 	return (fd_in);
 }

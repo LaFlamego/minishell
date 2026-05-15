@@ -6,17 +6,17 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:35:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/14 13:08:36 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/15 16:03:58 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "./path/path.h"
 #include "exec.h"
 #include "src/env/env.h"
 #include <errno.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
 
 static unsigned int	get_and_exec_cmd(t_array *argv, t_exec_ctx *exec,
@@ -25,7 +25,7 @@ static unsigned int	get_and_exec_cmd(t_array *argv, t_exec_ctx *exec,
 	char			*cmd_path;
 	unsigned int	exit_code;
 
-	exit_code = cmd_exec_get_path((char *)argv->data[0], exec, env);
+	exit_code = path_get_cmd((char *)argv->data[0], exec, env);
 	if (exit_code != 0)
 	{
 		free_cmd_path(exec);

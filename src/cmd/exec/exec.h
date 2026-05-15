@@ -6,14 +6,13 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:05:59 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/13 19:23:11 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/15 16:02:00 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXEC_H
 # define EXEC_H
 
-# include "../cmd.h"
 # include "../tree/node.h"
 # include "src/ctx/ctx.h"
 # include <sys/types.h>
@@ -71,8 +70,6 @@ unsigned int			cmd_exec_bin(t_array *argv, t_env *env,
 							t_exec_ctx *exec);
 pid_t					cmd_exec_fork(t_array *argv, t_exec_ctx *exec,
 							t_env *env);
-unsigned int			cmd_exec_get_path(char *cmd_name, t_exec_ctx *exec,
-							t_env *env);
 unsigned int			handle_and_sign(t_cmd_node *node, t_ctx *ctx);
 unsigned int			handle_or_sign(t_cmd_node *node, t_ctx *ctx);
 unsigned int			handle_single_command(t_cmd_node *node, t_ctx *ctx,
@@ -80,6 +77,6 @@ unsigned int			handle_single_command(t_cmd_node *node, t_ctx *ctx,
 unsigned int			handle_pipe_sign(t_cmd_node *node, t_exec_ctx *exec_ctx,
 							t_ctx *ctx);
 pid_t					exec_pipeline(t_list *curr, t_list *head,
-								t_exec_ctx *exec_ctx, t_ctx *ctx);
+							t_exec_ctx *exec_ctx, t_ctx *ctx);
 
 #endif

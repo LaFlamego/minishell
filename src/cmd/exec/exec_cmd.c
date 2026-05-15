@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:03:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/14 21:55:08 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/15 17:18:39 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,46 @@
 #include "src/ctx/ctx.h"
 #include "src/env/env.h"
 
-static unsigned int (*get_builtin(char *cmd_name))(int, char **, t_ctx *)
+static bool	is_builtin(char *cmd)
 {
-	if (ft_streq(cmd_name, "echo"))
-		return (&mini_echo);
-	if (ft_streq(cmd_name, "cd"))
-		return (&mini_cd);
-	if (ft_streq(cmd_name, "env"))
-		return (&mini_env);
-	if (ft_streq(cmd_name, "export"))
-		return (&mini_export);
-	if (ft_streq(cmd_name, "pwd"))
-		return (&mini_pwd);
-	if (ft_streq(cmd_name, "unset"))
-		return (&mini_unset);
-	if (ft_streq(cmd_name, "exit"))
-		return (&mini_exit);
-	return (NULL);
+	if (ft_streq(cmd, "echo") || ft_streq(cmd, "cd"))
+		return (true);
+	if (ft_streq(cmd, "env") || ft_streq(cmd, "export"))
+		return (true);
+	if (ft_streq(cmd, "pwd") || ft_streq(cmd, "unset"))
+		return (true);
+	if (ft_streq(cmd, "exit"))
+		return (true);
+	return (false);
+}
+
+static unsigned int	run_builtin(int argc, char **argv, t_ctx *ctx)
+{
+	if (ft_streq(argv[0], "echo"))
+		return (mini_echo(argc, argv, ctx));
+	if (ft_streq(argv[0], "cd"))
+		return (mini_cd(argc, argv, ctx));
+	if (ft_streq(argv[0], "env"))
+		return (mini_env(argc, argv, ctx));
+	if (ft_streq(argv[0], "export"))
+		return (mini_export(argc, argv, ctx));
+	if (ft_streq(argv[0], "pwd"))
+		return (mini_pwd(argc, argv, ctx));
+	if (ft_streq(argv[0], "unset"))
+		return (mini_unset(argc, argv, ctx));
+	if (ft_streq(argv[0], "exit"))
+		return (mini_exit(argc, argv, ctx));
+	return (1);
 }
 
 unsigned int	cmd_exec(t_ctx *ctx, t_exec_ctx *exec, t_array *argv)
 {
 	unsigned int	exit_code;
-	unsigned int	(*builtin)(int, char **, t_ctx *);
 
-	builtin = get_builtin(argv->data[0]);
-	if (builtin && exec->is_pipe == false)
+	if (is_builtin(argv->data[0]) && exec->is_pipe == false)
 	{
 		redir_fd(exec, true);
-		exit_code = builtin(argv->size - 1, (char **)argv->data, ctx);
+		exit_code = run_builtin(argv->size - 1, (char **)argv->data, ctx);
 		restore_stdio(exec);
 	}
 	else

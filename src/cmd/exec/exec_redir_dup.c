@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 14:27:44 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/13 19:00:08 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/15 20:03:35 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,6 @@ void	redir_fd(t_exec_ctx *exec, bool to_save_stdio)
 	if (exec->redir == WRITE_OUT || exec->redir == APPEND)
 		to_dup_and_close(exec, false, to_save_stdio);
 	else if (exec->redir == NO_REDIR)
-	{
-		// if (exec->fd.heredoc != -1)
-		// 	fd_close_reset(NULL, NULL, &exec->fd.heredoc);
 		return ;
-	}
 	exec->redir = NO_REDIR;
 }

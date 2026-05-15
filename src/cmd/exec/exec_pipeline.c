@@ -6,62 +6,16 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:35:32 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/14 15:34:38 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/15 20:03:03 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "libft.h"
-#include "src/cmd/tree/word/word.h"
-#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <unistd.h>
-
-static void	close_heredocs_in_words(t_word *words)
-{
-	t_word		*word;
-	t_list		*parts;
-	t_word_part	*part;
-	int			fd;
-
-	word = words;
-	while (word)
-	{
-		parts = word->content;
-		while (parts)
-		{
-			part = parts->content;
-			if (part && part->kind == WK_REDIRECT_IN_UNTIL_FD)
-			{
-				fd = (int)(intptr_t)part->data;
-				if (fd >= 0)
-				{
-					close(fd);
-					part->data = (void *)(intptr_t)-1;
-				}
-			}
-			parts = parts->next;
-		}
-		word = word->next;
-	}
-}
-
-static void	close_other_heredocs(t_list *head, t_cmd_node *current)
-{
-	t_list		*node;
-	t_cmd_node	*cmd;
-
-	node = head;
-	while (node)
-	{
-		cmd = node->content;
-		if (cmd && cmd != current && cmd->kind == COMMAND)
-			close_heredocs_in_words(cmd->data);
-		node = node->next;
-	}
-}
 
 static void	pipeline_dup(t_exec_ctx *exec_ctx, int fd_dup, bool is_pipe_in)
 {
@@ -78,10 +32,6 @@ static void	pipeline_dup(t_exec_ctx *exec_ctx, int fd_dup, bool is_pipe_in)
 		perror("minishell: dup");
 		return ;
 	}
-	// if (is_pipe_in)
-	// 	fd_close_reset(&exec_ctx->fd.in, NULL, NULL);
-	// else
-	// 	fd_close_reset(NULL, &exec_ctx->fd.out, NULL);
 }
 
 static void	fd_proceed(t_exec_ctx *exec_ctx)
@@ -113,6 +63,17 @@ static void	fd_proceed(t_exec_ctx *exec_ctx)
 		fd_close_reset(&exec_ctx->fd.in, &exec_ctx->fd.out, NULL);
 }
 
+static void	setup_fd_in_parent(t_exec_ctx *exec_ctx)
+{
+	fd_close_reset(NULL, &exec_ctx->fd.out, NULL);
+	if (exec_ctx->pipe.fd != -1)
+		fd_close_reset(NULL, NULL, &exec_ctx->pipe.fd);
+	if (exec_ctx->fd.heredoc != -1)
+		fd_close_reset(NULL, NULL, &exec_ctx->fd.heredoc);
+	exec_ctx->pipe.fd = exec_ctx->fd.in;
+	exec_ctx->fd.in = -1;
+}
+
 pid_t	exec_pipeline(t_list *list, t_list *head, t_exec_ctx *exec_ctx,
 		t_ctx *ctx)
 {
@@ -139,14 +100,6 @@ pid_t	exec_pipeline(t_list *list, t_list *head, t_exec_ctx *exec_ctx,
 		exit(pid);
 	}
 	if (pid > 0)
-	{
-		fd_close_reset(NULL, &exec_ctx->fd.out, NULL);
-		if (exec_ctx->pipe.fd != -1)
-			fd_close_reset(NULL, NULL, &exec_ctx->pipe.fd);
-		if (exec_ctx->fd.heredoc != -1)
-			fd_close_reset(NULL, NULL, &exec_ctx->fd.heredoc);
-		exec_ctx->pipe.fd = exec_ctx->fd.in;
-		exec_ctx->fd.in = -1;
-	}
+		setup_fd_in_parent(exec_ctx);
 	return (pid);
 }

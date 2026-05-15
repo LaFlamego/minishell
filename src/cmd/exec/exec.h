@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:05:59 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/15 16:02:00 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/15 19:49:12 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../tree/node.h"
 # include "src/ctx/ctx.h"
+# include "src/cmd/tree/word/word.h"
 # include <sys/types.h>
 
 enum					e_redir
@@ -64,6 +65,8 @@ void					fd_close_reset(int *pipein, int *pipeout, int *prevfd);
 void					init_exec_ctx(t_exec_ctx *exec, t_ctx *ctx);
 void					redir_fd(t_exec_ctx *exec, bool to_save_stdio);
 void					restore_stdio(t_exec_ctx *exec);
+void					close_heredocs_in_words(t_word *words);
+void					close_other_heredocs(t_list *head, t_cmd_node *current);
 unsigned int			track_node(t_cmd_node *node, t_ctx *ctx);
 unsigned int			cmd_exec(t_ctx *ctx, t_exec_ctx *exec, t_array *argv);
 unsigned int			cmd_exec_bin(t_array *argv, t_env *env,

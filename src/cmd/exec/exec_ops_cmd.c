@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:08:52 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/14 22:04:55 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/15 18:53:39 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "src/debug/debug.h"
 #include <stdlib.h>
 #include <sys/types.h>
-#include <stdint.h>
 
 unsigned int	handle_single_command(t_cmd_node *node, t_ctx *ctx,
 		t_exec_ctx *exec_ctx)
@@ -31,7 +30,8 @@ unsigned int	handle_single_command(t_cmd_node *node, t_ctx *ctx,
 	if (argv->size <= 1)
 	{
 		if (exec_ctx->redir != NO_REDIR)
-			fd_close_reset(&exec_ctx->fd.in, &exec_ctx->fd.out, &exec_ctx->fd.heredoc);
+			fd_close_reset(&exec_ctx->fd.in, &exec_ctx->fd.out,
+				&exec_ctx->fd.heredoc);
 		exit_code = 0;
 	}
 	else

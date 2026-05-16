@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 17:21:48 by crevette          #+#    #+#             */
-/*   Updated: 2026/04/02 01:28:03 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/16 22:30:14 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,25 @@
 
 unsigned int	mini_echo(int argc, char *argv[], t_ctx *ctx)
 {
-	int	i;
+	int		i;
+	bool	new_line;
 
 	(void)ctx;
-	if (argc > 1)
+	new_line = true;
+	i = 1;
+	while (i < argc && ft_streq(argv[i], "-n"))
 	{
-		i = 1 + ft_streq(argv[1], "-n");
-		while (i < argc)
-		{
-			ft_printf("%s", argv[i]);
-			if (i < argc - 1)
-				ft_printf(" ");
-			++i;
-		}
+		new_line = false;
+		i++;
 	}
-	if (argc == 1 || !ft_streq(argv[1], "-n"))
+	while (i < argc)
+	{
+		ft_printf("%s", argv[i]);
+		if (i < argc - 1)
+			ft_printf(" ");
+		i++;
+	}
+	if (argc == 1 || new_line)
 		ft_printf("\n");
 	return (0);
 }

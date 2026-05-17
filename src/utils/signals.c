@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 21:51:19 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/16 20:48:17 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/17 22:57:37 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,19 @@ static int	error(void)
 /** handle_signal() - handle incoming signals
  * @signal: signal to handle
  *
- * On SIGINT, display a new prompt on a new line
- * On SIGQUIT, do nothing. (cancels signal sent by CTRL+\)
+ * On SIGINT, display a new prompt on a new line.
+ * On SIGQUIT, try to kill child.
  */
 static void	handle_signal(int signal)
 {
-	if (signal == SIGINT && isatty(0))
+	if (signal == SIGINT)
 	{
 		g_signal = SIGINT;
 	}
 	if (signal == SIGQUIT)
-		return ;
+	{
+		g_signal = SIGQUIT;
+	}
 }
 
 int	set_signal_action(void)

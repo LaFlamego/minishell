@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:02:13 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/14 21:40:38 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/17 23:00:21 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ static unsigned int	wait_exit_code(pid_t pid)
 	{
 		ft_printf("\n");
 		exit_code = 130;
+	}
+	if (g_signal == SIGQUIT)
+	{
+		ft_printf("Quit (core dumped)\n");
+		exit_code = 131;
 	}
 	return (exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 13:12:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/15 17:02:37 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 00:41:02 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	expand_del(t_list *parts, t_string *arg)
 	return (1);
 }
 
-static int	handle_arg(t_word_part *part)
+static int	handle_arg(t_word_part *part, t_env *env)
 {
 	t_string	*arg;
 	int			fd;
@@ -42,7 +42,7 @@ static int	handle_arg(t_word_part *part)
 		ft_string_free(arg);
 		return (0);
 	}
-	fd = redirect_in_until(arg->content);
+	fd = redirect_in_until(arg->content, env);
 	if (fd < 0)
 	{
 		ft_string_free(arg);
@@ -55,7 +55,7 @@ static int	handle_arg(t_word_part *part)
 	return (1);
 }
 
-static int	traverse_parts(t_list *parts)
+static int	traverse_parts(t_list *parts, t_env *env)
 {
 	t_word		*curr;
 	t_word_part	*part;
@@ -64,7 +64,7 @@ static int	traverse_parts(t_list *parts)
 	while (curr)
 	{
 		part = curr->content;
-		if (part->kind == WK_REDIRECT_IN_UNTIL && !handle_arg(part))
+		if (part->kind == WK_REDIRECT_IN_UNTIL && !handle_arg(part, env))
 		{
 			return (0);
 		}
@@ -73,7 +73,7 @@ static int	traverse_parts(t_list *parts)
 	return (1);
 }
 
-static int	traverse_words(t_word *words)
+static int	traverse_words(t_word *words, t_env *env)
 {
 	t_word	*curr;
 	t_list	*parts;
@@ -82,18 +82,18 @@ static int	traverse_words(t_word *words)
 	while (curr)
 	{
 		parts = curr->content;
-		if (!traverse_parts(parts))
+		if (!traverse_parts(parts, env))
 			return (0);
 		curr = curr->next;
 	}
 	return (1);
 }
 
-int	preprocess_heredocs(t_cmd_node *node)
+int	preprocess_heredocs(t_cmd_node *node, t_env *env)
 {
 	if (node->kind == COMMAND)
 	{
-		return (traverse_words(node->data));
+		return (traverse_words(node->data, env));
 	}
 	return (1);
 }

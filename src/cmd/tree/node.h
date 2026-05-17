@@ -6,12 +6,14 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:03:17 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/15 16:48:58 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 00:43:20 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NODE_H
 # define NODE_H
+
+# include "./src/env/env.h"
 
 enum			e_kind
 {
@@ -47,6 +49,7 @@ t_cmd_node		*node_new_bin(t_cmd_node *left, enum e_kind op,
 					t_cmd_node *right);
 t_cmd_node		*node_free(t_cmd_node *node);
 
-int				node_traverse(t_cmd_node *node, int (*fn)(t_cmd_node *node));
+int				node_traverse(t_cmd_node *node, t_env *env,
+					int (*fn)(t_cmd_node *node, t_env *env));
 
 #endif

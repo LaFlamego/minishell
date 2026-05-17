@@ -62,9 +62,11 @@ EXPAND_SRCS	=	expand_command.c			\
 				expand_target.c				\
 				expand_word.c
 
-UTILS_SRCS	=	cli.c		\
-				files.c		\
-				path.c		\
+UTILS_SRCS	=	cli.c			\
+				files.c			\
+				files_filter.c	\
+				files_utils.c	\
+				path.c			\
 				signals.c
 
 DEBUG_SRCS	=	debug_argv.c			\

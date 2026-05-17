@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:09:55 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/15 16:27:00 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/17 18:27:38 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,29 @@
 #include "./src/cmd/tree/word/word.h"
 #include <stdlib.h>
 
-int	expand_part(t_word_part *part, t_string *arg, t_array *argv,
-		t_exec_ctx *ctx)
+static bool	is_file_list(t_list *parts)
+{
+	t_list		*curr;
+	t_word_part	*part;
+	bool		has_wildcard;
+
+	has_wildcard = false;
+	curr = parts;
+	while (curr)
+	{
+		part = curr->content;
+		if (part->kind == WK_VARIABLE)
+			return (false);
+		if (part->kind == WK_FILES)
+			has_wildcard = true;
+		curr = curr->next;
+	}
+	return (has_wildcard);
+}
+
+int	expand_part(t_word_part *part, t_string *arg, t_exec_ctx *ctx)
 {
 	if (part->kind == WK_STRING && !ft_string_push_str(arg, part->data))
-		return (0);
-	if (part->kind == WK_FILES && !expand_files(argv, ctx->env))
 		return (0);
 	if (part->kind == WK_VARIABLE && !expand_variable(arg, part->data,
 			ctx->env))
@@ -30,7 +47,7 @@ int	expand_part(t_word_part *part, t_string *arg, t_array *argv,
 	return (1);
 }
 
-static t_string	*expand_parts(t_list *parts, t_array *argv, t_exec_ctx *ctx)
+static t_string	*expand_parts(t_list *parts, t_exec_ctx *ctx)
 {
 	t_list		*curr;
 	t_string	*arg;
@@ -41,7 +58,7 @@ static t_string	*expand_parts(t_list *parts, t_array *argv, t_exec_ctx *ctx)
 	curr = parts;
 	while (curr)
 	{
-		if (!expand_part(curr->content, arg, argv, ctx))
+		if (!expand_part(curr->content, arg, ctx))
 		{
 			ft_string_free(arg);
 			return (NULL);
@@ -51,11 +68,38 @@ static t_string	*expand_parts(t_list *parts, t_array *argv, t_exec_ctx *ctx)
 	return (arg);
 }
 
+static int	handle_file_list(t_list *parts, t_array *argv, t_exec_ctx *ctx)
+{
+	size_t	old_size;
+	char	*filter;
+
+	old_size = argv->size;
+	filter = expand_filter(parts);
+	if (!filter || !expand_files(argv, ctx->env, filter))
+	{
+		free(filter);
+		return (0);
+	}
+	if (argv->size != old_size)
+	{
+		free(filter);
+		return (1);
+	}
+	if (!ft_array_push(argv, filter))
+	{
+		free(filter);
+		return (0);
+	}
+	return (1);
+}
+
 int	expand_word(t_list *parts, t_array *argv, t_exec_ctx *ctx)
 {
 	t_string	*arg;
 
-	arg = expand_parts(parts, argv, ctx);
+	if (is_file_list(parts))
+		return (handle_file_list(parts, argv, ctx));
+	arg = expand_parts(parts, ctx);
 	if (!arg)
 		return (0);
 	if (arg->size > 1 && !ft_array_push(argv, arg->content))

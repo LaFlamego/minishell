@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 21:22:12 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/13 17:45:25 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/17 00:57:11 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int								setup_signals_handlers(void);
 /**
  * dir_get_files() - list entries in a directory
  * @path: path to directory (must not be NULL)
+ * @filter: the filter to apply on file names
  *
  * Returns an array of allocated strings containing
  * directory entry names, excluding hidden files.
@@ -49,7 +50,10 @@ int								setup_signals_handlers(void);
  * Return: pointer to array on success, NULL on failure.
  * Caller must free each string and the array.
  */
-t_array							*dir_get_files(const char *path);
+t_array							*dir_get_files(const char *path, char *filter);
+
+void							files_sort(t_array *files);
+bool							is_filtered(char *file, char *filter);
 
 /**
  * cli_parse_args() - parse cli arguments

@@ -6,10 +6,11 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 15:26:04 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/08 21:15:52 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/17 18:16:50 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "./utils.h"
 #include "libft.h"
 #include <dirent.h>
 #include <errno.h>
@@ -25,9 +26,11 @@ static void	*handle_error(DIR *dir, t_array *files)
 	return (NULL);
 }
 
-static bool	is_hidden(const char *name)
+static bool	is_hidden(const char *name, const char *filter)
 {
-	return (name && *name == '.');
+	if (ft_streq(name, ".") || ft_streq(name, ".."))
+		return (true);
+	return (ft_startswith(name, ".") && *filter != '.');
 }
 
 static t_string	*ft_to_string(const char *str)
@@ -45,7 +48,7 @@ static t_string	*ft_to_string(const char *str)
 
 // FIXME: to_string can fail
 // FIXME: push can fail
-static t_array	*get_file_list(DIR *dir)
+static t_array	*get_file_list(DIR *dir, char *filter)
 {
 	struct dirent	*ent;
 	t_array			*files;
@@ -57,7 +60,7 @@ static t_array	*get_file_list(DIR *dir)
 	ent = readdir(dir);
 	while (ent)
 	{
-		if (!is_hidden(ent->d_name))
+		if (!is_hidden(ent->d_name, filter) && is_filtered(ent->d_name, filter))
 		{
 			name = ft_to_string(ent->d_name);
 			ft_array_push(files, name);
@@ -72,7 +75,7 @@ static t_array	*get_file_list(DIR *dir)
 	return (files);
 }
 
-t_array	*dir_get_files(const char *path)
+t_array	*dir_get_files(const char *path, char *filter)
 {
 	DIR		*dir;
 	t_array	*files;
@@ -80,9 +83,10 @@ t_array	*dir_get_files(const char *path)
 	dir = opendir(path);
 	if (!dir)
 		return (handle_error(dir, NULL));
-	files = get_file_list(dir);
+	files = get_file_list(dir, filter);
 	if (!files)
 		return (handle_error(dir, files));
 	closedir(dir);
+	files_sort(files);
 	return (files);
 }

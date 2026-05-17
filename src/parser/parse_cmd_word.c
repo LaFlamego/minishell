@@ -6,27 +6,11 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 22:28:27 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/08 20:32:22 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/17 02:53:55 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./parser.h"
-
-static bool	has_wildcard(t_word *word)
-{
-	t_word_part	*part;
-	t_word		*curr;
-
-	curr = word;
-	while (curr)
-	{
-		part = curr->content;
-		if (part->kind == WK_FILES)
-			return (true);
-		curr = curr->next;
-	}
-	return (false);
-}
 
 static t_word	*push_part(t_word *word, t_word_part *part)
 {
@@ -53,13 +37,11 @@ static bool	parser_match_word(t_parser *p)
 	return (parser_match(p, STRING) || parser_match(p, DOLLAR));
 }
 
-static t_word_part	*parse_part(t_parser *p, t_word *word)
+static t_word_part	*parse_part(t_parser *p)
 {
 	t_token	*t;
 
 	t = p->previous->content;
-	if (has_wildcard(word) || (word && t->type == STAR))
-		return (parser_error(p, t));
 	if (t->type == STAR)
 		return (part_new(WK_FILES, NULL));
 	if (t->type == STRING)
@@ -77,7 +59,7 @@ t_word	*parser_parse_cmd_word(t_parser *p)
 	word = NULL;
 	while (parser_match_word(p))
 	{
-		part = parse_part(p, word);
+		part = parse_part(p);
 		if (!part)
 		{
 			word_free(word);

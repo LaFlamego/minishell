@@ -6,14 +6,13 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 17:39:11 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/15 16:25:07 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/17 00:59:18 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./expand.h"
 #include "src/cmd/tree/word/word.h"
 #include "src/env/env.h"
-#include <stdint.h>
 #include <stdlib.h>
 
 int	expand_variable(t_string *arg, char *key, t_env *env)

@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 16:14:45 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/16 21:51:23 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/17 22:53:49 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,21 @@
 #include "src/ctx/ctx.h"
 #include "src/env/env.h"
 
-// FIXME: var starting with _ are not printed
+static bool	is_valid_arg(char *arg)
+{
+	int	i;
+
+	if (!ft_isalpha(arg[0]) && arg[0] != '_')
+		return (false);
+	i = 1;
+	while (arg[i] && arg[i] != '=')
+	{
+		if (!ft_isalpha(arg[i]) && !ft_isdigit(arg[i]) && arg[i] != '_')
+			return (false);
+		++i;
+	}
+	return (true);
+}
 
 static void	print_env(t_env *env)
 {
@@ -25,8 +39,8 @@ static void	print_env(t_env *env)
 	while (i < env->size - 1)
 	{
 		kvp = env->data[i];
-		if (kvp && ft_isalpha(kvp[0]))
-			ft_dprintf(1, "%s\n", env->data[i]);
+		if (kvp && is_valid_arg(kvp))
+			ft_dprintf(1, "%s\n", kvp);
 		i++;
 	}
 }

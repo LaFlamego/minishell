@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:21:12 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/17 19:04:09 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/17 22:53:10 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-// TODO: Does is_valid respect underscore?
 static bool	is_valid_arg(char *arg)
 {
 	int	i;

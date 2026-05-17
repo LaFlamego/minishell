@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 15:32:12 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/15 16:04:43 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/16 21:31:38 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*path_get_bin(t_env *env, char *cmd, t_path_res *last)
 
 	cmd_path = NULL;
 	paths = get_paths_var_value(env);
-	if (paths[0])
+	if (paths && paths[0])
 		cmd_path = get_from_paths(paths, cmd, last);
 	else
 		cmd_path = check_pwd(cmd, last);

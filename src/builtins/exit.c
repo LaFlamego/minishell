@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 18:30:12 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/02 01:28:32 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/17 19:24:30 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 #include <limits.h>
 
 #define BASE 10
-
-// TODO: Default Exit Code of mini_exit should be
-// > the same as the one of the last executed command
 
 static int	will_overflow(char c, long long n, long long sign)
 {

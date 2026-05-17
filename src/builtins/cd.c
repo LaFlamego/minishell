@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 12:18:23 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/11 13:16:50 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/16 21:49:45 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ unsigned int	update_cwd(char *key, t_ctx *ctx)
 unsigned int	mini_cd(int argc, char *argv[], t_ctx *ctx)
 {
 	if (argc > 2)
-		ft_printf("minishell: cd: too many arguments\n");
+		ft_dprintf(2, "minishell: cd: too many arguments\n");
 	else if (argc < 2)
-		ft_printf("minishell: cd: too few arguments\n");
+		ft_dprintf(2, "minishell: cd: too few arguments\n");
 	if (argc == 2)
 	{
 		if (argv[1] && argv[1][0])

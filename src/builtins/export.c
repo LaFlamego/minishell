@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:21:12 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/17 18:55:49 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/17 19:04:09 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static void	write_key(char *kvp)
 	}
 }
 
-// TODO: Can values be NULL?
 int	env_vars_list(t_ctx *ctx)
 {
 	size_t	i;
@@ -80,18 +79,22 @@ int	env_vars_list(t_ctx *ctx)
 	return (0);
 }
 
-// FIXME: No value should not override previous value
 static int	export_variables(int argc, char **argv, t_ctx *ctx)
 {
-	int	i;
-	int	exit_code;
+	int		i;
+	int		exit_code;
+	char	*value;
 
 	i = 1;
 	exit_code = 0;
 	while (i < argc)
 	{
 		if (is_valid_arg(argv[i]))
-			env_set(ctx->env, argv[i]);
+		{
+			value = env_get(ctx->env, argv[i]);
+			if (!value || ft_strchr(argv[i], '='))
+				env_set(ctx->env, argv[i]);
+		}
 		else
 		{
 			ft_dprintf(2, "minishell: export: `%s': not a valid identifier\n",

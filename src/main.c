@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "src/cmd/cmd.h"
 #include "src/prompt/prompt.h"
 #include "src/utils/utils.h"
 #include <unistd.h>
@@ -38,10 +37,7 @@ int	main(int argc, char *argv[], char *envp[])
 	}
 	if (!cli_parse_args(argc, argv, &ctx))
 		return (1);
-	if (ctx.flags & FLAG_CLI_MODE)
-		cmd_handle(ctx.command, &ctx);
-	else
-		prompt_display(&ctx);
+	prompt_display(&ctx);
 	exit_code = get_exit_code(&ctx);
 	ctx_free(&ctx);
 	return (exit_code);

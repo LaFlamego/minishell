@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:35:32 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/15 20:03:03 by crevette         ###   ########.fr       */
+/*   Updated: 2026/05/17 20:08:50 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,7 @@ pid_t	exec_pipeline(t_list *list, t_list *head, t_exec_ctx *exec_ctx,
 	{
 		close_other_heredocs(head, list->content);
 		fd_proceed(exec_ctx);
-		track_node(list->content, ctx);
-		exit(pid);
+		exit(track_node(list->content, ctx));
 	}
 	if (pid > 0)
 		setup_fd_in_parent(exec_ctx);

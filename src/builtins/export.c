@@ -6,18 +6,16 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:21:12 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/11 17:58:54 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/17 18:55:49 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "src/ctx/ctx.h"
+#include <stdlib.h>
+#include <unistd.h>
 
-// TODO: Remove that
-// export: `23=1': not a valid identifier
-// export: `23': not a valid identifier
-// export: `=': not a valid identifier
-
+// TODO: Does is_valid respect underscore?
 static bool	is_valid_arg(char *arg)
 {
 	int	i;
@@ -34,22 +32,55 @@ static bool	is_valid_arg(char *arg)
 	return (true);
 }
 
-// Last element of env is NULL
-// > Therefore we stop at i = size - 1
-// FIXME: Values should be printed between double quotes
-void	env_vars_list(t_ctx *ctx)
+static int	sort(void *va, void *vb)
+{
+	return (ft_strcmp(va, vb));
+}
+
+static void	write_key(char *kvp)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < ctx->env->size - 1)
+	while (kvp[i] && kvp[i] != '=')
 	{
-		if (is_valid_arg((char *)ctx->env->data[i]))
-			ft_printf("%s\n", (char *)ctx->env->data[i]);
+		ft_putchar_fd(kvp[i], 1);
 		i++;
 	}
 }
 
+// TODO: Can values be NULL?
+int	env_vars_list(t_ctx *ctx)
+{
+	size_t	i;
+	char	*val;
+	t_array	env;
+
+	env.size = ctx->env->size - 1;
+	env.data = malloc(env.size * sizeof(void *));
+	if (!env.data)
+		return (1);
+	ft_memcpy(env.data, ctx->env->data, env.size * sizeof(void *));
+	ft_array_sort(&env, &sort);
+	i = 0;
+	while (i < env.size)
+	{
+		if (is_valid_arg(env.data[i]))
+		{
+			ft_printf("declare -x ");
+			write_key(env.data[i]);
+			val = env_get(ctx->env, env.data[i]);
+			if (val)
+				ft_printf("=\"%s\"", val);
+			ft_printf("\n");
+		}
+		i++;
+	}
+	free(env.data);
+	return (0);
+}
+
+// FIXME: No value should not override previous value
 static int	export_variables(int argc, char **argv, t_ctx *ctx)
 {
 	int	i;
@@ -74,16 +105,12 @@ static int	export_variables(int argc, char **argv, t_ctx *ctx)
 
 unsigned int	mini_export(int argc, char *argv[], t_ctx *ctx)
 {
-	int	exit_code;
-
 	if (argc <= 1)
 	{
-		env_vars_list(ctx);
-		exit_code = 0;
+		return (env_vars_list(ctx));
 	}
 	else
 	{
-		exit_code = export_variables(argc, argv, ctx);
+		return (export_variables(argc, argv, ctx));
 	}
-	return (exit_code);
 }

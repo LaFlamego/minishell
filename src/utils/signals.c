@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 21:51:19 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/13 18:56:37 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/16 20:48:17 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ static int	error(void)
 	ft_dprintf(2, "error: failed to set signal handler\n");
 	return (0);
 }
-
-// TODO: CTRL+C must stop cat
-// > track_nodes must listen to it and kill the running child if needed
 
 /** handle_signal() - handle incoming signals
  * @signal: signal to handle

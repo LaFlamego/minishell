@@ -6,13 +6,15 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 16:14:45 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/12 21:02:48 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/16 21:51:23 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "src/ctx/ctx.h"
 #include "src/env/env.h"
+
+// FIXME: var starting with _ are not printed
 
 static void	print_env(t_env *env)
 {

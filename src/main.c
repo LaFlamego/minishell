@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 21:11:29 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/11 20:12:32 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/16 20:47:50 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@
 #include "src/utils/utils.h"
 #include <unistd.h>
 
-// TODO: What happens when we send the signal to stop the current job
-// when a bultin command is running
-
-// TODO: What is main's exit code?
-// What should be the default value
 static int	get_exit_code(t_ctx *ctx)
 {
 	char	*value;

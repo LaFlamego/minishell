@@ -40,7 +40,7 @@ PRINTF_SRCS = ft_pad.c ft_printf.c ft_printf_char.c ft_printf_flags.c          \
 
 ARRAY_SRCS = ft_array_new.c ft_array_iter.c ft_array_sort.c
 
-STRING_SRCS = ft_string.c ft_string_pop.c ft_string_push.c
+STRING_SRCS = ft_string.c ft_string_pop.c ft_string_push.c ft_string_take.c
 
 SRCS = $(addprefix $(SRCS_DIR)/lst/, $(LST_SRCS))       \
 	   $(addprefix $(SRCS_DIR)/mem/, $(MEM_SRCS))       \

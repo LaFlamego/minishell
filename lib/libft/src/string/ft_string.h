@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 17:41:16 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 20:13:56 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/17 03:02:17 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,7 @@ size_t		ft_string_push_string(t_string *dst, const t_string *src);
 t_string	ft_string_from_cstring(char *str);
 t_string	ft_string_from_cstring_alloc(char *str);
 t_string	*ft_string_join(const t_array *parts);
+
+char		*ft_string_take(t_string *s);
 
 #endif

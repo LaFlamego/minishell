@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 17:31:59 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 21:09:10 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/16 23:06:28 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,8 @@ size_t		ft_array_push(t_array *arr, void *ptr);
 // > ft_array_iter.c
 void		ft_array_foreach(t_array *arr, void (*f)(void *));
 void		*ft_array_find(t_array *arr, bool (*f)(void *));
+
+// > ft_array_sort.c
+void		ft_array_sort(t_array *arr, int (*cmp)(void *a, void *b));
 
 #endif

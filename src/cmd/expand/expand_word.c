@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:09:55 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/17 18:27:38 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/17 19:49:50 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,22 @@
 #include "./src/cmd/exec/exec.h"
 #include "./src/cmd/tree/word/word.h"
 #include <stdlib.h>
+
+static bool	has_string(t_list *parts)
+{
+	t_list		*curr;
+	t_word_part	*part;
+
+	curr = parts;
+	while (curr)
+	{
+		part = curr->content;
+		if (part->kind == WK_STRING)
+			return (true);
+		curr = curr->next;
+	}
+	return (false);
+}
 
 static bool	is_file_list(t_list *parts)
 {
@@ -102,12 +118,13 @@ int	expand_word(t_list *parts, t_array *argv, t_exec_ctx *ctx)
 	arg = expand_parts(parts, ctx);
 	if (!arg)
 		return (0);
-	if (arg->size > 1 && !ft_array_push(argv, arg->content))
+	if ((arg->size > 1 || has_string(parts)) && !ft_array_push(argv,
+			arg->content))
 	{
 		ft_string_free(arg);
 		return (0);
 	}
-	if (arg->size <= 1)
+	if (!has_string(parts) && arg->size <= 1)
 		ft_string_free(arg);
 	else
 		free(arg);

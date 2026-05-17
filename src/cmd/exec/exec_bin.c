@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/12 21:02:13 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/17 23:00:21 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 00:00:39 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,23 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+
+static unsigned int	handle_signal(void)
+{
+	if (g_signal == SIGINT)
+	{
+		g_signal = 0;
+		ft_printf("^C\n");
+		return (130);
+	}
+	if (g_signal == SIGQUIT)
+	{
+		g_signal = 0;
+		ft_printf("^\\Quit (core dumped)\n");
+		return (131);
+	}
+	return (0);
+}
 
 static unsigned int	wait_exit_code(pid_t pid)
 {
@@ -34,16 +51,8 @@ static unsigned int	wait_exit_code(pid_t pid)
 	{
 		exit_code = WTERMSIG(status) + 128;
 	}
-	if (g_signal == SIGINT)
-	{
-		ft_printf("\n");
-		exit_code = 130;
-	}
-	if (g_signal == SIGQUIT)
-	{
-		ft_printf("Quit (core dumped)\n");
-		exit_code = 131;
-	}
+	if (g_signal == SIGINT || g_signal == SIGQUIT)
+		return (handle_signal());
 	return (exit_code);
 }
 

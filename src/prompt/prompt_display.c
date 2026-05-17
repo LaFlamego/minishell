@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 13:15:33 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/14 21:39:09 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/17 23:59:14 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,13 @@ static int	readline_signal_hook(void)
 {
 	if (g_signal == SIGINT)
 	{
+		ft_printf("%s%s^C", rl_prompt, rl_line_buffer);
 		rl_done = 1;
+	}
+	if (g_signal == SIGQUIT)
+	{
+		g_signal = 0;
+		rl_redisplay();
 	}
 	return (0);
 }
@@ -53,7 +59,7 @@ unsigned int	prompt_display(t_ctx *ctx)
 	{
 		g_signal = 0;
 		input = readline("(=^.^=)$ ");
-		if (g_signal == SIGINT || (input && !input[0]))
+		if (g_signal == SIGQUIT || g_signal == SIGINT || (input && !input[0]))
 		{
 			free(input);
 			continue ;

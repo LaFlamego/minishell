@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 13:06:22 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/01 18:11:04 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 13:04:45 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,14 @@ static unsigned int	print_pwd(void)
 	while (getcwd(buf->content, buf->capacity) == NULL && errno == ERANGE)
 	{
 		if (!ft_string_realloc(buf, buf->capacity * 2))
+		{
+			ft_string_free(buf);
 			return (1);
+		}
 	}
 	if (errno && !buf->content)
 	{
+		ft_string_free(buf);
 		ft_dprintf(2, "minishell: pwd: %s\n", strerror(errno));
 		return (1);
 	}

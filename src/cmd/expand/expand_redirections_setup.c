@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:22:55 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/15 17:10:33 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 13:03:44 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static int	read_heredoc_input(int in, int out, const char *del)
 		line = readline("> ");
 		if (g_signal == SIGINT)
 		{
+			free(line);
 			close(in);
 			close(out);
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 15:46:30 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/08 20:05:45 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 13:01:49 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_cmd_node	*parser_parse_primary(t_parser *p)
 		if (!parser_match(p, RIGHT_PAREN))
 		{
 			parser_error(p, parser_peek(p));
-			return (NULL);
+			return (node_free(expr));
 		}
 		return (expr);
 	}

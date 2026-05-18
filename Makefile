@@ -23,7 +23,7 @@ PATH_SRCS	=	path_access.c		\
 				path_get_cmd.c
 
 PROMPT_SRCS = prompt_display.c
-BUILTINS_SRCS = echo.c env.c exit.c export.c pwd.c unset.c cd.c
+BUILTINS_SRCS = echo.c env.c exit.c export.c export_utils.c pwd.c unset.c cd.c
 
 SCANNER_SRCS = scanner_new.c scanner_add_token.c scanner_error.c scanner_scan.c
 
@@ -59,7 +59,8 @@ EXPAND_SRCS	=	expand_command.c			\
 				expand_redirections.c		\
 				expand_redirections_setup.c	\
 				expand_target.c				\
-				expand_word.c
+				expand_word.c				\
+				expand_word_utils.c
 
 UTILS_SRCS	=	cli.c			\
 				files.c			\

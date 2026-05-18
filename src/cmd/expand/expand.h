@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:21:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/18 23:26:53 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 23:55:44 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,8 @@ int		redirect_in(char *file_to, t_exec_ctx *exec_ctx);
 int		redirect_out(char *file_to, t_exec_ctx *exec_ctx);
 int		redirect_in_until(char *del);
 int		redirect_out_append(char *file_to, t_exec_ctx *exec_ctx);
+
+bool	has_string(t_list *parts);
+bool	is_file_list(t_list *parts);
 
 #endif

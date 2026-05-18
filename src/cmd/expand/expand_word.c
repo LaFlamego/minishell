@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 16:09:55 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/17 19:49:50 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 23:53:50 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,6 @@
 #include "./src/cmd/exec/exec.h"
 #include "./src/cmd/tree/word/word.h"
 #include <stdlib.h>
-
-static bool	has_string(t_list *parts)
-{
-	t_list		*curr;
-	t_word_part	*part;
-
-	curr = parts;
-	while (curr)
-	{
-		part = curr->content;
-		if (part->kind == WK_STRING)
-			return (true);
-		curr = curr->next;
-	}
-	return (false);
-}
-
-static bool	is_file_list(t_list *parts)
-{
-	t_list		*curr;
-	t_word_part	*part;
-	bool		has_wildcard;
-
-	has_wildcard = false;
-	curr = parts;
-	while (curr)
-	{
-		part = curr->content;
-		if (part->kind == WK_VARIABLE)
-			return (false);
-		if (part->kind == WK_FILES)
-			has_wildcard = true;
-		curr = curr->next;
-	}
-	return (has_wildcard);
-}
 
 int	expand_part(t_word_part *part, t_string *arg, t_exec_ctx *ctx)
 {

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/14 14:35:08 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/14 15:21:00 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 23:35:13 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ static t_string	*handle_char(const char **fmt, t_string *result, va_list *ap)
 		if (!push_string(ap, result))
 			return (NULL);
 	}
+	else if (ft_startswith(*fmt, "%%"))
+	{
+		*fmt += 1;
+		if (!ft_string_push(result, '%'))
+			return (NULL);
+	}
 	else
 	{
 		if (!ft_string_push(result, **fmt))
@@ -44,7 +50,6 @@ static t_string	*handle_char(const char **fmt, t_string *result, va_list *ap)
 	return (result);
 }
 
-// TODO: Test a bit
 char	*ft_format(const char *fmt, ...)
 {
 	t_string	*result;
@@ -61,6 +66,7 @@ char	*ft_format(const char *fmt, ...)
 	{
 		if (!handle_char(&fmt, result, &ap))
 		{
+			va_end(ap);
 			ft_string_free(result);
 			return (NULL);
 		}

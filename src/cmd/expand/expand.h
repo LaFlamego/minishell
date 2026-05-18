@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:21:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/17 16:15:16 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 23:26:53 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include "src/cmd/exec/exec.h"
 # include "src/cmd/tree/word/word.h"
 # include "src/env/env.h"
-
-// TODO: This should be renamed to preprocess or whatever
 
 /**
  * expand_command() - expand a command
@@ -32,7 +30,6 @@
  */
 t_array	*expand_command(t_word *words, t_exec_ctx *ctx);
 
-// TODO: add documentation
 int		expand_variable(t_string *arg, char *key, t_env *env);
 
 char	*expand_target(t_word *parts, t_env *env);

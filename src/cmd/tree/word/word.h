@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 14:16:13 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/13 10:12:49 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 23:28:41 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,14 @@ t_word_part		*part_new(t_word_kind kind, void *content);
  */
 void			part_free(void *raw_part);
 
-// TODO: Docs
+/**
+ *	word_from() - create a new word that contains part
+ *	@part: the original part
+ *
+ *	Return:
+ *	NULL on failure.
+ *	A pointer to t_word on sucess. Must be freed.
+ */
 t_word			*word_from(t_word_part *part);
 
 /**

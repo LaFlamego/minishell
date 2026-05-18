@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:11:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/15 16:39:34 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 23:26:23 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 #include "src/parser/parser.h"
 #include "src/scanner/scanner.h"
 
-// TODO: differentiate syntax error from logic error in the parser
-// > Minishell should not quit on syntax error
-// > Do we print a message if preprocessing heredocs fail?
 unsigned int	cmd_handle(const char *input, t_ctx *ctx)
 {
 	t_scanner	s;

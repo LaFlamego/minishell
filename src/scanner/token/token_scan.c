@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:24:33 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/05 12:28:54 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 23:30:37 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ static t_token	*scan_binary(t_scanner *s)
 	}
 	return (NULL);
 }
-
-// TODO: Should we support ${VARIABLE} ?
 
 t_token	*token_scan(t_scanner *s)
 {

@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:03:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/15 17:18:39 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 13:09:30 by crevette         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "src/builtins/builtins.h"
 #include "src/ctx/ctx.h"
 #include "src/env/env.h"
+#include "src/cmd/exec/path/path.h"
 
 static bool	is_builtin(char *cmd)
 {
@@ -51,6 +52,8 @@ unsigned int	cmd_exec(t_ctx *ctx, t_exec_ctx *exec, t_array *argv)
 {
 	unsigned int	exit_code;
 
+	if (!argv->data[0])
+		return (path_error(CMD_NOT_FOUND, ""));
 	if (is_builtin(argv->data[0]) && exec->is_pipe == false)
 	{
 		redir_fd(exec, true);

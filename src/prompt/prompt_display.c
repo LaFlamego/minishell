@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 13:15:33 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/17 23:59:14 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 12:44:42 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,20 @@ static int	handle_input(t_ctx *ctx, char *input)
 	return (0);
 }
 
+static bool	is_empty(char *line)
+{
+	size_t	i;
+
+	i = 0;
+	while (line && line[i])
+	{
+		if (!ft_isspace(line[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 unsigned int	prompt_display(t_ctx *ctx)
 {
 	char	*input;
@@ -59,7 +73,7 @@ unsigned int	prompt_display(t_ctx *ctx)
 	{
 		g_signal = 0;
 		input = readline("(=^.^=)$ ");
-		if (g_signal == SIGQUIT || g_signal == SIGINT || (input && !input[0]))
+		if (g_signal == SIGQUIT || g_signal == SIGINT || is_empty(input))
 		{
 			free(input);
 			continue ;

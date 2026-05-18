@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 21:11:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/18 23:26:23 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/19 01:04:53 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ unsigned int	cmd_handle(const char *input, t_ctx *ctx)
 	s = scanner_new(input);
 	if (!scanner_scan(&s) || !s.tokens)
 	{
+		env_set_exit_code(2, ctx->env);
 		scanner_free(&s);
 		return (0);
 	}
@@ -38,6 +39,8 @@ unsigned int	cmd_handle(const char *input, t_ctx *ctx)
 		debug_node(head, 0);
 	if (head && node_traverse(head, &preprocess_heredocs))
 		track_node(head, ctx);
+	else
+		env_set_exit_code(2, ctx->env);
 	scanner_free(&s);
 	node_free(head);
 	return (0);

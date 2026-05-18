@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 13:12:47 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/18 00:41:02 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/15 17:02:37 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	expand_del(t_list *parts, t_string *arg)
 	return (1);
 }
 
-static int	handle_arg(t_word_part *part, t_env *env)
+static int	handle_arg(t_word_part *part)
 {
 	t_string	*arg;
 	int			fd;
@@ -42,7 +42,7 @@ static int	handle_arg(t_word_part *part, t_env *env)
 		ft_string_free(arg);
 		return (0);
 	}
-	fd = redirect_in_until(arg->content, env);
+	fd = redirect_in_until(arg->content);
 	if (fd < 0)
 	{
 		ft_string_free(arg);
@@ -55,7 +55,7 @@ static int	handle_arg(t_word_part *part, t_env *env)
 	return (1);
 }
 
-static int	traverse_parts(t_list *parts, t_env *env)
+static int	traverse_parts(t_list *parts)
 {
 	t_word		*curr;
 	t_word_part	*part;
@@ -64,7 +64,7 @@ static int	traverse_parts(t_list *parts, t_env *env)
 	while (curr)
 	{
 		part = curr->content;
-		if (part->kind == WK_REDIRECT_IN_UNTIL && !handle_arg(part, env))
+		if (part->kind == WK_REDIRECT_IN_UNTIL && !handle_arg(part))
 		{
 			return (0);
 		}
@@ -73,7 +73,7 @@ static int	traverse_parts(t_list *parts, t_env *env)
 	return (1);
 }
 
-static int	traverse_words(t_word *words, t_env *env)
+static int	traverse_words(t_word *words)
 {
 	t_word	*curr;
 	t_list	*parts;
@@ -82,18 +82,18 @@ static int	traverse_words(t_word *words, t_env *env)
 	while (curr)
 	{
 		parts = curr->content;
-		if (!traverse_parts(parts, env))
+		if (!traverse_parts(parts))
 			return (0);
 		curr = curr->next;
 	}
 	return (1);
 }
 
-int	preprocess_heredocs(t_cmd_node *node, t_env *env)
+int	preprocess_heredocs(t_cmd_node *node)
 {
 	if (node->kind == COMMAND)
 	{
-		return (traverse_words(node->data, env));
+		return (traverse_words(node->data));
 	}
 	return (1);
 }

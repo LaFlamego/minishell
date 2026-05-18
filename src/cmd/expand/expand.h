@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 20:21:43 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/18 00:40:41 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/17 16:15:16 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ int		expand_files(t_array *argv, t_env *env, char *filter);
 
 int		expand_heredoc(t_word_part *part, t_string *arg);
 
-int		preprocess_heredocs(t_cmd_node *node, t_env *env);
+int		preprocess_heredocs(t_cmd_node *node);
 
 int		redirect_in(char *file_to, t_exec_ctx *exec_ctx);
 int		redirect_out(char *file_to, t_exec_ctx *exec_ctx);
-int		redirect_in_until(char *del, t_env *env);
+int		redirect_in_until(char *del);
 int		redirect_out_append(char *file_to, t_exec_ctx *exec_ctx);
 
 #endif

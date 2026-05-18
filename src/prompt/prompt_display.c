@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 13:15:33 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/18 12:44:42 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 12:55:25 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ unsigned int	prompt_display(t_ctx *ctx)
 	{
 		g_signal = 0;
 		input = readline("(=^.^=)$ ");
+		if (!input)
+		{
+			ft_printf("exit\n");
+			return (1);
+		}
 		if (g_signal == SIGQUIT || g_signal == SIGINT || is_empty(input))
 		{
 			free(input);

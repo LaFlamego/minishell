@@ -82,7 +82,6 @@ SRCS = $(addprefix $(SRCS_DIR)/, $(BASE_SRCS))					\
        $(addprefix $(SRCS_DIR)/cmd/exec/path/, $(PATH_SRCS))    \
        $(addprefix $(SRCS_DIR)/debug/, $(DEBUG_SRCS))			\
        $(addprefix $(SRCS_DIR)/cmd/expand/, $(EXPAND_SRCS))		\
-       $(addprefix $(SRCS_DIR)/files/, $(FILES_SRCS))			\
        $(addprefix $(SRCS_DIR)/prompt/, $(PROMPT_SRCS))			\
        $(addprefix $(SRCS_DIR)/scanner/, $(SCANNER_SRCS))		\
        $(addprefix $(SRCS_DIR)/scanner/token/, $(TOKEN_SRCS))	\

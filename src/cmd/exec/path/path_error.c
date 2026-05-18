@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 15:17:10 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/15 15:55:34 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/19 00:56:46 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,6 @@ static unsigned int	get_return_code(enum e_access_result res)
 	if (res == IS_DIR)
 		return (126);
 	return (1);
-}
-
-bool	is_path_error(enum e_access_result res)
-{
-	if (res == OK)
-		return (false);
-	return (true);
 }
 
 unsigned int	path_error(enum e_access_result res, char *cmd)

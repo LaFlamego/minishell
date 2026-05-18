@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 19:07:18 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/13 09:46:02 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/19 00:57:04 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ char	*expand_target(t_word *parts, t_env *env)
 	arg = ft_string_new(0);
 	curr = parts;
 	if (!arg)
-		return (0);
+		return (NULL);
 	while (curr)
 	{
 		if (!expand_part(curr->content, arg, env))
 		{
 			ft_string_free(arg);
-			return (0);
+			return (NULL);
 		}
 		curr = curr->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 19:01:14 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/08 20:10:03 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/19 00:57:20 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	parser_check(t_parser *p, t_token_type type)
 
 	token = parser_peek(p);
 	if (!token)
-		return (NULL);
+		return (false);
 	return (token->type == type);
 }
 

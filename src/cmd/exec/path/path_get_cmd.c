@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path.c                                             :+:      :+:    :+:   */
+/*   path_get_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/15 15:07:08 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/15 16:01:22 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 12:52:14 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ unsigned int	path_get_cmd(char *cmd, t_exec_ctx *ctx, t_env *env)
 	char		*path;
 	t_path_res	last;
 
+	if (!cmd[0])
+		return (path_error(CMD_NOT_FOUND, cmd));
 	if (ft_strchr(cmd, '/'))
 		return (validate_path(ctx, cmd));
 	last = OK;

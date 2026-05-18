@@ -8,7 +8,6 @@ BASE_SRCS = main.c
 ENV_SRCS	= 	env.c				\
 				env_find.c			\
 				env_from.c			\
-				env_merge.c			\
 				env_set.c			\
 				env_set_exit_code.c
 

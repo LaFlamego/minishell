@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 17:15:40 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/28 21:48:07 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 23:36:03 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ char			**env_find(t_env *env, const char *key);
 char			*env_set(t_env *env, char *kvp);
 
 void			env_unset(t_env *env, char *key);
-void			env_merge(t_env *dst, t_env *src);
 
 int				env_set_exit_code(unsigned int exit_code, t_env *env);
 

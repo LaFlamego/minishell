@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 17:31:35 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/12 21:09:06 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 23:22:39 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ t_array	*ft_array_new(void)
 
 void	ft_array_free(t_array *arr, void (*f)(void *))
 {
+	if (!arr)
+		return ;
 	if (arr->data)
 	{
 		ft_array_foreach(arr, f);

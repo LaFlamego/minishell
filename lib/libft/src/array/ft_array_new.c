@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 17:31:35 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/18 23:22:39 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 23:40:01 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	ft_array_free(t_array *arr, void (*f)(void *))
 	free(arr);
 }
 
-// TODO: Handle Down Sizing
-// Add overflow guard
 void	*ft_array_resize(t_array *arr, size_t size)
 {
 	void	*data;

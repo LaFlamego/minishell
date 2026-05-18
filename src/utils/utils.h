@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 21:22:12 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/17 00:57:11 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 23:23:05 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,5 @@ bool							is_filtered(char *file, char *filter);
  */
 int								cli_parse_args(int argc, char **argv,
 									t_ctx *ctx);
-
-/**
- * get_pwd() - get current path
- *
- * Simple wrapper around getcwd
- *
- * Return:
- * On success, a pointer to the path, must be freed
- * On failure, a NULL pointer
- */
-char							*get_pwd(void);
 
 #endif

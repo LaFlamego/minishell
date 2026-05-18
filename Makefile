@@ -66,7 +66,6 @@ UTILS_SRCS	=	cli.c			\
 				files.c			\
 				files_filter.c	\
 				files_utils.c	\
-				path.c			\
 				signals.c
 
 DEBUG_SRCS	=	debug_argv.c			\

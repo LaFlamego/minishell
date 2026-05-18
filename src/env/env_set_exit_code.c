@@ -6,7 +6,7 @@
 /*   By: crevette <coincoin@baozi>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 12:55:09 by crevette          #+#    #+#             */
-/*   Updated: 2026/05/09 15:45:14 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 23:18:28 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int	env_set_exit_code(unsigned int exit_code, t_env *env)
 		return (1);
 	val = ft_itoa(exit_code);
 	if (!val)
+	{
+		free(var.content);
 		return (1);
+	}
 	ft_string_push_str(&var, val);
 	free(val);
 	env_set(env, var.content);

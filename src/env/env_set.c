@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 18:43:28 by Oery              #+#    #+#             */
-/*   Updated: 2026/04/29 00:49:37 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 22:53:34 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,14 @@ static char	*add_variable(t_env *env, const char *key)
 	if (!new)
 		return (NULL);
 	env->size--;
-	if (!ft_array_push(env, new))
+	if (!ft_array_push(env, new) || !ft_array_push(env, NULL))
+	{
+		free(new);
 		return (NULL);
-	if (!ft_array_push(env, NULL))
-		return (NULL);
+	}
 	return (env->data[env->size - 2]);
 }
 
-/* update_variable() - update a key's value
- * @old: old key/value pair
- * @new: new key/value pair
- *
- * May or may not allocate memory depending on the old key/value pair size.
- * Does not take ownership of the new key/value pair.
- *
- * Return:
- * On success, a pointer to the new key/value pair.
- * On failure, a NULL pointer.
- */
 static char	*update_variable(char **old, char *new)
 {
 	char	*dupe;

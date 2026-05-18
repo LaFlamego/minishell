@@ -6,11 +6,12 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 15:28:15 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/05 12:19:12 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 23:20:04 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./scanner.h"
+#include <stdlib.h>
 
 char	scanner_advance(t_scanner *s)
 {
@@ -34,7 +35,10 @@ t_list	*scanner_scan(t_scanner *s)
 		return (NULL);
 	new = ft_lstnew(eof);
 	if (!new)
+	{
+		free(eof);
 		return (NULL);
+	}
 	ft_lstadd_back(&s->tokens, new);
 	return (s->tokens);
 }

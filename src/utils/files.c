@@ -6,7 +6,7 @@
 /*   By: Oery <coincoin@baozi>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 15:26:04 by Oery              #+#    #+#             */
-/*   Updated: 2026/05/18 13:08:59 by Oery             ###   ########.fr       */
+/*   Updated: 2026/05/18 15:29:34 by Oery             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "libft.h"
 #include <dirent.h>
 #include <errno.h>
-#include <stdlib.h>
 #include <string.h>
 
 static void	*handle_error(DIR *dir, t_array *files)
@@ -22,7 +21,7 @@ static void	*handle_error(DIR *dir, t_array *files)
 	if (dir)
 		closedir(dir);
 	if (files)
-		free(files);
+		ft_array_free(files, ft_string_free);
 	return (NULL);
 }
 
@@ -62,7 +61,7 @@ static t_array	*get_file_list(DIR *dir, char *filter)
 		{
 			name = ft_to_string(ent->d_name);
 			if (!name || !ft_array_push(files, name))
-				return (handle_error(dir, files));
+				return (ft_string_free(name), handle_error(dir, files));
 		}
 		ent = readdir(dir);
 	}

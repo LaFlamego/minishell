@@ -17,7 +17,7 @@ Each node of the tree is an operation and each leaf is a command.
 Commands are a list of words and each word a list of part.
 
 #### Execution
-
+With the calls from parsers, the nodes are tracked through before execution and get the right type of the node. The track happens recursively in each command after expanded properly and based on the kind of command, the data flow goes to dedicated execution line until there is an interruption or executed completely.
 
 #### Features
 
@@ -59,6 +59,8 @@ Run `make` to compile the `./minishell` binary.
 - [GNU Bash Manual Reference](https://www.gnu.org/software/bash/manual/bash.html)
 - [Readline MAN Refeference](https://tiswww.case.edu/php/chet/readline/readline.html)
 - [Crafting Interpreters - Robert Nystrom](https://craftinginterpreters.com/)
+- [Tree Structure](https://en.wikipedia.org/wiki/Tree_(abstract_data_type))
 
 ## AI Usage
 - Oery: AI was used for static analysis, test generation and questioning about Bash's internals
+- crevette: Used AI to understand concepts like how builtins work in shell and test especailly for extreme cases might cause memory leak/fd leak
